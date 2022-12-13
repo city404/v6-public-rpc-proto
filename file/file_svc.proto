@@ -23,11 +23,5 @@ message Slice {
 
 message Meta {
   string identity = 1; // identity
-  int32 type = 2; 
-  int32 status = 3; 
-  int64 update_ts = 5;
-  string peer = 6;
-  int64 create_ts = 7;
-  string server = 8;
-  bytes data = 9;
+  bytes data = 2;
 }
