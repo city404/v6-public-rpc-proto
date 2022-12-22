@@ -26,6 +26,8 @@ type FileClient interface {
 	CreateSlice(ctx context.Context, in *Slice, opts ...grpc.CallOption) (*Slice, error)
 	GetMeta(ctx context.Context, in *Meta, opts ...grpc.CallOption) (*Meta, error)
 	CreateMeta(ctx context.Context, in *Meta, opts ...grpc.CallOption) (*Meta, error)
+	AddFastLookup(ctx context.Context, in *FastLookup, opts ...grpc.CallOption) (*FastLookup, error)
+	GetFastLookup(ctx context.Context, in *FastLookupRequest, opts ...grpc.CallOption) (*FastLookup, error)
 }
 
 type fileClient struct {
@@ -72,6 +74,24 @@ func (c *fileClient) CreateMeta(ctx context.Context, in *Meta, opts ...grpc.Call
 	return out, nil
 }
 
+func (c *fileClient) AddFastLookup(ctx context.Context, in *FastLookup, opts ...grpc.CallOption) (*FastLookup, error) {
+	out := new(FastLookup)
+	err := c.cc.Invoke(ctx, "/v6.services.pub.File/AddFastLookup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileClient) GetFastLookup(ctx context.Context, in *FastLookupRequest, opts ...grpc.CallOption) (*FastLookup, error) {
+	out := new(FastLookup)
+	err := c.cc.Invoke(ctx, "/v6.services.pub.File/GetFastLookup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FileServer is the server API for File service.
 // All implementations must embed UnimplementedFileServer
 // for forward compatibility
@@ -80,6 +100,8 @@ type FileServer interface {
 	CreateSlice(context.Context, *Slice) (*Slice, error)
 	GetMeta(context.Context, *Meta) (*Meta, error)
 	CreateMeta(context.Context, *Meta) (*Meta, error)
+	AddFastLookup(context.Context, *FastLookup) (*FastLookup, error)
+	GetFastLookup(context.Context, *FastLookupRequest) (*FastLookup, error)
 	mustEmbedUnimplementedFileServer()
 }
 
@@ -98,6 +120,12 @@ func (UnimplementedFileServer) GetMeta(context.Context, *Meta) (*Meta, error) {
 }
 func (UnimplementedFileServer) CreateMeta(context.Context, *Meta) (*Meta, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMeta not implemented")
+}
+func (UnimplementedFileServer) AddFastLookup(context.Context, *FastLookup) (*FastLookup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddFastLookup not implemented")
+}
+func (UnimplementedFileServer) GetFastLookup(context.Context, *FastLookupRequest) (*FastLookup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFastLookup not implemented")
 }
 func (UnimplementedFileServer) mustEmbedUnimplementedFileServer() {}
 
@@ -184,6 +212,42 @@ func _File_CreateMeta_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _File_AddFastLookup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FastLookup)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileServer).AddFastLookup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v6.services.pub.File/AddFastLookup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileServer).AddFastLookup(ctx, req.(*FastLookup))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _File_GetFastLookup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FastLookupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileServer).GetFastLookup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/v6.services.pub.File/GetFastLookup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileServer).GetFastLookup(ctx, req.(*FastLookupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // File_ServiceDesc is the grpc.ServiceDesc for File service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -206,6 +270,14 @@ var File_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateMeta",
 			Handler:    _File_CreateMeta_Handler,
+		},
+		{
+			MethodName: "AddFastLookup",
+			Handler:    _File_AddFastLookup_Handler,
+		},
+		{
+			MethodName: "GetFastLookup",
+			Handler:    _File_GetFastLookup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

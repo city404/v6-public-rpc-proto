@@ -7,6 +7,8 @@ service File {
   rpc CreateSlice (Slice) returns (Slice) {}
   rpc GetMeta (Meta) returns (Meta) {}
   rpc CreateMeta (Meta) returns (Meta) {}
+  rpc AddFastLookup(FastLookup) returns (FastLookup) {}
+  rpc GetFastLookup(FastLookupRequest) returns (FastLookup) {}
 }
 
 message Slice {
@@ -24,4 +26,18 @@ message Slice {
 message Meta {
   string identity = 1; // identity
   bytes data = 2;
+}
+
+message FastLookup {
+  string identity = 1;
+  string wcs_etag = 2;
+  string sha1 = 3;
+  string head_sha1 = 4;
+  int64 file_size = 5;
+  string special_sha1 = 6;
+}
+
+message FastLookupRequest {
+  int32 type = 1;
+  FastLookup info = 2;
 }
