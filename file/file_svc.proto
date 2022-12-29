@@ -35,6 +35,7 @@ message FastLookup {
   string head_sha1 = 4;
   int64 file_size = 5;
   string special_sha1 = 6;
+  string name = 7;
 }
 
 message FastLookupRequest {
