@@ -10,7 +10,7 @@ v6 public proto collection.
 
 | item       | value                 | comment |
 |------------|-----------------------|---------|
-| Proto file | grpcuserapi.2dland.cn | -       |
-| Endpoint   | /user/user_svc.proto  | -       |
+| Endpoint   | grpcuserapi.2dland.cn | -       |
+| Proto file | /user/user_svc.proto  | -       |
 | SSL        | yes                   | -       |
 
