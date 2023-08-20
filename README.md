@@ -6,9 +6,5 @@ v6 public proto collection.
 
 * Handle user login/logoff, register
 
-> Proto file:  `/user/user_svc.proto`
-
-> Endpoint: `grpcuserapi.2dland.cn`
-
-> SSL: `yes`
+> Proto file:  `/user/user_svc.proto` Endpoint: `grpcuserapi.2dland.cn` SSL: `yes`
 
