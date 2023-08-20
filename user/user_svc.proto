@@ -1,0 +1,23 @@
+syntax = "proto3";
+package v6.services.pub;
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/file";
+
+service PubUser {
+  rpc Get (User) returns (User) {}
+  rpc Login (User) returns (User) {}
+  rpc Logoff (User) returns (User) {}
+  rpc Create (User) returns (User) {}
+  rpc Delete (User) returns (User) {}
+}
+
+message User {
+  string identity = 1; // identity
+  int32 type = 2; 
+  int32 status = 3; 
+  int64 update_ts = 5;
+  string password = 6;
+  string name = 7;
+  string addon = 8;
+  int64 create_ts = 9;
+  // bytes data = 10;
+}
