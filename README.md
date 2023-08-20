@@ -10,7 +10,11 @@ v6 public proto collection.
 
 | item       | value                 | comment |
 |------------|-----------------------|---------|
-| Endpoint   | grpcuserapi.2dland.cn | -       |
-| Proto file | /user/user_svc.proto  | -       |
-| SSL        | yes                   | -       |
+| endpoint   | grpcuserapi.2dland.cn | -       |
+| authority  | grpcuserapi.2dland.cn | -       |
+| proto file | /user/user_svc.proto  | -       |
+| ssl        | yes, must SSL         | -       |
+| ipfs-grpc  | support               | -       |
+| legacy rpc | support               | -       |
+
 
