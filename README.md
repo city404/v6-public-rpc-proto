@@ -2,7 +2,7 @@
 
 v6 public proto collection.
 
-#### public-user UserService
+#### public-user-server PubUser
 
 >  always take jwt headers when you request api
 
