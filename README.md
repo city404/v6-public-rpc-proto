@@ -4,9 +4,9 @@ v6 public proto collection.
 
 #### public-user UserService
 
->  Handle user login/logoff, register
+>  always take jwt headers when you request api
 
-* always take jwt headers when you request api
+* Handle user login/logoff, register
 
 | item       | value                 | comment |
 |------------|-----------------------|---------|
