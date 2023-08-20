@@ -33,7 +33,7 @@ type User struct {
 	Name     string `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
 	Addon    string `protobuf:"bytes,8,opt,name=addon,proto3" json:"addon,omitempty"`
 	CreateTs int64  `protobuf:"varint,9,opt,name=create_ts,json=createTs,proto3" json:"create_ts,omitempty"`
-	Token    string `protobuf:"bytes,10,opt,name=token,proto3" json:"token,omitempty"`
+	Token    string `protobuf:"bytes,10,opt,name=token,proto3" json:"token,omitempty"` // jwt token for user, you should take it as a cookie
 }
 
 func (x *User) Reset() {

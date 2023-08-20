@@ -19,5 +19,5 @@ message User {
   string name = 7;
   string addon = 8;
   int64 create_ts = 9;
-  string token = 10;
+  string token = 10; // jwt token for user, you should take it as a cookie
 }
