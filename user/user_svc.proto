@@ -4,7 +4,8 @@ option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/user";
 
 service PubUser {
   rpc Get (User) returns (User) {}
-  rpc Login (User) returns (User) {}
+  rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
+  rpc Refresh (LoginResponse) returns (LoginResponse) {} // refresh token. 
   rpc Logoff (User) returns (User) {}
   rpc Create (User) returns (User) {}
   rpc Delete (User) returns (User) {}
@@ -19,5 +20,32 @@ message User {
   string name = 7;
   string addon = 8;
   int64 create_ts = 9;
-  string token = 10; // jwt token for user, you should take it as a cookie
+  string hash = 10;
+}
+
+message LoginRequest {
+  string identity = 1;
+  string password = 2;
+  string addon = 3;
+  string name = 4;
+  string type = 5;
+  string callback = 6;
+  string return_url = 7;
+  int32 return_type = 8;
+  string captcha = 9;
+}
+
+message LoginResponse {
+  string access_token = 1;
+  string refresh_token = 2;
+  int64 expire_ts = 3; 
+  User user = 4;
+  LastLoginResponse last_login = 6;
+}
+
+message LastLoginResponse {
+  string identity = 1;
+  int64 last_login_ts = 2;
+  string last_login_ip = 3;
+  string last_login_device = 4;
 }
