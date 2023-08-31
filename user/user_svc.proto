@@ -27,7 +27,7 @@ message LoginRequest {
   string identity = 1;
   string password = 2;
   string addon = 3;
-  string name = 4;
+  string input = 4;
   string type = 5;
   string callback = 6;
   string return_url = 7;
@@ -36,16 +36,26 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string access_token = 1;
-  string refresh_token = 2;
-  int64 expire_ts = 3; 
-  User user = 4;
-  LastLoginResponse last_login = 6;
+  Token token = 1;
+  User user = 2;
+  LastLoginResponse last_login = 3;
 }
 
 message LastLoginResponse {
   string identity = 1;
-  int64 last_login_ts = 2;
+  int64 last_login_ts = 2; // millisecond
   string last_login_ip = 3;
   string last_login_device = 4;
+}
+
+message Token {
+  string identity = 1;
+  string user_identity = 2; 
+  string device = 3;
+  int32 version = 4;
+  string access_token = 5;
+  string refresh_token = 6;
+  int64 update_ts = 7;
+  int64 access_token_expire_ts = 8;
+  int64 refresh_token_expire_ts = 9;
 }
