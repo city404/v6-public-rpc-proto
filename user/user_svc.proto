@@ -21,6 +21,7 @@ message User {
   string addon = 8;
   int64 create_ts = 9;
   string hash = 10;
+  string icon = 11;
 }
 
 message LoginRequest {
