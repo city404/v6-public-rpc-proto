@@ -34,7 +34,7 @@ type PubUserClient interface {
 	Get(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Refresh(ctx context.Context, in *LoginResponse, opts ...grpc.CallOption) (*LoginResponse, error)
-	Logoff(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
+	Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error)
 	Create(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 }
@@ -74,7 +74,7 @@ func (c *pubUserClient) Refresh(ctx context.Context, in *LoginResponse, opts ...
 	return out, nil
 }
 
-func (c *pubUserClient) Logoff(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error) {
+func (c *pubUserClient) Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
 	err := c.cc.Invoke(ctx, PubUser_Logoff_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -108,7 +108,7 @@ type PubUserServer interface {
 	Get(context.Context, *User) (*User, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Refresh(context.Context, *LoginResponse) (*LoginResponse, error)
-	Logoff(context.Context, *User) (*User, error)
+	Logoff(context.Context, *Token) (*User, error)
 	Create(context.Context, *User) (*User, error)
 	Delete(context.Context, *User) (*User, error)
 	mustEmbedUnimplementedPubUserServer()
@@ -127,7 +127,7 @@ func (UnimplementedPubUserServer) Login(context.Context, *LoginRequest) (*LoginR
 func (UnimplementedPubUserServer) Refresh(context.Context, *LoginResponse) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Refresh not implemented")
 }
-func (UnimplementedPubUserServer) Logoff(context.Context, *User) (*User, error) {
+func (UnimplementedPubUserServer) Logoff(context.Context, *Token) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logoff not implemented")
 }
 func (UnimplementedPubUserServer) Create(context.Context, *User) (*User, error) {
@@ -204,7 +204,7 @@ func _PubUser_Refresh_Handler(srv interface{}, ctx context.Context, dec func(int
 }
 
 func _PubUser_Logoff_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
+	in := new(Token)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -216,7 +216,7 @@ func _PubUser_Logoff_Handler(srv interface{}, ctx context.Context, dec func(inte
 		FullMethod: PubUser_Logoff_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserServer).Logoff(ctx, req.(*User))
+		return srv.(PubUserServer).Logoff(ctx, req.(*Token))
 	}
 	return interceptor(ctx, in, info, handler)
 }
