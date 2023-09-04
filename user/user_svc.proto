@@ -5,7 +5,7 @@ option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/user";
 service PubUser {
   rpc Get (User) returns (User) {}
   rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
-  rpc Refresh (LoginResponse) returns (LoginResponse) {} // refresh token. 
+  rpc Refresh (Token) returns (LoginResponse) {} // refresh token. 
   rpc Logoff (Token) returns (User) {}
   rpc Create (User) returns (User) {}
   rpc Delete (User) returns (User) {}

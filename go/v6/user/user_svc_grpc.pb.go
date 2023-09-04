@@ -33,7 +33,7 @@ const (
 type PubUserClient interface {
 	Get(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	Refresh(ctx context.Context, in *LoginResponse, opts ...grpc.CallOption) (*LoginResponse, error)
+	Refresh(ctx context.Context, in *Token, opts ...grpc.CallOption) (*LoginResponse, error)
 	Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error)
 	Create(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
@@ -65,7 +65,7 @@ func (c *pubUserClient) Login(ctx context.Context, in *LoginRequest, opts ...grp
 	return out, nil
 }
 
-func (c *pubUserClient) Refresh(ctx context.Context, in *LoginResponse, opts ...grpc.CallOption) (*LoginResponse, error) {
+func (c *pubUserClient) Refresh(ctx context.Context, in *Token, opts ...grpc.CallOption) (*LoginResponse, error) {
 	out := new(LoginResponse)
 	err := c.cc.Invoke(ctx, PubUser_Refresh_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -107,7 +107,7 @@ func (c *pubUserClient) Delete(ctx context.Context, in *User, opts ...grpc.CallO
 type PubUserServer interface {
 	Get(context.Context, *User) (*User, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
-	Refresh(context.Context, *LoginResponse) (*LoginResponse, error)
+	Refresh(context.Context, *Token) (*LoginResponse, error)
 	Logoff(context.Context, *Token) (*User, error)
 	Create(context.Context, *User) (*User, error)
 	Delete(context.Context, *User) (*User, error)
@@ -124,7 +124,7 @@ func (UnimplementedPubUserServer) Get(context.Context, *User) (*User, error) {
 func (UnimplementedPubUserServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
-func (UnimplementedPubUserServer) Refresh(context.Context, *LoginResponse) (*LoginResponse, error) {
+func (UnimplementedPubUserServer) Refresh(context.Context, *Token) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Refresh not implemented")
 }
 func (UnimplementedPubUserServer) Logoff(context.Context, *Token) (*User, error) {
@@ -186,7 +186,7 @@ func _PubUser_Login_Handler(srv interface{}, ctx context.Context, dec func(inter
 }
 
 func _PubUser_Refresh_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LoginResponse)
+	in := new(Token)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -198,7 +198,7 @@ func _PubUser_Refresh_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: PubUser_Refresh_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserServer).Refresh(ctx, req.(*LoginResponse))
+		return srv.(PubUserServer).Refresh(ctx, req.(*Token))
 	}
 	return interceptor(ctx, in, info, handler)
 }
