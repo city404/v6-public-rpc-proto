@@ -19,13 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubUser_Get_FullMethodName               = "/v6.services.pub.PubUser/Get"
-	PubUser_Login_FullMethodName             = "/v6.services.pub.PubUser/Login"
-	PubUser_Refresh_FullMethodName           = "/v6.services.pub.PubUser/Refresh"
-	PubUser_Logoff_FullMethodName            = "/v6.services.pub.PubUser/Logoff"
-	PubUser_Register_FullMethodName          = "/v6.services.pub.PubUser/Register"
-	PubUser_Delete_FullMethodName            = "/v6.services.pub.PubUser/Delete"
-	PubUser_SendSmsVerifyCode_FullMethodName = "/v6.services.pub.PubUser/SendSmsVerifyCode"
+	PubUser_Get_FullMethodName                      = "/v6.services.pub.PubUser/Get"
+	PubUser_Login_FullMethodName                    = "/v6.services.pub.PubUser/Login"
+	PubUser_Refresh_FullMethodName                  = "/v6.services.pub.PubUser/Refresh"
+	PubUser_Logoff_FullMethodName                   = "/v6.services.pub.PubUser/Logoff"
+	PubUser_Register_FullMethodName                 = "/v6.services.pub.PubUser/Register"
+	PubUser_Delete_FullMethodName                   = "/v6.services.pub.PubUser/Delete"
+	PubUser_SendSmsVerifyCode_FullMethodName        = "/v6.services.pub.PubUser/SendSmsVerifyCode"
+	PubUser_SendSmsVerifyCodeNotUser_FullMethodName = "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser"
 )
 
 // PubUserClient is the client API for PubUser service.
@@ -39,6 +40,7 @@ type PubUserClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*User, error)
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
+	SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 }
 
 type pubUserClient struct {
@@ -112,6 +114,15 @@ func (c *pubUserClient) SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeS
 	return out, nil
 }
 
+func (c *pubUserClient) SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error) {
+	out := new(SmsVeifyCodeSendResponse)
+	err := c.cc.Invoke(ctx, PubUser_SendSmsVerifyCodeNotUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserServer is the server API for PubUser service.
 // All implementations must embed UnimplementedPubUserServer
 // for forward compatibility
@@ -123,6 +134,7 @@ type PubUserServer interface {
 	Register(context.Context, *RegisterRequest) (*User, error)
 	Delete(context.Context, *User) (*User, error)
 	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
+	SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error)
 	mustEmbedUnimplementedPubUserServer()
 }
 
@@ -150,6 +162,9 @@ func (UnimplementedPubUserServer) Delete(context.Context, *User) (*User, error) 
 }
 func (UnimplementedPubUserServer) SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendSmsVerifyCode not implemented")
+}
+func (UnimplementedPubUserServer) SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendSmsVerifyCodeNotUser not implemented")
 }
 func (UnimplementedPubUserServer) mustEmbedUnimplementedPubUserServer() {}
 
@@ -290,6 +305,24 @@ func _PubUser_SendSmsVerifyCode_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUser_SendSmsVerifyCodeNotUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SmsVeifyCodeSendRequestNotUser)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).SendSmsVerifyCodeNotUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_SendSmsVerifyCodeNotUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).SendSmsVerifyCodeNotUser(ctx, req.(*SmsVeifyCodeSendRequestNotUser))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUser_ServiceDesc is the grpc.ServiceDesc for PubUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -324,6 +357,10 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendSmsVerifyCode",
 			Handler:    _PubUser_SendSmsVerifyCode_Handler,
+		},
+		{
+			MethodName: "SendSmsVerifyCodeNotUser",
+			Handler:    _PubUser_SendSmsVerifyCodeNotUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

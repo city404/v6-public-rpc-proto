@@ -10,6 +10,7 @@ service PubUser {
     rpc Register (RegisterRequest) returns (User) {}
     rpc Delete (User) returns (User) {}
     rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {}
+    rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {}
 }
 
 message User {
@@ -75,6 +76,15 @@ message SmsVeifyCodeSendRequest {
     string captcha = 1;
     int32 type = 2;
     string addon = 3;
+}
+
+
+message SmsVeifyCodeSendRequestNotUser {
+    string captcha = 1;
+    int32 type = 2;
+    string addon = 3;
+    string country_code = 4;
+    string phone = 5;
 }
 
 message SmsVeifyCodeSendResponse {
