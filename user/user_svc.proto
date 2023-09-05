@@ -65,10 +65,10 @@ message Token {
 message RegisterRequest {
     string name = 1;
     string password = 2;
-    string country_code = 3;
-    string phone = 4;
+    // string country_code = 3;
+    // string phone = 4;
     string email = 5;
-    string captcha = 6;
+    string sms_captcha = 6;
 }
 
 message SmsVeifyCodeSendRequest {
@@ -78,7 +78,7 @@ message SmsVeifyCodeSendRequest {
 }
 
 message SmsVeifyCodeSendResponse {
-    string captcha = 1;
+    string sms_captcha = 1;
     int32 type = 2;
     string addon = 3;
     int64 expire_ts = 4;
