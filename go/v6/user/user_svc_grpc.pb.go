@@ -19,12 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubUser_Get_FullMethodName     = "/v6.services.pub.PubUser/Get"
-	PubUser_Login_FullMethodName   = "/v6.services.pub.PubUser/Login"
-	PubUser_Refresh_FullMethodName = "/v6.services.pub.PubUser/Refresh"
-	PubUser_Logoff_FullMethodName  = "/v6.services.pub.PubUser/Logoff"
-	PubUser_Create_FullMethodName  = "/v6.services.pub.PubUser/Create"
-	PubUser_Delete_FullMethodName  = "/v6.services.pub.PubUser/Delete"
+	PubUser_Get_FullMethodName               = "/v6.services.pub.PubUser/Get"
+	PubUser_Login_FullMethodName             = "/v6.services.pub.PubUser/Login"
+	PubUser_Refresh_FullMethodName           = "/v6.services.pub.PubUser/Refresh"
+	PubUser_Logoff_FullMethodName            = "/v6.services.pub.PubUser/Logoff"
+	PubUser_Register_FullMethodName          = "/v6.services.pub.PubUser/Register"
+	PubUser_Delete_FullMethodName            = "/v6.services.pub.PubUser/Delete"
+	PubUser_SendSmsVerifyCode_FullMethodName = "/v6.services.pub.PubUser/SendSmsVerifyCode"
 )
 
 // PubUserClient is the client API for PubUser service.
@@ -35,8 +36,9 @@ type PubUserClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Refresh(ctx context.Context, in *Token, opts ...grpc.CallOption) (*Token, error)
 	Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error)
-	Create(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
+	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*User, error)
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
+	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 }
 
 type pubUserClient struct {
@@ -83,9 +85,9 @@ func (c *pubUserClient) Logoff(ctx context.Context, in *Token, opts ...grpc.Call
 	return out, nil
 }
 
-func (c *pubUserClient) Create(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error) {
+func (c *pubUserClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
-	err := c.cc.Invoke(ctx, PubUser_Create_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, PubUser_Register_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +103,15 @@ func (c *pubUserClient) Delete(ctx context.Context, in *User, opts ...grpc.CallO
 	return out, nil
 }
 
+func (c *pubUserClient) SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error) {
+	out := new(SmsVeifyCodeSendResponse)
+	err := c.cc.Invoke(ctx, PubUser_SendSmsVerifyCode_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserServer is the server API for PubUser service.
 // All implementations must embed UnimplementedPubUserServer
 // for forward compatibility
@@ -109,8 +120,9 @@ type PubUserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Refresh(context.Context, *Token) (*Token, error)
 	Logoff(context.Context, *Token) (*User, error)
-	Create(context.Context, *User) (*User, error)
+	Register(context.Context, *RegisterRequest) (*User, error)
 	Delete(context.Context, *User) (*User, error)
+	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
 	mustEmbedUnimplementedPubUserServer()
 }
 
@@ -130,11 +142,14 @@ func (UnimplementedPubUserServer) Refresh(context.Context, *Token) (*Token, erro
 func (UnimplementedPubUserServer) Logoff(context.Context, *Token) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logoff not implemented")
 }
-func (UnimplementedPubUserServer) Create(context.Context, *User) (*User, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+func (UnimplementedPubUserServer) Register(context.Context, *RegisterRequest) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
 }
 func (UnimplementedPubUserServer) Delete(context.Context, *User) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedPubUserServer) SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendSmsVerifyCode not implemented")
 }
 func (UnimplementedPubUserServer) mustEmbedUnimplementedPubUserServer() {}
 
@@ -221,20 +236,20 @@ func _PubUser_Logoff_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubUser_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(User)
+func _PubUser_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubUserServer).Create(ctx, in)
+		return srv.(PubUserServer).Register(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PubUser_Create_FullMethodName,
+		FullMethod: PubUser_Register_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserServer).Create(ctx, req.(*User))
+		return srv.(PubUserServer).Register(ctx, req.(*RegisterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -253,6 +268,24 @@ func _PubUser_Delete_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PubUserServer).Delete(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUser_SendSmsVerifyCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SmsVeifyCodeSendRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).SendSmsVerifyCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_SendSmsVerifyCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).SendSmsVerifyCode(ctx, req.(*SmsVeifyCodeSendRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -281,12 +314,16 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PubUser_Logoff_Handler,
 		},
 		{
-			MethodName: "Create",
-			Handler:    _PubUser_Create_Handler,
+			MethodName: "Register",
+			Handler:    _PubUser_Register_Handler,
 		},
 		{
 			MethodName: "Delete",
 			Handler:    _PubUser_Delete_Handler,
+		},
+		{
+			MethodName: "SendSmsVerifyCode",
+			Handler:    _PubUser_SendSmsVerifyCode_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

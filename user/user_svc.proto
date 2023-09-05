@@ -3,60 +3,83 @@ package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/user";
 
 service PubUser {
-  rpc Get (User) returns (User) {}
-  rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
-  rpc Refresh (Token) returns (Token) {} // refresh token. 
-  rpc Logoff (Token) returns (User) {}
-  rpc Create (User) returns (User) {}
-  rpc Delete (User) returns (User) {}
+    rpc Get (User) returns (User) {}
+    rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
+    rpc Refresh (Token) returns (Token) {} // refresh token. 
+    rpc Logoff (Token) returns (User) {}
+    rpc Register (RegisterRequest) returns (User) {}
+    rpc Delete (User) returns (User) {}
+    rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {}
 }
 
 message User {
-  string identity = 1; // identity for user, unique in system
-  int32 type = 2; // 1: user, 2: admin, 3: super admin
-  int32 status = 3; // 1: normal, 2: disabled, 3: deleted
-  int64 update_ts = 5;
-  string password = 6;
-  string name = 7;
-  string addon = 8;
-  int64 create_ts = 9;
-  string hash = 10;
-  string icon = 11;
+    string identity = 1; // identity for user, unique in system
+    int32 type = 2; // 1: user, 2: admin, 3: super admin
+    int32 status = 3; // 1: normal, 2: disabled, 3: deleted
+    int64 update_ts = 5;
+    string password = 6;
+    string name = 7;
+    string addon = 8;
+    int64 create_ts = 9;
+    string hash = 10;
+    string icon = 11;
 }
 
 message LoginRequest {
-  string identity = 1;
-  string password = 2;
-  string addon = 3;
-  string input = 4;
-  string type = 5;
-  string callback = 6;
-  string return_url = 7;
-  int32 return_type = 8;
-  string captcha = 9;
+    string identity = 1;
+    string password = 2;
+    string addon = 3;
+    string input = 4;
+    string type = 5;
+    string callback = 6;
+    string return_url = 7;
+    int32 return_type = 8;
+    string captcha = 9;
 }
 
 message LoginResponse {
-  Token token = 1;
-  User user = 2;
-  LastLoginResponse last_login = 3;
+    Token token = 1;
+    User user = 2;
+    LastLoginResponse last_login = 3;
 }
 
 message LastLoginResponse {
-  string identity = 1;
-  int64 last_login_ts = 2; // millisecond
-  string last_login_ip = 3;
-  string last_login_device = 4;
+    string identity = 1;
+    int64 last_login_ts = 2; // millisecond
+    string last_login_ip = 3;
+    string last_login_device = 4;
 }
 
 message Token {
-  string identity = 1;
-  string user_identity = 2; 
-  string device = 3;
-  int32 version = 4;
-  string access_token = 5;
-  string refresh_token = 6;
-  int64 update_ts = 7;
-  int64 access_token_expire_ts = 8;
-  int64 refresh_token_expire_ts = 9;
+    string identity = 1;
+    string user_identity = 2; 
+    string device = 3;
+    int32 version = 4;
+    string access_token = 5;
+    string refresh_token = 6;
+    int64 update_ts = 7;
+    int64 access_token_expire_ts = 8;
+    int64 refresh_token_expire_ts = 9;
+}
+
+message RegisterRequest {
+    string name = 1;
+    string password = 2;
+    string country_code = 3;
+    string phone = 4;
+    string email = 5;
+    string captcha = 6;
+}
+
+message SmsVeifyCodeSendRequest {
+    string captcha = 1;
+    int32 type = 2;
+    string addon = 3;
+}
+
+message SmsVeifyCodeSendResponse {
+    string captcha = 1;
+    int32 type = 2;
+    string addon = 3;
+    int64 expire_ts = 4;
 }
