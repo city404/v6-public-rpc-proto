@@ -89,7 +89,7 @@ message SmsVeifyCodeSendRequestNotUser {
 }
 
 message SmsVeifyCodeSendResponse {
-    string sms_captcha = 1;
+    string captcha = 1;
     int32 type = 2;
     string addon = 3;
     int64 expire_ts = 4;
