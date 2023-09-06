@@ -70,6 +70,7 @@ message RegisterRequest {
     // string phone = 4;
     string email = 5;
     string sms_captcha = 6;
+    string captcha = 3;
 }
 
 message SmsVeifyCodeSendRequest {
