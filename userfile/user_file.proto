@@ -1,0 +1,42 @@
+syntax = "proto3";
+package v6.services.pub;
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/userfile";
+
+service PubUserFile {
+    rpc Create (File) returns (File) {}
+    rpc Get (File) returns (File) {}
+    //rpc Update (File) returns (File) {}
+    //rpc Rename (File) returns (File) {}
+    //rpc Delete (File) returns (File) {}
+    //rpc Move (File) returns (File) {}
+    //rpc Copy (File) returns (File) {}
+    // rpc List (File) returns (FileList) {}
+    // List ...
+}
+
+message File {
+    string identity = 1;
+    string parent = 3;
+    string name = 4;
+    string path = 5;
+    string mime = 6;
+    int64 size = 7;
+    int32 type = 8;
+    int64 created_at = 9;
+    int64 updated_at = 10;
+    int64 deleted_at = 11;
+    bool deleted = 12;
+    bool dir = 13;
+    bool hidden = 14;
+    bool locked = 15;
+    bool shared = 16;
+    bool starred = 17;
+    bool trashed = 18;
+    int64 locked_at = 19;
+    string locked_by = 20;
+    int64 shared_at = 21;
+    int32 flag = 22;
+    string unique = 23;
+    string content_identity = 24;
+}
+
