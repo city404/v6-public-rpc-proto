@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.3.0
 // - protoc             v4.24.4
-// source: userfile/user_file.proto
+// source: userfile/public_user_file.proto
 
 package userfile
 
@@ -142,5 +142,5 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "userfile/user_file.proto",
+	Metadata: "userfile/public_user_file.proto",
 }
