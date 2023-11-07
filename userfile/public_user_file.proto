@@ -1,6 +1,7 @@
 syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/userfile";
+import "common/pub_common.proto";
 
 service PubUserFile {
     rpc Create (File) returns (File) {}
@@ -10,8 +11,7 @@ service PubUserFile {
     //rpc Delete (File) returns (File) {}
     //rpc Move (File) returns (File) {}
     //rpc Copy (File) returns (File) {}
-    // rpc List (File) returns (FileList) {}
-    // List ...
+    rpc List (FileListRequest) returns (FileListResponse) {}
 }
 
 message File {
@@ -40,3 +40,13 @@ message File {
     string content_identity = 24;
 }
 
+message FileListRequest {
+    File parent = 1;
+    File filter = 2;
+    .v6.services.pub.common.ListRequest list_info = 3;
+}
+
+message FileListResponse {
+    repeated File files = 1;
+    .v6.services.pub.common.ListRequest list_info = 2;
+}
