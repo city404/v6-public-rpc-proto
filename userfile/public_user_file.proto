@@ -43,10 +43,10 @@ message File {
 message FileListRequest {
     File parent = 1;
     File filter = 2;
-    .v6.services.pub.common.ListRequest list_info = 3;
+    .v6.services.pub.common.ScanListRequest list_info = 3;
 }
 
 message FileListResponse {
     repeated File files = 1;
-    .v6.services.pub.common.ListRequest list_info = 2;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
 }
