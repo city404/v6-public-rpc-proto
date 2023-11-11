@@ -8,9 +8,10 @@ service PubUserFile {
     rpc Get (File) returns (File) {}
     //rpc Update (File) returns (File) {}
     //rpc Rename (File) returns (File) {}
-    //rpc Delete (File) returns (File) {}
-    //rpc Move (File) returns (File) {}
-    //rpc Copy (File) returns (File) {}
+    rpc Recycle (BatchOperationRequest) returns (BatchOperationResponse) {}
+    rpc Move (BatchOperationRequest) returns (BatchOperationResponse) {}
+    rpc Copy (BatchOperationRequest) returns (BatchOperationResponse) {}
+    rpc BatchOperation (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc List (FileListRequest) returns (FileListResponse) {}
 }
 
@@ -49,4 +50,19 @@ message FileListRequest {
 message FileListResponse {
     repeated File files = 1;
     .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message BatchOperationRequest {
+    repeated File source = 1;
+    File dest = 2;
+    int32 operation = 3;
+    int32 flag = 4;
+}
+
+message BatchOperationResponse {
+    string task  = 1;
+    int32 status = 2;
+    int64 affected  = 3;
+    int64 created_at = 4;
+    int64 progress = 5;
 }
