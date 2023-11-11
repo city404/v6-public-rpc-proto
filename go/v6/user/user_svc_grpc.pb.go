@@ -44,7 +44,7 @@ type PubUserClient interface {
 	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
-	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginRequest, error)
+	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error)
 }
 
 type pubUserClient struct {
@@ -136,8 +136,8 @@ func (c *pubUserClient) VerifyAuthToken(ctx context.Context, in *LoginRequest, o
 	return out, nil
 }
 
-func (c *pubUserClient) CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginRequest, error) {
-	out := new(LoginRequest)
+func (c *pubUserClient) CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error) {
+	out := new(OauthTokenResponse)
 	err := c.cc.Invoke(ctx, PubUser_CreateAuthToken_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -158,7 +158,7 @@ type PubUserServer interface {
 	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(context.Context, *LoginRequest) (*LoginResponse, error)
-	CreateAuthToken(context.Context, *LoginRequest) (*LoginRequest, error)
+	CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error)
 	mustEmbedUnimplementedPubUserServer()
 }
 
@@ -193,7 +193,7 @@ func (UnimplementedPubUserServer) SendSmsVerifyCodeNotUser(context.Context, *Sms
 func (UnimplementedPubUserServer) VerifyAuthToken(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAuthToken not implemented")
 }
-func (UnimplementedPubUserServer) CreateAuthToken(context.Context, *LoginRequest) (*LoginRequest, error) {
+func (UnimplementedPubUserServer) CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAuthToken not implemented")
 }
 func (UnimplementedPubUserServer) mustEmbedUnimplementedPubUserServer() {}

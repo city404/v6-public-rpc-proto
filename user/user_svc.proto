@@ -12,7 +12,7 @@ service PubUser {
     rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {}
     rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {}
     rpc VerifyAuthToken (LoginRequest) returns (LoginResponse) {}
-    rpc CreateAuthToken (LoginRequest) returns (LoginRequest) {}
+    rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {}
 }
 
 message User {
@@ -97,4 +97,16 @@ message SmsVeifyCodeSendResponse {
     int32 type = 2;
     string addon = 3;
     int64 expire_ts = 4;
+}
+
+message OauthTokenResponse {
+    string url = 1;
+    string addon = 2;
+    string input = 3;
+    string type = 4;
+    string callback = 5;
+    string return_url = 6;
+    int32 return_type = 7;
+    string captcha = 8;
+    string state = 9;
 }
