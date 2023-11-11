@@ -22,7 +22,7 @@ message File {
     string path = 5;
     string mime = 6;
     int64 size = 7;
-    int32 type = 8;
+    int64 type = 8;
     int64 created_at = 9;
     int64 updated_at = 10;
     int64 deleted_at = 11;
@@ -36,9 +36,10 @@ message File {
     int64 locked_at = 19;
     string locked_by = 20;
     int64 shared_at = 21;
-    int32 flag = 22;
+    int64 flag = 22;
     string unique = 23;
     string content_identity = 24;
+    int64 label = 25;
 }
 
 message FileListRequest {
