@@ -36,6 +36,7 @@ message LoginRequest {
     string return_url = 7;
     int32 return_type = 8;
     string captcha = 9;
+    string state = 10;
 }
 
 message LoginResponse {
