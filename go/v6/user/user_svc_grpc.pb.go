@@ -28,6 +28,7 @@ const (
 	PubUser_SendSmsVerifyCode_FullMethodName        = "/v6.services.pub.PubUser/SendSmsVerifyCode"
 	PubUser_SendSmsVerifyCodeNotUser_FullMethodName = "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser"
 	PubUser_VerifyAuthToken_FullMethodName          = "/v6.services.pub.PubUser/VerifyAuthToken"
+	PubUser_CreateAuthToken_FullMethodName          = "/v6.services.pub.PubUser/CreateAuthToken"
 )
 
 // PubUserClient is the client API for PubUser service.
@@ -43,6 +44,7 @@ type PubUserClient interface {
 	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginRequest, error)
 }
 
 type pubUserClient struct {
@@ -134,6 +136,15 @@ func (c *pubUserClient) VerifyAuthToken(ctx context.Context, in *LoginRequest, o
 	return out, nil
 }
 
+func (c *pubUserClient) CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginRequest, error) {
+	out := new(LoginRequest)
+	err := c.cc.Invoke(ctx, PubUser_CreateAuthToken_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserServer is the server API for PubUser service.
 // All implementations must embed UnimplementedPubUserServer
 // for forward compatibility
@@ -147,6 +158,7 @@ type PubUserServer interface {
 	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(context.Context, *LoginRequest) (*LoginResponse, error)
+	CreateAuthToken(context.Context, *LoginRequest) (*LoginRequest, error)
 	mustEmbedUnimplementedPubUserServer()
 }
 
@@ -180,6 +192,9 @@ func (UnimplementedPubUserServer) SendSmsVerifyCodeNotUser(context.Context, *Sms
 }
 func (UnimplementedPubUserServer) VerifyAuthToken(context.Context, *LoginRequest) (*LoginResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAuthToken not implemented")
+}
+func (UnimplementedPubUserServer) CreateAuthToken(context.Context, *LoginRequest) (*LoginRequest, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAuthToken not implemented")
 }
 func (UnimplementedPubUserServer) mustEmbedUnimplementedPubUserServer() {}
 
@@ -356,6 +371,24 @@ func _PubUser_VerifyAuthToken_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUser_CreateAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).CreateAuthToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_CreateAuthToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).CreateAuthToken(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUser_ServiceDesc is the grpc.ServiceDesc for PubUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -398,6 +431,10 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyAuthToken",
 			Handler:    _PubUser_VerifyAuthToken_Handler,
+		},
+		{
+			MethodName: "CreateAuthToken",
+			Handler:    _PubUser_CreateAuthToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
