@@ -46,6 +46,7 @@ go mod init github.com/city404/v6-public-rpc-proto/go
 # go get google.golang.org/grpc
 go get
 # go get github.com/golang/protobuf@master
+go get golang.org/x/net
 go mod tidy
 cd ..
 
