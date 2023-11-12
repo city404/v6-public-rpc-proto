@@ -20,7 +20,7 @@ message File {
     string parent = 3;
     string name = 4;
     string path = 5;
-    string mime = 6;
+    string mime_type = 6;
     int64 size = 7;
     int64 type = 8;
     int64 created_at = 9;
