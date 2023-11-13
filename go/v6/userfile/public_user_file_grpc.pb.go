@@ -21,9 +21,10 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	PubUserFile_Create_FullMethodName         = "/v6.services.pub.PubUserFile/Create"
 	PubUserFile_Get_FullMethodName            = "/v6.services.pub.PubUserFile/Get"
-	PubUserFile_Recycle_FullMethodName        = "/v6.services.pub.PubUserFile/Recycle"
+	PubUserFile_Trash_FullMethodName          = "/v6.services.pub.PubUserFile/Trash"
 	PubUserFile_Move_FullMethodName           = "/v6.services.pub.PubUserFile/Move"
 	PubUserFile_Copy_FullMethodName           = "/v6.services.pub.PubUserFile/Copy"
+	PubUserFile_Delete_FullMethodName         = "/v6.services.pub.PubUserFile/Delete"
 	PubUserFile_BatchOperation_FullMethodName = "/v6.services.pub.PubUserFile/BatchOperation"
 	PubUserFile_List_FullMethodName           = "/v6.services.pub.PubUserFile/List"
 )
@@ -36,9 +37,10 @@ type PubUserFileClient interface {
 	Get(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error)
 	// rpc Update (File) returns (File) {}
 	// rpc Rename (File) returns (File) {}
-	Recycle(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
+	Trash(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Move(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Copy(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
+	Delete(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	BatchOperation(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	List(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 }
@@ -69,9 +71,9 @@ func (c *pubUserFileClient) Get(ctx context.Context, in *File, opts ...grpc.Call
 	return out, nil
 }
 
-func (c *pubUserFileClient) Recycle(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error) {
+func (c *pubUserFileClient) Trash(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error) {
 	out := new(BatchOperationResponse)
-	err := c.cc.Invoke(ctx, PubUserFile_Recycle_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, PubUserFile_Trash_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,6 +92,15 @@ func (c *pubUserFileClient) Move(ctx context.Context, in *BatchOperationRequest,
 func (c *pubUserFileClient) Copy(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error) {
 	out := new(BatchOperationResponse)
 	err := c.cc.Invoke(ctx, PubUserFile_Copy_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserFileClient) Delete(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error) {
+	out := new(BatchOperationResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_Delete_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -122,9 +133,10 @@ type PubUserFileServer interface {
 	Get(context.Context, *File) (*File, error)
 	// rpc Update (File) returns (File) {}
 	// rpc Rename (File) returns (File) {}
-	Recycle(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
+	Trash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Move(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Copy(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
+	Delete(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	BatchOperation(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	List(context.Context, *FileListRequest) (*FileListResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
@@ -140,14 +152,17 @@ func (UnimplementedPubUserFileServer) Create(context.Context, *File) (*File, err
 func (UnimplementedPubUserFileServer) Get(context.Context, *File) (*File, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPubUserFileServer) Recycle(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Recycle not implemented")
+func (UnimplementedPubUserFileServer) Trash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Trash not implemented")
 }
 func (UnimplementedPubUserFileServer) Move(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Move not implemented")
 }
 func (UnimplementedPubUserFileServer) Copy(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Copy not implemented")
+}
+func (UnimplementedPubUserFileServer) Delete(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedPubUserFileServer) BatchOperation(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchOperation not implemented")
@@ -204,20 +219,20 @@ func _PubUserFile_Get_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubUserFile_Recycle_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PubUserFile_Trash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BatchOperationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubUserFileServer).Recycle(ctx, in)
+		return srv.(PubUserFileServer).Trash(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PubUserFile_Recycle_FullMethodName,
+		FullMethod: PubUserFile_Trash_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserFileServer).Recycle(ctx, req.(*BatchOperationRequest))
+		return srv.(PubUserFileServer).Trash(ctx, req.(*BatchOperationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -254,6 +269,24 @@ func _PubUserFile_Copy_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PubUserFileServer).Copy(ctx, req.(*BatchOperationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUserFile_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchOperationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).Delete(ctx, req.(*BatchOperationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -310,8 +343,8 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PubUserFile_Get_Handler,
 		},
 		{
-			MethodName: "Recycle",
-			Handler:    _PubUserFile_Recycle_Handler,
+			MethodName: "Trash",
+			Handler:    _PubUserFile_Trash_Handler,
 		},
 		{
 			MethodName: "Move",
@@ -320,6 +353,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Copy",
 			Handler:    _PubUserFile_Copy_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _PubUserFile_Delete_Handler,
 		},
 		{
 			MethodName: "BatchOperation",
