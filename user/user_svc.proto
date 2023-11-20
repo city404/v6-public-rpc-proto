@@ -11,7 +11,7 @@ service PubUser {
     rpc Delete (User) returns (User) {}
     rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {}
     rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {}
-    rpc VerifyAuthToken (LoginRequest) returns (LoginResponse) {}
+    rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {}
     rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {}
 }
 

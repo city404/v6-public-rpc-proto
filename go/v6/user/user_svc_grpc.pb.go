@@ -43,7 +43,7 @@ type PubUserClient interface {
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
-	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error)
 }
 
@@ -127,8 +127,8 @@ func (c *pubUserClient) SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVei
 	return out, nil
 }
 
-func (c *pubUserClient) VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
-	out := new(LoginResponse)
+func (c *pubUserClient) VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error) {
+	out := new(OauthTokenCheckResponse)
 	err := c.cc.Invoke(ctx, PubUser_VerifyAuthToken_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -157,7 +157,7 @@ type PubUserServer interface {
 	Delete(context.Context, *User) (*User, error)
 	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error)
-	VerifyAuthToken(context.Context, *LoginRequest) (*LoginResponse, error)
+	VerifyAuthToken(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error)
 	mustEmbedUnimplementedPubUserServer()
 }
@@ -190,7 +190,7 @@ func (UnimplementedPubUserServer) SendSmsVerifyCode(context.Context, *SmsVeifyCo
 func (UnimplementedPubUserServer) SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendSmsVerifyCodeNotUser not implemented")
 }
-func (UnimplementedPubUserServer) VerifyAuthToken(context.Context, *LoginRequest) (*LoginResponse, error) {
+func (UnimplementedPubUserServer) VerifyAuthToken(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAuthToken not implemented")
 }
 func (UnimplementedPubUserServer) CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error) {
