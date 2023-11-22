@@ -1,8 +1,8 @@
 syntax = "proto3";
 package v6.services.pub;
-option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/file";
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/slice";
 
-service File {
+service SliceProxy {
     rpc GetSlice (Slice) returns (Slice) {}
     rpc CreateSlice (Slice) returns (Slice) {}
     rpc GetMeta (Meta) returns (Meta) {}
