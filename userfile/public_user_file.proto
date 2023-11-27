@@ -12,8 +12,10 @@ service PubUserFile {
     rpc Move (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc Copy (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc Delete (BatchOperationRequest) returns (BatchOperationResponse) {}
+    rpc Recover (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc BatchOperation (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc List (FileListRequest) returns (FileListResponse) {}
+    rpc ListTrash (FileListRequest) returns (FileListResponse) {}
 }
 
 message File {
