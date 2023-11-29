@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	PubUserFile_Create_FullMethodName         = "/v6.services.pub.PubUserFile/Create"
 	PubUserFile_Get_FullMethodName            = "/v6.services.pub.PubUserFile/Get"
+	PubUserFile_Rename_FullMethodName         = "/v6.services.pub.PubUserFile/Rename"
 	PubUserFile_Trash_FullMethodName          = "/v6.services.pub.PubUserFile/Trash"
 	PubUserFile_Move_FullMethodName           = "/v6.services.pub.PubUserFile/Move"
 	PubUserFile_Copy_FullMethodName           = "/v6.services.pub.PubUserFile/Copy"
@@ -38,7 +39,7 @@ type PubUserFileClient interface {
 	Create(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error)
 	Get(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error)
 	// rpc Update (File) returns (File) {}
-	// rpc Rename (File) returns (File) {}
+	Rename(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error)
 	Trash(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Move(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Copy(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
@@ -69,6 +70,15 @@ func (c *pubUserFileClient) Create(ctx context.Context, in *File, opts ...grpc.C
 func (c *pubUserFileClient) Get(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error) {
 	out := new(File)
 	err := c.cc.Invoke(ctx, PubUserFile_Get_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserFileClient) Rename(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error) {
+	out := new(File)
+	err := c.cc.Invoke(ctx, PubUserFile_Rename_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -154,7 +164,7 @@ type PubUserFileServer interface {
 	Create(context.Context, *File) (*File, error)
 	Get(context.Context, *File) (*File, error)
 	// rpc Update (File) returns (File) {}
-	// rpc Rename (File) returns (File) {}
+	Rename(context.Context, *File) (*File, error)
 	Trash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Move(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Copy(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
@@ -175,6 +185,9 @@ func (UnimplementedPubUserFileServer) Create(context.Context, *File) (*File, err
 }
 func (UnimplementedPubUserFileServer) Get(context.Context, *File) (*File, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
+}
+func (UnimplementedPubUserFileServer) Rename(context.Context, *File) (*File, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Rename not implemented")
 }
 func (UnimplementedPubUserFileServer) Trash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Trash not implemented")
@@ -245,6 +258,24 @@ func _PubUserFile_Get_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PubUserFileServer).Get(ctx, req.(*File))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUserFile_Rename_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(File)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).Rename(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_Rename_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).Rename(ctx, req.(*File))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -407,6 +438,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Get",
 			Handler:    _PubUserFile_Get_Handler,
+		},
+		{
+			MethodName: "Rename",
+			Handler:    _PubUserFile_Rename_Handler,
 		},
 		{
 			MethodName: "Trash",
