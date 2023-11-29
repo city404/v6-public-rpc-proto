@@ -30,6 +30,7 @@ const (
 	PubUserFile_BatchOperation_FullMethodName = "/v6.services.pub.PubUserFile/BatchOperation"
 	PubUserFile_List_FullMethodName           = "/v6.services.pub.PubUserFile/List"
 	PubUserFile_ListTrash_FullMethodName      = "/v6.services.pub.PubUserFile/ListTrash"
+	PubUserFile_Search_FullMethodName         = "/v6.services.pub.PubUserFile/Search"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -48,6 +49,7 @@ type PubUserFileClient interface {
 	BatchOperation(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	List(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	ListTrash(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
+	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 }
 
 type pubUserFileClient struct {
@@ -157,6 +159,15 @@ func (c *pubUserFileClient) ListTrash(ctx context.Context, in *FileListRequest, 
 	return out, nil
 }
 
+func (c *pubUserFileClient) Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*FileListResponse, error) {
+	out := new(FileListResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_Search_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility
@@ -173,6 +184,7 @@ type PubUserFileServer interface {
 	BatchOperation(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	List(context.Context, *FileListRequest) (*FileListResponse, error)
 	ListTrash(context.Context, *FileListRequest) (*FileListResponse, error)
+	Search(context.Context, *SearchRequest) (*FileListResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -212,6 +224,9 @@ func (UnimplementedPubUserFileServer) List(context.Context, *FileListRequest) (*
 }
 func (UnimplementedPubUserFileServer) ListTrash(context.Context, *FileListRequest) (*FileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListTrash not implemented")
+}
+func (UnimplementedPubUserFileServer) Search(context.Context, *SearchRequest) (*FileListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 
@@ -424,6 +439,24 @@ func _PubUserFile_ListTrash_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_Search_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).Search(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_Search_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).Search(ctx, req.(*SearchRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -474,6 +507,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListTrash",
 			Handler:    _PubUserFile_ListTrash_Handler,
+		},
+		{
+			MethodName: "Search",
+			Handler:    _PubUserFile_Search_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

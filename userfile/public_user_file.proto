@@ -16,6 +16,7 @@ service PubUserFile {
     rpc BatchOperation (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc List (FileListRequest) returns (FileListResponse) {}
     rpc ListTrash (FileListRequest) returns (FileListResponse) {}
+    rpc Search (SearchRequest) returns (FileListResponse) {}
 }
 
 message File {
@@ -48,6 +49,11 @@ message File {
 message FileListRequest {
     File parent = 1;
     File filter = 2;
+    .v6.services.pub.common.ScanListRequest list_info = 3;
+}
+
+message SearchRequest {
+    string name = 1;
     .v6.services.pub.common.ScanListRequest list_info = 3;
 }
 
