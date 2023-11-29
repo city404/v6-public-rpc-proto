@@ -7,7 +7,7 @@ service PubUserFile {
     rpc Create (File) returns (File) {}
     rpc Get (File) returns (File) {}
     //rpc Update (File) returns (File) {}
-    rpc Rename (File) returns (File) {}
+    rpc Rename (File) returns (BatchOperationResponse) {}
     rpc Trash (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc Move (BatchOperationRequest) returns (BatchOperationResponse) {}
     rpc Copy (BatchOperationRequest) returns (BatchOperationResponse) {}

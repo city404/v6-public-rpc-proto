@@ -39,7 +39,7 @@ type PubUserFileClient interface {
 	Create(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error)
 	Get(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error)
 	// rpc Update (File) returns (File) {}
-	Rename(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error)
+	Rename(ctx context.Context, in *File, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Trash(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Move(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Copy(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
@@ -76,8 +76,8 @@ func (c *pubUserFileClient) Get(ctx context.Context, in *File, opts ...grpc.Call
 	return out, nil
 }
 
-func (c *pubUserFileClient) Rename(ctx context.Context, in *File, opts ...grpc.CallOption) (*File, error) {
-	out := new(File)
+func (c *pubUserFileClient) Rename(ctx context.Context, in *File, opts ...grpc.CallOption) (*BatchOperationResponse, error) {
+	out := new(BatchOperationResponse)
 	err := c.cc.Invoke(ctx, PubUserFile_Rename_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ type PubUserFileServer interface {
 	Create(context.Context, *File) (*File, error)
 	Get(context.Context, *File) (*File, error)
 	// rpc Update (File) returns (File) {}
-	Rename(context.Context, *File) (*File, error)
+	Rename(context.Context, *File) (*BatchOperationResponse, error)
 	Trash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Move(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Copy(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
@@ -186,7 +186,7 @@ func (UnimplementedPubUserFileServer) Create(context.Context, *File) (*File, err
 func (UnimplementedPubUserFileServer) Get(context.Context, *File) (*File, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPubUserFileServer) Rename(context.Context, *File) (*File, error) {
+func (UnimplementedPubUserFileServer) Rename(context.Context, *File) (*BatchOperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Rename not implemented")
 }
 func (UnimplementedPubUserFileServer) Trash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
