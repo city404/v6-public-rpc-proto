@@ -26,6 +26,7 @@ const (
 	PubUserFile_Move_FullMethodName           = "/v6.services.pub.PubUserFile/Move"
 	PubUserFile_Copy_FullMethodName           = "/v6.services.pub.PubUserFile/Copy"
 	PubUserFile_Delete_FullMethodName         = "/v6.services.pub.PubUserFile/Delete"
+	PubUserFile_DeleteTrash_FullMethodName    = "/v6.services.pub.PubUserFile/DeleteTrash"
 	PubUserFile_Recover_FullMethodName        = "/v6.services.pub.PubUserFile/Recover"
 	PubUserFile_BatchOperation_FullMethodName = "/v6.services.pub.PubUserFile/BatchOperation"
 	PubUserFile_List_FullMethodName           = "/v6.services.pub.PubUserFile/List"
@@ -45,6 +46,7 @@ type PubUserFileClient interface {
 	Move(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Copy(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Delete(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
+	DeleteTrash(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	Recover(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	BatchOperation(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error)
 	List(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
@@ -123,6 +125,15 @@ func (c *pubUserFileClient) Delete(ctx context.Context, in *BatchOperationReques
 	return out, nil
 }
 
+func (c *pubUserFileClient) DeleteTrash(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error) {
+	out := new(BatchOperationResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_DeleteTrash_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pubUserFileClient) Recover(ctx context.Context, in *BatchOperationRequest, opts ...grpc.CallOption) (*BatchOperationResponse, error) {
 	out := new(BatchOperationResponse)
 	err := c.cc.Invoke(ctx, PubUserFile_Recover_FullMethodName, in, out, opts...)
@@ -180,6 +191,7 @@ type PubUserFileServer interface {
 	Move(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Copy(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Delete(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
+	DeleteTrash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	Recover(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	BatchOperation(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error)
 	List(context.Context, *FileListRequest) (*FileListResponse, error)
@@ -212,6 +224,9 @@ func (UnimplementedPubUserFileServer) Copy(context.Context, *BatchOperationReque
 }
 func (UnimplementedPubUserFileServer) Delete(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedPubUserFileServer) DeleteTrash(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTrash not implemented")
 }
 func (UnimplementedPubUserFileServer) Recover(context.Context, *BatchOperationRequest) (*BatchOperationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Recover not implemented")
@@ -367,6 +382,24 @@ func _PubUserFile_Delete_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_DeleteTrash_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BatchOperationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).DeleteTrash(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_DeleteTrash_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).DeleteTrash(ctx, req.(*BatchOperationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PubUserFile_Recover_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BatchOperationRequest)
 	if err := dec(in); err != nil {
@@ -491,6 +524,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Delete",
 			Handler:    _PubUserFile_Delete_Handler,
+		},
+		{
+			MethodName: "DeleteTrash",
+			Handler:    _PubUserFile_DeleteTrash_Handler,
 		},
 		{
 			MethodName: "Recover",
