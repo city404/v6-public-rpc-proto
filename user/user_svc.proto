@@ -7,7 +7,7 @@ service PubUser {
     rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
     rpc Refresh (Token) returns (Token) {} // refresh token. 
     rpc Logoff (Token) returns (User) {}
-    rpc ResetPassword (LoginRequest) returns (LoginResponse) {} 
+    rpc ResetPassword (LoginRequest) returns (User) {} 
     rpc Register (RegisterRequest) returns (User) {}
     rpc Delete (User) returns (User) {}
     rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {}

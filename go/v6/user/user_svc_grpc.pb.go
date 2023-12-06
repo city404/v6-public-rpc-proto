@@ -40,7 +40,7 @@ type PubUserClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Refresh(ctx context.Context, in *Token, opts ...grpc.CallOption) (*Token, error)
 	Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error)
-	ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*User, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*User, error)
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
@@ -93,8 +93,8 @@ func (c *pubUserClient) Logoff(ctx context.Context, in *Token, opts ...grpc.Call
 	return out, nil
 }
 
-func (c *pubUserClient) ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
-	out := new(LoginResponse)
+func (c *pubUserClient) ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
 	err := c.cc.Invoke(ctx, PubUser_ResetPassword_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -164,7 +164,7 @@ type PubUserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Refresh(context.Context, *Token) (*Token, error)
 	Logoff(context.Context, *Token) (*User, error)
-	ResetPassword(context.Context, *LoginRequest) (*LoginResponse, error)
+	ResetPassword(context.Context, *LoginRequest) (*User, error)
 	Register(context.Context, *RegisterRequest) (*User, error)
 	Delete(context.Context, *User) (*User, error)
 	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
@@ -190,7 +190,7 @@ func (UnimplementedPubUserServer) Refresh(context.Context, *Token) (*Token, erro
 func (UnimplementedPubUserServer) Logoff(context.Context, *Token) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logoff not implemented")
 }
-func (UnimplementedPubUserServer) ResetPassword(context.Context, *LoginRequest) (*LoginResponse, error) {
+func (UnimplementedPubUserServer) ResetPassword(context.Context, *LoginRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
 }
 func (UnimplementedPubUserServer) Register(context.Context, *RegisterRequest) (*User, error) {
