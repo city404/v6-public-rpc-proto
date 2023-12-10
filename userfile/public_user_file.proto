@@ -18,6 +18,8 @@ service PubUserFile {
     rpc List (FileListRequest) returns (FileListResponse) {}
     rpc ListTrash (FileListRequest) returns (FileListResponse) {}
     rpc Search (SearchRequest) returns (FileListResponse) {}
+    rpc CreateDownloadOffer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
+    rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
 message File {
@@ -76,4 +78,10 @@ message BatchOperationResponse {
     int64 affected  = 3;
     int64 created_at = 4;
     int64 progress = 5;
+}
+
+message RTCDownloadInfo {
+    string content_identity = 1;
+    string sdp = 2;
+    string offer = 3;
 }

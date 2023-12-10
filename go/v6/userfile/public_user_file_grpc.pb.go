@@ -19,19 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubUserFile_Create_FullMethodName         = "/v6.services.pub.PubUserFile/Create"
-	PubUserFile_Get_FullMethodName            = "/v6.services.pub.PubUserFile/Get"
-	PubUserFile_Rename_FullMethodName         = "/v6.services.pub.PubUserFile/Rename"
-	PubUserFile_Trash_FullMethodName          = "/v6.services.pub.PubUserFile/Trash"
-	PubUserFile_Move_FullMethodName           = "/v6.services.pub.PubUserFile/Move"
-	PubUserFile_Copy_FullMethodName           = "/v6.services.pub.PubUserFile/Copy"
-	PubUserFile_Delete_FullMethodName         = "/v6.services.pub.PubUserFile/Delete"
-	PubUserFile_DeleteTrash_FullMethodName    = "/v6.services.pub.PubUserFile/DeleteTrash"
-	PubUserFile_Recover_FullMethodName        = "/v6.services.pub.PubUserFile/Recover"
-	PubUserFile_BatchOperation_FullMethodName = "/v6.services.pub.PubUserFile/BatchOperation"
-	PubUserFile_List_FullMethodName           = "/v6.services.pub.PubUserFile/List"
-	PubUserFile_ListTrash_FullMethodName      = "/v6.services.pub.PubUserFile/ListTrash"
-	PubUserFile_Search_FullMethodName         = "/v6.services.pub.PubUserFile/Search"
+	PubUserFile_Create_FullMethodName               = "/v6.services.pub.PubUserFile/Create"
+	PubUserFile_Get_FullMethodName                  = "/v6.services.pub.PubUserFile/Get"
+	PubUserFile_Rename_FullMethodName               = "/v6.services.pub.PubUserFile/Rename"
+	PubUserFile_Trash_FullMethodName                = "/v6.services.pub.PubUserFile/Trash"
+	PubUserFile_Move_FullMethodName                 = "/v6.services.pub.PubUserFile/Move"
+	PubUserFile_Copy_FullMethodName                 = "/v6.services.pub.PubUserFile/Copy"
+	PubUserFile_Delete_FullMethodName               = "/v6.services.pub.PubUserFile/Delete"
+	PubUserFile_DeleteTrash_FullMethodName          = "/v6.services.pub.PubUserFile/DeleteTrash"
+	PubUserFile_Recover_FullMethodName              = "/v6.services.pub.PubUserFile/Recover"
+	PubUserFile_BatchOperation_FullMethodName       = "/v6.services.pub.PubUserFile/BatchOperation"
+	PubUserFile_List_FullMethodName                 = "/v6.services.pub.PubUserFile/List"
+	PubUserFile_ListTrash_FullMethodName            = "/v6.services.pub.PubUserFile/ListTrash"
+	PubUserFile_Search_FullMethodName               = "/v6.services.pub.PubUserFile/Search"
+	PubUserFile_CreateDownloadOffer_FullMethodName  = "/v6.services.pub.PubUserFile/CreateDownloadOffer"
+	PubUserFile_CreateDownloadAnswer_FullMethodName = "/v6.services.pub.PubUserFile/CreateDownloadAnswer"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -52,6 +54,8 @@ type PubUserFileClient interface {
 	List(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	ListTrash(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*FileListResponse, error)
+	CreateDownloadOffer(ctx context.Context, in *RTCDownloadInfo, opts ...grpc.CallOption) (*RTCDownloadInfo, error)
+	CreateDownloadAnswer(ctx context.Context, in *RTCDownloadInfo, opts ...grpc.CallOption) (*RTCDownloadInfo, error)
 }
 
 type pubUserFileClient struct {
@@ -179,6 +183,24 @@ func (c *pubUserFileClient) Search(ctx context.Context, in *SearchRequest, opts 
 	return out, nil
 }
 
+func (c *pubUserFileClient) CreateDownloadOffer(ctx context.Context, in *RTCDownloadInfo, opts ...grpc.CallOption) (*RTCDownloadInfo, error) {
+	out := new(RTCDownloadInfo)
+	err := c.cc.Invoke(ctx, PubUserFile_CreateDownloadOffer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserFileClient) CreateDownloadAnswer(ctx context.Context, in *RTCDownloadInfo, opts ...grpc.CallOption) (*RTCDownloadInfo, error) {
+	out := new(RTCDownloadInfo)
+	err := c.cc.Invoke(ctx, PubUserFile_CreateDownloadAnswer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility
@@ -197,6 +219,8 @@ type PubUserFileServer interface {
 	List(context.Context, *FileListRequest) (*FileListResponse, error)
 	ListTrash(context.Context, *FileListRequest) (*FileListResponse, error)
 	Search(context.Context, *SearchRequest) (*FileListResponse, error)
+	CreateDownloadOffer(context.Context, *RTCDownloadInfo) (*RTCDownloadInfo, error)
+	CreateDownloadAnswer(context.Context, *RTCDownloadInfo) (*RTCDownloadInfo, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -242,6 +266,12 @@ func (UnimplementedPubUserFileServer) ListTrash(context.Context, *FileListReques
 }
 func (UnimplementedPubUserFileServer) Search(context.Context, *SearchRequest) (*FileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
+}
+func (UnimplementedPubUserFileServer) CreateDownloadOffer(context.Context, *RTCDownloadInfo) (*RTCDownloadInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDownloadOffer not implemented")
+}
+func (UnimplementedPubUserFileServer) CreateDownloadAnswer(context.Context, *RTCDownloadInfo) (*RTCDownloadInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDownloadAnswer not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 
@@ -490,6 +520,42 @@ func _PubUserFile_Search_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_CreateDownloadOffer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RTCDownloadInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).CreateDownloadOffer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_CreateDownloadOffer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).CreateDownloadOffer(ctx, req.(*RTCDownloadInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUserFile_CreateDownloadAnswer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RTCDownloadInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).CreateDownloadAnswer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_CreateDownloadAnswer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).CreateDownloadAnswer(ctx, req.(*RTCDownloadInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -548,6 +614,14 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Search",
 			Handler:    _PubUserFile_Search_Handler,
+		},
+		{
+			MethodName: "CreateDownloadOffer",
+			Handler:    _PubUserFile_CreateDownloadOffer_Handler,
+		},
+		{
+			MethodName: "CreateDownloadAnswer",
+			Handler:    _PubUserFile_CreateDownloadAnswer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
