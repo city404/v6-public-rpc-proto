@@ -53,7 +53,7 @@ type PubUserFileClient interface {
 	List(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	ListTrash(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*FileListResponse, error)
-	CreateDownloadOffer(ctx context.Context, in *RTCDownloadInfo, opts ...grpc.CallOption) (*RTCFileResponse, error)
+	CreateDownloadOffer(ctx context.Context, in *RTCFileRequest, opts ...grpc.CallOption) (*RTCFileResponse, error)
 }
 
 type pubUserFileClient struct {
@@ -181,7 +181,7 @@ func (c *pubUserFileClient) Search(ctx context.Context, in *SearchRequest, opts 
 	return out, nil
 }
 
-func (c *pubUserFileClient) CreateDownloadOffer(ctx context.Context, in *RTCDownloadInfo, opts ...grpc.CallOption) (*RTCFileResponse, error) {
+func (c *pubUserFileClient) CreateDownloadOffer(ctx context.Context, in *RTCFileRequest, opts ...grpc.CallOption) (*RTCFileResponse, error) {
 	out := new(RTCFileResponse)
 	err := c.cc.Invoke(ctx, PubUserFile_CreateDownloadOffer_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -208,7 +208,7 @@ type PubUserFileServer interface {
 	List(context.Context, *FileListRequest) (*FileListResponse, error)
 	ListTrash(context.Context, *FileListRequest) (*FileListResponse, error)
 	Search(context.Context, *SearchRequest) (*FileListResponse, error)
-	CreateDownloadOffer(context.Context, *RTCDownloadInfo) (*RTCFileResponse, error)
+	CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -255,7 +255,7 @@ func (UnimplementedPubUserFileServer) ListTrash(context.Context, *FileListReques
 func (UnimplementedPubUserFileServer) Search(context.Context, *SearchRequest) (*FileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (UnimplementedPubUserFileServer) CreateDownloadOffer(context.Context, *RTCDownloadInfo) (*RTCFileResponse, error) {
+func (UnimplementedPubUserFileServer) CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDownloadOffer not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
@@ -506,7 +506,7 @@ func _PubUserFile_Search_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _PubUserFile_CreateDownloadOffer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RTCDownloadInfo)
+	in := new(RTCFileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -518,7 +518,7 @@ func _PubUserFile_CreateDownloadOffer_Handler(srv interface{}, ctx context.Conte
 		FullMethod: PubUserFile_CreateDownloadOffer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserFileServer).CreateDownloadOffer(ctx, req.(*RTCDownloadInfo))
+		return srv.(PubUserFileServer).CreateDownloadOffer(ctx, req.(*RTCFileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
