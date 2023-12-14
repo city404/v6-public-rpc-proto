@@ -18,7 +18,7 @@ service PubUserFile {
     rpc List (FileListRequest) returns (FileListResponse) {}
     rpc ListTrash (FileListRequest) returns (FileListResponse) {}
     rpc Search (SearchRequest) returns (FileListResponse) {}
-    rpc CreateDownloadOffer (RTCDownloadInfo) returns (RTCDownloadResponse) {}
+    rpc CreateDownloadOffer (RTCDownloadInfo) returns (RTCFileResponse) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -86,9 +86,10 @@ message RTCDownloadInfo {
     string offer = 3;
 }
 
-message RTCDownloadResponse {
+message RTCFileResponse {
     string content_identity = 1;
     int64 file_size = 2;
     string encode_key = 3;
     repeated string sdp = 4;
+    string name = 5;
 }
