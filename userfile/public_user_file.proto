@@ -93,4 +93,5 @@ message RTCFileResponse {
     string encode_key = 3;
     repeated string sdp = 4;
     string name = 5;
+    string connection = 6;
 }
