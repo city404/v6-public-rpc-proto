@@ -84,6 +84,7 @@ message RTCFileRequest {
     string content_identity = 1;
     string sdp = 2;
     string offer = 3;
+    string client_identity = 4;
 }
 
 message RTCFileResponse {
