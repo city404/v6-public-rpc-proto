@@ -19,20 +19,22 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubUserFile_Create_FullMethodName              = "/v6.services.pub.PubUserFile/Create"
-	PubUserFile_Get_FullMethodName                 = "/v6.services.pub.PubUserFile/Get"
-	PubUserFile_Rename_FullMethodName              = "/v6.services.pub.PubUserFile/Rename"
-	PubUserFile_Trash_FullMethodName               = "/v6.services.pub.PubUserFile/Trash"
-	PubUserFile_Move_FullMethodName                = "/v6.services.pub.PubUserFile/Move"
-	PubUserFile_Copy_FullMethodName                = "/v6.services.pub.PubUserFile/Copy"
-	PubUserFile_Delete_FullMethodName              = "/v6.services.pub.PubUserFile/Delete"
-	PubUserFile_DeleteTrash_FullMethodName         = "/v6.services.pub.PubUserFile/DeleteTrash"
-	PubUserFile_Recover_FullMethodName             = "/v6.services.pub.PubUserFile/Recover"
-	PubUserFile_BatchOperation_FullMethodName      = "/v6.services.pub.PubUserFile/BatchOperation"
-	PubUserFile_List_FullMethodName                = "/v6.services.pub.PubUserFile/List"
-	PubUserFile_ListTrash_FullMethodName           = "/v6.services.pub.PubUserFile/ListTrash"
-	PubUserFile_Search_FullMethodName              = "/v6.services.pub.PubUserFile/Search"
-	PubUserFile_CreateDownloadOffer_FullMethodName = "/v6.services.pub.PubUserFile/CreateDownloadOffer"
+	PubUserFile_Create_FullMethodName                 = "/v6.services.pub.PubUserFile/Create"
+	PubUserFile_Get_FullMethodName                    = "/v6.services.pub.PubUserFile/Get"
+	PubUserFile_Rename_FullMethodName                 = "/v6.services.pub.PubUserFile/Rename"
+	PubUserFile_Trash_FullMethodName                  = "/v6.services.pub.PubUserFile/Trash"
+	PubUserFile_Move_FullMethodName                   = "/v6.services.pub.PubUserFile/Move"
+	PubUserFile_Copy_FullMethodName                   = "/v6.services.pub.PubUserFile/Copy"
+	PubUserFile_Delete_FullMethodName                 = "/v6.services.pub.PubUserFile/Delete"
+	PubUserFile_DeleteTrash_FullMethodName            = "/v6.services.pub.PubUserFile/DeleteTrash"
+	PubUserFile_Recover_FullMethodName                = "/v6.services.pub.PubUserFile/Recover"
+	PubUserFile_BatchOperation_FullMethodName         = "/v6.services.pub.PubUserFile/BatchOperation"
+	PubUserFile_List_FullMethodName                   = "/v6.services.pub.PubUserFile/List"
+	PubUserFile_ListTrash_FullMethodName              = "/v6.services.pub.PubUserFile/ListTrash"
+	PubUserFile_Search_FullMethodName                 = "/v6.services.pub.PubUserFile/Search"
+	PubUserFile_CreateDownloadOffer_FullMethodName    = "/v6.services.pub.PubUserFile/CreateDownloadOffer"
+	PubUserFile_SendClientIceCandidate_FullMethodName = "/v6.services.pub.PubUserFile/SendClientIceCandidate"
+	PubUserFile_GetServerIceCandidate_FullMethodName  = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -54,6 +56,8 @@ type PubUserFileClient interface {
 	ListTrash(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	CreateDownloadOffer(ctx context.Context, in *RTCFileRequest, opts ...grpc.CallOption) (*RTCFileResponse, error)
+	SendClientIceCandidate(ctx context.Context, in *SendIceCandidateRequest, opts ...grpc.CallOption) (*SendIceCandidateResponse, error)
+	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
 }
 
 type pubUserFileClient struct {
@@ -190,6 +194,24 @@ func (c *pubUserFileClient) CreateDownloadOffer(ctx context.Context, in *RTCFile
 	return out, nil
 }
 
+func (c *pubUserFileClient) SendClientIceCandidate(ctx context.Context, in *SendIceCandidateRequest, opts ...grpc.CallOption) (*SendIceCandidateResponse, error) {
+	out := new(SendIceCandidateResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_SendClientIceCandidate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserFileClient) GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error) {
+	out := new(GetIceCandidateResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_GetServerIceCandidate_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility
@@ -209,6 +231,8 @@ type PubUserFileServer interface {
 	ListTrash(context.Context, *FileListRequest) (*FileListResponse, error)
 	Search(context.Context, *SearchRequest) (*FileListResponse, error)
 	CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error)
+	SendClientIceCandidate(context.Context, *SendIceCandidateRequest) (*SendIceCandidateResponse, error)
+	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -257,6 +281,12 @@ func (UnimplementedPubUserFileServer) Search(context.Context, *SearchRequest) (*
 }
 func (UnimplementedPubUserFileServer) CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDownloadOffer not implemented")
+}
+func (UnimplementedPubUserFileServer) SendClientIceCandidate(context.Context, *SendIceCandidateRequest) (*SendIceCandidateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendClientIceCandidate not implemented")
+}
+func (UnimplementedPubUserFileServer) GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServerIceCandidate not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 
@@ -523,6 +553,42 @@ func _PubUserFile_CreateDownloadOffer_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_SendClientIceCandidate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendIceCandidateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).SendClientIceCandidate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_SendClientIceCandidate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).SendClientIceCandidate(ctx, req.(*SendIceCandidateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUserFile_GetServerIceCandidate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIceCandidateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).GetServerIceCandidate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_GetServerIceCandidate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).GetServerIceCandidate(ctx, req.(*GetIceCandidateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -585,6 +651,14 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateDownloadOffer",
 			Handler:    _PubUserFile_CreateDownloadOffer_Handler,
+		},
+		{
+			MethodName: "SendClientIceCandidate",
+			Handler:    _PubUserFile_SendClientIceCandidate_Handler,
+		},
+		{
+			MethodName: "GetServerIceCandidate",
+			Handler:    _PubUserFile_GetServerIceCandidate_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
