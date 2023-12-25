@@ -35,6 +35,7 @@ const (
 	PubUserFile_CreateDownloadOffer_FullMethodName    = "/v6.services.pub.PubUserFile/CreateDownloadOffer"
 	PubUserFile_SendClientIceCandidate_FullMethodName = "/v6.services.pub.PubUserFile/SendClientIceCandidate"
 	PubUserFile_GetServerIceCandidate_FullMethodName  = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
+	PubUserFile_ParseFileSlice_FullMethodName         = "/v6.services.pub.PubUserFile/ParseFileSlice"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -58,6 +59,7 @@ type PubUserFileClient interface {
 	CreateDownloadOffer(ctx context.Context, in *RTCFileRequest, opts ...grpc.CallOption) (*RTCFileResponse, error)
 	SendClientIceCandidate(ctx context.Context, in *SendIceCandidateRequest, opts ...grpc.CallOption) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
+	ParseFileSlice(ctx context.Context, in *ParseFileSliceRequest, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
 }
 
 type pubUserFileClient struct {
@@ -212,6 +214,15 @@ func (c *pubUserFileClient) GetServerIceCandidate(ctx context.Context, in *GetIc
 	return out, nil
 }
 
+func (c *pubUserFileClient) ParseFileSlice(ctx context.Context, in *ParseFileSliceRequest, opts ...grpc.CallOption) (*ParseFileSliceResponse, error) {
+	out := new(ParseFileSliceResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_ParseFileSlice_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility
@@ -233,6 +244,7 @@ type PubUserFileServer interface {
 	CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error)
 	SendClientIceCandidate(context.Context, *SendIceCandidateRequest) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
+	ParseFileSlice(context.Context, *ParseFileSliceRequest) (*ParseFileSliceResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -287,6 +299,9 @@ func (UnimplementedPubUserFileServer) SendClientIceCandidate(context.Context, *S
 }
 func (UnimplementedPubUserFileServer) GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerIceCandidate not implemented")
+}
+func (UnimplementedPubUserFileServer) ParseFileSlice(context.Context, *ParseFileSliceRequest) (*ParseFileSliceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ParseFileSlice not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 
@@ -589,6 +604,24 @@ func _PubUserFile_GetServerIceCandidate_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_ParseFileSlice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ParseFileSliceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).ParseFileSlice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_ParseFileSlice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).ParseFileSlice(ctx, req.(*ParseFileSliceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -659,6 +692,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetServerIceCandidate",
 			Handler:    _PubUserFile_GetServerIceCandidate_Handler,
+		},
+		{
+			MethodName: "ParseFileSlice",
+			Handler:    _PubUserFile_ParseFileSlice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
