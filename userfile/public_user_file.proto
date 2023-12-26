@@ -21,7 +21,7 @@ service PubUserFile {
     rpc CreateDownloadOffer (RTCFileRequest) returns (RTCFileResponse) {}
     rpc SendClientIceCandidate (SendIceCandidateRequest) returns (SendIceCandidateResponse) {}
     rpc GetServerIceCandidate (GetIceCandidateRequest) returns (GetIceCandidateResponse) {}
-    rpc ParseFileSlice (ParseFileSliceRequest) returns (ParseFileSliceResponse) {}
+    rpc ParseFileSlice (File) returns (ParseFileSliceResponse) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -123,10 +123,11 @@ message GetIceCandidateResponse {
     repeated string candidate = 3;
 }
 
-message ParseFileSliceRequest {
-    string content_identity = 1;
-    // string client_identity = 2;
-}
+
+//message ParseFileSliceRequest {
+//    string content_identity = 1;
+//    // string client_identity = 2;
+//}
 
 message ParseFileSliceResponse {
     string content_identity = 1;

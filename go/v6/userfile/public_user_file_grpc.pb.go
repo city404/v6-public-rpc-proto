@@ -59,7 +59,7 @@ type PubUserFileClient interface {
 	CreateDownloadOffer(ctx context.Context, in *RTCFileRequest, opts ...grpc.CallOption) (*RTCFileResponse, error)
 	SendClientIceCandidate(ctx context.Context, in *SendIceCandidateRequest, opts ...grpc.CallOption) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
-	ParseFileSlice(ctx context.Context, in *ParseFileSliceRequest, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
+	ParseFileSlice(ctx context.Context, in *File, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
 }
 
 type pubUserFileClient struct {
@@ -214,7 +214,7 @@ func (c *pubUserFileClient) GetServerIceCandidate(ctx context.Context, in *GetIc
 	return out, nil
 }
 
-func (c *pubUserFileClient) ParseFileSlice(ctx context.Context, in *ParseFileSliceRequest, opts ...grpc.CallOption) (*ParseFileSliceResponse, error) {
+func (c *pubUserFileClient) ParseFileSlice(ctx context.Context, in *File, opts ...grpc.CallOption) (*ParseFileSliceResponse, error) {
 	out := new(ParseFileSliceResponse)
 	err := c.cc.Invoke(ctx, PubUserFile_ParseFileSlice_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -244,7 +244,7 @@ type PubUserFileServer interface {
 	CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error)
 	SendClientIceCandidate(context.Context, *SendIceCandidateRequest) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
-	ParseFileSlice(context.Context, *ParseFileSliceRequest) (*ParseFileSliceResponse, error)
+	ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -300,7 +300,7 @@ func (UnimplementedPubUserFileServer) SendClientIceCandidate(context.Context, *S
 func (UnimplementedPubUserFileServer) GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServerIceCandidate not implemented")
 }
-func (UnimplementedPubUserFileServer) ParseFileSlice(context.Context, *ParseFileSliceRequest) (*ParseFileSliceResponse, error) {
+func (UnimplementedPubUserFileServer) ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ParseFileSlice not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
@@ -605,7 +605,7 @@ func _PubUserFile_GetServerIceCandidate_Handler(srv interface{}, ctx context.Con
 }
 
 func _PubUserFile_ParseFileSlice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ParseFileSliceRequest)
+	in := new(File)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -617,7 +617,7 @@ func _PubUserFile_ParseFileSlice_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: PubUserFile_ParseFileSlice_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserFileServer).ParseFileSlice(ctx, req.(*ParseFileSliceRequest))
+		return srv.(PubUserFileServer).ParseFileSlice(ctx, req.(*File))
 	}
 	return interceptor(ctx, in, info, handler)
 }
