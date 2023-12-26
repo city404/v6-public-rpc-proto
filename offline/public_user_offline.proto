@@ -1,7 +1,7 @@
 syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/offline";
-import "common/pub_common.proto";
+// import "common/pub_common.proto";
 
 service PubOfflineTask {
     rpc Parse (TaskParseRequest) returns (TaskParseResponse) {}
@@ -9,7 +9,7 @@ service PubOfflineTask {
 
 message TaskParseRequest {
     string url = 1;
-    string file = 2;
+    // string file = 2;
 }
 
 message TaskMeta {
@@ -54,9 +54,14 @@ message TaskFile {
     bool directory = 16;
 }
 
+
+
 message TaskParseResponse {
+    repeated TaskParseData data = 1;
+}
+
+message TaskParseData {
     TaskMeta meta = 1;
-    repeated TaskFile task_files = 2;
-    .v6.services.pub.common.ScanListRequest list_info = 3;
+    repeated TaskFile files = 2;
 }
 
