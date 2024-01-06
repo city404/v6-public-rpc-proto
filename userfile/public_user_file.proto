@@ -22,6 +22,7 @@ service PubUserFile {
     rpc SendClientIceCandidate (SendIceCandidateRequest) returns (SendIceCandidateResponse) {}
     rpc GetServerIceCandidate (GetIceCandidateRequest) returns (GetIceCandidateResponse) {}
     rpc ParseFileSlice (File) returns (ParseFileSliceResponse) {}
+    rpc GetSliceDownloadAddress (SliceDownloadAddressRequest) returns (SliceDownloadAddressResponse) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -135,10 +136,28 @@ message ParseFileSliceResponse {
     repeated string raw_nodes = 3;
     int64 file_size = 4;
     repeated SliceSize sizes = 5;
+    string sha1 = 6;
 }
 
 message SliceSize {
     int64 start_index = 1;
     int64 end_index = 2;
     int64 size = 3;
+}
+
+
+message SliceDownloadAddressRequest {
+    repeated string content_identity = 1;
+}
+
+message SliceDownloadAddressResponse {
+    repeated SliceDownloadInfo addresses = 1;
+}
+
+message SliceDownloadInfo {
+    string content_identity = 1;
+    string download_address = 2;
+    string download_token = 3;
+    int64 expire_at = 4;
+    string request_address = 5;
 }

@@ -19,23 +19,24 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubUserFile_Create_FullMethodName                 = "/v6.services.pub.PubUserFile/Create"
-	PubUserFile_Get_FullMethodName                    = "/v6.services.pub.PubUserFile/Get"
-	PubUserFile_Rename_FullMethodName                 = "/v6.services.pub.PubUserFile/Rename"
-	PubUserFile_Trash_FullMethodName                  = "/v6.services.pub.PubUserFile/Trash"
-	PubUserFile_Move_FullMethodName                   = "/v6.services.pub.PubUserFile/Move"
-	PubUserFile_Copy_FullMethodName                   = "/v6.services.pub.PubUserFile/Copy"
-	PubUserFile_Delete_FullMethodName                 = "/v6.services.pub.PubUserFile/Delete"
-	PubUserFile_DeleteTrash_FullMethodName            = "/v6.services.pub.PubUserFile/DeleteTrash"
-	PubUserFile_Recover_FullMethodName                = "/v6.services.pub.PubUserFile/Recover"
-	PubUserFile_BatchOperation_FullMethodName         = "/v6.services.pub.PubUserFile/BatchOperation"
-	PubUserFile_List_FullMethodName                   = "/v6.services.pub.PubUserFile/List"
-	PubUserFile_ListTrash_FullMethodName              = "/v6.services.pub.PubUserFile/ListTrash"
-	PubUserFile_Search_FullMethodName                 = "/v6.services.pub.PubUserFile/Search"
-	PubUserFile_CreateDownloadOffer_FullMethodName    = "/v6.services.pub.PubUserFile/CreateDownloadOffer"
-	PubUserFile_SendClientIceCandidate_FullMethodName = "/v6.services.pub.PubUserFile/SendClientIceCandidate"
-	PubUserFile_GetServerIceCandidate_FullMethodName  = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
-	PubUserFile_ParseFileSlice_FullMethodName         = "/v6.services.pub.PubUserFile/ParseFileSlice"
+	PubUserFile_Create_FullMethodName                  = "/v6.services.pub.PubUserFile/Create"
+	PubUserFile_Get_FullMethodName                     = "/v6.services.pub.PubUserFile/Get"
+	PubUserFile_Rename_FullMethodName                  = "/v6.services.pub.PubUserFile/Rename"
+	PubUserFile_Trash_FullMethodName                   = "/v6.services.pub.PubUserFile/Trash"
+	PubUserFile_Move_FullMethodName                    = "/v6.services.pub.PubUserFile/Move"
+	PubUserFile_Copy_FullMethodName                    = "/v6.services.pub.PubUserFile/Copy"
+	PubUserFile_Delete_FullMethodName                  = "/v6.services.pub.PubUserFile/Delete"
+	PubUserFile_DeleteTrash_FullMethodName             = "/v6.services.pub.PubUserFile/DeleteTrash"
+	PubUserFile_Recover_FullMethodName                 = "/v6.services.pub.PubUserFile/Recover"
+	PubUserFile_BatchOperation_FullMethodName          = "/v6.services.pub.PubUserFile/BatchOperation"
+	PubUserFile_List_FullMethodName                    = "/v6.services.pub.PubUserFile/List"
+	PubUserFile_ListTrash_FullMethodName               = "/v6.services.pub.PubUserFile/ListTrash"
+	PubUserFile_Search_FullMethodName                  = "/v6.services.pub.PubUserFile/Search"
+	PubUserFile_CreateDownloadOffer_FullMethodName     = "/v6.services.pub.PubUserFile/CreateDownloadOffer"
+	PubUserFile_SendClientIceCandidate_FullMethodName  = "/v6.services.pub.PubUserFile/SendClientIceCandidate"
+	PubUserFile_GetServerIceCandidate_FullMethodName   = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
+	PubUserFile_ParseFileSlice_FullMethodName          = "/v6.services.pub.PubUserFile/ParseFileSlice"
+	PubUserFile_GetSliceDownloadAddress_FullMethodName = "/v6.services.pub.PubUserFile/GetSliceDownloadAddress"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -60,6 +61,7 @@ type PubUserFileClient interface {
 	SendClientIceCandidate(ctx context.Context, in *SendIceCandidateRequest, opts ...grpc.CallOption) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
 	ParseFileSlice(ctx context.Context, in *File, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
+	GetSliceDownloadAddress(ctx context.Context, in *SliceDownloadAddressRequest, opts ...grpc.CallOption) (*SliceDownloadAddressResponse, error)
 }
 
 type pubUserFileClient struct {
@@ -223,6 +225,15 @@ func (c *pubUserFileClient) ParseFileSlice(ctx context.Context, in *File, opts .
 	return out, nil
 }
 
+func (c *pubUserFileClient) GetSliceDownloadAddress(ctx context.Context, in *SliceDownloadAddressRequest, opts ...grpc.CallOption) (*SliceDownloadAddressResponse, error) {
+	out := new(SliceDownloadAddressResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_GetSliceDownloadAddress_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility
@@ -245,6 +256,7 @@ type PubUserFileServer interface {
 	SendClientIceCandidate(context.Context, *SendIceCandidateRequest) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
 	ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error)
+	GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -302,6 +314,9 @@ func (UnimplementedPubUserFileServer) GetServerIceCandidate(context.Context, *Ge
 }
 func (UnimplementedPubUserFileServer) ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ParseFileSlice not implemented")
+}
+func (UnimplementedPubUserFileServer) GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSliceDownloadAddress not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 
@@ -622,6 +637,24 @@ func _PubUserFile_ParseFileSlice_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_GetSliceDownloadAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SliceDownloadAddressRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).GetSliceDownloadAddress(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_GetSliceDownloadAddress_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).GetSliceDownloadAddress(ctx, req.(*SliceDownloadAddressRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -696,6 +729,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ParseFileSlice",
 			Handler:    _PubUserFile_ParseFileSlice_Handler,
+		},
+		{
+			MethodName: "GetSliceDownloadAddress",
+			Handler:    _PubUserFile_GetSliceDownloadAddress_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
