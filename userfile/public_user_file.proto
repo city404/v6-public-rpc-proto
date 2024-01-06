@@ -148,7 +148,7 @@ message SliceSize {
 
 
 message SliceDownloadAddressRequest {
-    repeated string content_identity = 1;
+    repeated string identity = 1;
 }
 
 message SliceDownloadAddressResponse {
@@ -156,7 +156,7 @@ message SliceDownloadAddressResponse {
 }
 
 message SliceDownloadInfo {
-    string content_identity = 1;
+    string identity = 1;
     string download_address = 2;
     string download_token = 3;
     int64 expire_at = 4;
