@@ -86,18 +86,18 @@ message BatchOperationResponse {
 
 message ManageRTCRequest {
     // string content_identity = 1;
-    string sdp = 2;
-    string offer = 3;
-    string client_identity = 4;
+    string sdp = 1;
+    string offer = 2;
+    string client_identity = 3;
 }
 
 message ManageRTCResponse {
-    string content_identity = 1;
-    int64 file_size = 2;
-    string encode_key = 3;
-    string sdp = 4;
-    string name = 5;
-    string connection = 6;
+    // string content_identity = 1;
+    int64 file_size = 1;
+    string encode_key = 2;
+    string sdp = 3;
+    string name = 4;
+    string connection = 5;
 }
 
 message SendIceCandidateRequest {
