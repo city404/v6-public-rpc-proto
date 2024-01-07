@@ -32,7 +32,7 @@ const (
 	PubUserFile_List_FullMethodName                    = "/v6.services.pub.PubUserFile/List"
 	PubUserFile_ListTrash_FullMethodName               = "/v6.services.pub.PubUserFile/ListTrash"
 	PubUserFile_Search_FullMethodName                  = "/v6.services.pub.PubUserFile/Search"
-	PubUserFile_CreateDownloadOffer_FullMethodName     = "/v6.services.pub.PubUserFile/CreateDownloadOffer"
+	PubUserFile_CreateRTCOffer_FullMethodName          = "/v6.services.pub.PubUserFile/CreateRTCOffer"
 	PubUserFile_SendClientIceCandidate_FullMethodName  = "/v6.services.pub.PubUserFile/SendClientIceCandidate"
 	PubUserFile_GetServerIceCandidate_FullMethodName   = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
 	PubUserFile_ParseFileSlice_FullMethodName          = "/v6.services.pub.PubUserFile/ParseFileSlice"
@@ -57,7 +57,7 @@ type PubUserFileClient interface {
 	List(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	ListTrash(ctx context.Context, in *FileListRequest, opts ...grpc.CallOption) (*FileListResponse, error)
 	Search(ctx context.Context, in *SearchRequest, opts ...grpc.CallOption) (*FileListResponse, error)
-	CreateDownloadOffer(ctx context.Context, in *RTCFileRequest, opts ...grpc.CallOption) (*RTCFileResponse, error)
+	CreateRTCOffer(ctx context.Context, in *RTCManageRequest, opts ...grpc.CallOption) (*RTCManageResponse, error)
 	SendClientIceCandidate(ctx context.Context, in *SendIceCandidateRequest, opts ...grpc.CallOption) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
 	ParseFileSlice(ctx context.Context, in *File, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
@@ -189,9 +189,9 @@ func (c *pubUserFileClient) Search(ctx context.Context, in *SearchRequest, opts 
 	return out, nil
 }
 
-func (c *pubUserFileClient) CreateDownloadOffer(ctx context.Context, in *RTCFileRequest, opts ...grpc.CallOption) (*RTCFileResponse, error) {
-	out := new(RTCFileResponse)
-	err := c.cc.Invoke(ctx, PubUserFile_CreateDownloadOffer_FullMethodName, in, out, opts...)
+func (c *pubUserFileClient) CreateRTCOffer(ctx context.Context, in *RTCManageRequest, opts ...grpc.CallOption) (*RTCManageResponse, error) {
+	out := new(RTCManageResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_CreateRTCOffer_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -252,7 +252,7 @@ type PubUserFileServer interface {
 	List(context.Context, *FileListRequest) (*FileListResponse, error)
 	ListTrash(context.Context, *FileListRequest) (*FileListResponse, error)
 	Search(context.Context, *SearchRequest) (*FileListResponse, error)
-	CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error)
+	CreateRTCOffer(context.Context, *RTCManageRequest) (*RTCManageResponse, error)
 	SendClientIceCandidate(context.Context, *SendIceCandidateRequest) (*SendIceCandidateResponse, error)
 	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
 	ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error)
@@ -303,8 +303,8 @@ func (UnimplementedPubUserFileServer) ListTrash(context.Context, *FileListReques
 func (UnimplementedPubUserFileServer) Search(context.Context, *SearchRequest) (*FileListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Search not implemented")
 }
-func (UnimplementedPubUserFileServer) CreateDownloadOffer(context.Context, *RTCFileRequest) (*RTCFileResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateDownloadOffer not implemented")
+func (UnimplementedPubUserFileServer) CreateRTCOffer(context.Context, *RTCManageRequest) (*RTCManageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRTCOffer not implemented")
 }
 func (UnimplementedPubUserFileServer) SendClientIceCandidate(context.Context, *SendIceCandidateRequest) (*SendIceCandidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendClientIceCandidate not implemented")
@@ -565,20 +565,20 @@ func _PubUserFile_Search_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubUserFile_CreateDownloadOffer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RTCFileRequest)
+func _PubUserFile_CreateRTCOffer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RTCManageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubUserFileServer).CreateDownloadOffer(ctx, in)
+		return srv.(PubUserFileServer).CreateRTCOffer(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PubUserFile_CreateDownloadOffer_FullMethodName,
+		FullMethod: PubUserFile_CreateRTCOffer_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserFileServer).CreateDownloadOffer(ctx, req.(*RTCFileRequest))
+		return srv.(PubUserFileServer).CreateRTCOffer(ctx, req.(*RTCManageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -715,8 +715,8 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PubUserFile_Search_Handler,
 		},
 		{
-			MethodName: "CreateDownloadOffer",
-			Handler:    _PubUserFile_CreateDownloadOffer_Handler,
+			MethodName: "CreateRTCOffer",
+			Handler:    _PubUserFile_CreateRTCOffer_Handler,
 		},
 		{
 			MethodName: "SendClientIceCandidate",

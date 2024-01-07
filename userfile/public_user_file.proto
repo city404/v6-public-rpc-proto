@@ -18,7 +18,7 @@ service PubUserFile {
     rpc List (FileListRequest) returns (FileListResponse) {}
     rpc ListTrash (FileListRequest) returns (FileListResponse) {}
     rpc Search (SearchRequest) returns (FileListResponse) {}
-    rpc CreateDownloadOffer (RTCFileRequest) returns (RTCFileResponse) {}
+    rpc CreateRTCOffer (RTCManageRequest) returns (RTCManageResponse) {}
     rpc SendClientIceCandidate (SendIceCandidateRequest) returns (SendIceCandidateResponse) {}
     rpc GetServerIceCandidate (GetIceCandidateRequest) returns (GetIceCandidateResponse) {}
     rpc ParseFileSlice (File) returns (ParseFileSliceResponse) {}
@@ -84,14 +84,14 @@ message BatchOperationResponse {
     int64 progress = 5;
 }
 
-message RTCFileRequest {
+message RTCManageRequest {
     string content_identity = 1;
     string sdp = 2;
     string offer = 3;
     string client_identity = 4;
 }
 
-message RTCFileResponse {
+message RTCManageResponse {
     string content_identity = 1;
     int64 file_size = 2;
     string encode_key = 3;
@@ -101,27 +101,27 @@ message RTCFileResponse {
 }
 
 message SendIceCandidateRequest {
-    string content_identity = 1;
-    string client_identity = 2;
-    string candidate = 3;
+    // string content_identity = 1;
+    string client_identity = 1;
+    string candidate = 2;
 }
 
 message SendIceCandidateResponse {
-    string content_identity = 1;
-    string client_identity = 2;
-    string candidate = 3;
+    // string content_identity = 1;
+    string client_identity = 1;
+    string candidate = 2;
 }
 
 message GetIceCandidateRequest {
-    string content_identity = 1;
-    string client_identity = 2;
-    string candidate = 3;
+    // string content_identity = 1;
+    string client_identity = 1;
+    string candidate = 2;
 }
 
 message GetIceCandidateResponse {
-    string content_identity = 1;
-    string client_identity = 2;
-    repeated string candidate = 3;
+    // string content_identity = 1;
+    string client_identity = 1;
+    repeated string candidate = 2;
 }
 
 
