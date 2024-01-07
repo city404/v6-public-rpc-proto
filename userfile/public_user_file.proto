@@ -18,7 +18,7 @@ service PubUserFile {
     rpc List (FileListRequest) returns (FileListResponse) {}
     rpc ListTrash (FileListRequest) returns (FileListResponse) {}
     rpc Search (SearchRequest) returns (FileListResponse) {}
-    rpc CreateRTCOffer (RTCManageRequest) returns (RTCManageResponse) {}
+    rpc CreateManageRTCOffer (ManageRTCRequest) returns (ManageRTCResponse) {}
     rpc SendClientIceCandidate (SendIceCandidateRequest) returns (SendIceCandidateResponse) {}
     rpc GetServerIceCandidate (GetIceCandidateRequest) returns (GetIceCandidateResponse) {}
     rpc ParseFileSlice (File) returns (ParseFileSliceResponse) {}
@@ -84,14 +84,14 @@ message BatchOperationResponse {
     int64 progress = 5;
 }
 
-message RTCManageRequest {
+message ManageRTCRequest {
     string content_identity = 1;
     string sdp = 2;
     string offer = 3;
     string client_identity = 4;
 }
 
-message RTCManageResponse {
+message ManageRTCResponse {
     string content_identity = 1;
     int64 file_size = 2;
     string encode_key = 3;
