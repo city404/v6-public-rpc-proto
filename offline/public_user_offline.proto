@@ -58,6 +58,6 @@ message TaskFile {
 
 message TaskParseResponse {
     TaskMeta meta = 1;
-    repeated TaskFile files = 2;
+    repeated TaskFile task_files = 2;
 }
 
