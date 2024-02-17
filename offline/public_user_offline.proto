@@ -5,6 +5,7 @@ option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/offline";
 
 service PubOfflineTask {
     rpc Parse (TaskParseRequest) returns (TaskParseResponse) {}
+    rpc Add (TaskAddRequest) returns (TaskAddResponse) {}
 }
 
 message TaskParseRequest {
@@ -32,7 +33,7 @@ message TaskMeta {
     uint64 bytes_total = 17;
     uint64 bytes_processed = 18;
     int32 flag = 19;
-    int32 retry_status = 20;
+    // int32 retry_status = 20;
 }
 
 message TaskFile {
@@ -46,10 +47,10 @@ message TaskFile {
     string name = 8;
     uint64 size = 9;
     // string content_identity = 10;
-    int32 code = 11;
-    string message = 12;
+    // int32 code = 11;
+    // string message = 12;
     uint64 bytes_total = 13;
-    uint64 bytes_processed = 14;
+    // uint64 bytes_processed = 14;
     int32 index = 15;
     bool directory = 16;
 }
@@ -61,3 +62,11 @@ message TaskParseResponse {
     repeated TaskFile task_files = 2;
 }
 
+message TaskAddRequest {
+    string url = 1;
+    string file = 2;
+}
+
+message TaskAddResponse {
+    TaskMeta meta = 1;
+}
