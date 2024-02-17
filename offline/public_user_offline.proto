@@ -57,10 +57,6 @@ message TaskFile {
 
 
 message TaskParseResponse {
-    repeated TaskParseData data = 1;
-}
-
-message TaskParseData {
     TaskMeta meta = 1;
     repeated TaskFile files = 2;
 }
