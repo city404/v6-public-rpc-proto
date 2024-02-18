@@ -80,7 +80,7 @@ message OfflineTaskDeleteRequest {
 }
 
 message OfflineTaskDeleteResponse {
-
+    int64 count = 1;
 }
 
 message UserTask {
