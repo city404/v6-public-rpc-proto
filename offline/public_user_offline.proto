@@ -1,11 +1,13 @@
 syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/offline";
-// import "common/pub_common.proto";
+import "common/pub_common.proto";
 
 service PubOfflineTask {
     rpc Parse (TaskParseRequest) returns (TaskParseResponse) {}
     rpc Add (TaskAddRequest) returns (TaskAddResponse) {}
+    rpc List (OfflineTaskListRequest) returns (OfflineTaskListResponse) {}
+    rpc Delete (OfflineTaskDeleteRequest) returns (OfflineTaskDeleteResponse) {}
 }
 
 message TaskParseRequest {
@@ -73,4 +75,21 @@ message TaskAddRequest {
 
 message TaskAddResponse {
     TaskMeta meta = 1;
+}
+
+message OfflineTaskListRequest {
+    .v6.services.pub.common.ScanListRequest list_info = 3;
+}
+
+message OfflineTaskListResponse {
+    repeated TaskMeta tasks = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message OfflineTaskDeleteRequest {
+    repeated string identity = 1;
+}
+
+message OfflineTaskDeleteResponse {
+
 }
