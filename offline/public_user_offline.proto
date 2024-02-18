@@ -76,6 +76,7 @@ message OfflineTaskListResponse {
 
 message OfflineTaskDeleteRequest {
     repeated string identity = 1;
+    bool delete_files = 2;
 }
 
 message OfflineTaskDeleteResponse {
