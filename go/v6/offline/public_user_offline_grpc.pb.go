@@ -30,7 +30,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PubOfflineTaskClient interface {
 	Parse(ctx context.Context, in *TaskParseRequest, opts ...grpc.CallOption) (*TaskParseResponse, error)
-	Add(ctx context.Context, in *TaskAddRequest, opts ...grpc.CallOption) (*TaskAddResponse, error)
+	Add(ctx context.Context, in *UserTask, opts ...grpc.CallOption) (*UserTask, error)
 	List(ctx context.Context, in *OfflineTaskListRequest, opts ...grpc.CallOption) (*OfflineTaskListResponse, error)
 	Delete(ctx context.Context, in *OfflineTaskDeleteRequest, opts ...grpc.CallOption) (*OfflineTaskDeleteResponse, error)
 }
@@ -52,8 +52,8 @@ func (c *pubOfflineTaskClient) Parse(ctx context.Context, in *TaskParseRequest, 
 	return out, nil
 }
 
-func (c *pubOfflineTaskClient) Add(ctx context.Context, in *TaskAddRequest, opts ...grpc.CallOption) (*TaskAddResponse, error) {
-	out := new(TaskAddResponse)
+func (c *pubOfflineTaskClient) Add(ctx context.Context, in *UserTask, opts ...grpc.CallOption) (*UserTask, error) {
+	out := new(UserTask)
 	err := c.cc.Invoke(ctx, PubOfflineTask_Add_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -84,7 +84,7 @@ func (c *pubOfflineTaskClient) Delete(ctx context.Context, in *OfflineTaskDelete
 // for forward compatibility
 type PubOfflineTaskServer interface {
 	Parse(context.Context, *TaskParseRequest) (*TaskParseResponse, error)
-	Add(context.Context, *TaskAddRequest) (*TaskAddResponse, error)
+	Add(context.Context, *UserTask) (*UserTask, error)
 	List(context.Context, *OfflineTaskListRequest) (*OfflineTaskListResponse, error)
 	Delete(context.Context, *OfflineTaskDeleteRequest) (*OfflineTaskDeleteResponse, error)
 	mustEmbedUnimplementedPubOfflineTaskServer()
@@ -97,7 +97,7 @@ type UnimplementedPubOfflineTaskServer struct {
 func (UnimplementedPubOfflineTaskServer) Parse(context.Context, *TaskParseRequest) (*TaskParseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Parse not implemented")
 }
-func (UnimplementedPubOfflineTaskServer) Add(context.Context, *TaskAddRequest) (*TaskAddResponse, error) {
+func (UnimplementedPubOfflineTaskServer) Add(context.Context, *UserTask) (*UserTask, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
 }
 func (UnimplementedPubOfflineTaskServer) List(context.Context, *OfflineTaskListRequest) (*OfflineTaskListResponse, error) {
@@ -138,7 +138,7 @@ func _PubOfflineTask_Parse_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _PubOfflineTask_Add_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TaskAddRequest)
+	in := new(UserTask)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -150,7 +150,7 @@ func _PubOfflineTask_Add_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: PubOfflineTask_Add_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubOfflineTaskServer).Add(ctx, req.(*TaskAddRequest))
+		return srv.(PubOfflineTaskServer).Add(ctx, req.(*UserTask))
 	}
 	return interceptor(ctx, in, info, handler)
 }

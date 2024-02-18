@@ -5,7 +5,7 @@ import "common/pub_common.proto";
 
 service PubOfflineTask {
     rpc Parse (TaskParseRequest) returns (TaskParseResponse) {}
-    rpc Add (TaskAddRequest) returns (TaskAddResponse) {}
+    rpc Add (UserTask) returns (UserTask) {}
     rpc List (OfflineTaskListRequest) returns (OfflineTaskListResponse) {}
     rpc Delete (OfflineTaskDeleteRequest) returns (OfflineTaskDeleteResponse) {}
 }
@@ -64,25 +64,13 @@ message TaskParseResponse {
     repeated TaskFile task_files = 2;
 }
 
-message TaskAddRequest {
-    string url = 1;
-    string file = 2;
-    repeated string ignore_files = 3;
-    string callback = 4;
-    string save_path = 5;
-    string save_identity = 6;
-}
-
-message TaskAddResponse {
-    TaskMeta meta = 1;
-}
 
 message OfflineTaskListRequest {
     .v6.services.pub.common.ScanListRequest list_info = 3;
 }
 
 message OfflineTaskListResponse {
-    repeated TaskMeta tasks = 1;
+    repeated UserTask tasks = 1;
     .v6.services.pub.common.ScanListRequest list_info = 2;
 }
 
@@ -92,4 +80,28 @@ message OfflineTaskDeleteRequest {
 
 message OfflineTaskDeleteResponse {
 
+}
+
+message UserTask {
+    string identity = 1; // identity
+    int32 type = 2; 
+    int32 status = 3; 
+    // string user_identity = 4;
+    int64 update_ts = 5;
+    string file = 6;
+    int64 create_ts = 7;
+    string url = 8;
+    uint64 size = 9;
+    string name = 10;
+    string task_identity = 11;
+    int32 code = 12;
+    string message = 13;
+    string addon = 14;
+    uint64 progress = 16;
+    uint64 bytes_total = 17;
+    uint64 bytes_processed = 18;
+    int32 flag = 19;
+    string save_path = 20;
+    repeated string callbacks = 21;
+    repeated string ignore_files = 22;
 }
