@@ -65,6 +65,10 @@ message TaskParseResponse {
 message TaskAddRequest {
     string url = 1;
     string file = 2;
+    repeated string ignore_files = 3;
+    string callback = 4;
+    string save_path = 5;
+    string save_identity = 6;
 }
 
 message TaskAddResponse {
