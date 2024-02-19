@@ -27,7 +27,7 @@ message TaskMeta {
     string url = 8;
     uint64 size = 9;
     string name = 10;
-    string lock_by = 11;
+    // string lock_by = 11;
     int32 code = 12;
     string message = 13;
     string addon = 14;
