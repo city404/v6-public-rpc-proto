@@ -13,6 +13,7 @@ service PubOfflineTask {
 message TaskParseRequest {
     string url = 1;
     string file = 2;
+    string identity = 3;
 }
 
 message TaskMeta {
