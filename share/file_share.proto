@@ -24,7 +24,7 @@ message FileShare {
     string path = 6;
     bool has_password = 7;
     string password = 8;
-    int64 expire = 9;
+    int64 lifetime = 9;
     int64 save_limit = 10;
     int64 save_count = 11;
     int64 like = 12;
