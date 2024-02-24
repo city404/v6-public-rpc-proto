@@ -1,0 +1,82 @@
+syntax = "proto3";
+package v6.services.pub;
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/fileshare";
+import "common/pub_common.proto";
+
+service PubFileShare {
+    rpc Create (FileShare) returns (FileShare) {}
+    rpc Get (FileShare) returns (FileShare) {}
+    rpc Like (FileShare) returns (FileShare) {}
+    rpc Dislike (FileShare) returns (FileShare) {}
+    rpc ComplaintShare (Complaint) returns (Complaint) {}
+    rpc List (FileShareListRequest) returns (FileShareListResponse) {}
+    rpc ListComplaint (ComplaintListRequest) returns (ComplaintListResponse) {}
+    rpc Delete (FileShareDeleteRequest) returns (FileShareDeleteResponse) {}
+    rpc DeleteComplaint (ComplaintDeleteRequest) returns (ComplaintDeleteResponse) {}
+}
+
+message FileShare {
+    string identity = 1;
+    string user_identity = 2;
+    int32 type = 3;
+    string mime_type = 4;
+    string name = 5;
+    string path = 6;
+    bool has_password = 7;
+    string password = 8;
+    int64 expire = 9;
+    int64 save_limit = 10;
+    int64 save_count = 11;
+    int64 like = 12;
+    int64 dislike = 13;
+    int64 created_at = 14;
+    int64 updated_at = 15;
+}
+
+message FileShareListRequest {
+    string user_identity = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 3;
+}
+
+message FileShareListResponse {
+    repeated FileShare shares = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message FileShareDeleteRequest {
+    repeated string identity = 1;
+}
+
+message FileShareDeleteResponse {
+    int64 count = 1;
+}
+
+message Complaint {
+    string identity = 1;
+    string user_identity = 2;
+    string file_share_identity = 3;
+    string file_share_user_identity = 4;
+    string content = 5;
+    int64 created_at = 6;
+    int64 updated_at = 7;
+    int32 status = 8;
+    int32 flag = 9;
+}
+
+message ComplaintListRequest {
+    // string user_identity = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 3;
+}
+
+message ComplaintListResponse {
+    repeated Complaint complaints = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message ComplaintDeleteRequest {
+    repeated string identity = 1;
+}
+
+message ComplaintDeleteResponse {
+    int64 count = 1;
+}
