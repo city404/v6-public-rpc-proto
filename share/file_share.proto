@@ -31,6 +31,7 @@ message FileShare {
     int64 dislike = 13;
     int64 created_at = 14;
     int64 updated_at = 15;
+    int64 expire_at = 16;
 }
 
 message FileShareListRequest {
