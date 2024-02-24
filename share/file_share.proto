@@ -32,6 +32,7 @@ message FileShare {
     int64 created_at = 14;
     int64 updated_at = 15;
     int64 expire_at = 16;
+    int64 file_size = 17;
 }
 
 message FileShareListRequest {
