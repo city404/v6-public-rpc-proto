@@ -34,9 +34,9 @@ message File {
     string mime_type = 6;
     int64 size = 7;
     int64 type = 8;
-    int64 created_at = 9;
-    int64 updated_at = 10;
-    int64 deleted_at = 11;
+    int64 create_ts = 9;
+    int64 update_ts = 10;
+    int64 delete_ts = 11;
     bool deleted = 12;
     bool dir = 13;
     bool hidden = 14;
@@ -80,7 +80,7 @@ message BatchOperationResponse {
     string task  = 1;
     int32 status = 2;
     int64 affected  = 3;
-    int64 created_at = 4;
+    int64 create_ts = 4;
     int64 progress = 5;
 }
 
