@@ -13,6 +13,7 @@ service PubFileShare {
     rpc ListComplaint (ComplaintListRequest) returns (ComplaintListResponse) {}
     rpc Delete (FileShareDeleteRequest) returns (FileShareDeleteResponse) {}
     rpc DeleteComplaint (ComplaintDeleteRequest) returns (ComplaintDeleteResponse) {}
+    rpc Save (FileShare) returns (FileShare) {}
 }
 
 message FileShare {

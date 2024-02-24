@@ -28,6 +28,7 @@ const (
 	PubFileShare_ListComplaint_FullMethodName   = "/v6.services.pub.PubFileShare/ListComplaint"
 	PubFileShare_Delete_FullMethodName          = "/v6.services.pub.PubFileShare/Delete"
 	PubFileShare_DeleteComplaint_FullMethodName = "/v6.services.pub.PubFileShare/DeleteComplaint"
+	PubFileShare_Save_FullMethodName            = "/v6.services.pub.PubFileShare/Save"
 )
 
 // PubFileShareClient is the client API for PubFileShare service.
@@ -43,6 +44,7 @@ type PubFileShareClient interface {
 	ListComplaint(ctx context.Context, in *ComplaintListRequest, opts ...grpc.CallOption) (*ComplaintListResponse, error)
 	Delete(ctx context.Context, in *FileShareDeleteRequest, opts ...grpc.CallOption) (*FileShareDeleteResponse, error)
 	DeleteComplaint(ctx context.Context, in *ComplaintDeleteRequest, opts ...grpc.CallOption) (*ComplaintDeleteResponse, error)
+	Save(ctx context.Context, in *FileShare, opts ...grpc.CallOption) (*FileShare, error)
 }
 
 type pubFileShareClient struct {
@@ -134,6 +136,15 @@ func (c *pubFileShareClient) DeleteComplaint(ctx context.Context, in *ComplaintD
 	return out, nil
 }
 
+func (c *pubFileShareClient) Save(ctx context.Context, in *FileShare, opts ...grpc.CallOption) (*FileShare, error) {
+	out := new(FileShare)
+	err := c.cc.Invoke(ctx, PubFileShare_Save_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubFileShareServer is the server API for PubFileShare service.
 // All implementations must embed UnimplementedPubFileShareServer
 // for forward compatibility
@@ -147,6 +158,7 @@ type PubFileShareServer interface {
 	ListComplaint(context.Context, *ComplaintListRequest) (*ComplaintListResponse, error)
 	Delete(context.Context, *FileShareDeleteRequest) (*FileShareDeleteResponse, error)
 	DeleteComplaint(context.Context, *ComplaintDeleteRequest) (*ComplaintDeleteResponse, error)
+	Save(context.Context, *FileShare) (*FileShare, error)
 	mustEmbedUnimplementedPubFileShareServer()
 }
 
@@ -180,6 +192,9 @@ func (UnimplementedPubFileShareServer) Delete(context.Context, *FileShareDeleteR
 }
 func (UnimplementedPubFileShareServer) DeleteComplaint(context.Context, *ComplaintDeleteRequest) (*ComplaintDeleteResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteComplaint not implemented")
+}
+func (UnimplementedPubFileShareServer) Save(context.Context, *FileShare) (*FileShare, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Save not implemented")
 }
 func (UnimplementedPubFileShareServer) mustEmbedUnimplementedPubFileShareServer() {}
 
@@ -356,6 +371,24 @@ func _PubFileShare_DeleteComplaint_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubFileShare_Save_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FileShare)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubFileShareServer).Save(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubFileShare_Save_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubFileShareServer).Save(ctx, req.(*FileShare))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubFileShare_ServiceDesc is the grpc.ServiceDesc for PubFileShare service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -398,6 +431,10 @@ var PubFileShare_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteComplaint",
 			Handler:    _PubFileShare_DeleteComplaint_Handler,
+		},
+		{
+			MethodName: "Save",
+			Handler:    _PubFileShare_Save_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
