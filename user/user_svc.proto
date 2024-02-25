@@ -10,6 +10,7 @@ service PubUser {
     rpc ResetPassword (LoginRequest) returns (User) {} 
     rpc Register (RegisterRequest) returns (User) {}
     rpc Delete (User) returns (User) {}
+    rpc Update (User) returns (User) {}
     rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {}
     rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {}
     rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {}
