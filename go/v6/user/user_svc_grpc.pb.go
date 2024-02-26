@@ -24,6 +24,7 @@ const (
 	PubUser_Refresh_FullMethodName                  = "/v6.services.pub.PubUser/Refresh"
 	PubUser_Logoff_FullMethodName                   = "/v6.services.pub.PubUser/Logoff"
 	PubUser_ResetPassword_FullMethodName            = "/v6.services.pub.PubUser/ResetPassword"
+	PubUser_ChangePassword_FullMethodName           = "/v6.services.pub.PubUser/ChangePassword"
 	PubUser_Register_FullMethodName                 = "/v6.services.pub.PubUser/Register"
 	PubUser_Delete_FullMethodName                   = "/v6.services.pub.PubUser/Delete"
 	PubUser_Update_FullMethodName                   = "/v6.services.pub.PubUser/Update"
@@ -42,6 +43,7 @@ type PubUserClient interface {
 	Refresh(ctx context.Context, in *Token, opts ...grpc.CallOption) (*Token, error)
 	Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error)
 	ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*User, error)
+	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*User, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*User, error)
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
@@ -98,6 +100,15 @@ func (c *pubUserClient) Logoff(ctx context.Context, in *Token, opts ...grpc.Call
 func (c *pubUserClient) ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*User, error) {
 	out := new(User)
 	err := c.cc.Invoke(ctx, PubUser_ResetPassword_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserClient) ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*User, error) {
+	out := new(User)
+	err := c.cc.Invoke(ctx, PubUser_ChangePassword_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -176,6 +187,7 @@ type PubUserServer interface {
 	Refresh(context.Context, *Token) (*Token, error)
 	Logoff(context.Context, *Token) (*User, error)
 	ResetPassword(context.Context, *LoginRequest) (*User, error)
+	ChangePassword(context.Context, *ChangePasswordRequest) (*User, error)
 	Register(context.Context, *RegisterRequest) (*User, error)
 	Delete(context.Context, *User) (*User, error)
 	Update(context.Context, *User) (*User, error)
@@ -204,6 +216,9 @@ func (UnimplementedPubUserServer) Logoff(context.Context, *Token) (*User, error)
 }
 func (UnimplementedPubUserServer) ResetPassword(context.Context, *LoginRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
+}
+func (UnimplementedPubUserServer) ChangePassword(context.Context, *ChangePasswordRequest) (*User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ChangePassword not implemented")
 }
 func (UnimplementedPubUserServer) Register(context.Context, *RegisterRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
@@ -325,6 +340,24 @@ func _PubUser_ResetPassword_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PubUserServer).ResetPassword(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUser_ChangePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ChangePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).ChangePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_ChangePassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).ChangePassword(ctx, req.(*ChangePasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -481,6 +514,10 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetPassword",
 			Handler:    _PubUser_ResetPassword_Handler,
+		},
+		{
+			MethodName: "ChangePassword",
+			Handler:    _PubUser_ChangePassword_Handler,
 		},
 		{
 			MethodName: "Register",
