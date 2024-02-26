@@ -19,7 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubDavConfig_Create_FullMethodName = "/v6.services.pub.PubDavConfig/Create"
 	PubDavConfig_Get_FullMethodName    = "/v6.services.pub.PubDavConfig/Get"
 	PubDavConfig_Update_FullMethodName = "/v6.services.pub.PubDavConfig/Update"
 )
@@ -28,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PubDavConfigClient interface {
-	Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
+	// rpc Create (DavConfig) returns (DavConfig) {}
 	Get(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 	Update(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 }
@@ -39,15 +38,6 @@ type pubDavConfigClient struct {
 
 func NewPubDavConfigClient(cc grpc.ClientConnInterface) PubDavConfigClient {
 	return &pubDavConfigClient{cc}
-}
-
-func (c *pubDavConfigClient) Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error) {
-	out := new(DavConfig)
-	err := c.cc.Invoke(ctx, PubDavConfig_Create_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *pubDavConfigClient) Get(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error) {
@@ -72,7 +62,7 @@ func (c *pubDavConfigClient) Update(ctx context.Context, in *DavConfig, opts ...
 // All implementations must embed UnimplementedPubDavConfigServer
 // for forward compatibility
 type PubDavConfigServer interface {
-	Create(context.Context, *DavConfig) (*DavConfig, error)
+	// rpc Create (DavConfig) returns (DavConfig) {}
 	Get(context.Context, *DavConfig) (*DavConfig, error)
 	Update(context.Context, *DavConfig) (*DavConfig, error)
 	mustEmbedUnimplementedPubDavConfigServer()
@@ -82,9 +72,6 @@ type PubDavConfigServer interface {
 type UnimplementedPubDavConfigServer struct {
 }
 
-func (UnimplementedPubDavConfigServer) Create(context.Context, *DavConfig) (*DavConfig, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
-}
 func (UnimplementedPubDavConfigServer) Get(context.Context, *DavConfig) (*DavConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
@@ -102,24 +89,6 @@ type UnsafePubDavConfigServer interface {
 
 func RegisterPubDavConfigServer(s grpc.ServiceRegistrar, srv PubDavConfigServer) {
 	s.RegisterService(&PubDavConfig_ServiceDesc, srv)
-}
-
-func _PubDavConfig_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DavConfig)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(PubDavConfigServer).Create(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: PubDavConfig_Create_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubDavConfigServer).Create(ctx, req.(*DavConfig))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _PubDavConfig_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -165,10 +134,6 @@ var PubDavConfig_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "v6.services.pub.PubDavConfig",
 	HandlerType: (*PubDavConfigServer)(nil),
 	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Create",
-			Handler:    _PubDavConfig_Create_Handler,
-		},
 		{
 			MethodName: "Get",
 			Handler:    _PubDavConfig_Get_Handler,

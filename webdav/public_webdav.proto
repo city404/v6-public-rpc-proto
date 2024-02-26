@@ -5,7 +5,7 @@ option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/webdavconfig";
 
 
 service PubDavConfig {
-    rpc Create (DavConfig) returns (DavConfig) {}
+    // rpc Create (DavConfig) returns (DavConfig) {}
     rpc Get (DavConfig) returns (DavConfig) {}
     rpc Update (DavConfig) returns (DavConfig) {}
     // rpc Enable (DavConfig) returns (DavConfig) {}
