@@ -1,0 +1,27 @@
+syntax = "proto3";
+package v6.services.pub;
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/webdavconfig";
+// import "common/pub_common.proto";
+
+
+service PubDavConfig {
+    rpc Create (DavConfig) returns (DavConfig) {}
+    rpc Get (DavConfig) returns (DavConfig) {}
+    rpc Update (DavConfig) returns (DavConfig) {}
+    rpc Enable (DavConfig) returns (DavConfig) {}
+}
+
+
+message DavConfig {
+    string user_identity = 1;
+    string enable = 2;
+    string root = 3;
+    bool enable_write = 4;
+    bool enable_lock = 5;
+    bool enable_chunked = 6;
+    bool windows_style = 7;
+    int32 status = 8;
+    string prefix = 9;
+    int32 code = 10;
+    string message = 11;
+}
