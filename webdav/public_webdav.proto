@@ -14,11 +14,11 @@ service PubDavConfig {
 
 message DavConfig {
     string user_identity = 1;
-    string enable = 2;
+    int32 enable_flag = 2;
     string root = 3;
-    int32 write_status = 4;
-    int32 lock_status = 5;
-    int32 chunked_status = 6;
+    int32 write_flag = 4;
+    int32 lock_flag = 5;
+    int32 chunked_flag = 6;
     int32 path_style = 7;
     int32 status = 8;
     string prefix = 9;
