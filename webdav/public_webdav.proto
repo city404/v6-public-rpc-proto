@@ -8,7 +8,8 @@ service PubDavConfig {
     // rpc Create (DavConfig) returns (DavConfig) {}
     rpc Get (DavConfig) returns (DavConfig) {}
     rpc Update (DavConfig) returns (DavConfig) {}
-    // rpc Enable (DavConfig) returns (DavConfig) {}
+    rpc Enable (DavConfig) returns (DavConfig) {}
+    rpc Disable (DavConfig) returns (DavConfig) {}
 }
 
 

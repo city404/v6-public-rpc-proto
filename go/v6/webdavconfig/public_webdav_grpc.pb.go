@@ -19,8 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubDavConfig_Get_FullMethodName    = "/v6.services.pub.PubDavConfig/Get"
-	PubDavConfig_Update_FullMethodName = "/v6.services.pub.PubDavConfig/Update"
+	PubDavConfig_Get_FullMethodName     = "/v6.services.pub.PubDavConfig/Get"
+	PubDavConfig_Update_FullMethodName  = "/v6.services.pub.PubDavConfig/Update"
+	PubDavConfig_Enable_FullMethodName  = "/v6.services.pub.PubDavConfig/Enable"
+	PubDavConfig_Disable_FullMethodName = "/v6.services.pub.PubDavConfig/Disable"
 )
 
 // PubDavConfigClient is the client API for PubDavConfig service.
@@ -30,6 +32,8 @@ type PubDavConfigClient interface {
 	// rpc Create (DavConfig) returns (DavConfig) {}
 	Get(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 	Update(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
+	Enable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
+	Disable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 }
 
 type pubDavConfigClient struct {
@@ -58,6 +62,24 @@ func (c *pubDavConfigClient) Update(ctx context.Context, in *DavConfig, opts ...
 	return out, nil
 }
 
+func (c *pubDavConfigClient) Enable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error) {
+	out := new(DavConfig)
+	err := c.cc.Invoke(ctx, PubDavConfig_Enable_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubDavConfigClient) Disable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error) {
+	out := new(DavConfig)
+	err := c.cc.Invoke(ctx, PubDavConfig_Disable_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubDavConfigServer is the server API for PubDavConfig service.
 // All implementations must embed UnimplementedPubDavConfigServer
 // for forward compatibility
@@ -65,6 +87,8 @@ type PubDavConfigServer interface {
 	// rpc Create (DavConfig) returns (DavConfig) {}
 	Get(context.Context, *DavConfig) (*DavConfig, error)
 	Update(context.Context, *DavConfig) (*DavConfig, error)
+	Enable(context.Context, *DavConfig) (*DavConfig, error)
+	Disable(context.Context, *DavConfig) (*DavConfig, error)
 	mustEmbedUnimplementedPubDavConfigServer()
 }
 
@@ -77,6 +101,12 @@ func (UnimplementedPubDavConfigServer) Get(context.Context, *DavConfig) (*DavCon
 }
 func (UnimplementedPubDavConfigServer) Update(context.Context, *DavConfig) (*DavConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
+}
+func (UnimplementedPubDavConfigServer) Enable(context.Context, *DavConfig) (*DavConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Enable not implemented")
+}
+func (UnimplementedPubDavConfigServer) Disable(context.Context, *DavConfig) (*DavConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
 }
 func (UnimplementedPubDavConfigServer) mustEmbedUnimplementedPubDavConfigServer() {}
 
@@ -127,6 +157,42 @@ func _PubDavConfig_Update_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubDavConfig_Enable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DavConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubDavConfigServer).Enable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubDavConfig_Enable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubDavConfigServer).Enable(ctx, req.(*DavConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubDavConfig_Disable_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DavConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubDavConfigServer).Disable(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubDavConfig_Disable_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubDavConfigServer).Disable(ctx, req.(*DavConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubDavConfig_ServiceDesc is the grpc.ServiceDesc for PubDavConfig service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -141,6 +207,14 @@ var PubDavConfig_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Update",
 			Handler:    _PubDavConfig_Update_Handler,
+		},
+		{
+			MethodName: "Enable",
+			Handler:    _PubDavConfig_Enable_Handler,
+		},
+		{
+			MethodName: "Disable",
+			Handler:    _PubDavConfig_Disable_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
