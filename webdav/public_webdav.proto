@@ -24,7 +24,7 @@ message DavConfig {
     string prefix = 9;
     int32 code = 10;
     string message = 11;
-    string user = 12;
+    string username = 12;
     string password = 13;
     int64 update_ts = 14;
 }
