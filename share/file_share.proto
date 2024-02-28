@@ -34,6 +34,7 @@ message FileShare {
     int64 update_ts = 15;
     int64 expire_ts = 16;
     int64 file_size = 17;
+    string save_path = 18;
 }
 
 message FileShareListRequest {
