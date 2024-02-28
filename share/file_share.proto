@@ -22,7 +22,7 @@ message FileShare {
     int32 type = 3;
     string mime_type = 4;
     string name = 5;
-    string path = 6;
+    repeated string path_list = 6;
     bool has_password = 7;
     string password = 8;
     int64 lifetime = 9;
