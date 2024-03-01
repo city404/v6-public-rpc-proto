@@ -1,0 +1,32 @@
+syntax = "proto3";
+package v6.services.pub;
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/sftpconfig";
+// import "common/pub_common.proto";
+
+
+service PubSftpConfig {
+    // rpc Create (DavConfig) returns (DavConfig) {}
+    rpc Get (SftpConfig) returns (SftpConfig) {}
+    rpc Update (SftpConfig) returns (SftpConfig) {}
+    rpc Enable (SftpConfig) returns (SftpConfig) {}
+    rpc Disable (SftpConfig) returns (SftpConfig) {}
+}
+
+
+message SftpConfig {
+    string user_identity = 1;
+    int32 enable_flag = 2;
+    string root = 3;
+    int32 write_flag = 4;
+    int32 lock_flag = 5;
+    int32 chunked_flag = 6;
+    int32 path_style = 7;
+    int32 status = 8;
+    string prefix = 9;
+    int32 code = 10;
+    string message = 11;
+    string username = 12;
+    string password = 13;
+    int64 update_ts = 14;
+    string ssh_key = 15;
+}
