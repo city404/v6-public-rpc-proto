@@ -1,7 +1,7 @@
 syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/sftpconfig";
-// import "common/pub_common.proto";
+import "common/pub_common.proto";
 
 
 service PubSftpConfig {
@@ -11,7 +11,7 @@ service PubSftpConfig {
     rpc Enable (SftpConfig) returns (SftpConfig) {}
     rpc Disable (SftpConfig) returns (SftpConfig) {}
     rpc UpdateKeys (SftpConfig) returns (SftpConfig) {}
-    rpc ValidateUserName (SftpConfig) returns (UserNameValidateResponse) {}
+    rpc ValidateUserName (SftpConfig) returns (.v6.services.pub.common.UserNameValidateResponse) {}
 }
 
 
@@ -33,8 +33,12 @@ message SftpConfig {
     string ssh_key = 15;
 }
 
+/*
+
 message UserNameValidateResponse {
     int32 code = 1;
     string message = 2;
     bool valid = 3;
 }
+
+*/

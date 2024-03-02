@@ -8,6 +8,7 @@ package webdavconfig
 
 import (
 	context "context"
+	common "github.com/city404/v6-public-rpc-proto/go/v6/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -35,7 +36,7 @@ type PubDavConfigClient interface {
 	Update(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 	Enable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 	Disable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
-	ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*UserNameValidateResponse, error)
+	ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 }
 
 type pubDavConfigClient struct {
@@ -82,8 +83,8 @@ func (c *pubDavConfigClient) Disable(ctx context.Context, in *DavConfig, opts ..
 	return out, nil
 }
 
-func (c *pubDavConfigClient) ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*UserNameValidateResponse, error) {
-	out := new(UserNameValidateResponse)
+func (c *pubDavConfigClient) ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error) {
+	out := new(common.UserNameValidateResponse)
 	err := c.cc.Invoke(ctx, PubDavConfig_ValidateUserName_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -100,7 +101,7 @@ type PubDavConfigServer interface {
 	Update(context.Context, *DavConfig) (*DavConfig, error)
 	Enable(context.Context, *DavConfig) (*DavConfig, error)
 	Disable(context.Context, *DavConfig) (*DavConfig, error)
-	ValidateUserName(context.Context, *DavConfig) (*UserNameValidateResponse, error)
+	ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error)
 	mustEmbedUnimplementedPubDavConfigServer()
 }
 
@@ -120,7 +121,7 @@ func (UnimplementedPubDavConfigServer) Enable(context.Context, *DavConfig) (*Dav
 func (UnimplementedPubDavConfigServer) Disable(context.Context, *DavConfig) (*DavConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
 }
-func (UnimplementedPubDavConfigServer) ValidateUserName(context.Context, *DavConfig) (*UserNameValidateResponse, error) {
+func (UnimplementedPubDavConfigServer) ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateUserName not implemented")
 }
 func (UnimplementedPubDavConfigServer) mustEmbedUnimplementedPubDavConfigServer() {}

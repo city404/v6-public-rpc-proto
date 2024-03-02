@@ -1,7 +1,7 @@
 syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/webdavconfig";
-// import "common/pub_common.proto";
+import "common/pub_common.proto";
 
 
 service PubDavConfig {
@@ -10,7 +10,7 @@ service PubDavConfig {
     rpc Update (DavConfig) returns (DavConfig) {}
     rpc Enable (DavConfig) returns (DavConfig) {}
     rpc Disable (DavConfig) returns (DavConfig) {}
-    rpc ValidateUserName (DavConfig) returns (UserNameValidateResponse) {}
+    rpc ValidateUserName (DavConfig) returns (.v6.services.pub.common.UserNameValidateResponse) {}
 }
 
 
@@ -31,8 +31,10 @@ message DavConfig {
     int64 update_ts = 14;
 }
 
+/*
 message UserNameValidateResponse {
     int32 code = 1;
     string message = 2;
     bool valid = 3;
 }
+*/

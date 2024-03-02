@@ -8,6 +8,7 @@ package sftpconfig
 
 import (
 	context "context"
+	common "github.com/city404/v6-public-rpc-proto/go/v6/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -37,7 +38,7 @@ type PubSftpConfigClient interface {
 	Enable(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
 	Disable(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
 	UpdateKeys(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
-	ValidateUserName(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*UserNameValidateResponse, error)
+	ValidateUserName(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 }
 
 type pubSftpConfigClient struct {
@@ -93,8 +94,8 @@ func (c *pubSftpConfigClient) UpdateKeys(ctx context.Context, in *SftpConfig, op
 	return out, nil
 }
 
-func (c *pubSftpConfigClient) ValidateUserName(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*UserNameValidateResponse, error) {
-	out := new(UserNameValidateResponse)
+func (c *pubSftpConfigClient) ValidateUserName(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error) {
+	out := new(common.UserNameValidateResponse)
 	err := c.cc.Invoke(ctx, PubSftpConfig_ValidateUserName_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -112,7 +113,7 @@ type PubSftpConfigServer interface {
 	Enable(context.Context, *SftpConfig) (*SftpConfig, error)
 	Disable(context.Context, *SftpConfig) (*SftpConfig, error)
 	UpdateKeys(context.Context, *SftpConfig) (*SftpConfig, error)
-	ValidateUserName(context.Context, *SftpConfig) (*UserNameValidateResponse, error)
+	ValidateUserName(context.Context, *SftpConfig) (*common.UserNameValidateResponse, error)
 	mustEmbedUnimplementedPubSftpConfigServer()
 }
 
@@ -135,7 +136,7 @@ func (UnimplementedPubSftpConfigServer) Disable(context.Context, *SftpConfig) (*
 func (UnimplementedPubSftpConfigServer) UpdateKeys(context.Context, *SftpConfig) (*SftpConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateKeys not implemented")
 }
-func (UnimplementedPubSftpConfigServer) ValidateUserName(context.Context, *SftpConfig) (*UserNameValidateResponse, error) {
+func (UnimplementedPubSftpConfigServer) ValidateUserName(context.Context, *SftpConfig) (*common.UserNameValidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateUserName not implemented")
 }
 func (UnimplementedPubSftpConfigServer) mustEmbedUnimplementedPubSftpConfigServer() {}
