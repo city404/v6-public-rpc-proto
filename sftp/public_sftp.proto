@@ -11,6 +11,7 @@ service PubSftpConfig {
     rpc Enable (SftpConfig) returns (SftpConfig) {}
     rpc Disable (SftpConfig) returns (SftpConfig) {}
     rpc UpdateKeys (SftpConfig) returns (SftpConfig) {}
+    rpc ValidateUserName (SftpConfig) returns (UserNameValidateResponse) {}
 }
 
 
@@ -30,4 +31,10 @@ message SftpConfig {
     string password = 13;
     int64 update_ts = 14;
     string ssh_key = 15;
+}
+
+message UserNameValidateResponse {
+    int32 code = 1;
+    string message = 2;
+    bool success = 3;
 }

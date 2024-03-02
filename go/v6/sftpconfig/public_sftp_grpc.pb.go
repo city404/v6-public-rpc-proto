@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubSftpConfig_Get_FullMethodName        = "/v6.services.pub.PubSftpConfig/Get"
-	PubSftpConfig_Update_FullMethodName     = "/v6.services.pub.PubSftpConfig/Update"
-	PubSftpConfig_Enable_FullMethodName     = "/v6.services.pub.PubSftpConfig/Enable"
-	PubSftpConfig_Disable_FullMethodName    = "/v6.services.pub.PubSftpConfig/Disable"
-	PubSftpConfig_UpdateKeys_FullMethodName = "/v6.services.pub.PubSftpConfig/UpdateKeys"
+	PubSftpConfig_Get_FullMethodName              = "/v6.services.pub.PubSftpConfig/Get"
+	PubSftpConfig_Update_FullMethodName           = "/v6.services.pub.PubSftpConfig/Update"
+	PubSftpConfig_Enable_FullMethodName           = "/v6.services.pub.PubSftpConfig/Enable"
+	PubSftpConfig_Disable_FullMethodName          = "/v6.services.pub.PubSftpConfig/Disable"
+	PubSftpConfig_UpdateKeys_FullMethodName       = "/v6.services.pub.PubSftpConfig/UpdateKeys"
+	PubSftpConfig_ValidateUserName_FullMethodName = "/v6.services.pub.PubSftpConfig/ValidateUserName"
 )
 
 // PubSftpConfigClient is the client API for PubSftpConfig service.
@@ -36,6 +37,7 @@ type PubSftpConfigClient interface {
 	Enable(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
 	Disable(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
 	UpdateKeys(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
+	ValidateUserName(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*UserNameValidateResponse, error)
 }
 
 type pubSftpConfigClient struct {
@@ -91,6 +93,15 @@ func (c *pubSftpConfigClient) UpdateKeys(ctx context.Context, in *SftpConfig, op
 	return out, nil
 }
 
+func (c *pubSftpConfigClient) ValidateUserName(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*UserNameValidateResponse, error) {
+	out := new(UserNameValidateResponse)
+	err := c.cc.Invoke(ctx, PubSftpConfig_ValidateUserName_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubSftpConfigServer is the server API for PubSftpConfig service.
 // All implementations must embed UnimplementedPubSftpConfigServer
 // for forward compatibility
@@ -101,6 +112,7 @@ type PubSftpConfigServer interface {
 	Enable(context.Context, *SftpConfig) (*SftpConfig, error)
 	Disable(context.Context, *SftpConfig) (*SftpConfig, error)
 	UpdateKeys(context.Context, *SftpConfig) (*SftpConfig, error)
+	ValidateUserName(context.Context, *SftpConfig) (*UserNameValidateResponse, error)
 	mustEmbedUnimplementedPubSftpConfigServer()
 }
 
@@ -122,6 +134,9 @@ func (UnimplementedPubSftpConfigServer) Disable(context.Context, *SftpConfig) (*
 }
 func (UnimplementedPubSftpConfigServer) UpdateKeys(context.Context, *SftpConfig) (*SftpConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateKeys not implemented")
+}
+func (UnimplementedPubSftpConfigServer) ValidateUserName(context.Context, *SftpConfig) (*UserNameValidateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateUserName not implemented")
 }
 func (UnimplementedPubSftpConfigServer) mustEmbedUnimplementedPubSftpConfigServer() {}
 
@@ -226,6 +241,24 @@ func _PubSftpConfig_UpdateKeys_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubSftpConfig_ValidateUserName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SftpConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubSftpConfigServer).ValidateUserName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubSftpConfig_ValidateUserName_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubSftpConfigServer).ValidateUserName(ctx, req.(*SftpConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubSftpConfig_ServiceDesc is the grpc.ServiceDesc for PubSftpConfig service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -252,6 +285,10 @@ var PubSftpConfig_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateKeys",
 			Handler:    _PubSftpConfig_UpdateKeys_Handler,
+		},
+		{
+			MethodName: "ValidateUserName",
+			Handler:    _PubSftpConfig_ValidateUserName_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

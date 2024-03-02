@@ -10,6 +10,7 @@ service PubDavConfig {
     rpc Update (DavConfig) returns (DavConfig) {}
     rpc Enable (DavConfig) returns (DavConfig) {}
     rpc Disable (DavConfig) returns (DavConfig) {}
+    rpc ValidateUserName (DavConfig) returns (UserNameValidateResponse) {}
 }
 
 
@@ -28,4 +29,10 @@ message DavConfig {
     string username = 12;
     string password = 13;
     int64 update_ts = 14;
+}
+
+message UserNameValidateResponse {
+    int32 code = 1;
+    string message = 2;
+    bool success = 3;
 }
