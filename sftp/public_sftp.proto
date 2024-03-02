@@ -36,5 +36,5 @@ message SftpConfig {
 message UserNameValidateResponse {
     int32 code = 1;
     string message = 2;
-    bool success = 3;
+    bool valid = 3;
 }
