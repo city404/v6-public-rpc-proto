@@ -10,7 +10,7 @@ service PubSftpConfig {
     rpc Update (SftpConfig) returns (SftpConfig) {}
     rpc Enable (SftpConfig) returns (SftpConfig) {}
     rpc Disable (SftpConfig) returns (SftpConfig) {}
-    rpc ClearKeys (SftpConfig) returns (SftpConfig) {}
+    rpc UpdateKeys (SftpConfig) returns (SftpConfig) {}
 }
 
 

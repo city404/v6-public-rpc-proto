@@ -19,11 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubSftpConfig_Get_FullMethodName       = "/v6.services.pub.PubSftpConfig/Get"
-	PubSftpConfig_Update_FullMethodName    = "/v6.services.pub.PubSftpConfig/Update"
-	PubSftpConfig_Enable_FullMethodName    = "/v6.services.pub.PubSftpConfig/Enable"
-	PubSftpConfig_Disable_FullMethodName   = "/v6.services.pub.PubSftpConfig/Disable"
-	PubSftpConfig_ClearKeys_FullMethodName = "/v6.services.pub.PubSftpConfig/ClearKeys"
+	PubSftpConfig_Get_FullMethodName        = "/v6.services.pub.PubSftpConfig/Get"
+	PubSftpConfig_Update_FullMethodName     = "/v6.services.pub.PubSftpConfig/Update"
+	PubSftpConfig_Enable_FullMethodName     = "/v6.services.pub.PubSftpConfig/Enable"
+	PubSftpConfig_Disable_FullMethodName    = "/v6.services.pub.PubSftpConfig/Disable"
+	PubSftpConfig_UpdateKeys_FullMethodName = "/v6.services.pub.PubSftpConfig/UpdateKeys"
 )
 
 // PubSftpConfigClient is the client API for PubSftpConfig service.
@@ -35,7 +35,7 @@ type PubSftpConfigClient interface {
 	Update(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
 	Enable(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
 	Disable(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
-	ClearKeys(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
+	UpdateKeys(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error)
 }
 
 type pubSftpConfigClient struct {
@@ -82,9 +82,9 @@ func (c *pubSftpConfigClient) Disable(ctx context.Context, in *SftpConfig, opts 
 	return out, nil
 }
 
-func (c *pubSftpConfigClient) ClearKeys(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error) {
+func (c *pubSftpConfigClient) UpdateKeys(ctx context.Context, in *SftpConfig, opts ...grpc.CallOption) (*SftpConfig, error) {
 	out := new(SftpConfig)
-	err := c.cc.Invoke(ctx, PubSftpConfig_ClearKeys_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, PubSftpConfig_UpdateKeys_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +100,7 @@ type PubSftpConfigServer interface {
 	Update(context.Context, *SftpConfig) (*SftpConfig, error)
 	Enable(context.Context, *SftpConfig) (*SftpConfig, error)
 	Disable(context.Context, *SftpConfig) (*SftpConfig, error)
-	ClearKeys(context.Context, *SftpConfig) (*SftpConfig, error)
+	UpdateKeys(context.Context, *SftpConfig) (*SftpConfig, error)
 	mustEmbedUnimplementedPubSftpConfigServer()
 }
 
@@ -120,8 +120,8 @@ func (UnimplementedPubSftpConfigServer) Enable(context.Context, *SftpConfig) (*S
 func (UnimplementedPubSftpConfigServer) Disable(context.Context, *SftpConfig) (*SftpConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
 }
-func (UnimplementedPubSftpConfigServer) ClearKeys(context.Context, *SftpConfig) (*SftpConfig, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ClearKeys not implemented")
+func (UnimplementedPubSftpConfigServer) UpdateKeys(context.Context, *SftpConfig) (*SftpConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateKeys not implemented")
 }
 func (UnimplementedPubSftpConfigServer) mustEmbedUnimplementedPubSftpConfigServer() {}
 
@@ -208,20 +208,20 @@ func _PubSftpConfig_Disable_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubSftpConfig_ClearKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PubSftpConfig_UpdateKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SftpConfig)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubSftpConfigServer).ClearKeys(ctx, in)
+		return srv.(PubSftpConfigServer).UpdateKeys(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PubSftpConfig_ClearKeys_FullMethodName,
+		FullMethod: PubSftpConfig_UpdateKeys_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubSftpConfigServer).ClearKeys(ctx, req.(*SftpConfig))
+		return srv.(PubSftpConfigServer).UpdateKeys(ctx, req.(*SftpConfig))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -250,8 +250,8 @@ var PubSftpConfig_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PubSftpConfig_Disable_Handler,
 		},
 		{
-			MethodName: "ClearKeys",
-			Handler:    _PubSftpConfig_ClearKeys_Handler,
+			MethodName: "UpdateKeys",
+			Handler:    _PubSftpConfig_UpdateKeys_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
