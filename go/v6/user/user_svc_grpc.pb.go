@@ -8,6 +8,7 @@ package user
 
 import (
 	context "context"
+	common "github.com/city404/v6-public-rpc-proto/go/v6/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -32,6 +33,7 @@ const (
 	PubUser_SendSmsVerifyCodeNotUser_FullMethodName = "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser"
 	PubUser_VerifyAuthToken_FullMethodName          = "/v6.services.pub.PubUser/VerifyAuthToken"
 	PubUser_CreateAuthToken_FullMethodName          = "/v6.services.pub.PubUser/CreateAuthToken"
+	PubUser_ValidateUserInfo_FullMethodName         = "/v6.services.pub.PubUser/ValidateUserInfo"
 )
 
 // PubUserClient is the client API for PubUser service.
@@ -51,6 +53,7 @@ type PubUserClient interface {
 	SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error)
+	ValidateUserInfo(ctx context.Context, in *UserValidateInfo, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 }
 
 type pubUserClient struct {
@@ -178,6 +181,15 @@ func (c *pubUserClient) CreateAuthToken(ctx context.Context, in *LoginRequest, o
 	return out, nil
 }
 
+func (c *pubUserClient) ValidateUserInfo(ctx context.Context, in *UserValidateInfo, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error) {
+	out := new(common.UserNameValidateResponse)
+	err := c.cc.Invoke(ctx, PubUser_ValidateUserInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserServer is the server API for PubUser service.
 // All implementations must embed UnimplementedPubUserServer
 // for forward compatibility
@@ -195,6 +207,7 @@ type PubUserServer interface {
 	SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error)
+	ValidateUserInfo(context.Context, *UserValidateInfo) (*common.UserNameValidateResponse, error)
 	mustEmbedUnimplementedPubUserServer()
 }
 
@@ -240,6 +253,9 @@ func (UnimplementedPubUserServer) VerifyAuthToken(context.Context, *LoginRequest
 }
 func (UnimplementedPubUserServer) CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAuthToken not implemented")
+}
+func (UnimplementedPubUserServer) ValidateUserInfo(context.Context, *UserValidateInfo) (*common.UserNameValidateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateUserInfo not implemented")
 }
 func (UnimplementedPubUserServer) mustEmbedUnimplementedPubUserServer() {}
 
@@ -488,6 +504,24 @@ func _PubUser_CreateAuthToken_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUser_ValidateUserInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserValidateInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).ValidateUserInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_ValidateUserInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).ValidateUserInfo(ctx, req.(*UserValidateInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUser_ServiceDesc is the grpc.ServiceDesc for PubUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -546,6 +580,10 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAuthToken",
 			Handler:    _PubUser_CreateAuthToken_Handler,
+		},
+		{
+			MethodName: "ValidateUserInfo",
+			Handler:    _PubUser_ValidateUserInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

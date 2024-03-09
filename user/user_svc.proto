@@ -1,6 +1,8 @@
 syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/user";
+import "common/pub_common.proto";
+
 
 service PubUser {
     rpc Get (User) returns (User) {}
@@ -16,6 +18,7 @@ service PubUser {
     rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {}
     rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {}
     rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {}
+    rpc ValidateUserInfo (UserValidateInfo) returns (.v6.services.pub.common.UserNameValidateResponse) {}
 }
 
 message User {
@@ -127,4 +130,13 @@ message ChangePasswordRequest {
     string old_password = 2;
     string new_password = 3;
     string addon = 4;
+}
+
+message UserValidateInfo {
+    string identity = 1;
+    string name = 2;
+    string email = 3;
+    string phone = 4;
+    string country_code = 5;
+    string addon = 6;
 }
