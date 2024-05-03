@@ -157,11 +157,11 @@ message SliceDownloadAddressResponse {
     int64 expire_at = 2;
     string request_address = 3;
     int32 version = 4;
-    int32 encrypt = 5;
 }
 
 message SliceDownloadInfo {
     string identity = 1;
     string download_address = 2;
     string download_token = 3;
+    int32 encrypt = 4;
 }
