@@ -149,12 +149,15 @@ message SliceSize {
 
 message SliceDownloadAddressRequest {
     repeated string identity = 1;
+    int32 version = 2;
 }
 
 message SliceDownloadAddressResponse {
     repeated SliceDownloadInfo addresses = 1;
     int64 expire_at = 2;
     string request_address = 3;
+    int32 version = 4;
+    int32 encrypt = 5;
 }
 
 message SliceDownloadInfo {
