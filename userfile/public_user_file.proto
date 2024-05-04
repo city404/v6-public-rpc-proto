@@ -138,6 +138,8 @@ message ParseFileSliceResponse {
     repeated SliceSize sizes = 5;
     string sha1 = 6;
     string wcs_etag = 7;
+    string name = 8;
+    string path = 9;
 }
 
 message SliceSize {
