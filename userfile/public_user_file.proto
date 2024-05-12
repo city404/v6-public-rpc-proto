@@ -23,6 +23,7 @@ service PubUserFile {
     rpc GetServerIceCandidate (GetIceCandidateRequest) returns (GetIceCandidateResponse) {}
     rpc ParseFileSlice (File) returns (ParseFileSliceResponse) {}
     rpc GetSliceDownloadAddress (SliceDownloadAddressRequest) returns (SliceDownloadAddressResponse) {}
+    rpc PreviewDoc (File) returns (DocFilePreview) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -166,4 +167,20 @@ message SliceDownloadInfo {
     string download_address = 2;
     string download_token = 3;
     int32 encrypt = 4;
+}
+
+message DocFilePreview {
+    string identity = 1;
+    string parent = 3;
+    string name = 4;
+    string path = 5;
+    string mime_type = 6;
+    int64 size = 7;
+    int64 type = 8;
+    bool can_preview = 9;
+    string preview_address = 10;
+    string preview_token = 11;
+    bool can_edit = 12;
+    string edit_address = 13;
+    string edit_token = 14;
 }

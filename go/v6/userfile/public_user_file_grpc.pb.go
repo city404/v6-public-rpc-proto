@@ -37,6 +37,7 @@ const (
 	PubUserFile_GetServerIceCandidate_FullMethodName   = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
 	PubUserFile_ParseFileSlice_FullMethodName          = "/v6.services.pub.PubUserFile/ParseFileSlice"
 	PubUserFile_GetSliceDownloadAddress_FullMethodName = "/v6.services.pub.PubUserFile/GetSliceDownloadAddress"
+	PubUserFile_PreviewDoc_FullMethodName              = "/v6.services.pub.PubUserFile/PreviewDoc"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -62,6 +63,7 @@ type PubUserFileClient interface {
 	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
 	ParseFileSlice(ctx context.Context, in *File, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
 	GetSliceDownloadAddress(ctx context.Context, in *SliceDownloadAddressRequest, opts ...grpc.CallOption) (*SliceDownloadAddressResponse, error)
+	PreviewDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error)
 }
 
 type pubUserFileClient struct {
@@ -234,6 +236,15 @@ func (c *pubUserFileClient) GetSliceDownloadAddress(ctx context.Context, in *Sli
 	return out, nil
 }
 
+func (c *pubUserFileClient) PreviewDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error) {
+	out := new(DocFilePreview)
+	err := c.cc.Invoke(ctx, PubUserFile_PreviewDoc_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility
@@ -257,6 +268,7 @@ type PubUserFileServer interface {
 	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
 	ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error)
 	GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error)
+	PreviewDoc(context.Context, *File) (*DocFilePreview, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -317,6 +329,9 @@ func (UnimplementedPubUserFileServer) ParseFileSlice(context.Context, *File) (*P
 }
 func (UnimplementedPubUserFileServer) GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSliceDownloadAddress not implemented")
+}
+func (UnimplementedPubUserFileServer) PreviewDoc(context.Context, *File) (*DocFilePreview, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreviewDoc not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 
@@ -655,6 +670,24 @@ func _PubUserFile_GetSliceDownloadAddress_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_PreviewDoc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(File)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).PreviewDoc(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_PreviewDoc_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).PreviewDoc(ctx, req.(*File))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -733,6 +766,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSliceDownloadAddress",
 			Handler:    _PubUserFile_GetSliceDownloadAddress_Handler,
+		},
+		{
+			MethodName: "PreviewDoc",
+			Handler:    _PubUserFile_PreviewDoc_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
