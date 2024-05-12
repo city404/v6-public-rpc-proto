@@ -200,4 +200,6 @@ message DownloadAndPreviewInfo {
     int32 download_type = 12;
     string sha1 = 13;
     bool can_download = 14;
+    string cannot_download_message = 15;
+    string content_identity = 16;
 }
