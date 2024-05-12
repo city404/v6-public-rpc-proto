@@ -19,25 +19,26 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	PubUserFile_Create_FullMethodName                  = "/v6.services.pub.PubUserFile/Create"
-	PubUserFile_Get_FullMethodName                     = "/v6.services.pub.PubUserFile/Get"
-	PubUserFile_Rename_FullMethodName                  = "/v6.services.pub.PubUserFile/Rename"
-	PubUserFile_Trash_FullMethodName                   = "/v6.services.pub.PubUserFile/Trash"
-	PubUserFile_Move_FullMethodName                    = "/v6.services.pub.PubUserFile/Move"
-	PubUserFile_Copy_FullMethodName                    = "/v6.services.pub.PubUserFile/Copy"
-	PubUserFile_Delete_FullMethodName                  = "/v6.services.pub.PubUserFile/Delete"
-	PubUserFile_DeleteTrash_FullMethodName             = "/v6.services.pub.PubUserFile/DeleteTrash"
-	PubUserFile_Recover_FullMethodName                 = "/v6.services.pub.PubUserFile/Recover"
-	PubUserFile_BatchOperation_FullMethodName          = "/v6.services.pub.PubUserFile/BatchOperation"
-	PubUserFile_List_FullMethodName                    = "/v6.services.pub.PubUserFile/List"
-	PubUserFile_ListTrash_FullMethodName               = "/v6.services.pub.PubUserFile/ListTrash"
-	PubUserFile_Search_FullMethodName                  = "/v6.services.pub.PubUserFile/Search"
-	PubUserFile_CreateManageRTCOffer_FullMethodName    = "/v6.services.pub.PubUserFile/CreateManageRTCOffer"
-	PubUserFile_SendClientIceCandidate_FullMethodName  = "/v6.services.pub.PubUserFile/SendClientIceCandidate"
-	PubUserFile_GetServerIceCandidate_FullMethodName   = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
-	PubUserFile_ParseFileSlice_FullMethodName          = "/v6.services.pub.PubUserFile/ParseFileSlice"
-	PubUserFile_GetSliceDownloadAddress_FullMethodName = "/v6.services.pub.PubUserFile/GetSliceDownloadAddress"
-	PubUserFile_PreviewDoc_FullMethodName              = "/v6.services.pub.PubUserFile/PreviewDoc"
+	PubUserFile_Create_FullMethodName                    = "/v6.services.pub.PubUserFile/Create"
+	PubUserFile_Get_FullMethodName                       = "/v6.services.pub.PubUserFile/Get"
+	PubUserFile_Rename_FullMethodName                    = "/v6.services.pub.PubUserFile/Rename"
+	PubUserFile_Trash_FullMethodName                     = "/v6.services.pub.PubUserFile/Trash"
+	PubUserFile_Move_FullMethodName                      = "/v6.services.pub.PubUserFile/Move"
+	PubUserFile_Copy_FullMethodName                      = "/v6.services.pub.PubUserFile/Copy"
+	PubUserFile_Delete_FullMethodName                    = "/v6.services.pub.PubUserFile/Delete"
+	PubUserFile_DeleteTrash_FullMethodName               = "/v6.services.pub.PubUserFile/DeleteTrash"
+	PubUserFile_Recover_FullMethodName                   = "/v6.services.pub.PubUserFile/Recover"
+	PubUserFile_BatchOperation_FullMethodName            = "/v6.services.pub.PubUserFile/BatchOperation"
+	PubUserFile_List_FullMethodName                      = "/v6.services.pub.PubUserFile/List"
+	PubUserFile_ListTrash_FullMethodName                 = "/v6.services.pub.PubUserFile/ListTrash"
+	PubUserFile_Search_FullMethodName                    = "/v6.services.pub.PubUserFile/Search"
+	PubUserFile_CreateManageRTCOffer_FullMethodName      = "/v6.services.pub.PubUserFile/CreateManageRTCOffer"
+	PubUserFile_SendClientIceCandidate_FullMethodName    = "/v6.services.pub.PubUserFile/SendClientIceCandidate"
+	PubUserFile_GetServerIceCandidate_FullMethodName     = "/v6.services.pub.PubUserFile/GetServerIceCandidate"
+	PubUserFile_ParseFileSlice_FullMethodName            = "/v6.services.pub.PubUserFile/ParseFileSlice"
+	PubUserFile_GetSliceDownloadAddress_FullMethodName   = "/v6.services.pub.PubUserFile/GetSliceDownloadAddress"
+	PubUserFile_GetDownloadAndPreviewInfo_FullMethodName = "/v6.services.pub.PubUserFile/GetDownloadAndPreviewInfo"
+	PubUserFile_PreviewDoc_FullMethodName                = "/v6.services.pub.PubUserFile/PreviewDoc"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -63,6 +64,7 @@ type PubUserFileClient interface {
 	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
 	ParseFileSlice(ctx context.Context, in *File, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
 	GetSliceDownloadAddress(ctx context.Context, in *SliceDownloadAddressRequest, opts ...grpc.CallOption) (*SliceDownloadAddressResponse, error)
+	GetDownloadAndPreviewInfo(ctx context.Context, in *File, opts ...grpc.CallOption) (*DownloadAndPreviewInfo, error)
 	PreviewDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error)
 }
 
@@ -236,6 +238,15 @@ func (c *pubUserFileClient) GetSliceDownloadAddress(ctx context.Context, in *Sli
 	return out, nil
 }
 
+func (c *pubUserFileClient) GetDownloadAndPreviewInfo(ctx context.Context, in *File, opts ...grpc.CallOption) (*DownloadAndPreviewInfo, error) {
+	out := new(DownloadAndPreviewInfo)
+	err := c.cc.Invoke(ctx, PubUserFile_GetDownloadAndPreviewInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pubUserFileClient) PreviewDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error) {
 	out := new(DocFilePreview)
 	err := c.cc.Invoke(ctx, PubUserFile_PreviewDoc_FullMethodName, in, out, opts...)
@@ -268,6 +279,7 @@ type PubUserFileServer interface {
 	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
 	ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error)
 	GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error)
+	GetDownloadAndPreviewInfo(context.Context, *File) (*DownloadAndPreviewInfo, error)
 	PreviewDoc(context.Context, *File) (*DocFilePreview, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
@@ -329,6 +341,9 @@ func (UnimplementedPubUserFileServer) ParseFileSlice(context.Context, *File) (*P
 }
 func (UnimplementedPubUserFileServer) GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSliceDownloadAddress not implemented")
+}
+func (UnimplementedPubUserFileServer) GetDownloadAndPreviewInfo(context.Context, *File) (*DownloadAndPreviewInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDownloadAndPreviewInfo not implemented")
 }
 func (UnimplementedPubUserFileServer) PreviewDoc(context.Context, *File) (*DocFilePreview, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PreviewDoc not implemented")
@@ -670,6 +685,24 @@ func _PubUserFile_GetSliceDownloadAddress_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_GetDownloadAndPreviewInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(File)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).GetDownloadAndPreviewInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_GetDownloadAndPreviewInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).GetDownloadAndPreviewInfo(ctx, req.(*File))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PubUserFile_PreviewDoc_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(File)
 	if err := dec(in); err != nil {
@@ -766,6 +799,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSliceDownloadAddress",
 			Handler:    _PubUserFile_GetSliceDownloadAddress_Handler,
+		},
+		{
+			MethodName: "GetDownloadAndPreviewInfo",
+			Handler:    _PubUserFile_GetDownloadAndPreviewInfo_Handler,
 		},
 		{
 			MethodName: "PreviewDoc",
