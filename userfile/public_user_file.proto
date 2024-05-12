@@ -198,4 +198,5 @@ message DownloadAndPreviewInfo {
     bool can_edit = 10;
     int32 preview_type = 11;
     int32 download_type = 12;
+    string sha1 = 13;
 }
