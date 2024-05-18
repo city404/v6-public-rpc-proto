@@ -53,6 +53,8 @@ message File {
     string unique = 23;
     string content_identity = 24;
     int64 label = 25;
+    int64 store_type = 26;
+    int64 version = 27;
 }
 
 message FileListRequest {
