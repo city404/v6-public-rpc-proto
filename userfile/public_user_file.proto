@@ -25,6 +25,7 @@ service PubUserFile {
     rpc GetSliceDownloadAddress (SliceDownloadAddressRequest) returns (SliceDownloadAddressResponse) {}
     rpc GetDownloadAndPreviewInfo (File) returns (DownloadAndPreviewInfo) {}
     rpc PreviewDoc (File) returns (DocFilePreview) {}
+    rpc CreateDoc (File) returns (DocFilePreview) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 

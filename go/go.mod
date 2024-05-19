@@ -1,6 +1,6 @@
 module github.com/city404/v6-public-rpc-proto/go
 
-go 1.22.0
+go 1.22.3
 
 require (
 	google.golang.org/grpc v1.64.0
