@@ -26,6 +26,7 @@ service PubUserFile {
     rpc GetDownloadAndPreviewInfo (File) returns (DownloadAndPreviewInfo) {}
     rpc PreviewDoc (File) returns (DocFilePreview) {}
     rpc CreateDoc (File) returns (DocFilePreview) {}
+    rpc CreateUploadToken (File) returns (UploadToken) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -205,4 +206,20 @@ message DownloadAndPreviewInfo {
     bool can_download = 14;
     string cannot_download_message = 15;
     string content_identity = 16;
+}
+
+message UploadToken {
+    string token = 1;
+    string identity = 3;
+    string name = 5;
+    string path = 6;
+    int64 type = 7;
+    int64 store_type = 8;
+    int64 version = 9;
+    string access_key = 10;
+    string secret_key = 11;
+    string bucket = 12;
+    string region = 13;
+    string endpoint = 14;
+    string key = 15;
 }
