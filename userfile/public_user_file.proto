@@ -173,6 +173,7 @@ message SliceDownloadInfo {
     string download_address = 2;
     string download_token = 3;
     int32 encrypt = 4;
+    int64 store_type = 5;
 }
 
 message DocFilePreview {
