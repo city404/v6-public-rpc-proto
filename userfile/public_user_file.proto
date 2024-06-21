@@ -146,6 +146,7 @@ message ParseFileSliceResponse {
     string wcs_etag = 7;
     string name = 8;
     string path = 9;
+    int64 store_type = 10;
 }
 
 message SliceSize {
