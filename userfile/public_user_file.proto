@@ -159,6 +159,8 @@ message SliceSize {
 message SliceDownloadAddressRequest {
     repeated string identity = 1;
     int32 version = 2;
+    string filename = 3;
+    int64 flag = 4;
 }
 
 message SliceDownloadAddressResponse {
