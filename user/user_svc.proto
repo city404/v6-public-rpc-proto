@@ -158,13 +158,15 @@ message DiskStatisticsAndQuota {
 }
 
 message TrafficStatisticsAndQuota {
-    int64 bytes_daily_limit_in = 1;
-    int64 bytes_daily_limit_out = 2;
-    int64 today_bytes_in = 3;
-    int64 today_bytes_out = 4;
+    int64 bytes_daily_limit_download = 1;
+    int64 bytes_daily_limit_upload = 2;
+    int64 today_bytes_download = 3;
+    int64 today_bytes_upload = 4;
 }
 
 message OfflineTaskStatisticsAndQuota {
     int64 daily_limit = 1;
     int64 today_used = 2;
+    int64 bytes_daily_limit = 3;
+    int64 bytes_daily_commit = 4;
 }
