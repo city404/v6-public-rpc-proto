@@ -149,24 +149,24 @@ message UserStatisticsAndQuota {
 }
 
 message DiskStatisticsAndQuota {
-    int64 bytes_limit = 1;
+    int64 bytes_quota = 1;
     int64 bytes_used = 2;
     int64 bytes_free = 3;
-    int64 files_limit = 4;
+    int64 files_quota = 4;
     int64 files_used = 5;
     int64 bytes_trash_used = 6;
 }
 
 message TrafficStatisticsAndQuota {
-    int64 bytes_daily_limit_download = 1;
-    int64 bytes_daily_limit_upload = 2;
-    int64 today_bytes_download = 3;
-    int64 today_bytes_upload = 4;
+    int64 daily_bytes_download_quota = 1;
+    int64 daily_bytes_upload_quota = 2;
+    int64 bytes_downloaded_today = 3;
+    int64 bytes_uploaded_today = 4;
 }
 
 message OfflineTaskStatisticsAndQuota {
-    int64 daily_limit = 1;
-    int64 today_used = 2;
-    int64 bytes_daily_limit = 3;
-    int64 bytes_daily_commit = 4;
+    int64 daily_tasks_quota = 1;
+    int64 tasks_commited_today = 2;
+    int64 daily_bytes_quota = 3;
+    int64 bytes_commited_today = 4;
 }
