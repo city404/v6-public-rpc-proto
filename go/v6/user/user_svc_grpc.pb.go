@@ -34,6 +34,7 @@ const (
 	PubUser_VerifyAuthToken_FullMethodName          = "/v6.services.pub.PubUser/VerifyAuthToken"
 	PubUser_CreateAuthToken_FullMethodName          = "/v6.services.pub.PubUser/CreateAuthToken"
 	PubUser_ValidateUserInfo_FullMethodName         = "/v6.services.pub.PubUser/ValidateUserInfo"
+	PubUser_GetStatisticsAndQuota_FullMethodName    = "/v6.services.pub.PubUser/GetStatisticsAndQuota"
 )
 
 // PubUserClient is the client API for PubUser service.
@@ -54,6 +55,7 @@ type PubUserClient interface {
 	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error)
 	ValidateUserInfo(ctx context.Context, in *UserValidateInfo, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
+	GetStatisticsAndQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error)
 }
 
 type pubUserClient struct {
@@ -204,6 +206,16 @@ func (c *pubUserClient) ValidateUserInfo(ctx context.Context, in *UserValidateIn
 	return out, nil
 }
 
+func (c *pubUserClient) GetStatisticsAndQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserStatisticsAndQuota)
+	err := c.cc.Invoke(ctx, PubUser_GetStatisticsAndQuota_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserServer is the server API for PubUser service.
 // All implementations must embed UnimplementedPubUserServer
 // for forward compatibility.
@@ -222,6 +234,7 @@ type PubUserServer interface {
 	VerifyAuthToken(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error)
 	ValidateUserInfo(context.Context, *UserValidateInfo) (*common.UserNameValidateResponse, error)
+	GetStatisticsAndQuota(context.Context, *User) (*UserStatisticsAndQuota, error)
 	mustEmbedUnimplementedPubUserServer()
 }
 
@@ -273,6 +286,9 @@ func (UnimplementedPubUserServer) CreateAuthToken(context.Context, *LoginRequest
 }
 func (UnimplementedPubUserServer) ValidateUserInfo(context.Context, *UserValidateInfo) (*common.UserNameValidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateUserInfo not implemented")
+}
+func (UnimplementedPubUserServer) GetStatisticsAndQuota(context.Context, *User) (*UserStatisticsAndQuota, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStatisticsAndQuota not implemented")
 }
 func (UnimplementedPubUserServer) mustEmbedUnimplementedPubUserServer() {}
 func (UnimplementedPubUserServer) testEmbeddedByValue()                 {}
@@ -547,6 +563,24 @@ func _PubUser_ValidateUserInfo_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUser_GetStatisticsAndQuota_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).GetStatisticsAndQuota(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_GetStatisticsAndQuota_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).GetStatisticsAndQuota(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUser_ServiceDesc is the grpc.ServiceDesc for PubUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -609,6 +643,10 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateUserInfo",
 			Handler:    _PubUser_ValidateUserInfo_Handler,
+		},
+		{
+			MethodName: "GetStatisticsAndQuota",
+			Handler:    _PubUser_GetStatisticsAndQuota_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

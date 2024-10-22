@@ -58,6 +58,8 @@ message File {
     int64 label = 25;
     int64 store_type = 26;
     int64 version = 27;
+    int64 files = 28;
+    int64 direcotries = 29;
 }
 
 message FileListRequest {

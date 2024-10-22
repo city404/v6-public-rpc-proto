@@ -19,6 +19,7 @@ service PubUser {
     rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {}
     rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {}
     rpc ValidateUserInfo (UserValidateInfo) returns (.v6.services.pub.common.UserNameValidateResponse) {}
+    rpc GetStatisticsAndQuota (User) returns (UserStatisticsAndQuota) {}
 }
 
 message User {
@@ -139,4 +140,31 @@ message UserValidateInfo {
     string phone = 4;
     string country_code = 5;
     string addon = 6;
+}
+
+message UserStatisticsAndQuota {
+    DiskStatisticsAndQuota disk_statistics_quota = 1;
+    TrafficStatisticsAndQuota traffic_statistics_quota = 2;
+    OfflineTaskStatisticsAndQuota offline_task_statistics_quota = 3;
+}
+
+message DiskStatisticsAndQuota {
+    int64 bytes_limit = 1;
+    int64 bytes_used = 2;
+    int64 bytes_free = 3;
+    int64 files_limit = 4;
+    int64 files_used = 5;
+    int64 bytes_trash_used = 6;
+}
+
+message TrafficStatisticsAndQuota {
+    int64 bytes_daily_limit_in = 1;
+    int64 bytes_daily_limit_out = 2;
+    int64 today_bytes_in = 3;
+    int64 today_bytes_out = 4;
+}
+
+message OfflineTaskStatisticsAndQuota {
+    int64 daily_limit = 1;
+    int64 today_used = 2;
 }
