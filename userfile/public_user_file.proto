@@ -60,6 +60,7 @@ message File {
     int64 version = 27;
     int64 files = 28;
     int64 direcotries = 29;
+    int64 nodes = 30;
 }
 
 message FileListRequest {
