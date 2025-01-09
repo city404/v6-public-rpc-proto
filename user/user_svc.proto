@@ -20,6 +20,8 @@ service PubUser {
     rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {}
     rpc ValidateUserInfo (UserValidateInfo) returns (.v6.services.pub.common.UserNameValidateResponse) {}
     rpc GetStatisticsAndQuota (User) returns (UserStatisticsAndQuota) {}
+    rpc ExtendQuota (UserQuotaExtendInfo) returns (UserStatisticsAndQuota) {}
+    rpc GetAvailableExtendQuota (User) returns (UserQuotaExtendInfo) {}
 }
 
 message User {
@@ -169,4 +171,13 @@ message OfflineTaskStatisticsAndQuota {
     int64 tasks_commited_today = 2;
     int64 daily_bytes_quota = 3;
     int64 bytes_commited_today = 4;
+}
+
+message UserQuotaExtendInfo {
+    int64 daily_bytes_download = 1;
+    int64 daily_bytes_upload = 2;
+    int64 daily_offline_tasks = 3;
+    int64 daily_offline_tasks_bytes = 4;
+    int64 disk_bytes = 5;
+    int64 disk_files = 6;
 }

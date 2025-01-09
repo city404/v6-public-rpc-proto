@@ -35,6 +35,8 @@ const (
 	PubUser_CreateAuthToken_FullMethodName          = "/v6.services.pub.PubUser/CreateAuthToken"
 	PubUser_ValidateUserInfo_FullMethodName         = "/v6.services.pub.PubUser/ValidateUserInfo"
 	PubUser_GetStatisticsAndQuota_FullMethodName    = "/v6.services.pub.PubUser/GetStatisticsAndQuota"
+	PubUser_ExtendQuota_FullMethodName              = "/v6.services.pub.PubUser/ExtendQuota"
+	PubUser_GetAvailableExtendQuota_FullMethodName  = "/v6.services.pub.PubUser/GetAvailableExtendQuota"
 )
 
 // PubUserClient is the client API for PubUser service.
@@ -56,6 +58,8 @@ type PubUserClient interface {
 	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error)
 	ValidateUserInfo(ctx context.Context, in *UserValidateInfo, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 	GetStatisticsAndQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error)
+	ExtendQuota(ctx context.Context, in *UserQuotaExtendInfo, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error)
+	GetAvailableExtendQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserQuotaExtendInfo, error)
 }
 
 type pubUserClient struct {
@@ -216,6 +220,26 @@ func (c *pubUserClient) GetStatisticsAndQuota(ctx context.Context, in *User, opt
 	return out, nil
 }
 
+func (c *pubUserClient) ExtendQuota(ctx context.Context, in *UserQuotaExtendInfo, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserStatisticsAndQuota)
+	err := c.cc.Invoke(ctx, PubUser_ExtendQuota_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserClient) GetAvailableExtendQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserQuotaExtendInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UserQuotaExtendInfo)
+	err := c.cc.Invoke(ctx, PubUser_GetAvailableExtendQuota_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserServer is the server API for PubUser service.
 // All implementations must embed UnimplementedPubUserServer
 // for forward compatibility.
@@ -235,6 +259,8 @@ type PubUserServer interface {
 	CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error)
 	ValidateUserInfo(context.Context, *UserValidateInfo) (*common.UserNameValidateResponse, error)
 	GetStatisticsAndQuota(context.Context, *User) (*UserStatisticsAndQuota, error)
+	ExtendQuota(context.Context, *UserQuotaExtendInfo) (*UserStatisticsAndQuota, error)
+	GetAvailableExtendQuota(context.Context, *User) (*UserQuotaExtendInfo, error)
 	mustEmbedUnimplementedPubUserServer()
 }
 
@@ -289,6 +315,12 @@ func (UnimplementedPubUserServer) ValidateUserInfo(context.Context, *UserValidat
 }
 func (UnimplementedPubUserServer) GetStatisticsAndQuota(context.Context, *User) (*UserStatisticsAndQuota, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStatisticsAndQuota not implemented")
+}
+func (UnimplementedPubUserServer) ExtendQuota(context.Context, *UserQuotaExtendInfo) (*UserStatisticsAndQuota, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExtendQuota not implemented")
+}
+func (UnimplementedPubUserServer) GetAvailableExtendQuota(context.Context, *User) (*UserQuotaExtendInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvailableExtendQuota not implemented")
 }
 func (UnimplementedPubUserServer) mustEmbedUnimplementedPubUserServer() {}
 func (UnimplementedPubUserServer) testEmbeddedByValue()                 {}
@@ -581,6 +613,42 @@ func _PubUser_GetStatisticsAndQuota_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUser_ExtendQuota_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserQuotaExtendInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).ExtendQuota(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_ExtendQuota_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).ExtendQuota(ctx, req.(*UserQuotaExtendInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUser_GetAvailableExtendQuota_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(User)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).GetAvailableExtendQuota(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_GetAvailableExtendQuota_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).GetAvailableExtendQuota(ctx, req.(*User))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUser_ServiceDesc is the grpc.ServiceDesc for PubUser service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -647,6 +715,14 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetStatisticsAndQuota",
 			Handler:    _PubUser_GetStatisticsAndQuota_Handler,
+		},
+		{
+			MethodName: "ExtendQuota",
+			Handler:    _PubUser_ExtendQuota_Handler,
+		},
+		{
+			MethodName: "GetAvailableExtendQuota",
+			Handler:    _PubUser_GetAvailableExtendQuota_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
