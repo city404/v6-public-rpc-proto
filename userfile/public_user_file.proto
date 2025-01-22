@@ -61,6 +61,7 @@ message File {
     int64 files = 28;
     int64 direcotries = 29;
     int64 nodes = 30;
+    string sort_name = 31;
 }
 
 message FileListRequest {
