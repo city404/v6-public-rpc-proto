@@ -8,7 +8,7 @@ go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 
-DIRS=("common" "slice" "user" "userfile" "offline" "rpcs" "wrtc" "share" "webdav" "sftp" "tickets")
+DIRS=("common" "slice" "user" "userfile" "offline" "rpcs" "wrtc" "share" "webdav" "sftp" "ticket")
 
 
 rm -rf ./go_temp
