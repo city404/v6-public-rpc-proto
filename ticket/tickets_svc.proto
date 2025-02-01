@@ -7,6 +7,7 @@ service PubTicket {
     rpc Get (Ticket) returns (Ticket) {}
     rpc List (TicketListRequest) returns (TicketListResponse) {}
     rpc Create (Ticket) returns (Ticket) {}
+    rpc GetMapping (Ticket) returns (Ticket) {}
     // rpc Delete (Ticket) returns (Ticket) {}
 }
 
