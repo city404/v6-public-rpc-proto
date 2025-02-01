@@ -4,7 +4,7 @@
 // - protoc             v5.29.3
 // source: tickets/tickets_svc.proto
 
-package tickets
+package ticket
 
 import (
 	context "context"
@@ -19,139 +19,139 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PubTickets_Get_FullMethodName  = "/v6.services.pub.PubTickets/Get"
-	PubTickets_List_FullMethodName = "/v6.services.pub.PubTickets/List"
+	PubTicket_Get_FullMethodName  = "/v6.services.pub.PubTicket/Get"
+	PubTicket_List_FullMethodName = "/v6.services.pub.PubTicket/List"
 )
 
-// PubTicketsClient is the client API for PubTickets service.
+// PubTicketClient is the client API for PubTicket service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type PubTicketsClient interface {
+type PubTicketClient interface {
 	Get(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	List(ctx context.Context, in *TicketListRequest, opts ...grpc.CallOption) (*TicketListResponse, error)
 }
 
-type pubTicketsClient struct {
+type pubTicketClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewPubTicketsClient(cc grpc.ClientConnInterface) PubTicketsClient {
-	return &pubTicketsClient{cc}
+func NewPubTicketClient(cc grpc.ClientConnInterface) PubTicketClient {
+	return &pubTicketClient{cc}
 }
 
-func (c *pubTicketsClient) Get(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error) {
+func (c *pubTicketClient) Get(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(Ticket)
-	err := c.cc.Invoke(ctx, PubTickets_Get_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, PubTicket_Get_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *pubTicketsClient) List(ctx context.Context, in *TicketListRequest, opts ...grpc.CallOption) (*TicketListResponse, error) {
+func (c *pubTicketClient) List(ctx context.Context, in *TicketListRequest, opts ...grpc.CallOption) (*TicketListResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TicketListResponse)
-	err := c.cc.Invoke(ctx, PubTickets_List_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, PubTicket_List_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// PubTicketsServer is the server API for PubTickets service.
-// All implementations must embed UnimplementedPubTicketsServer
+// PubTicketServer is the server API for PubTicket service.
+// All implementations must embed UnimplementedPubTicketServer
 // for forward compatibility.
-type PubTicketsServer interface {
+type PubTicketServer interface {
 	Get(context.Context, *Ticket) (*Ticket, error)
 	List(context.Context, *TicketListRequest) (*TicketListResponse, error)
-	mustEmbedUnimplementedPubTicketsServer()
+	mustEmbedUnimplementedPubTicketServer()
 }
 
-// UnimplementedPubTicketsServer must be embedded to have
+// UnimplementedPubTicketServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedPubTicketsServer struct{}
+type UnimplementedPubTicketServer struct{}
 
-func (UnimplementedPubTicketsServer) Get(context.Context, *Ticket) (*Ticket, error) {
+func (UnimplementedPubTicketServer) Get(context.Context, *Ticket) (*Ticket, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
-func (UnimplementedPubTicketsServer) List(context.Context, *TicketListRequest) (*TicketListResponse, error) {
+func (UnimplementedPubTicketServer) List(context.Context, *TicketListRequest) (*TicketListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
-func (UnimplementedPubTicketsServer) mustEmbedUnimplementedPubTicketsServer() {}
-func (UnimplementedPubTicketsServer) testEmbeddedByValue()                    {}
+func (UnimplementedPubTicketServer) mustEmbedUnimplementedPubTicketServer() {}
+func (UnimplementedPubTicketServer) testEmbeddedByValue()                   {}
 
-// UnsafePubTicketsServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to PubTicketsServer will
+// UnsafePubTicketServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to PubTicketServer will
 // result in compilation errors.
-type UnsafePubTicketsServer interface {
-	mustEmbedUnimplementedPubTicketsServer()
+type UnsafePubTicketServer interface {
+	mustEmbedUnimplementedPubTicketServer()
 }
 
-func RegisterPubTicketsServer(s grpc.ServiceRegistrar, srv PubTicketsServer) {
-	// If the following call pancis, it indicates UnimplementedPubTicketsServer was
+func RegisterPubTicketServer(s grpc.ServiceRegistrar, srv PubTicketServer) {
+	// If the following call pancis, it indicates UnimplementedPubTicketServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&PubTickets_ServiceDesc, srv)
+	s.RegisterService(&PubTicket_ServiceDesc, srv)
 }
 
-func _PubTickets_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PubTicket_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Ticket)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubTicketsServer).Get(ctx, in)
+		return srv.(PubTicketServer).Get(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PubTickets_Get_FullMethodName,
+		FullMethod: PubTicket_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubTicketsServer).Get(ctx, req.(*Ticket))
+		return srv.(PubTicketServer).Get(ctx, req.(*Ticket))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubTickets_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _PubTicket_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TicketListRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubTicketsServer).List(ctx, in)
+		return srv.(PubTicketServer).List(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PubTickets_List_FullMethodName,
+		FullMethod: PubTicket_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubTicketsServer).List(ctx, req.(*TicketListRequest))
+		return srv.(PubTicketServer).List(ctx, req.(*TicketListRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// PubTickets_ServiceDesc is the grpc.ServiceDesc for PubTickets service.
+// PubTicket_ServiceDesc is the grpc.ServiceDesc for PubTicket service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var PubTickets_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "v6.services.pub.PubTickets",
-	HandlerType: (*PubTicketsServer)(nil),
+var PubTicket_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "v6.services.pub.PubTicket",
+	HandlerType: (*PubTicketServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "Get",
-			Handler:    _PubTickets_Get_Handler,
+			Handler:    _PubTicket_Get_Handler,
 		},
 		{
 			MethodName: "List",
-			Handler:    _PubTickets_List_Handler,
+			Handler:    _PubTicket_List_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
