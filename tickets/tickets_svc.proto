@@ -1,0 +1,29 @@
+syntax = "proto3";
+package v6.services.pub;
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/tickets";
+import "common/pub_common.proto";
+
+service PubTickets {
+    rpc Get (Ticket) returns (Ticket) {}
+    rpc List (TicketListRequest) returns (TicketListResponse) {}
+}
+
+message Ticket {
+    string identity = 1;
+    string email = 2; 
+    string phone = 3;
+    string subject = 4;
+    string category = 5;
+    string sub_category = 6;
+    string channel = 7;
+    string description = 8;
+}
+
+message TicketListRequest {
+    .v6.services.pub.common.ScanListRequest list_info = 3;
+}
+
+message TicketListResponse {
+    repeated Ticket tickets = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+}
