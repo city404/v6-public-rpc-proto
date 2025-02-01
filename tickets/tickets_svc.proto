@@ -6,6 +6,8 @@ import "common/pub_common.proto";
 service PubTicket {
     rpc Get (Ticket) returns (Ticket) {}
     rpc List (TicketListRequest) returns (TicketListResponse) {}
+    rpc Create (Ticket) returns (Ticket) {}
+    // rpc Delete (Ticket) returns (Ticket) {}
 }
 
 message Ticket {

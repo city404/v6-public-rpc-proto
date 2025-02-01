@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PubTicket_Get_FullMethodName  = "/v6.services.pub.PubTicket/Get"
-	PubTicket_List_FullMethodName = "/v6.services.pub.PubTicket/List"
+	PubTicket_Get_FullMethodName    = "/v6.services.pub.PubTicket/Get"
+	PubTicket_List_FullMethodName   = "/v6.services.pub.PubTicket/List"
+	PubTicket_Create_FullMethodName = "/v6.services.pub.PubTicket/Create"
 )
 
 // PubTicketClient is the client API for PubTicket service.
@@ -29,6 +30,7 @@ const (
 type PubTicketClient interface {
 	Get(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	List(ctx context.Context, in *TicketListRequest, opts ...grpc.CallOption) (*TicketListResponse, error)
+	Create(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 }
 
 type pubTicketClient struct {
@@ -59,12 +61,23 @@ func (c *pubTicketClient) List(ctx context.Context, in *TicketListRequest, opts 
 	return out, nil
 }
 
+func (c *pubTicketClient) Create(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Ticket)
+	err := c.cc.Invoke(ctx, PubTicket_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubTicketServer is the server API for PubTicket service.
 // All implementations must embed UnimplementedPubTicketServer
 // for forward compatibility.
 type PubTicketServer interface {
 	Get(context.Context, *Ticket) (*Ticket, error)
 	List(context.Context, *TicketListRequest) (*TicketListResponse, error)
+	Create(context.Context, *Ticket) (*Ticket, error)
 	mustEmbedUnimplementedPubTicketServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedPubTicketServer) Get(context.Context, *Ticket) (*Ticket, erro
 }
 func (UnimplementedPubTicketServer) List(context.Context, *TicketListRequest) (*TicketListResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
+}
+func (UnimplementedPubTicketServer) Create(context.Context, *Ticket) (*Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedPubTicketServer) mustEmbedUnimplementedPubTicketServer() {}
 func (UnimplementedPubTicketServer) testEmbeddedByValue()                   {}
@@ -138,6 +154,24 @@ func _PubTicket_List_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubTicket_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ticket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubTicketServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubTicket_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubTicketServer).Create(ctx, req.(*Ticket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubTicket_ServiceDesc is the grpc.ServiceDesc for PubTicket service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var PubTicket_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "List",
 			Handler:    _PubTicket_List_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _PubTicket_Create_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
