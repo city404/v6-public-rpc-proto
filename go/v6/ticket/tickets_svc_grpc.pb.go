@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PubTicket_Get_FullMethodName        = "/v6.services.pub.PubTicket/Get"
-	PubTicket_List_FullMethodName       = "/v6.services.pub.PubTicket/List"
-	PubTicket_Create_FullMethodName     = "/v6.services.pub.PubTicket/Create"
-	PubTicket_GetMapping_FullMethodName = "/v6.services.pub.PubTicket/GetMapping"
+	PubTicket_Get_FullMethodName               = "/v6.services.pub.PubTicket/Get"
+	PubTicket_List_FullMethodName              = "/v6.services.pub.PubTicket/List"
+	PubTicket_Create_FullMethodName            = "/v6.services.pub.PubTicket/Create"
+	PubTicket_GetContactInfo_FullMethodName    = "/v6.services.pub.PubTicket/GetContactInfo"
+	PubTicket_UpdateContactInfo_FullMethodName = "/v6.services.pub.PubTicket/UpdateContactInfo"
 )
 
 // PubTicketClient is the client API for PubTicket service.
@@ -32,7 +33,8 @@ type PubTicketClient interface {
 	Get(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	List(ctx context.Context, in *TicketListRequest, opts ...grpc.CallOption) (*TicketListResponse, error)
 	Create(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
-	GetMapping(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
+	GetContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error)
+	UpdateContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error)
 }
 
 type pubTicketClient struct {
@@ -73,10 +75,20 @@ func (c *pubTicketClient) Create(ctx context.Context, in *Ticket, opts ...grpc.C
 	return out, nil
 }
 
-func (c *pubTicketClient) GetMapping(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error) {
+func (c *pubTicketClient) GetContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Ticket)
-	err := c.cc.Invoke(ctx, PubTicket_GetMapping_FullMethodName, in, out, cOpts...)
+	out := new(ContactInfo)
+	err := c.cc.Invoke(ctx, PubTicket_GetContactInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubTicketClient) UpdateContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ContactInfo)
+	err := c.cc.Invoke(ctx, PubTicket_UpdateContactInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -90,7 +102,8 @@ type PubTicketServer interface {
 	Get(context.Context, *Ticket) (*Ticket, error)
 	List(context.Context, *TicketListRequest) (*TicketListResponse, error)
 	Create(context.Context, *Ticket) (*Ticket, error)
-	GetMapping(context.Context, *Ticket) (*Ticket, error)
+	GetContactInfo(context.Context, *ContactInfo) (*ContactInfo, error)
+	UpdateContactInfo(context.Context, *ContactInfo) (*ContactInfo, error)
 	mustEmbedUnimplementedPubTicketServer()
 }
 
@@ -110,8 +123,11 @@ func (UnimplementedPubTicketServer) List(context.Context, *TicketListRequest) (*
 func (UnimplementedPubTicketServer) Create(context.Context, *Ticket) (*Ticket, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedPubTicketServer) GetMapping(context.Context, *Ticket) (*Ticket, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMapping not implemented")
+func (UnimplementedPubTicketServer) GetContactInfo(context.Context, *ContactInfo) (*ContactInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetContactInfo not implemented")
+}
+func (UnimplementedPubTicketServer) UpdateContactInfo(context.Context, *ContactInfo) (*ContactInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateContactInfo not implemented")
 }
 func (UnimplementedPubTicketServer) mustEmbedUnimplementedPubTicketServer() {}
 func (UnimplementedPubTicketServer) testEmbeddedByValue()                   {}
@@ -188,20 +204,38 @@ func _PubTicket_Create_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubTicket_GetMapping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ticket)
+func _PubTicket_GetContactInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ContactInfo)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PubTicketServer).GetMapping(ctx, in)
+		return srv.(PubTicketServer).GetContactInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: PubTicket_GetMapping_FullMethodName,
+		FullMethod: PubTicket_GetContactInfo_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubTicketServer).GetMapping(ctx, req.(*Ticket))
+		return srv.(PubTicketServer).GetContactInfo(ctx, req.(*ContactInfo))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubTicket_UpdateContactInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ContactInfo)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubTicketServer).UpdateContactInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubTicket_UpdateContactInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubTicketServer).UpdateContactInfo(ctx, req.(*ContactInfo))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -226,8 +260,12 @@ var PubTicket_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _PubTicket_Create_Handler,
 		},
 		{
-			MethodName: "GetMapping",
-			Handler:    _PubTicket_GetMapping_Handler,
+			MethodName: "GetContactInfo",
+			Handler:    _PubTicket_GetContactInfo_Handler,
+		},
+		{
+			MethodName: "UpdateContactInfo",
+			Handler:    _PubTicket_UpdateContactInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

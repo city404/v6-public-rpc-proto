@@ -7,8 +7,8 @@ service PubTicket {
     rpc Get (Ticket) returns (Ticket) {}
     rpc List (TicketListRequest) returns (TicketListResponse) {}
     rpc Create (Ticket) returns (Ticket) {}
-    rpc GetMapping (Ticket) returns (Ticket) {}
-    // rpc Delete (Ticket) returns (Ticket) {}
+    rpc GetContactInfo (ContactInfo) returns (ContactInfo) {}
+    rpc UpdateContactInfo (ContactInfo) returns (ContactInfo) {}
 }
 
 message Ticket {
@@ -29,4 +29,11 @@ message TicketListRequest {
 message TicketListResponse {
     repeated Ticket tickets = 1;
     .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message ContactInfo {
+    string first_name = 1;
+    string last_name = 2;
+    string email = 3;
+    string phone = 4;
 }
