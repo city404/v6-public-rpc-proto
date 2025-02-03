@@ -9,6 +9,7 @@ service PubTicket {
     rpc Create (Ticket) returns (Ticket) {}
     rpc GetContactInfo (ContactInfo) returns (ContactInfo) {}
     rpc UpdateContactInfo (ContactInfo) returns (ContactInfo) {}
+    rpc ListConversation (ConversationListRequest) returns (ConversationListResponse) {}
 }
 
 message Ticket {
@@ -36,4 +37,39 @@ message ContactInfo {
     string last_name = 2;
     string email = 3;
     string phone = 4;
+}
+
+message ConversationListRequest {
+    string ticket_identity = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message ConversationListResponse {
+    repeated Conversation conversations = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message Conversation {
+    bool is_description_thread = 1;
+    bool can_reply = 2;
+    string bcc = 3;
+    string channel = 4;
+    string type = 5;
+    string last_rating_icon_url = 6;
+    string impersonated_user = 7;
+    string identity = 8;
+    string content_type = 9;
+    string direction = 10;
+    string summary = 11;
+    string cc = 12;
+    string key_words = 13;
+    string visibility = 14;
+    string content = 15;
+    string encoded_content = 16;
+    bool is_forward = 17;
+    bool has_attach = 18;
+    string attachment_count = 19;
+    string to = 20;
+    string from_email_address = 21;
+    string status = 22;
 }

@@ -24,6 +24,7 @@ const (
 	PubTicket_Create_FullMethodName            = "/v6.services.pub.PubTicket/Create"
 	PubTicket_GetContactInfo_FullMethodName    = "/v6.services.pub.PubTicket/GetContactInfo"
 	PubTicket_UpdateContactInfo_FullMethodName = "/v6.services.pub.PubTicket/UpdateContactInfo"
+	PubTicket_ListConversation_FullMethodName  = "/v6.services.pub.PubTicket/ListConversation"
 )
 
 // PubTicketClient is the client API for PubTicket service.
@@ -35,6 +36,7 @@ type PubTicketClient interface {
 	Create(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	GetContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error)
 	UpdateContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error)
+	ListConversation(ctx context.Context, in *ConversationListRequest, opts ...grpc.CallOption) (*ConversationListResponse, error)
 }
 
 type pubTicketClient struct {
@@ -95,6 +97,16 @@ func (c *pubTicketClient) UpdateContactInfo(ctx context.Context, in *ContactInfo
 	return out, nil
 }
 
+func (c *pubTicketClient) ListConversation(ctx context.Context, in *ConversationListRequest, opts ...grpc.CallOption) (*ConversationListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConversationListResponse)
+	err := c.cc.Invoke(ctx, PubTicket_ListConversation_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubTicketServer is the server API for PubTicket service.
 // All implementations must embed UnimplementedPubTicketServer
 // for forward compatibility.
@@ -104,6 +116,7 @@ type PubTicketServer interface {
 	Create(context.Context, *Ticket) (*Ticket, error)
 	GetContactInfo(context.Context, *ContactInfo) (*ContactInfo, error)
 	UpdateContactInfo(context.Context, *ContactInfo) (*ContactInfo, error)
+	ListConversation(context.Context, *ConversationListRequest) (*ConversationListResponse, error)
 	mustEmbedUnimplementedPubTicketServer()
 }
 
@@ -128,6 +141,9 @@ func (UnimplementedPubTicketServer) GetContactInfo(context.Context, *ContactInfo
 }
 func (UnimplementedPubTicketServer) UpdateContactInfo(context.Context, *ContactInfo) (*ContactInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateContactInfo not implemented")
+}
+func (UnimplementedPubTicketServer) ListConversation(context.Context, *ConversationListRequest) (*ConversationListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListConversation not implemented")
 }
 func (UnimplementedPubTicketServer) mustEmbedUnimplementedPubTicketServer() {}
 func (UnimplementedPubTicketServer) testEmbeddedByValue()                   {}
@@ -240,6 +256,24 @@ func _PubTicket_UpdateContactInfo_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubTicket_ListConversation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConversationListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubTicketServer).ListConversation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubTicket_ListConversation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubTicketServer).ListConversation(ctx, req.(*ConversationListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubTicket_ServiceDesc is the grpc.ServiceDesc for PubTicket service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -266,6 +300,10 @@ var PubTicket_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateContactInfo",
 			Handler:    _PubTicket_UpdateContactInfo_Handler,
+		},
+		{
+			MethodName: "ListConversation",
+			Handler:    _PubTicket_ListConversation_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
