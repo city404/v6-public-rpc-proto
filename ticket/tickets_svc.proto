@@ -72,4 +72,5 @@ message Conversation {
     string to = 20;
     string from_email_address = 21;
     string status = 22;
+    int64 create_ts = 23;
 }
