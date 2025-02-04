@@ -24,6 +24,7 @@ message Ticket {
     string description = 8;
     int64 create_ts = 9;
     repeated string attachments = 10;
+    string entity_type = 11;
 }
 
 message TicketListRequest {
