@@ -10,7 +10,7 @@ service PubTicket {
     rpc GetContactInfo (ContactInfo) returns (ContactInfo) {}
     rpc UpdateContactInfo (ContactInfo) returns (ContactInfo) {}
     rpc ListConversation (ConversationListRequest) returns (ConversationListResponse) {}
-    rpc Reply (Ticket) returns (Ticket) {}
+    rpc Comment (Ticket) returns (Ticket) {}
 }
 
 message Ticket {
