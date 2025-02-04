@@ -10,6 +10,7 @@ service PubTicket {
     rpc GetContactInfo (ContactInfo) returns (ContactInfo) {}
     rpc UpdateContactInfo (ContactInfo) returns (ContactInfo) {}
     rpc ListConversation (ConversationListRequest) returns (ConversationListResponse) {}
+    rpc Reply (Ticket) returns (Ticket) {}
 }
 
 message Ticket {
@@ -21,6 +22,8 @@ message Ticket {
     string sub_category = 6;
     string channel = 7;
     string description = 8;
+    int64 create_ts = 9;
+    repeated string attachment = 10;
 }
 
 message TicketListRequest {
