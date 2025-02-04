@@ -84,4 +84,6 @@ message Conversation {
     string from_email_address = 21;
     string status = 22;
     int64 create_ts = 23;
+    bool user_thread = 24;
+    string clean_content = 25;
 }
