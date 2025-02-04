@@ -26,6 +26,7 @@ message Ticket {
     repeated string attachments = 10;
     string entity_type = 11;
     string content_type = 12;
+    string status = 13;
 }
 
 message TicketListRequest {
