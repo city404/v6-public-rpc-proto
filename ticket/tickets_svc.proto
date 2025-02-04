@@ -29,6 +29,9 @@ message Ticket {
     string entity_type = 11;
     string content_type = 12;
     string status = 13;
+    bool read = 14;
+    int64 comment_count = 15;
+    int64 thread_count = 16;
 }
 
 message TicketListRequest {
