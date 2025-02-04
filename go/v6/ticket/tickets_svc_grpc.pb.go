@@ -8,6 +8,7 @@ package ticket
 
 import (
 	context "context"
+	common "github.com/city404/v6-public-rpc-proto/go/v6/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -26,6 +27,8 @@ const (
 	PubTicket_UpdateContactInfo_FullMethodName = "/v6.services.pub.PubTicket/UpdateContactInfo"
 	PubTicket_ListConversation_FullMethodName  = "/v6.services.pub.PubTicket/ListConversation"
 	PubTicket_Comment_FullMethodName           = "/v6.services.pub.PubTicket/Comment"
+	PubTicket_Delete_FullMethodName            = "/v6.services.pub.PubTicket/Delete"
+	PubTicket_Close_FullMethodName             = "/v6.services.pub.PubTicket/Close"
 )
 
 // PubTicketClient is the client API for PubTicket service.
@@ -39,6 +42,8 @@ type PubTicketClient interface {
 	UpdateContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error)
 	ListConversation(ctx context.Context, in *ConversationListRequest, opts ...grpc.CallOption) (*ConversationListResponse, error)
 	Comment(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
+	Delete(ctx context.Context, in *common.StringList, opts ...grpc.CallOption) (*common.StringList, error)
+	Close(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 }
 
 type pubTicketClient struct {
@@ -119,6 +124,26 @@ func (c *pubTicketClient) Comment(ctx context.Context, in *Ticket, opts ...grpc.
 	return out, nil
 }
 
+func (c *pubTicketClient) Delete(ctx context.Context, in *common.StringList, opts ...grpc.CallOption) (*common.StringList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.StringList)
+	err := c.cc.Invoke(ctx, PubTicket_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubTicketClient) Close(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Ticket)
+	err := c.cc.Invoke(ctx, PubTicket_Close_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubTicketServer is the server API for PubTicket service.
 // All implementations must embed UnimplementedPubTicketServer
 // for forward compatibility.
@@ -130,6 +155,8 @@ type PubTicketServer interface {
 	UpdateContactInfo(context.Context, *ContactInfo) (*ContactInfo, error)
 	ListConversation(context.Context, *ConversationListRequest) (*ConversationListResponse, error)
 	Comment(context.Context, *Ticket) (*Ticket, error)
+	Delete(context.Context, *common.StringList) (*common.StringList, error)
+	Close(context.Context, *Ticket) (*Ticket, error)
 	mustEmbedUnimplementedPubTicketServer()
 }
 
@@ -160,6 +187,12 @@ func (UnimplementedPubTicketServer) ListConversation(context.Context, *Conversat
 }
 func (UnimplementedPubTicketServer) Comment(context.Context, *Ticket) (*Ticket, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Comment not implemented")
+}
+func (UnimplementedPubTicketServer) Delete(context.Context, *common.StringList) (*common.StringList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
+}
+func (UnimplementedPubTicketServer) Close(context.Context, *Ticket) (*Ticket, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Close not implemented")
 }
 func (UnimplementedPubTicketServer) mustEmbedUnimplementedPubTicketServer() {}
 func (UnimplementedPubTicketServer) testEmbeddedByValue()                   {}
@@ -308,6 +341,42 @@ func _PubTicket_Comment_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubTicket_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(common.StringList)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubTicketServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubTicket_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubTicketServer).Delete(ctx, req.(*common.StringList))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubTicket_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(Ticket)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubTicketServer).Close(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubTicket_Close_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubTicketServer).Close(ctx, req.(*Ticket))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubTicket_ServiceDesc is the grpc.ServiceDesc for PubTicket service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -342,6 +411,14 @@ var PubTicket_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Comment",
 			Handler:    _PubTicket_Comment_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _PubTicket_Delete_Handler,
+		},
+		{
+			MethodName: "Close",
+			Handler:    _PubTicket_Close_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

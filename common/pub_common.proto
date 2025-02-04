@@ -19,3 +19,7 @@ message UserNameValidateResponse {
     string message = 2;
     bool valid = 3;
 }
+
+message StringList {
+    repeated string list = 1;
+}
