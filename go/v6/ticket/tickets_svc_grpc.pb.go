@@ -43,7 +43,7 @@ type PubTicketClient interface {
 	ListConversation(ctx context.Context, in *ConversationListRequest, opts ...grpc.CallOption) (*ConversationListResponse, error)
 	Comment(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
 	Delete(ctx context.Context, in *common.StringList, opts ...grpc.CallOption) (*common.StringList, error)
-	Close(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
+	Close(ctx context.Context, in *common.StringList, opts ...grpc.CallOption) (*common.StringList, error)
 }
 
 type pubTicketClient struct {
@@ -134,9 +134,9 @@ func (c *pubTicketClient) Delete(ctx context.Context, in *common.StringList, opt
 	return out, nil
 }
 
-func (c *pubTicketClient) Close(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error) {
+func (c *pubTicketClient) Close(ctx context.Context, in *common.StringList, opts ...grpc.CallOption) (*common.StringList, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(Ticket)
+	out := new(common.StringList)
 	err := c.cc.Invoke(ctx, PubTicket_Close_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -156,7 +156,7 @@ type PubTicketServer interface {
 	ListConversation(context.Context, *ConversationListRequest) (*ConversationListResponse, error)
 	Comment(context.Context, *Ticket) (*Ticket, error)
 	Delete(context.Context, *common.StringList) (*common.StringList, error)
-	Close(context.Context, *Ticket) (*Ticket, error)
+	Close(context.Context, *common.StringList) (*common.StringList, error)
 	mustEmbedUnimplementedPubTicketServer()
 }
 
@@ -191,7 +191,7 @@ func (UnimplementedPubTicketServer) Comment(context.Context, *Ticket) (*Ticket, 
 func (UnimplementedPubTicketServer) Delete(context.Context, *common.StringList) (*common.StringList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedPubTicketServer) Close(context.Context, *Ticket) (*Ticket, error) {
+func (UnimplementedPubTicketServer) Close(context.Context, *common.StringList) (*common.StringList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Close not implemented")
 }
 func (UnimplementedPubTicketServer) mustEmbedUnimplementedPubTicketServer() {}
@@ -360,7 +360,7 @@ func _PubTicket_Delete_Handler(srv interface{}, ctx context.Context, dec func(in
 }
 
 func _PubTicket_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(Ticket)
+	in := new(common.StringList)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -372,7 +372,7 @@ func _PubTicket_Close_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: PubTicket_Close_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubTicketServer).Close(ctx, req.(*Ticket))
+		return srv.(PubTicketServer).Close(ctx, req.(*common.StringList))
 	}
 	return interceptor(ctx, in, info, handler)
 }

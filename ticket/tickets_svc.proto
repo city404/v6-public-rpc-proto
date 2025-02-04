@@ -12,7 +12,7 @@ service PubTicket {
     rpc ListConversation (ConversationListRequest) returns (ConversationListResponse) {}
     rpc Comment (Ticket) returns (Ticket) {}
     rpc Delete (.v6.services.pub.common.StringList) returns (.v6.services.pub.common.StringList) {}
-    rpc Close (Ticket) returns (Ticket) {}
+    rpc Close (.v6.services.pub.common.StringList) returns (.v6.services.pub.common.StringList) {}
 }
 
 message Ticket {
