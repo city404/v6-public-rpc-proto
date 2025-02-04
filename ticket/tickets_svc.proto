@@ -23,7 +23,7 @@ message Ticket {
     string channel = 7;
     string description = 8;
     int64 create_ts = 9;
-    repeated string attachment = 10;
+    repeated string attachments = 10;
 }
 
 message TicketListRequest {
