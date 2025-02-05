@@ -10,6 +10,8 @@ service PubDavConfig {
     rpc Update (DavConfig) returns (DavConfig) {}
     rpc Enable (DavConfig) returns (DavConfig) {}
     rpc Disable (DavConfig) returns (DavConfig) {}
+    rpc ListAll (DavConfig) returns (DavConfigListResponse) {}
+    rpc List (DavConfigListRequest) returns (DavConfigListResponse) {}
     rpc ValidateUserName (DavConfig) returns (.v6.services.pub.common.UserNameValidateResponse) {}
 }
 
@@ -29,6 +31,16 @@ message DavConfig {
     string username = 12;
     string password = 13;
     int64 update_ts = 14;
+}
+
+message DavConfigListRequest {
+    .v6.services.pub.common.ScanListRequest list_info = 1;
+    string user_identity = 2;
+}
+
+message DavConfigListResponse {
+    .v6.services.pub.common.ScanListRequest list_info = 1;
+    repeated DavConfig configs = 2;
 }
 
 /*

@@ -24,6 +24,8 @@ const (
 	PubDavConfig_Update_FullMethodName           = "/v6.services.pub.PubDavConfig/Update"
 	PubDavConfig_Enable_FullMethodName           = "/v6.services.pub.PubDavConfig/Enable"
 	PubDavConfig_Disable_FullMethodName          = "/v6.services.pub.PubDavConfig/Disable"
+	PubDavConfig_ListAll_FullMethodName          = "/v6.services.pub.PubDavConfig/ListAll"
+	PubDavConfig_List_FullMethodName             = "/v6.services.pub.PubDavConfig/List"
 	PubDavConfig_ValidateUserName_FullMethodName = "/v6.services.pub.PubDavConfig/ValidateUserName"
 )
 
@@ -36,6 +38,8 @@ type PubDavConfigClient interface {
 	Update(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 	Enable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 	Disable(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
+	ListAll(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfigListResponse, error)
+	List(ctx context.Context, in *DavConfigListRequest, opts ...grpc.CallOption) (*DavConfigListResponse, error)
 	ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 }
 
@@ -87,6 +91,26 @@ func (c *pubDavConfigClient) Disable(ctx context.Context, in *DavConfig, opts ..
 	return out, nil
 }
 
+func (c *pubDavConfigClient) ListAll(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfigListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DavConfigListResponse)
+	err := c.cc.Invoke(ctx, PubDavConfig_ListAll_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubDavConfigClient) List(ctx context.Context, in *DavConfigListRequest, opts ...grpc.CallOption) (*DavConfigListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DavConfigListResponse)
+	err := c.cc.Invoke(ctx, PubDavConfig_List_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pubDavConfigClient) ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(common.UserNameValidateResponse)
@@ -106,6 +130,8 @@ type PubDavConfigServer interface {
 	Update(context.Context, *DavConfig) (*DavConfig, error)
 	Enable(context.Context, *DavConfig) (*DavConfig, error)
 	Disable(context.Context, *DavConfig) (*DavConfig, error)
+	ListAll(context.Context, *DavConfig) (*DavConfigListResponse, error)
+	List(context.Context, *DavConfigListRequest) (*DavConfigListResponse, error)
 	ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error)
 	mustEmbedUnimplementedPubDavConfigServer()
 }
@@ -128,6 +154,12 @@ func (UnimplementedPubDavConfigServer) Enable(context.Context, *DavConfig) (*Dav
 }
 func (UnimplementedPubDavConfigServer) Disable(context.Context, *DavConfig) (*DavConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Disable not implemented")
+}
+func (UnimplementedPubDavConfigServer) ListAll(context.Context, *DavConfig) (*DavConfigListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAll not implemented")
+}
+func (UnimplementedPubDavConfigServer) List(context.Context, *DavConfigListRequest) (*DavConfigListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedPubDavConfigServer) ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateUserName not implemented")
@@ -225,6 +257,42 @@ func _PubDavConfig_Disable_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubDavConfig_ListAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DavConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubDavConfigServer).ListAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubDavConfig_ListAll_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubDavConfigServer).ListAll(ctx, req.(*DavConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubDavConfig_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DavConfigListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubDavConfigServer).List(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubDavConfig_List_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubDavConfigServer).List(ctx, req.(*DavConfigListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PubDavConfig_ValidateUserName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DavConfig)
 	if err := dec(in); err != nil {
@@ -265,6 +333,14 @@ var PubDavConfig_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Disable",
 			Handler:    _PubDavConfig_Disable_Handler,
+		},
+		{
+			MethodName: "ListAll",
+			Handler:    _PubDavConfig_ListAll_Handler,
+		},
+		{
+			MethodName: "List",
+			Handler:    _PubDavConfig_List_Handler,
 		},
 		{
 			MethodName: "ValidateUserName",
