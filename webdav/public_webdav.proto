@@ -13,6 +13,7 @@ service PubDavConfig {
     rpc ListAll (DavConfig) returns (DavConfigListResponse) {}
     rpc List (DavConfigListRequest) returns (DavConfigListResponse) {}
     rpc ValidateUserName (DavConfig) returns (.v6.services.pub.common.UserNameValidateResponse) {}
+    rpc ServerInfo (DavConfig) returns (DavServerInfo) {}
 }
 
 
@@ -41,6 +42,18 @@ message DavConfigListRequest {
 message DavConfigListResponse {
     .v6.services.pub.common.ScanListRequest list_info = 1;
     repeated DavConfig configs = 2;
+}
+
+message DavServerInfo {
+    string server_name = 1;
+    string server_version = 2;
+    string server_software = 4;
+    string server_address = 5;
+    string server_port = 6;
+    string server_protocol = 7;
+    string server_root = 8;
+    bool server_ssl = 9;
+    bool server_allow_write = 10;
 }
 
 /*

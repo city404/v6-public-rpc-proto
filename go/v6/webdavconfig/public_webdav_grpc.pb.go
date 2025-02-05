@@ -27,6 +27,7 @@ const (
 	PubDavConfig_ListAll_FullMethodName          = "/v6.services.pub.PubDavConfig/ListAll"
 	PubDavConfig_List_FullMethodName             = "/v6.services.pub.PubDavConfig/List"
 	PubDavConfig_ValidateUserName_FullMethodName = "/v6.services.pub.PubDavConfig/ValidateUserName"
+	PubDavConfig_ServerInfo_FullMethodName       = "/v6.services.pub.PubDavConfig/ServerInfo"
 )
 
 // PubDavConfigClient is the client API for PubDavConfig service.
@@ -41,6 +42,7 @@ type PubDavConfigClient interface {
 	ListAll(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfigListResponse, error)
 	List(ctx context.Context, in *DavConfigListRequest, opts ...grpc.CallOption) (*DavConfigListResponse, error)
 	ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
+	ServerInfo(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error)
 }
 
 type pubDavConfigClient struct {
@@ -121,6 +123,16 @@ func (c *pubDavConfigClient) ValidateUserName(ctx context.Context, in *DavConfig
 	return out, nil
 }
 
+func (c *pubDavConfigClient) ServerInfo(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DavServerInfo)
+	err := c.cc.Invoke(ctx, PubDavConfig_ServerInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubDavConfigServer is the server API for PubDavConfig service.
 // All implementations must embed UnimplementedPubDavConfigServer
 // for forward compatibility.
@@ -133,6 +145,7 @@ type PubDavConfigServer interface {
 	ListAll(context.Context, *DavConfig) (*DavConfigListResponse, error)
 	List(context.Context, *DavConfigListRequest) (*DavConfigListResponse, error)
 	ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error)
+	ServerInfo(context.Context, *DavConfig) (*DavServerInfo, error)
 	mustEmbedUnimplementedPubDavConfigServer()
 }
 
@@ -163,6 +176,9 @@ func (UnimplementedPubDavConfigServer) List(context.Context, *DavConfigListReque
 }
 func (UnimplementedPubDavConfigServer) ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateUserName not implemented")
+}
+func (UnimplementedPubDavConfigServer) ServerInfo(context.Context, *DavConfig) (*DavServerInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ServerInfo not implemented")
 }
 func (UnimplementedPubDavConfigServer) mustEmbedUnimplementedPubDavConfigServer() {}
 func (UnimplementedPubDavConfigServer) testEmbeddedByValue()                      {}
@@ -311,6 +327,24 @@ func _PubDavConfig_ValidateUserName_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubDavConfig_ServerInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DavConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubDavConfigServer).ServerInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubDavConfig_ServerInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubDavConfigServer).ServerInfo(ctx, req.(*DavConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubDavConfig_ServiceDesc is the grpc.ServiceDesc for PubDavConfig service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -345,6 +379,10 @@ var PubDavConfig_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateUserName",
 			Handler:    _PubDavConfig_ValidateUserName_Handler,
+		},
+		{
+			MethodName: "ServerInfo",
+			Handler:    _PubDavConfig_ServerInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
