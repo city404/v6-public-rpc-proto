@@ -33,6 +33,7 @@ message DavConfig {
     string password = 13;
     int64 update_ts = 14;
     string identity = 15;
+    string initial_path = 16;
 }
 
 message DavConfigListRequest {
