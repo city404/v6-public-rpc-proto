@@ -28,6 +28,8 @@ const (
 	PubDavConfig_List_FullMethodName             = "/v6.services.pub.PubDavConfig/List"
 	PubDavConfig_ValidateUserName_FullMethodName = "/v6.services.pub.PubDavConfig/ValidateUserName"
 	PubDavConfig_ServerInfo_FullMethodName       = "/v6.services.pub.PubDavConfig/ServerInfo"
+	PubDavConfig_Create_FullMethodName           = "/v6.services.pub.PubDavConfig/Create"
+	PubDavConfig_Delete_FullMethodName           = "/v6.services.pub.PubDavConfig/Delete"
 )
 
 // PubDavConfigClient is the client API for PubDavConfig service.
@@ -43,6 +45,8 @@ type PubDavConfigClient interface {
 	List(ctx context.Context, in *DavConfigListRequest, opts ...grpc.CallOption) (*DavConfigListResponse, error)
 	ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 	ServerInfo(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error)
+	Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error)
+	Delete(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error)
 }
 
 type pubDavConfigClient struct {
@@ -133,6 +137,26 @@ func (c *pubDavConfigClient) ServerInfo(ctx context.Context, in *DavConfig, opts
 	return out, nil
 }
 
+func (c *pubDavConfigClient) Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DavServerInfo)
+	err := c.cc.Invoke(ctx, PubDavConfig_Create_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubDavConfigClient) Delete(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DavServerInfo)
+	err := c.cc.Invoke(ctx, PubDavConfig_Delete_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubDavConfigServer is the server API for PubDavConfig service.
 // All implementations must embed UnimplementedPubDavConfigServer
 // for forward compatibility.
@@ -146,6 +170,8 @@ type PubDavConfigServer interface {
 	List(context.Context, *DavConfigListRequest) (*DavConfigListResponse, error)
 	ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error)
 	ServerInfo(context.Context, *DavConfig) (*DavServerInfo, error)
+	Create(context.Context, *DavConfig) (*DavServerInfo, error)
+	Delete(context.Context, *DavConfig) (*DavServerInfo, error)
 	mustEmbedUnimplementedPubDavConfigServer()
 }
 
@@ -179,6 +205,12 @@ func (UnimplementedPubDavConfigServer) ValidateUserName(context.Context, *DavCon
 }
 func (UnimplementedPubDavConfigServer) ServerInfo(context.Context, *DavConfig) (*DavServerInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ServerInfo not implemented")
+}
+func (UnimplementedPubDavConfigServer) Create(context.Context, *DavConfig) (*DavServerInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
+}
+func (UnimplementedPubDavConfigServer) Delete(context.Context, *DavConfig) (*DavServerInfo, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedPubDavConfigServer) mustEmbedUnimplementedPubDavConfigServer() {}
 func (UnimplementedPubDavConfigServer) testEmbeddedByValue()                      {}
@@ -345,6 +377,42 @@ func _PubDavConfig_ServerInfo_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubDavConfig_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DavConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubDavConfigServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubDavConfig_Create_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubDavConfigServer).Create(ctx, req.(*DavConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubDavConfig_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DavConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubDavConfigServer).Delete(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubDavConfig_Delete_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubDavConfigServer).Delete(ctx, req.(*DavConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubDavConfig_ServiceDesc is the grpc.ServiceDesc for PubDavConfig service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -383,6 +451,14 @@ var PubDavConfig_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ServerInfo",
 			Handler:    _PubDavConfig_ServerInfo_Handler,
+		},
+		{
+			MethodName: "Create",
+			Handler:    _PubDavConfig_Create_Handler,
+		},
+		{
+			MethodName: "Delete",
+			Handler:    _PubDavConfig_Delete_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
