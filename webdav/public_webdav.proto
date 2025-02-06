@@ -35,6 +35,7 @@ message DavConfig {
     string password = 13;
     int64 update_ts = 14;
     string remark = 15;
+    int64 last_access_ts = 16;
 }
 
 message DavConfigListRequest {
