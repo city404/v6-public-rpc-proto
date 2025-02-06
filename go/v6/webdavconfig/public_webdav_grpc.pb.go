@@ -45,8 +45,8 @@ type PubDavConfigClient interface {
 	List(ctx context.Context, in *DavConfigListRequest, opts ...grpc.CallOption) (*DavConfigListResponse, error)
 	ValidateUserName(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 	ServerInfo(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error)
-	Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error)
-	Delete(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error)
+	Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
+	Delete(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error)
 }
 
 type pubDavConfigClient struct {
@@ -137,9 +137,9 @@ func (c *pubDavConfigClient) ServerInfo(ctx context.Context, in *DavConfig, opts
 	return out, nil
 }
 
-func (c *pubDavConfigClient) Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error) {
+func (c *pubDavConfigClient) Create(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DavServerInfo)
+	out := new(DavConfig)
 	err := c.cc.Invoke(ctx, PubDavConfig_Create_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -147,9 +147,9 @@ func (c *pubDavConfigClient) Create(ctx context.Context, in *DavConfig, opts ...
 	return out, nil
 }
 
-func (c *pubDavConfigClient) Delete(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavServerInfo, error) {
+func (c *pubDavConfigClient) Delete(ctx context.Context, in *DavConfig, opts ...grpc.CallOption) (*DavConfig, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DavServerInfo)
+	out := new(DavConfig)
 	err := c.cc.Invoke(ctx, PubDavConfig_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -170,8 +170,8 @@ type PubDavConfigServer interface {
 	List(context.Context, *DavConfigListRequest) (*DavConfigListResponse, error)
 	ValidateUserName(context.Context, *DavConfig) (*common.UserNameValidateResponse, error)
 	ServerInfo(context.Context, *DavConfig) (*DavServerInfo, error)
-	Create(context.Context, *DavConfig) (*DavServerInfo, error)
-	Delete(context.Context, *DavConfig) (*DavServerInfo, error)
+	Create(context.Context, *DavConfig) (*DavConfig, error)
+	Delete(context.Context, *DavConfig) (*DavConfig, error)
 	mustEmbedUnimplementedPubDavConfigServer()
 }
 
@@ -206,10 +206,10 @@ func (UnimplementedPubDavConfigServer) ValidateUserName(context.Context, *DavCon
 func (UnimplementedPubDavConfigServer) ServerInfo(context.Context, *DavConfig) (*DavServerInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ServerInfo not implemented")
 }
-func (UnimplementedPubDavConfigServer) Create(context.Context, *DavConfig) (*DavServerInfo, error) {
+func (UnimplementedPubDavConfigServer) Create(context.Context, *DavConfig) (*DavConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedPubDavConfigServer) Delete(context.Context, *DavConfig) (*DavServerInfo, error) {
+func (UnimplementedPubDavConfigServer) Delete(context.Context, *DavConfig) (*DavConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedPubDavConfigServer) mustEmbedUnimplementedPubDavConfigServer() {}
