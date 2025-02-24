@@ -234,4 +234,10 @@ message UploadTask {
     string task = 3;
     string upload_token = 4;
     string upload_key = 5;
+    string access_key = 10;
+    string secret_key = 11;
+    string bucket = 12;
+    string region = 13;
+    string endpoint = 14;
+    string key = 15;
 }
