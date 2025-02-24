@@ -28,6 +28,7 @@ service PubUserFile {
     rpc PreviewDoc (File) returns (DocFilePreview) {}
     rpc CreateDoc (File) returns (DocFilePreview) {}
     rpc CreateUploadToken (File) returns (UploadToken) {}
+    rpc CreateUploadTask (File) returns (UploadTask) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -225,4 +226,12 @@ message UploadToken {
     string region = 13;
     string endpoint = 14;
     string key = 15;
+}
+
+message UploadTask {
+    bool created = 1;
+    string upload_address = 2;
+    string task = 3;
+    string upload_token = 4;
+    string upload_key = 5;
 }

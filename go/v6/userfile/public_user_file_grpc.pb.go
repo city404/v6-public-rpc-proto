@@ -42,6 +42,7 @@ const (
 	PubUserFile_PreviewDoc_FullMethodName                = "/v6.services.pub.PubUserFile/PreviewDoc"
 	PubUserFile_CreateDoc_FullMethodName                 = "/v6.services.pub.PubUserFile/CreateDoc"
 	PubUserFile_CreateUploadToken_FullMethodName         = "/v6.services.pub.PubUserFile/CreateUploadToken"
+	PubUserFile_CreateUploadTask_FullMethodName          = "/v6.services.pub.PubUserFile/CreateUploadTask"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -72,6 +73,7 @@ type PubUserFileClient interface {
 	PreviewDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error)
 	CreateDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error)
 	CreateUploadToken(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadToken, error)
+	CreateUploadTask(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadTask, error)
 }
 
 type pubUserFileClient struct {
@@ -312,6 +314,16 @@ func (c *pubUserFileClient) CreateUploadToken(ctx context.Context, in *File, opt
 	return out, nil
 }
 
+func (c *pubUserFileClient) CreateUploadTask(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadTask, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UploadTask)
+	err := c.cc.Invoke(ctx, PubUserFile_CreateUploadTask_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility.
@@ -340,6 +352,7 @@ type PubUserFileServer interface {
 	PreviewDoc(context.Context, *File) (*DocFilePreview, error)
 	CreateDoc(context.Context, *File) (*DocFilePreview, error)
 	CreateUploadToken(context.Context, *File) (*UploadToken, error)
+	CreateUploadTask(context.Context, *File) (*UploadTask, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -418,6 +431,9 @@ func (UnimplementedPubUserFileServer) CreateDoc(context.Context, *File) (*DocFil
 }
 func (UnimplementedPubUserFileServer) CreateUploadToken(context.Context, *File) (*UploadToken, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateUploadToken not implemented")
+}
+func (UnimplementedPubUserFileServer) CreateUploadTask(context.Context, *File) (*UploadTask, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUploadTask not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 func (UnimplementedPubUserFileServer) testEmbeddedByValue()                     {}
@@ -854,6 +870,24 @@ func _PubUserFile_CreateUploadToken_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_CreateUploadTask_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(File)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).CreateUploadTask(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_CreateUploadTask_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).CreateUploadTask(ctx, req.(*File))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -952,6 +986,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateUploadToken",
 			Handler:    _PubUserFile_CreateUploadToken_Handler,
+		},
+		{
+			MethodName: "CreateUploadTask",
+			Handler:    _PubUserFile_CreateUploadTask_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
