@@ -9,6 +9,7 @@ service PubUser {
     rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
     rpc Refresh (Token) returns (Token) {} // refresh token. 
     rpc Logoff (Token) returns (User) {}
+    rpc DeviceAuthorization (DeviceAuthorizationRequest) returns (LoginResponse) {}
     rpc ResetPassword (LoginRequest) returns (User) {} 
     rpc ChangePassword (ChangePasswordRequest) returns (User) {} 
     rpc Register (RegisterRequest) returns (User) {}
@@ -49,6 +50,12 @@ message LoginRequest {
     string captcha = 9;
     string state = 10;
     string country_code = 11;
+}
+
+message DeviceAuthorizationRequest {
+    string identity = 1;
+    string device = 2;
+    int32 type = 3;
 }
 
 message LoginResponse {

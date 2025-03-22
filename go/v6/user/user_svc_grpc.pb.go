@@ -24,6 +24,7 @@ const (
 	PubUser_Login_FullMethodName                    = "/v6.services.pub.PubUser/Login"
 	PubUser_Refresh_FullMethodName                  = "/v6.services.pub.PubUser/Refresh"
 	PubUser_Logoff_FullMethodName                   = "/v6.services.pub.PubUser/Logoff"
+	PubUser_DeviceAuthorization_FullMethodName      = "/v6.services.pub.PubUser/DeviceAuthorization"
 	PubUser_ResetPassword_FullMethodName            = "/v6.services.pub.PubUser/ResetPassword"
 	PubUser_ChangePassword_FullMethodName           = "/v6.services.pub.PubUser/ChangePassword"
 	PubUser_Register_FullMethodName                 = "/v6.services.pub.PubUser/Register"
@@ -47,6 +48,7 @@ type PubUserClient interface {
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	Refresh(ctx context.Context, in *Token, opts ...grpc.CallOption) (*Token, error)
 	Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error)
+	DeviceAuthorization(ctx context.Context, in *DeviceAuthorizationRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*User, error)
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*User, error)
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*User, error)
@@ -104,6 +106,16 @@ func (c *pubUserClient) Logoff(ctx context.Context, in *Token, opts ...grpc.Call
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(User)
 	err := c.cc.Invoke(ctx, PubUser_Logoff_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserClient) DeviceAuthorization(ctx context.Context, in *DeviceAuthorizationRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, PubUser_DeviceAuthorization_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -248,6 +260,7 @@ type PubUserServer interface {
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	Refresh(context.Context, *Token) (*Token, error)
 	Logoff(context.Context, *Token) (*User, error)
+	DeviceAuthorization(context.Context, *DeviceAuthorizationRequest) (*LoginResponse, error)
 	ResetPassword(context.Context, *LoginRequest) (*User, error)
 	ChangePassword(context.Context, *ChangePasswordRequest) (*User, error)
 	Register(context.Context, *RegisterRequest) (*User, error)
@@ -282,6 +295,9 @@ func (UnimplementedPubUserServer) Refresh(context.Context, *Token) (*Token, erro
 }
 func (UnimplementedPubUserServer) Logoff(context.Context, *Token) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Logoff not implemented")
+}
+func (UnimplementedPubUserServer) DeviceAuthorization(context.Context, *DeviceAuthorizationRequest) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeviceAuthorization not implemented")
 }
 func (UnimplementedPubUserServer) ResetPassword(context.Context, *LoginRequest) (*User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
@@ -411,6 +427,24 @@ func _PubUser_Logoff_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PubUserServer).Logoff(ctx, req.(*Token))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUser_DeviceAuthorization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeviceAuthorizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).DeviceAuthorization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_DeviceAuthorization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).DeviceAuthorization(ctx, req.(*DeviceAuthorizationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -671,6 +705,10 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Logoff",
 			Handler:    _PubUser_Logoff_Handler,
+		},
+		{
+			MethodName: "DeviceAuthorization",
+			Handler:    _PubUser_DeviceAuthorization_Handler,
 		},
 		{
 			MethodName: "ResetPassword",
