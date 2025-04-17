@@ -29,6 +29,7 @@ service PubUserFile {
     rpc CreateDoc (File) returns (DocFilePreview) {}
     rpc CreateUploadToken (File) returns (UploadToken) {}
     rpc CreateUploadTask (File) returns (UploadTask) {}
+    rpc CreateTemporaryUpload (File) returns (UploadTask) {}
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
