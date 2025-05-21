@@ -1,0 +1,281 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ticket/tickets_svc.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PubTicket"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "commonOrderByInfo": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "asc": {
+          "type": "boolean"
+        }
+      }
+    },
+    "commonScanListRequest": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        },
+        "limit": {
+          "type": "string",
+          "format": "int64"
+        },
+        "orderBy": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/commonOrderByInfo"
+          }
+        },
+        "version": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "commonStringList": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "pubContactInfo": {
+      "type": "object",
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        }
+      }
+    },
+    "pubConversation": {
+      "type": "object",
+      "properties": {
+        "isDescriptionThread": {
+          "type": "boolean"
+        },
+        "canReply": {
+          "type": "boolean"
+        },
+        "bcc": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "lastRatingIconUrl": {
+          "type": "string"
+        },
+        "impersonatedUser": {
+          "type": "string"
+        },
+        "identity": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "direction": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "cc": {
+          "type": "string"
+        },
+        "keyWords": {
+          "type": "string"
+        },
+        "visibility": {
+          "type": "string"
+        },
+        "content": {
+          "type": "string"
+        },
+        "encodedContent": {
+          "type": "string"
+        },
+        "isForward": {
+          "type": "boolean"
+        },
+        "hasAttach": {
+          "type": "boolean"
+        },
+        "attachmentCount": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "fromEmailAddress": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createTs": {
+          "type": "string",
+          "format": "int64"
+        },
+        "userThread": {
+          "type": "boolean"
+        },
+        "cleanContent": {
+          "type": "string"
+        }
+      }
+    },
+    "pubConversationListResponse": {
+      "type": "object",
+      "properties": {
+        "conversations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pubConversation"
+          }
+        },
+        "listInfo": {
+          "$ref": "#/definitions/commonScanListRequest"
+        }
+      }
+    },
+    "pubTicket": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "subCategory": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "createTs": {
+          "type": "string",
+          "format": "int64"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "contentType": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "commentCount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "threadCount": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "pubTicketListResponse": {
+      "type": "object",
+      "properties": {
+        "tickets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pubTicket"
+          }
+        },
+        "listInfo": {
+          "$ref": "#/definitions/commonScanListRequest"
+        }
+      }
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
