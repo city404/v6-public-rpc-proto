@@ -7,6 +7,7 @@ go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
 # protoc-gen-grpc-gateway
 go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
+go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
 GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 
@@ -23,6 +24,7 @@ function makeFile(){
     file=$1
     echo "Generate: ${file}"
     protoc --go_out=./go_temp --go-grpc_out=./go_temp --grpc-gateway_out=./go_temp ${file}
+    protoc -I . --openapiv2_out ./gen/openapiv2 --openapiv2_opt logtostderr=true,allow_merge=true,merge_file_name=api ${file}
 }
 
 
