@@ -2,10 +2,16 @@ syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/user";
 import "common/pub_common.proto";
+import "google/api/annotations.proto";
 
 
 service PubUser {
-    rpc Get (User) returns (User) {}
+    rpc Get (User) returns (User) {
+        option (google.api.http) = {
+            post: "/v1/example/echo"
+            body: "*"
+        };
+    }
     rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
     rpc Refresh (Token) returns (Token) {} // refresh token. 
     rpc Logoff (Token) returns (User) {}
