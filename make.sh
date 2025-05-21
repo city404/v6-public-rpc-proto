@@ -24,7 +24,7 @@ function makeFile(){
     file=$1
     echo "Generate: ${file}"
     protoc --go_out=./go_temp --go-grpc_out=./go_temp --grpc-gateway_out=./go_temp ${file}
-    protoc -I . --openapiv2_out ./gen/openapiv2 --openapiv2_opt logtostderr=true,allow_merge=true,merge_file_name=api ${file}
+#    protoc -I . --openapiv2_out ./gen/openapiv2 --openapiv2_opt logtostderr=true,allow_merge=true,merge_file_name=api ${file}
 }
 
 
