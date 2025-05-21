@@ -8,27 +8,112 @@ import "google/api/annotations.proto";
 service PubUser {
     rpc Get (User) returns (User) {
         option (google.api.http) = {
-            post: "/v1/example/echo"
+            post: "/v6/user/get"
             body: "*"
         };
     }
-    rpc Login (LoginRequest) returns (LoginResponse) {} // login with password
-    rpc Refresh (Token) returns (Token) {} // refresh token. 
-    rpc Logoff (Token) returns (User) {}
-    rpc DeviceAuthorization (DeviceAuthorizationRequest) returns (LoginResponse) {}
-    rpc ResetPassword (LoginRequest) returns (User) {} 
-    rpc ChangePassword (ChangePasswordRequest) returns (User) {} 
-    rpc Register (RegisterRequest) returns (User) {}
-    rpc Delete (User) returns (User) {}
-    rpc Update (User) returns (User) {}
-    rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {}
-    rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {}
-    rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {}
-    rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {}
-    rpc ValidateUserInfo (UserValidateInfo) returns (.v6.services.pub.common.UserNameValidateResponse) {}
-    rpc GetStatisticsAndQuota (User) returns (UserStatisticsAndQuota) {}
-    rpc ExtendQuota (UserQuotaExtendInfo) returns (UserStatisticsAndQuota) {}
-    rpc GetAvailableExtendQuota (User) returns (UserQuotaExtendInfo) {}
+    rpc Login (LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/login"
+            body: "*"
+        };
+    } // login with password
+    rpc Refresh (Token) returns (Token) {
+        option (google.api.http) = {
+            post: "/v6/user/refresh"
+            body: "*"
+        };
+    } // refresh token. 
+    rpc Logoff (Token) returns (User) {
+        option (google.api.http) = {
+            post: "/v6/user/logoff"
+            body: "*"
+        };
+    }
+    rpc DeviceAuthorization (DeviceAuthorizationRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/device_authorization"
+            body: "*"
+        };
+    }
+    rpc ResetPassword (LoginRequest) returns (User) {
+        option (google.api.http) = {
+            post: "/v6/user/reset_password"
+            body: "*"
+        };
+    } 
+    rpc ChangePassword (ChangePasswordRequest) returns (User) {
+        option (google.api.http) = {
+            post: "/v6/user/change_password"
+            body: "*"
+        };
+    } 
+    rpc Register (RegisterRequest) returns (User) {
+        option (google.api.http) = {
+            post: "/v6/user/register"
+            body: "*"
+        };
+    }
+    rpc Delete (User) returns (User) {
+        option (google.api.http) = {
+            post: "/v6/user/delete"
+            body: "*"
+        };
+    }
+    rpc Update (User) returns (User) {
+        option (google.api.http) = {
+            post: "/v6/user/update"
+            body: "*"
+        };
+    }
+    rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/sms_verify_code"
+            body: "*"
+        };
+    }
+    rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/sms_verify_code_not_user"
+            body: "*"
+        };
+    }
+    rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/verify_auth_token"
+            body: "*"
+        };
+    }
+    rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/create_auth_token"
+            body: "*"
+        };
+    }
+    rpc ValidateUserInfo (UserValidateInfo) returns (.v6.services.pub.common.UserNameValidateResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/validate_user_info"
+            body: "*"
+        };
+    }
+    rpc GetStatisticsAndQuota (User) returns (UserStatisticsAndQuota) {
+        option (google.api.http) = {
+            post: "/v6/user/get_statistics_and_quota"
+            body: "*"
+        };
+    }
+    rpc ExtendQuota (UserQuotaExtendInfo) returns (UserStatisticsAndQuota) {
+        option (google.api.http) = {
+            post: "/v6/user/extend_quota"
+            body: "*"
+        };
+    }
+    rpc GetAvailableExtendQuota (User) returns (UserQuotaExtendInfo) {
+        option (google.api.http) = {
+            post: "/v6/user/get_available_extend_quota"
+            body: "*"
+        };
+    }
 }
 
 message User {

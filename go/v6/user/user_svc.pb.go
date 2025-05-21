@@ -1683,26 +1683,26 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\n" +
 	"disk_bytes\x18\x05 \x01(\x03R\tdiskBytes\x12\x1d\n" +
 	"\n" +
-	"disk_files\x18\x06 \x01(\x03R\tdiskFiles2\xf7\v\n" +
-	"\aPubUser\x12P\n" +
-	"\x03Get\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/example/echo\x12H\n" +
-	"\x05Login\x12\x1d.v6.services.pub.LoginRequest\x1a\x1e.v6.services.pub.LoginResponse\"\x00\x12;\n" +
-	"\aRefresh\x12\x16.v6.services.pub.Token\x1a\x16.v6.services.pub.Token\"\x00\x129\n" +
-	"\x06Logoff\x12\x16.v6.services.pub.Token\x1a\x15.v6.services.pub.User\"\x00\x12d\n" +
-	"\x13DeviceAuthorization\x12+.v6.services.pub.DeviceAuthorizationRequest\x1a\x1e.v6.services.pub.LoginResponse\"\x00\x12G\n" +
-	"\rResetPassword\x12\x1d.v6.services.pub.LoginRequest\x1a\x15.v6.services.pub.User\"\x00\x12Q\n" +
-	"\x0eChangePassword\x12&.v6.services.pub.ChangePasswordRequest\x1a\x15.v6.services.pub.User\"\x00\x12E\n" +
-	"\bRegister\x12 .v6.services.pub.RegisterRequest\x1a\x15.v6.services.pub.User\"\x00\x128\n" +
-	"\x06Delete\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x00\x128\n" +
-	"\x06Update\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x00\x12j\n" +
-	"\x11SendSmsVerifyCode\x12(.v6.services.pub.SmsVeifyCodeSendRequest\x1a).v6.services.pub.SmsVeifyCodeSendResponse\"\x00\x12x\n" +
-	"\x18SendSmsVerifyCodeNotUser\x12/.v6.services.pub.SmsVeifyCodeSendRequestNotUser\x1a).v6.services.pub.SmsVeifyCodeSendResponse\"\x00\x12\\\n" +
-	"\x0fVerifyAuthToken\x12\x1d.v6.services.pub.LoginRequest\x1a(.v6.services.pub.OauthTokenCheckResponse\"\x00\x12W\n" +
-	"\x0fCreateAuthToken\x12\x1d.v6.services.pub.LoginRequest\x1a#.v6.services.pub.OauthTokenResponse\"\x00\x12i\n" +
-	"\x10ValidateUserInfo\x12!.v6.services.pub.UserValidateInfo\x1a0.v6.services.pub.common.UserNameValidateResponse\"\x00\x12Y\n" +
-	"\x15GetStatisticsAndQuota\x12\x15.v6.services.pub.User\x1a'.v6.services.pub.UserStatisticsAndQuota\"\x00\x12^\n" +
-	"\vExtendQuota\x12$.v6.services.pub.UserQuotaExtendInfo\x1a'.v6.services.pub.UserStatisticsAndQuota\"\x00\x12X\n" +
-	"\x17GetAvailableExtendQuota\x12\x15.v6.services.pub.User\x1a$.v6.services.pub.UserQuotaExtendInfo\"\x00B3Z1github.com/city404/v6-public-rpc-proto/go/v6/userb\x06proto3"
+	"disk_files\x18\x06 \x01(\x03R\tdiskFiles2\xbe\x10\n" +
+	"\aPubUser\x12L\n" +
+	"\x03Get\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v6/user/get\x12a\n" +
+	"\x05Login\x12\x1d.v6.services.pub.LoginRequest\x1a\x1e.v6.services.pub.LoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v6/user/login\x12V\n" +
+	"\aRefresh\x12\x16.v6.services.pub.Token\x1a\x16.v6.services.pub.Token\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/user/refresh\x12S\n" +
+	"\x06Logoff\x12\x16.v6.services.pub.Token\x1a\x15.v6.services.pub.User\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v6/user/logoff\x12\x8c\x01\n" +
+	"\x13DeviceAuthorization\x12+.v6.services.pub.DeviceAuthorizationRequest\x1a\x1e.v6.services.pub.LoginResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/user/device_authorization\x12i\n" +
+	"\rResetPassword\x12\x1d.v6.services.pub.LoginRequest\x1a\x15.v6.services.pub.User\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v6/user/reset_password\x12t\n" +
+	"\x0eChangePassword\x12&.v6.services.pub.ChangePasswordRequest\x1a\x15.v6.services.pub.User\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v6/user/change_password\x12a\n" +
+	"\bRegister\x12 .v6.services.pub.RegisterRequest\x1a\x15.v6.services.pub.User\"\x1c\x82\xd3\xe4\x93\x02\x16:\x01*\"\x11/v6/user/register\x12R\n" +
+	"\x06Delete\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v6/user/delete\x12R\n" +
+	"\x06Update\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v6/user/update\x12\x8d\x01\n" +
+	"\x11SendSmsVerifyCode\x12(.v6.services.pub.SmsVeifyCodeSendRequest\x1a).v6.services.pub.SmsVeifyCodeSendResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v6/user/sms_verify_code\x12\xa4\x01\n" +
+	"\x18SendSmsVerifyCodeNotUser\x12/.v6.services.pub.SmsVeifyCodeSendRequestNotUser\x1a).v6.services.pub.SmsVeifyCodeSendResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v6/user/sms_verify_code_not_user\x12\x81\x01\n" +
+	"\x0fVerifyAuthToken\x12\x1d.v6.services.pub.LoginRequest\x1a(.v6.services.pub.OauthTokenCheckResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v6/user/verify_auth_token\x12|\n" +
+	"\x0fCreateAuthToken\x12\x1d.v6.services.pub.LoginRequest\x1a#.v6.services.pub.OauthTokenResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v6/user/create_auth_token\x12\x8f\x01\n" +
+	"\x10ValidateUserInfo\x12!.v6.services.pub.UserValidateInfo\x1a0.v6.services.pub.common.UserNameValidateResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v6/user/validate_user_info\x12\x85\x01\n" +
+	"\x15GetStatisticsAndQuota\x12\x15.v6.services.pub.User\x1a'.v6.services.pub.UserStatisticsAndQuota\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v6/user/get_statistics_and_quota\x12~\n" +
+	"\vExtendQuota\x12$.v6.services.pub.UserQuotaExtendInfo\x1a'.v6.services.pub.UserStatisticsAndQuota\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v6/user/extend_quota\x12\x86\x01\n" +
+	"\x17GetAvailableExtendQuota\x12\x15.v6.services.pub.User\x1a$.v6.services.pub.UserQuotaExtendInfo\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v6/user/get_available_extend_quotaB3Z1github.com/city404/v6-public-rpc-proto/go/v6/userb\x06proto3"
 
 var (
 	file_user_user_svc_proto_rawDescOnce sync.Once
