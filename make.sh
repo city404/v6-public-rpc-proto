@@ -5,6 +5,8 @@
 git pull
 go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+# protoc-gen-grpc-gateway
+go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
 GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 
@@ -20,7 +22,7 @@ OUT_DIR=`pwd`
 function makeFile(){
     file=$1
     echo "Generate: ${file}"
-    protoc --go_out=./go_temp --go-grpc_out=./go_temp ${file}
+    protoc --go_out=./go_temp --go-grpc_out=./go_temp --grpc-gateway_out=./go_temp ${file}
 }
 
 
