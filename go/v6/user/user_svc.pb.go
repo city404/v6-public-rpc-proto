@@ -155,6 +155,8 @@ type LoginRequest struct {
 	CodeChallenge       string                 `protobuf:"bytes,12,opt,name=code_challenge,json=codeChallenge,proto3" json:"code_challenge,omitempty"`                     // for oauth2.0 PKCE
 	CodeChallengeMethod string                 `protobuf:"bytes,13,opt,name=code_challenge_method,json=codeChallengeMethod,proto3" json:"code_challenge_method,omitempty"` // for oauth2.0 PKCE
 	Device              string                 `protobuf:"bytes,14,opt,name=device,proto3" json:"device,omitempty"`                                                        // device information, used for device authorization
+	Nonce               string                 `protobuf:"bytes,15,opt,name=nonce,proto3" json:"nonce,omitempty"`                                                          // for oauth2.0 nonce
+	Scope               string                 `protobuf:"bytes,16,opt,name=scope,proto3" json:"scope,omitempty"`                                                          // for oauth2.0 scope
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -283,6 +285,20 @@ func (x *LoginRequest) GetCodeChallengeMethod() string {
 func (x *LoginRequest) GetDevice() string {
 	if x != nil {
 		return x.Device
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetNonce() string {
+	if x != nil {
+		return x.Nonce
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetScope() string {
+	if x != nil {
+		return x.Scope
 	}
 	return ""
 }
@@ -1581,7 +1597,7 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\tcreate_ts\x18\t \x01(\x03R\bcreateTs\x12\x12\n" +
 	"\x04hash\x18\n" +
 	" \x01(\tR\x04hash\x12\x12\n" +
-	"\x04icon\x18\v \x01(\tR\x04icon\"\xa8\x03\n" +
+	"\x04icon\x18\v \x01(\tR\x04icon\"\xd4\x03\n" +
 	"\fLoginRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
@@ -1599,7 +1615,9 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\fcountry_code\x18\v \x01(\tR\vcountryCode\x12%\n" +
 	"\x0ecode_challenge\x18\f \x01(\tR\rcodeChallenge\x122\n" +
 	"\x15code_challenge_method\x18\r \x01(\tR\x13codeChallengeMethod\x12\x16\n" +
-	"\x06device\x18\x0e \x01(\tR\x06device\"d\n" +
+	"\x06device\x18\x0e \x01(\tR\x06device\x12\x14\n" +
+	"\x05nonce\x18\x0f \x01(\tR\x05nonce\x12\x14\n" +
+	"\x05scope\x18\x10 \x01(\tR\x05scope\"d\n" +
 	"\x1aDeviceAuthorizationRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x16\n" +
 	"\x06device\x18\x02 \x01(\tR\x06device\x12\x12\n" +
