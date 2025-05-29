@@ -146,6 +146,8 @@ message LoginRequest {
     string device = 14; // device information, used for device authorization
     string nonce = 15; // for oauth2.0 nonce
     string scope = 16; // for oauth2.0 scope
+    int32 version = 17; // for oauth2.0 version
+
 }
 
 message DeviceAuthorizationRequest {

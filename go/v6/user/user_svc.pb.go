@@ -157,6 +157,7 @@ type LoginRequest struct {
 	Device              string                 `protobuf:"bytes,14,opt,name=device,proto3" json:"device,omitempty"`                                                        // device information, used for device authorization
 	Nonce               string                 `protobuf:"bytes,15,opt,name=nonce,proto3" json:"nonce,omitempty"`                                                          // for oauth2.0 nonce
 	Scope               string                 `protobuf:"bytes,16,opt,name=scope,proto3" json:"scope,omitempty"`                                                          // for oauth2.0 scope
+	Version             int32                  `protobuf:"varint,17,opt,name=version,proto3" json:"version,omitempty"`                                                     // for oauth2.0 version
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -301,6 +302,13 @@ func (x *LoginRequest) GetScope() string {
 		return x.Scope
 	}
 	return ""
+}
+
+func (x *LoginRequest) GetVersion() int32 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
 }
 
 type DeviceAuthorizationRequest struct {
@@ -1597,7 +1605,7 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\tcreate_ts\x18\t \x01(\x03R\bcreateTs\x12\x12\n" +
 	"\x04hash\x18\n" +
 	" \x01(\tR\x04hash\x12\x12\n" +
-	"\x04icon\x18\v \x01(\tR\x04icon\"\xd4\x03\n" +
+	"\x04icon\x18\v \x01(\tR\x04icon\"\xee\x03\n" +
 	"\fLoginRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
@@ -1617,7 +1625,8 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\x15code_challenge_method\x18\r \x01(\tR\x13codeChallengeMethod\x12\x16\n" +
 	"\x06device\x18\x0e \x01(\tR\x06device\x12\x14\n" +
 	"\x05nonce\x18\x0f \x01(\tR\x05nonce\x12\x14\n" +
-	"\x05scope\x18\x10 \x01(\tR\x05scope\"d\n" +
+	"\x05scope\x18\x10 \x01(\tR\x05scope\x12\x18\n" +
+	"\aversion\x18\x11 \x01(\x05R\aversion\"d\n" +
 	"\x1aDeviceAuthorizationRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x16\n" +
 	"\x06device\x18\x02 \x01(\tR\x06device\x12\x12\n" +
