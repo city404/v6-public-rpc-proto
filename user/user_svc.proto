@@ -32,19 +32,19 @@ service PubUser {
     }
     rpc DeviceAuthorization (DeviceAuthorizationRequest) returns (LoginResponse) {
         option (google.api.http) = {
-            post: "/v6/user/device_authorization"
+            post: "/v6/user/deviceAuthorization"
             body: "*"
         };
     }
     rpc ResetPassword (LoginRequest) returns (User) {
         option (google.api.http) = {
-            post: "/v6/user/reset_password"
+            post: "/v6/user/resetPassword"
             body: "*"
         };
     } 
     rpc ChangePassword (ChangePasswordRequest) returns (User) {
         option (google.api.http) = {
-            post: "/v6/user/change_password"
+            post: "/v6/user/changePassword"
             body: "*"
         };
     } 
@@ -68,49 +68,50 @@ service PubUser {
     }
     rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {
         option (google.api.http) = {
-            post: "/v6/user/sms_verify_code"
+            post: "/v6/user/smsVerifyCode"
             body: "*"
         };
     }
     rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {
         option (google.api.http) = {
-            post: "/v6/user/sms_verify_code_not_user"
+            post: "/v6/user/smsVerifyCodeNotUser"
             body: "*"
         };
     }
     rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {
         option (google.api.http) = {
-            post: "/v6/user/verify_auth_token"
+            post: "/v6/user/verifyAuthToken"
             body: "*"
         };
     }
     rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {
         option (google.api.http) = {
-            post: "/v6/user/create_auth_token"
+            post: "/v6/user/createAuthToken"
             body: "*"
         };
     }
     rpc ValidateUserInfo (UserValidateInfo) returns (.v6.services.pub.common.UserNameValidateResponse) {
         option (google.api.http) = {
-            post: "/v6/user/validate_user_info"
+            post: "/v6/user/validateUserInfo"
             body: "*"
         };
     }
     rpc GetStatisticsAndQuota (User) returns (UserStatisticsAndQuota) {
         option (google.api.http) = {
-            post: "/v6/user/get_statistics_and_quota"
+            post: "/v6/user/getStatisticsAndQuota"
             body: "*"
         };
     }
     rpc ExtendQuota (UserQuotaExtendInfo) returns (UserStatisticsAndQuota) {
         option (google.api.http) = {
-            post: "/v6/user/extend_quota"
+            post: "/v6/user/extendQuota"
+            // This endpoint is used to extend user quota, such as disk space, traffic, etc.
             body: "*"
         };
     }
     rpc GetAvailableExtendQuota (User) returns (UserQuotaExtendInfo) {
         option (google.api.http) = {
-            post: "/v6/user/get_available_extend_quota"
+            post: "/v6/user/getAvailableExtendQuota"
             body: "*"
         };
     }

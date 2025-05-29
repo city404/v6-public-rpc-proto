@@ -559,7 +559,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/DeviceAuthorization", runtime.WithHTTPPathPattern("/v6/user/device_authorization"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/DeviceAuthorization", runtime.WithHTTPPathPattern("/v6/user/deviceAuthorization"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -579,7 +579,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ResetPassword", runtime.WithHTTPPathPattern("/v6/user/reset_password"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ResetPassword", runtime.WithHTTPPathPattern("/v6/user/resetPassword"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -599,7 +599,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ChangePassword", runtime.WithHTTPPathPattern("/v6/user/change_password"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ChangePassword", runtime.WithHTTPPathPattern("/v6/user/changePassword"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -679,7 +679,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCode", runtime.WithHTTPPathPattern("/v6/user/sms_verify_code"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCode", runtime.WithHTTPPathPattern("/v6/user/smsVerifyCode"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -699,7 +699,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser", runtime.WithHTTPPathPattern("/v6/user/sms_verify_code_not_user"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser", runtime.WithHTTPPathPattern("/v6/user/smsVerifyCodeNotUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -719,7 +719,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/VerifyAuthToken", runtime.WithHTTPPathPattern("/v6/user/verify_auth_token"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/VerifyAuthToken", runtime.WithHTTPPathPattern("/v6/user/verifyAuthToken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -739,7 +739,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/CreateAuthToken", runtime.WithHTTPPathPattern("/v6/user/create_auth_token"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/CreateAuthToken", runtime.WithHTTPPathPattern("/v6/user/createAuthToken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -759,7 +759,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ValidateUserInfo", runtime.WithHTTPPathPattern("/v6/user/validate_user_info"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ValidateUserInfo", runtime.WithHTTPPathPattern("/v6/user/validateUserInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -779,7 +779,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/GetStatisticsAndQuota", runtime.WithHTTPPathPattern("/v6/user/get_statistics_and_quota"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/GetStatisticsAndQuota", runtime.WithHTTPPathPattern("/v6/user/getStatisticsAndQuota"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -799,7 +799,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ExtendQuota", runtime.WithHTTPPathPattern("/v6/user/extend_quota"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/ExtendQuota", runtime.WithHTTPPathPattern("/v6/user/extendQuota"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -819,7 +819,7 @@ func RegisterPubUserHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/GetAvailableExtendQuota", runtime.WithHTTPPathPattern("/v6/user/get_available_extend_quota"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.pub.PubUser/GetAvailableExtendQuota", runtime.WithHTTPPathPattern("/v6/user/getAvailableExtendQuota"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -945,7 +945,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/DeviceAuthorization", runtime.WithHTTPPathPattern("/v6/user/device_authorization"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/DeviceAuthorization", runtime.WithHTTPPathPattern("/v6/user/deviceAuthorization"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -962,7 +962,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ResetPassword", runtime.WithHTTPPathPattern("/v6/user/reset_password"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ResetPassword", runtime.WithHTTPPathPattern("/v6/user/resetPassword"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -979,7 +979,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ChangePassword", runtime.WithHTTPPathPattern("/v6/user/change_password"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ChangePassword", runtime.WithHTTPPathPattern("/v6/user/changePassword"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1047,7 +1047,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCode", runtime.WithHTTPPathPattern("/v6/user/sms_verify_code"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCode", runtime.WithHTTPPathPattern("/v6/user/smsVerifyCode"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1064,7 +1064,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser", runtime.WithHTTPPathPattern("/v6/user/sms_verify_code_not_user"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser", runtime.WithHTTPPathPattern("/v6/user/smsVerifyCodeNotUser"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1081,7 +1081,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/VerifyAuthToken", runtime.WithHTTPPathPattern("/v6/user/verify_auth_token"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/VerifyAuthToken", runtime.WithHTTPPathPattern("/v6/user/verifyAuthToken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1098,7 +1098,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/CreateAuthToken", runtime.WithHTTPPathPattern("/v6/user/create_auth_token"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/CreateAuthToken", runtime.WithHTTPPathPattern("/v6/user/createAuthToken"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1115,7 +1115,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ValidateUserInfo", runtime.WithHTTPPathPattern("/v6/user/validate_user_info"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ValidateUserInfo", runtime.WithHTTPPathPattern("/v6/user/validateUserInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1132,7 +1132,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/GetStatisticsAndQuota", runtime.WithHTTPPathPattern("/v6/user/get_statistics_and_quota"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/GetStatisticsAndQuota", runtime.WithHTTPPathPattern("/v6/user/getStatisticsAndQuota"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1149,7 +1149,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ExtendQuota", runtime.WithHTTPPathPattern("/v6/user/extend_quota"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/ExtendQuota", runtime.WithHTTPPathPattern("/v6/user/extendQuota"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1166,7 +1166,7 @@ func RegisterPubUserHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/GetAvailableExtendQuota", runtime.WithHTTPPathPattern("/v6/user/get_available_extend_quota"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.pub.PubUser/GetAvailableExtendQuota", runtime.WithHTTPPathPattern("/v6/user/getAvailableExtendQuota"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1187,20 +1187,20 @@ var (
 	pattern_PubUser_Login_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "login"}, ""))
 	pattern_PubUser_Refresh_0                  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "refresh"}, ""))
 	pattern_PubUser_Logoff_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "logoff"}, ""))
-	pattern_PubUser_DeviceAuthorization_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "device_authorization"}, ""))
-	pattern_PubUser_ResetPassword_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "reset_password"}, ""))
-	pattern_PubUser_ChangePassword_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "change_password"}, ""))
+	pattern_PubUser_DeviceAuthorization_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "deviceAuthorization"}, ""))
+	pattern_PubUser_ResetPassword_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "resetPassword"}, ""))
+	pattern_PubUser_ChangePassword_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "changePassword"}, ""))
 	pattern_PubUser_Register_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "register"}, ""))
 	pattern_PubUser_Delete_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "delete"}, ""))
 	pattern_PubUser_Update_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "update"}, ""))
-	pattern_PubUser_SendSmsVerifyCode_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "sms_verify_code"}, ""))
-	pattern_PubUser_SendSmsVerifyCodeNotUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "sms_verify_code_not_user"}, ""))
-	pattern_PubUser_VerifyAuthToken_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "verify_auth_token"}, ""))
-	pattern_PubUser_CreateAuthToken_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "create_auth_token"}, ""))
-	pattern_PubUser_ValidateUserInfo_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "validate_user_info"}, ""))
-	pattern_PubUser_GetStatisticsAndQuota_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "get_statistics_and_quota"}, ""))
-	pattern_PubUser_ExtendQuota_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "extend_quota"}, ""))
-	pattern_PubUser_GetAvailableExtendQuota_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "get_available_extend_quota"}, ""))
+	pattern_PubUser_SendSmsVerifyCode_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "smsVerifyCode"}, ""))
+	pattern_PubUser_SendSmsVerifyCodeNotUser_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "smsVerifyCodeNotUser"}, ""))
+	pattern_PubUser_VerifyAuthToken_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "verifyAuthToken"}, ""))
+	pattern_PubUser_CreateAuthToken_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "createAuthToken"}, ""))
+	pattern_PubUser_ValidateUserInfo_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "validateUserInfo"}, ""))
+	pattern_PubUser_GetStatisticsAndQuota_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "getStatisticsAndQuota"}, ""))
+	pattern_PubUser_ExtendQuota_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "extendQuota"}, ""))
+	pattern_PubUser_GetAvailableExtendQuota_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "user", "getAvailableExtendQuota"}, ""))
 )
 
 var (
