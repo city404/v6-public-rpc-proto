@@ -899,8 +899,7 @@ type OauthTokenResponse struct {
 	ReturnUrl     string                 `protobuf:"bytes,6,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
 	ReturnType    int32                  `protobuf:"varint,7,opt,name=return_type,json=returnType,proto3" json:"return_type,omitempty"`
 	Captcha       string                 `protobuf:"bytes,8,opt,name=captcha,proto3" json:"captcha,omitempty"`
-	State         string                 `protobuf:"bytes,9,opt,name=state,proto3" json:"state,omitempty"`
-	Random        string                 `protobuf:"bytes,10,opt,name=random,proto3" json:"random,omitempty"` // random string for security
+	State         string                 `protobuf:"bytes,9,opt,name=state,proto3" json:"state,omitempty"` //string random = 10; // random string for security
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -994,13 +993,6 @@ func (x *OauthTokenResponse) GetCaptcha() string {
 func (x *OauthTokenResponse) GetState() string {
 	if x != nil {
 		return x.State
-	}
-	return ""
-}
-
-func (x *OauthTokenResponse) GetRandom() string {
-	if x != nil {
-		return x.Random
 	}
 	return ""
 }
@@ -1672,7 +1664,7 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\acaptcha\x18\x01 \x01(\tR\acaptcha\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\x05R\x04type\x12\x14\n" +
 	"\x05addon\x18\x03 \x01(\tR\x05addon\x12\x1b\n" +
-	"\texpire_ts\x18\x04 \x01(\x03R\bexpireTs\"\x8a\x02\n" +
+	"\texpire_ts\x18\x04 \x01(\x03R\bexpireTs\"\xf2\x01\n" +
 	"\x12OauthTokenResponse\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x14\n" +
 	"\x05addon\x18\x02 \x01(\tR\x05addon\x12\x14\n" +
@@ -1684,9 +1676,7 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\vreturn_type\x18\a \x01(\x05R\n" +
 	"returnType\x12\x18\n" +
 	"\acaptcha\x18\b \x01(\tR\acaptcha\x12\x14\n" +
-	"\x05state\x18\t \x01(\tR\x05state\x12\x16\n" +
-	"\x06random\x18\n" +
-	" \x01(\tR\x06random\"\xbc\x01\n" +
+	"\x05state\x18\t \x01(\tR\x05state\"\xbc\x01\n" +
 	"\x17OauthTokenCheckResponse\x124\n" +
 	"\x05login\x18\x01 \x01(\v2\x1e.v6.services.pub.LoginResponseR\x05login\x129\n" +
 	"\x05oauth\x18\x02 \x01(\v2#.v6.services.pub.OauthTokenResponseR\x05oauth\x12\x16\n" +
