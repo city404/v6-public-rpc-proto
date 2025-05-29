@@ -349,7 +349,7 @@ func local_request_PubUser_VerifyAuthToken_0(ctx context.Context, marshaler runt
 
 func request_PubUser_VerifyAuthorizationCode_0(ctx context.Context, marshaler runtime.Marshaler, client PubUserClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq LoginRequest
+		protoReq AuthorizationCode
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
@@ -361,7 +361,7 @@ func request_PubUser_VerifyAuthorizationCode_0(ctx context.Context, marshaler ru
 
 func local_request_PubUser_VerifyAuthorizationCode_0(ctx context.Context, marshaler runtime.Marshaler, server PubUserServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq LoginRequest
+		protoReq AuthorizationCode
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
