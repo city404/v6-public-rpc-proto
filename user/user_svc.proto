@@ -84,6 +84,18 @@ service PubUser {
             body: "*"
         };
     }
+    rpc VerifyAuthorizationCode (LoginRequest) returns (Token) {
+        option (google.api.http) = {
+            post: "/v6/user/verify_authorization_code"
+            body: "*"
+        };
+    }
+    rpc CheckAuthStatus (LoginRequest) returns (OauthTokenCheckResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/check_auth_status"
+            body: "*"
+        };
+    }
     rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {
         option (google.api.http) = {
             post: "/v6/user/create_auth_token"
@@ -161,6 +173,7 @@ message LoginResponse {
     User user = 2;
     LastLoginResponse last_login = 3;
     string state = 4;
+    string authorization_code = 5; // for oauth2.0
 }
 
 message LastLoginResponse {
@@ -232,6 +245,8 @@ message OauthTokenCheckResponse {
     OauthTokenResponse oauth = 2;
     int32 status = 3;
     string message = 4;
+    string authorization_code = 5; // for oauth2.0
+    string state = 6; // for oauth2.0
 }
 
 message ChangePasswordRequest {

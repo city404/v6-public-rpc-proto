@@ -372,13 +372,14 @@ func (x *DeviceAuthorizationRequest) GetType() int32 {
 }
 
 type LoginResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         *Token                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
-	User          *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
-	LastLogin     *LastLoginResponse     `protobuf:"bytes,3,opt,name=last_login,json=lastLogin,proto3" json:"last_login,omitempty"`
-	State         string                 `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Token             *Token                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	User              *User                  `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	LastLogin         *LastLoginResponse     `protobuf:"bytes,3,opt,name=last_login,json=lastLogin,proto3" json:"last_login,omitempty"`
+	State             string                 `protobuf:"bytes,4,opt,name=state,proto3" json:"state,omitempty"`
+	AuthorizationCode string                 `protobuf:"bytes,5,opt,name=authorization_code,json=authorizationCode,proto3" json:"authorization_code,omitempty"` // for oauth2.0
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *LoginResponse) Reset() {
@@ -435,6 +436,13 @@ func (x *LoginResponse) GetLastLogin() *LastLoginResponse {
 func (x *LoginResponse) GetState() string {
 	if x != nil {
 		return x.State
+	}
+	return ""
+}
+
+func (x *LoginResponse) GetAuthorizationCode() string {
+	if x != nil {
+		return x.AuthorizationCode
 	}
 	return ""
 }
@@ -1006,13 +1014,15 @@ func (x *OauthTokenResponse) GetState() string {
 }
 
 type OauthTokenCheckResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Login         *LoginResponse         `protobuf:"bytes,1,opt,name=login,proto3" json:"login,omitempty"`
-	Oauth         *OauthTokenResponse    `protobuf:"bytes,2,opt,name=oauth,proto3" json:"oauth,omitempty"`
-	Status        int32                  `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
-	Message       string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Login             *LoginResponse         `protobuf:"bytes,1,opt,name=login,proto3" json:"login,omitempty"`
+	Oauth             *OauthTokenResponse    `protobuf:"bytes,2,opt,name=oauth,proto3" json:"oauth,omitempty"`
+	Status            int32                  `protobuf:"varint,3,opt,name=status,proto3" json:"status,omitempty"`
+	Message           string                 `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
+	AuthorizationCode string                 `protobuf:"bytes,5,opt,name=authorization_code,json=authorizationCode,proto3" json:"authorization_code,omitempty"` // for oauth2.0
+	State             string                 `protobuf:"bytes,6,opt,name=state,proto3" json:"state,omitempty"`                                                  // for oauth2.0
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
 }
 
 func (x *OauthTokenCheckResponse) Reset() {
@@ -1069,6 +1079,20 @@ func (x *OauthTokenCheckResponse) GetStatus() int32 {
 func (x *OauthTokenCheckResponse) GetMessage() string {
 	if x != nil {
 		return x.Message
+	}
+	return ""
+}
+
+func (x *OauthTokenCheckResponse) GetAuthorizationCode() string {
+	if x != nil {
+		return x.AuthorizationCode
+	}
+	return ""
+}
+
+func (x *OauthTokenCheckResponse) GetState() string {
+	if x != nil {
+		return x.State
 	}
 	return ""
 }
@@ -1630,13 +1654,14 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\x1aDeviceAuthorizationRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x16\n" +
 	"\x06device\x18\x02 \x01(\tR\x06device\x12\x12\n" +
-	"\x04type\x18\x03 \x01(\x05R\x04type\"\xc1\x01\n" +
+	"\x04type\x18\x03 \x01(\x05R\x04type\"\xf0\x01\n" +
 	"\rLoginResponse\x12,\n" +
 	"\x05token\x18\x01 \x01(\v2\x16.v6.services.pub.TokenR\x05token\x12)\n" +
 	"\x04user\x18\x02 \x01(\v2\x15.v6.services.pub.UserR\x04user\x12A\n" +
 	"\n" +
 	"last_login\x18\x03 \x01(\v2\".v6.services.pub.LastLoginResponseR\tlastLogin\x12\x14\n" +
-	"\x05state\x18\x04 \x01(\tR\x05state\"\xa3\x01\n" +
+	"\x05state\x18\x04 \x01(\tR\x05state\x12-\n" +
+	"\x12authorization_code\x18\x05 \x01(\tR\x11authorizationCode\"\xa3\x01\n" +
 	"\x11LastLoginResponse\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\"\n" +
 	"\rlast_login_ts\x18\x02 \x01(\x03R\vlastLoginTs\x12\"\n" +
@@ -1685,12 +1710,14 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\vreturn_type\x18\a \x01(\x05R\n" +
 	"returnType\x12\x18\n" +
 	"\acaptcha\x18\b \x01(\tR\acaptcha\x12\x14\n" +
-	"\x05state\x18\t \x01(\tR\x05state\"\xbc\x01\n" +
+	"\x05state\x18\t \x01(\tR\x05state\"\x81\x02\n" +
 	"\x17OauthTokenCheckResponse\x124\n" +
 	"\x05login\x18\x01 \x01(\v2\x1e.v6.services.pub.LoginResponseR\x05login\x129\n" +
 	"\x05oauth\x18\x02 \x01(\v2#.v6.services.pub.OauthTokenResponseR\x05oauth\x12\x16\n" +
 	"\x06status\x18\x03 \x01(\x05R\x06status\x12\x18\n" +
-	"\amessage\x18\x04 \x01(\tR\amessage\"\x8f\x01\n" +
+	"\amessage\x18\x04 \x01(\tR\amessage\x12-\n" +
+	"\x12authorization_code\x18\x05 \x01(\tR\x11authorizationCode\x12\x14\n" +
+	"\x05state\x18\x06 \x01(\tR\x05state\"\x8f\x01\n" +
 	"\x15ChangePasswordRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12!\n" +
 	"\fold_password\x18\x02 \x01(\tR\voldPassword\x12!\n" +
@@ -1737,7 +1764,7 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\n" +
 	"disk_bytes\x18\x05 \x01(\x03R\tdiskBytes\x12\x1d\n" +
 	"\n" +
-	"disk_files\x18\x06 \x01(\x03R\tdiskFiles2\xbe\x10\n" +
+	"disk_files\x18\x06 \x01(\x03R\tdiskFiles2\xc3\x12\n" +
 	"\aPubUser\x12L\n" +
 	"\x03Get\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v6/user/get\x12a\n" +
 	"\x05Login\x12\x1d.v6.services.pub.LoginRequest\x1a\x1e.v6.services.pub.LoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v6/user/login\x12V\n" +
@@ -1751,7 +1778,9 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\x06Update\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x1a\x82\xd3\xe4\x93\x02\x14:\x01*\"\x0f/v6/user/update\x12\x8d\x01\n" +
 	"\x11SendSmsVerifyCode\x12(.v6.services.pub.SmsVeifyCodeSendRequest\x1a).v6.services.pub.SmsVeifyCodeSendResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v6/user/sms_verify_code\x12\xa4\x01\n" +
 	"\x18SendSmsVerifyCodeNotUser\x12/.v6.services.pub.SmsVeifyCodeSendRequestNotUser\x1a).v6.services.pub.SmsVeifyCodeSendResponse\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v6/user/sms_verify_code_not_user\x12\x81\x01\n" +
-	"\x0fVerifyAuthToken\x12\x1d.v6.services.pub.LoginRequest\x1a(.v6.services.pub.OauthTokenCheckResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v6/user/verify_auth_token\x12|\n" +
+	"\x0fVerifyAuthToken\x12\x1d.v6.services.pub.LoginRequest\x1a(.v6.services.pub.OauthTokenCheckResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v6/user/verify_auth_token\x12\x7f\n" +
+	"\x17VerifyAuthorizationCode\x12\x1d.v6.services.pub.LoginRequest\x1a\x16.v6.services.pub.Token\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v6/user/verify_authorization_code\x12\x81\x01\n" +
+	"\x0fCheckAuthStatus\x12\x1d.v6.services.pub.LoginRequest\x1a(.v6.services.pub.OauthTokenCheckResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v6/user/check_auth_status\x12|\n" +
 	"\x0fCreateAuthToken\x12\x1d.v6.services.pub.LoginRequest\x1a#.v6.services.pub.OauthTokenResponse\"%\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v6/user/create_auth_token\x12\x8f\x01\n" +
 	"\x10ValidateUserInfo\x12!.v6.services.pub.UserValidateInfo\x1a0.v6.services.pub.common.UserNameValidateResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v6/user/validate_user_info\x12\x85\x01\n" +
 	"\x15GetStatisticsAndQuota\x12\x15.v6.services.pub.User\x1a'.v6.services.pub.UserStatisticsAndQuota\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v6/user/get_statistics_and_quota\x12~\n" +
@@ -1815,31 +1844,35 @@ var file_user_user_svc_proto_depIdxs = []int32{
 	7,  // 18: v6.services.pub.PubUser.SendSmsVerifyCode:input_type -> v6.services.pub.SmsVeifyCodeSendRequest
 	8,  // 19: v6.services.pub.PubUser.SendSmsVerifyCodeNotUser:input_type -> v6.services.pub.SmsVeifyCodeSendRequestNotUser
 	1,  // 20: v6.services.pub.PubUser.VerifyAuthToken:input_type -> v6.services.pub.LoginRequest
-	1,  // 21: v6.services.pub.PubUser.CreateAuthToken:input_type -> v6.services.pub.LoginRequest
-	13, // 22: v6.services.pub.PubUser.ValidateUserInfo:input_type -> v6.services.pub.UserValidateInfo
-	0,  // 23: v6.services.pub.PubUser.GetStatisticsAndQuota:input_type -> v6.services.pub.User
-	18, // 24: v6.services.pub.PubUser.ExtendQuota:input_type -> v6.services.pub.UserQuotaExtendInfo
-	0,  // 25: v6.services.pub.PubUser.GetAvailableExtendQuota:input_type -> v6.services.pub.User
-	0,  // 26: v6.services.pub.PubUser.Get:output_type -> v6.services.pub.User
-	3,  // 27: v6.services.pub.PubUser.Login:output_type -> v6.services.pub.LoginResponse
-	5,  // 28: v6.services.pub.PubUser.Refresh:output_type -> v6.services.pub.Token
-	0,  // 29: v6.services.pub.PubUser.Logoff:output_type -> v6.services.pub.User
-	3,  // 30: v6.services.pub.PubUser.DeviceAuthorization:output_type -> v6.services.pub.LoginResponse
-	0,  // 31: v6.services.pub.PubUser.ResetPassword:output_type -> v6.services.pub.User
-	0,  // 32: v6.services.pub.PubUser.ChangePassword:output_type -> v6.services.pub.User
-	0,  // 33: v6.services.pub.PubUser.Register:output_type -> v6.services.pub.User
-	0,  // 34: v6.services.pub.PubUser.Delete:output_type -> v6.services.pub.User
-	0,  // 35: v6.services.pub.PubUser.Update:output_type -> v6.services.pub.User
-	9,  // 36: v6.services.pub.PubUser.SendSmsVerifyCode:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
-	9,  // 37: v6.services.pub.PubUser.SendSmsVerifyCodeNotUser:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
-	11, // 38: v6.services.pub.PubUser.VerifyAuthToken:output_type -> v6.services.pub.OauthTokenCheckResponse
-	10, // 39: v6.services.pub.PubUser.CreateAuthToken:output_type -> v6.services.pub.OauthTokenResponse
-	19, // 40: v6.services.pub.PubUser.ValidateUserInfo:output_type -> v6.services.pub.common.UserNameValidateResponse
-	14, // 41: v6.services.pub.PubUser.GetStatisticsAndQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
-	14, // 42: v6.services.pub.PubUser.ExtendQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
-	18, // 43: v6.services.pub.PubUser.GetAvailableExtendQuota:output_type -> v6.services.pub.UserQuotaExtendInfo
-	26, // [26:44] is the sub-list for method output_type
-	8,  // [8:26] is the sub-list for method input_type
+	1,  // 21: v6.services.pub.PubUser.VerifyAuthorizationCode:input_type -> v6.services.pub.LoginRequest
+	1,  // 22: v6.services.pub.PubUser.CheckAuthStatus:input_type -> v6.services.pub.LoginRequest
+	1,  // 23: v6.services.pub.PubUser.CreateAuthToken:input_type -> v6.services.pub.LoginRequest
+	13, // 24: v6.services.pub.PubUser.ValidateUserInfo:input_type -> v6.services.pub.UserValidateInfo
+	0,  // 25: v6.services.pub.PubUser.GetStatisticsAndQuota:input_type -> v6.services.pub.User
+	18, // 26: v6.services.pub.PubUser.ExtendQuota:input_type -> v6.services.pub.UserQuotaExtendInfo
+	0,  // 27: v6.services.pub.PubUser.GetAvailableExtendQuota:input_type -> v6.services.pub.User
+	0,  // 28: v6.services.pub.PubUser.Get:output_type -> v6.services.pub.User
+	3,  // 29: v6.services.pub.PubUser.Login:output_type -> v6.services.pub.LoginResponse
+	5,  // 30: v6.services.pub.PubUser.Refresh:output_type -> v6.services.pub.Token
+	0,  // 31: v6.services.pub.PubUser.Logoff:output_type -> v6.services.pub.User
+	3,  // 32: v6.services.pub.PubUser.DeviceAuthorization:output_type -> v6.services.pub.LoginResponse
+	0,  // 33: v6.services.pub.PubUser.ResetPassword:output_type -> v6.services.pub.User
+	0,  // 34: v6.services.pub.PubUser.ChangePassword:output_type -> v6.services.pub.User
+	0,  // 35: v6.services.pub.PubUser.Register:output_type -> v6.services.pub.User
+	0,  // 36: v6.services.pub.PubUser.Delete:output_type -> v6.services.pub.User
+	0,  // 37: v6.services.pub.PubUser.Update:output_type -> v6.services.pub.User
+	9,  // 38: v6.services.pub.PubUser.SendSmsVerifyCode:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
+	9,  // 39: v6.services.pub.PubUser.SendSmsVerifyCodeNotUser:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
+	11, // 40: v6.services.pub.PubUser.VerifyAuthToken:output_type -> v6.services.pub.OauthTokenCheckResponse
+	5,  // 41: v6.services.pub.PubUser.VerifyAuthorizationCode:output_type -> v6.services.pub.Token
+	11, // 42: v6.services.pub.PubUser.CheckAuthStatus:output_type -> v6.services.pub.OauthTokenCheckResponse
+	10, // 43: v6.services.pub.PubUser.CreateAuthToken:output_type -> v6.services.pub.OauthTokenResponse
+	19, // 44: v6.services.pub.PubUser.ValidateUserInfo:output_type -> v6.services.pub.common.UserNameValidateResponse
+	14, // 45: v6.services.pub.PubUser.GetStatisticsAndQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
+	14, // 46: v6.services.pub.PubUser.ExtendQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
+	18, // 47: v6.services.pub.PubUser.GetAvailableExtendQuota:output_type -> v6.services.pub.UserQuotaExtendInfo
+	28, // [28:48] is the sub-list for method output_type
+	8,  // [8:28] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name

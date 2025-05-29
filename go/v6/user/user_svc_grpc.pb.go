@@ -33,6 +33,8 @@ const (
 	PubUser_SendSmsVerifyCode_FullMethodName        = "/v6.services.pub.PubUser/SendSmsVerifyCode"
 	PubUser_SendSmsVerifyCodeNotUser_FullMethodName = "/v6.services.pub.PubUser/SendSmsVerifyCodeNotUser"
 	PubUser_VerifyAuthToken_FullMethodName          = "/v6.services.pub.PubUser/VerifyAuthToken"
+	PubUser_VerifyAuthorizationCode_FullMethodName  = "/v6.services.pub.PubUser/VerifyAuthorizationCode"
+	PubUser_CheckAuthStatus_FullMethodName          = "/v6.services.pub.PubUser/CheckAuthStatus"
 	PubUser_CreateAuthToken_FullMethodName          = "/v6.services.pub.PubUser/CreateAuthToken"
 	PubUser_ValidateUserInfo_FullMethodName         = "/v6.services.pub.PubUser/ValidateUserInfo"
 	PubUser_GetStatisticsAndQuota_FullMethodName    = "/v6.services.pub.PubUser/GetStatisticsAndQuota"
@@ -57,6 +59,8 @@ type PubUserClient interface {
 	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error)
+	VerifyAuthorizationCode(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*Token, error)
+	CheckAuthStatus(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error)
 	ValidateUserInfo(ctx context.Context, in *UserValidateInfo, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
 	GetStatisticsAndQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error)
@@ -202,6 +206,26 @@ func (c *pubUserClient) VerifyAuthToken(ctx context.Context, in *LoginRequest, o
 	return out, nil
 }
 
+func (c *pubUserClient) VerifyAuthorizationCode(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*Token, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(Token)
+	err := c.cc.Invoke(ctx, PubUser_VerifyAuthorizationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *pubUserClient) CheckAuthStatus(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(OauthTokenCheckResponse)
+	err := c.cc.Invoke(ctx, PubUser_CheckAuthStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *pubUserClient) CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(OauthTokenResponse)
@@ -269,6 +293,8 @@ type PubUserServer interface {
 	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
 	SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error)
 	VerifyAuthToken(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error)
+	VerifyAuthorizationCode(context.Context, *LoginRequest) (*Token, error)
+	CheckAuthStatus(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error)
 	CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error)
 	ValidateUserInfo(context.Context, *UserValidateInfo) (*common.UserNameValidateResponse, error)
 	GetStatisticsAndQuota(context.Context, *User) (*UserStatisticsAndQuota, error)
@@ -322,6 +348,12 @@ func (UnimplementedPubUserServer) SendSmsVerifyCodeNotUser(context.Context, *Sms
 }
 func (UnimplementedPubUserServer) VerifyAuthToken(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAuthToken not implemented")
+}
+func (UnimplementedPubUserServer) VerifyAuthorizationCode(context.Context, *LoginRequest) (*Token, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyAuthorizationCode not implemented")
+}
+func (UnimplementedPubUserServer) CheckAuthStatus(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckAuthStatus not implemented")
 }
 func (UnimplementedPubUserServer) CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAuthToken not implemented")
@@ -593,6 +625,42 @@ func _PubUser_VerifyAuthToken_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUser_VerifyAuthorizationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).VerifyAuthorizationCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_VerifyAuthorizationCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).VerifyAuthorizationCode(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PubUser_CheckAuthStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserServer).CheckAuthStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUser_CheckAuthStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserServer).CheckAuthStatus(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _PubUser_CreateAuthToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LoginRequest)
 	if err := dec(in); err != nil {
@@ -741,6 +809,14 @@ var PubUser_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyAuthToken",
 			Handler:    _PubUser_VerifyAuthToken_Handler,
+		},
+		{
+			MethodName: "VerifyAuthorizationCode",
+			Handler:    _PubUser_VerifyAuthorizationCode_Handler,
+		},
+		{
+			MethodName: "CheckAuthStatus",
+			Handler:    _PubUser_CheckAuthStatus_Handler,
 		},
 		{
 			MethodName: "CreateAuthToken",
