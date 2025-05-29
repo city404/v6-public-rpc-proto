@@ -222,6 +222,7 @@ message OauthTokenResponse {
     int32 return_type = 7;
     string captcha = 8;
     string state = 9;
+    string random = 10; // random string for security
 }
 
 message OauthTokenCheckResponse {
