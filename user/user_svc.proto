@@ -141,6 +141,9 @@ message LoginRequest {
     string captcha = 9;
     string state = 10;
     string country_code = 11;
+    string code_challenge = 12; // for oauth2.0 PKCE
+    string code_challenge_method = 13; // for oauth2.0 PKCE
+    string device = 14; // device information, used for device authorization
 }
 
 message DeviceAuthorizationRequest {

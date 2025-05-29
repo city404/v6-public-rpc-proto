@@ -140,20 +140,23 @@ func (x *User) GetIcon() string {
 }
 
 type LoginRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
-	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	Addon         string                 `protobuf:"bytes,3,opt,name=addon,proto3" json:"addon,omitempty"`
-	Input         string                 `protobuf:"bytes,4,opt,name=input,proto3" json:"input,omitempty"`
-	Type          string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
-	Callback      string                 `protobuf:"bytes,6,opt,name=callback,proto3" json:"callback,omitempty"`
-	ReturnUrl     string                 `protobuf:"bytes,7,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
-	ReturnType    int32                  `protobuf:"varint,8,opt,name=return_type,json=returnType,proto3" json:"return_type,omitempty"`
-	Captcha       string                 `protobuf:"bytes,9,opt,name=captcha,proto3" json:"captcha,omitempty"`
-	State         string                 `protobuf:"bytes,10,opt,name=state,proto3" json:"state,omitempty"`
-	CountryCode   string                 `protobuf:"bytes,11,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Identity            string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
+	Password            string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	Addon               string                 `protobuf:"bytes,3,opt,name=addon,proto3" json:"addon,omitempty"`
+	Input               string                 `protobuf:"bytes,4,opt,name=input,proto3" json:"input,omitempty"`
+	Type                string                 `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
+	Callback            string                 `protobuf:"bytes,6,opt,name=callback,proto3" json:"callback,omitempty"`
+	ReturnUrl           string                 `protobuf:"bytes,7,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
+	ReturnType          int32                  `protobuf:"varint,8,opt,name=return_type,json=returnType,proto3" json:"return_type,omitempty"`
+	Captcha             string                 `protobuf:"bytes,9,opt,name=captcha,proto3" json:"captcha,omitempty"`
+	State               string                 `protobuf:"bytes,10,opt,name=state,proto3" json:"state,omitempty"`
+	CountryCode         string                 `protobuf:"bytes,11,opt,name=country_code,json=countryCode,proto3" json:"country_code,omitempty"`
+	CodeChallenge       string                 `protobuf:"bytes,12,opt,name=code_challenge,json=codeChallenge,proto3" json:"code_challenge,omitempty"`                     // for oauth2.0 PKCE
+	CodeChallengeMethod string                 `protobuf:"bytes,13,opt,name=code_challenge_method,json=codeChallengeMethod,proto3" json:"code_challenge_method,omitempty"` // for oauth2.0 PKCE
+	Device              string                 `protobuf:"bytes,14,opt,name=device,proto3" json:"device,omitempty"`                                                        // device information, used for device authorization
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *LoginRequest) Reset() {
@@ -259,6 +262,27 @@ func (x *LoginRequest) GetState() string {
 func (x *LoginRequest) GetCountryCode() string {
 	if x != nil {
 		return x.CountryCode
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetCodeChallenge() string {
+	if x != nil {
+		return x.CodeChallenge
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetCodeChallengeMethod() string {
+	if x != nil {
+		return x.CodeChallengeMethod
+	}
+	return ""
+}
+
+func (x *LoginRequest) GetDevice() string {
+	if x != nil {
+		return x.Device
 	}
 	return ""
 }
@@ -1557,7 +1581,7 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\tcreate_ts\x18\t \x01(\x03R\bcreateTs\x12\x12\n" +
 	"\x04hash\x18\n" +
 	" \x01(\tR\x04hash\x12\x12\n" +
-	"\x04icon\x18\v \x01(\tR\x04icon\"\xb5\x02\n" +
+	"\x04icon\x18\v \x01(\tR\x04icon\"\xa8\x03\n" +
 	"\fLoginRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\x12\x14\n" +
@@ -1572,7 +1596,10 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\acaptcha\x18\t \x01(\tR\acaptcha\x12\x14\n" +
 	"\x05state\x18\n" +
 	" \x01(\tR\x05state\x12!\n" +
-	"\fcountry_code\x18\v \x01(\tR\vcountryCode\"d\n" +
+	"\fcountry_code\x18\v \x01(\tR\vcountryCode\x12%\n" +
+	"\x0ecode_challenge\x18\f \x01(\tR\rcodeChallenge\x122\n" +
+	"\x15code_challenge_method\x18\r \x01(\tR\x13codeChallengeMethod\x12\x16\n" +
+	"\x06device\x18\x0e \x01(\tR\x06device\"d\n" +
 	"\x1aDeviceAuthorizationRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x16\n" +
 	"\x06device\x18\x02 \x01(\tR\x06device\x12\x12\n" +
