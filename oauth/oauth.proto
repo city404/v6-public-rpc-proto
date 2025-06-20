@@ -5,7 +5,7 @@ option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/oauth";
 import "google/api/annotations.proto";
 
 
-service Oauth {
+service OauthAuthorization {
     rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse) {
         option (google.api.http) = {
             post: "/v6/oauth/authorize"

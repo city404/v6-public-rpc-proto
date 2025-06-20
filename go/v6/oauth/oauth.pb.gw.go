@@ -35,7 +35,7 @@ var (
 	_ = metadata.Join
 )
 
-func request_Oauth_Authorize_0(ctx context.Context, marshaler runtime.Marshaler, client OauthClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_OauthAuthorization_Authorize_0(ctx context.Context, marshaler runtime.Marshaler, client OauthAuthorizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq AuthorizeRequest
 		metadata runtime.ServerMetadata
@@ -50,7 +50,7 @@ func request_Oauth_Authorize_0(ctx context.Context, marshaler runtime.Marshaler,
 	return msg, metadata, err
 }
 
-func local_request_Oauth_Authorize_0(ctx context.Context, marshaler runtime.Marshaler, server OauthServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_OauthAuthorization_Authorize_0(ctx context.Context, marshaler runtime.Marshaler, server OauthAuthorizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq AuthorizeRequest
 		metadata runtime.ServerMetadata
@@ -62,39 +62,39 @@ func local_request_Oauth_Authorize_0(ctx context.Context, marshaler runtime.Mars
 	return msg, metadata, err
 }
 
-// RegisterOauthHandlerServer registers the http handlers for service Oauth to "mux".
-// UnaryRPC     :call OauthServer directly.
+// RegisterOauthAuthorizationHandlerServer registers the http handlers for service OauthAuthorization to "mux".
+// UnaryRPC     :call OauthAuthorizationServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOauthHandlerFromEndpoint instead.
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOauthAuthorizationHandlerFromEndpoint instead.
 // GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
-func RegisterOauthHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OauthServer) error {
-	mux.Handle(http.MethodPost, pattern_Oauth_Authorize_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+func RegisterOauthAuthorizationHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OauthAuthorizationServer) error {
+	mux.Handle(http.MethodPost, pattern_OauthAuthorization_Authorize_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.oauth.Oauth/Authorize", runtime.WithHTTPPathPattern("/v6/oauth/authorize"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.oauth.OauthAuthorization/Authorize", runtime.WithHTTPPathPattern("/v6/oauth/authorize"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Oauth_Authorize_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_OauthAuthorization_Authorize_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Oauth_Authorize_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthAuthorization_Authorize_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
 	return nil
 }
 
-// RegisterOauthHandlerFromEndpoint is same as RegisterOauthHandler but
+// RegisterOauthAuthorizationHandlerFromEndpoint is same as RegisterOauthAuthorizationHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterOauthHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterOauthAuthorizationHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
@@ -113,45 +113,45 @@ func RegisterOauthHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux
 			}
 		}()
 	}()
-	return RegisterOauthHandler(ctx, mux, conn)
+	return RegisterOauthAuthorizationHandler(ctx, mux, conn)
 }
 
-// RegisterOauthHandler registers the http handlers for service Oauth to "mux".
+// RegisterOauthAuthorizationHandler registers the http handlers for service OauthAuthorization to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterOauthHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterOauthHandlerClient(ctx, mux, NewOauthClient(conn))
+func RegisterOauthAuthorizationHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterOauthAuthorizationHandlerClient(ctx, mux, NewOauthAuthorizationClient(conn))
 }
 
-// RegisterOauthHandlerClient registers the http handlers for service Oauth
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OauthClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OauthClient"
+// RegisterOauthAuthorizationHandlerClient registers the http handlers for service OauthAuthorization
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OauthAuthorizationClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OauthAuthorizationClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "OauthClient" to call the correct interceptors. This client ignores the HTTP middlewares.
-func RegisterOauthHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OauthClient) error {
-	mux.Handle(http.MethodPost, pattern_Oauth_Authorize_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+// "OauthAuthorizationClient" to call the correct interceptors. This client ignores the HTTP middlewares.
+func RegisterOauthAuthorizationHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OauthAuthorizationClient) error {
+	mux.Handle(http.MethodPost, pattern_OauthAuthorization_Authorize_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.oauth.Oauth/Authorize", runtime.WithHTTPPathPattern("/v6/oauth/authorize"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.oauth.OauthAuthorization/Authorize", runtime.WithHTTPPathPattern("/v6/oauth/authorize"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Oauth_Authorize_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_OauthAuthorization_Authorize_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Oauth_Authorize_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OauthAuthorization_Authorize_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	return nil
 }
 
 var (
-	pattern_Oauth_Authorize_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "authorize"}, ""))
+	pattern_OauthAuthorization_Authorize_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "authorize"}, ""))
 )
 
 var (
-	forward_Oauth_Authorize_0 = runtime.ForwardResponseMessage
+	forward_OauthAuthorization_Authorize_0 = runtime.ForwardResponseMessage
 )

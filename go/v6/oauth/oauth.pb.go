@@ -172,8 +172,8 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state2\x7f\n" +
-	"\x05Oauth\x12v\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state2\x8c\x01\n" +
+	"\x12OauthAuthorization\x12v\n" +
 	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorizeB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
 
 var (
@@ -194,8 +194,8 @@ var file_oauth_oauth_proto_goTypes = []any{
 	(*AuthorizeResponse)(nil), // 1: v6.services.oauth.AuthorizeResponse
 }
 var file_oauth_oauth_proto_depIdxs = []int32{
-	0, // 0: v6.services.oauth.Oauth.Authorize:input_type -> v6.services.oauth.AuthorizeRequest
-	1, // 1: v6.services.oauth.Oauth.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
+	0, // 0: v6.services.oauth.OauthAuthorization.Authorize:input_type -> v6.services.oauth.AuthorizeRequest
+	1, // 1: v6.services.oauth.OauthAuthorization.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
