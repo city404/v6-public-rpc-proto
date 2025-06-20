@@ -1,0 +1,28 @@
+syntax = "proto3";
+package v6.services.oauth;
+option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/oauth";
+// import "common/pub_common.proto";
+import "google/api/annotations.proto";
+
+
+service Oauth {
+    rpc Authorize (AuthorizeRequest) returns (AuthorizeResponse) {
+        option (google.api.http) = {
+            post: "/v6/oauth/authorize"
+            body: "*"
+        };
+    }
+}
+
+message AuthorizeRequest {
+    string client_id = 1; // Client ID
+    string response_type = 2; // Response type, e.g., "code"
+    string redirect_uri = 3; // Redirect URI
+    string scope = 4; // Scopes requested
+    string state = 5; // State parameter for CSRF protection
+}
+message AuthorizeResponse {
+    string code = 1; // Authorization code
+    string redirect_uri = 2; // Redirect URI to send the user back to
+    string state = 3; // State parameter to match the request
+}

@@ -11,7 +11,7 @@ go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
 GOPATH=$(go env GOPATH)
 export PATH=$PATH:$GOPATH/bin
 
-DIRS=("common" "slice" "user" "userfile" "offline" "rpcs" "wrtc" "share" "webdav" "sftp" "ticket")
+DIRS=("common" "slice" "user" "userfile" "offline" "rpcs" "wrtc" "share" "webdav" "sftp" "ticket" "oauth")
 
 
 rm -rf ./go_temp
