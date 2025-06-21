@@ -13,7 +13,7 @@ service OauthAuthorization {
         };
     }
 
-    rpc GetAuthorizeState (AuthorizeState) returns (AuthorizeResponse) {
+    rpc GetAuthorizeState (AuthorizeState) returns (AuthorizeState) {
         option (google.api.http) = {
             post: "/v6/oauth/get_authorize_state"
             body: "*"
@@ -53,6 +53,7 @@ message AuthorizeResponse {
     string code = 1; // Authorization code
     string redirect_uri = 2; // Redirect URI to send the user back to
     string state = 3; // State parameter to match the request
+    string status = 4; // Status of the authorization request
     // string identity = 4;
 }
 

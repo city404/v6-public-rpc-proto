@@ -159,6 +159,7 @@ type AuthorizeResponse struct {
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                                  // Authorization code
 	RedirectUri   string                 `protobuf:"bytes,2,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"` // Redirect URI to send the user back to
 	State         string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`                                // State parameter to match the request
+	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                              // Status of the authorization request
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -210,6 +211,13 @@ func (x *AuthorizeResponse) GetRedirectUri() string {
 func (x *AuthorizeResponse) GetState() string {
 	if x != nil {
 		return x.State
+	}
+	return ""
+}
+
+func (x *AuthorizeResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
 	}
 	return ""
 }
@@ -553,11 +561,12 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	" \x01(\tR\x06device\x12\x12\n" +
 	"\x04mode\x18\v \x01(\tR\x04mode\x12\x1d\n" +
 	"\n" +
-	"debug_host\x18\f \x01(\tR\tdebugHost\"`\n" +
+	"debug_host\x18\f \x01(\tR\tdebugHost\"x\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state\"\xda\x02\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\x12\x16\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\"\xda\x02\n" +
 	"\x0eAuthorizeState\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12\x16\n" +
@@ -588,10 +597,10 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x13RefreshTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x03 \x01(\tR\frefreshToken\x12\x1d\n" +
 	"\n" +
-	"grant_type\x18\x04 \x01(\tR\tgrantType2\x82\x04\n" +
+	"grant_type\x18\x04 \x01(\tR\tgrantType2\xff\x03\n" +
 	"\x12OauthAuthorization\x12v\n" +
-	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorize\x12\x86\x01\n" +
-	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a$.v6.services.oauth.AuthorizeResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_state\x12m\n" +
+	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorize\x12\x83\x01\n" +
+	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a!.v6.services.oauth.AuthorizeState\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_state\x12m\n" +
 	"\bGetToken\x12\x1f.v6.services.oauth.TokenRequest\x1a .v6.services.oauth.TokenResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/get_token\x12|\n" +
 	"\fRefreshToken\x12&.v6.services.oauth.RefreshTokenRequest\x1a .v6.services.oauth.TokenResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v6/oauth/refresh_tokenB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
 
@@ -622,7 +631,7 @@ var file_oauth_oauth_proto_depIdxs = []int32{
 	3, // 2: v6.services.oauth.OauthAuthorization.GetToken:input_type -> v6.services.oauth.TokenRequest
 	5, // 3: v6.services.oauth.OauthAuthorization.RefreshToken:input_type -> v6.services.oauth.RefreshTokenRequest
 	1, // 4: v6.services.oauth.OauthAuthorization.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
-	1, // 5: v6.services.oauth.OauthAuthorization.GetAuthorizeState:output_type -> v6.services.oauth.AuthorizeResponse
+	2, // 5: v6.services.oauth.OauthAuthorization.GetAuthorizeState:output_type -> v6.services.oauth.AuthorizeState
 	4, // 6: v6.services.oauth.OauthAuthorization.GetToken:output_type -> v6.services.oauth.TokenResponse
 	4, // 7: v6.services.oauth.OauthAuthorization.RefreshToken:output_type -> v6.services.oauth.TokenResponse
 	4, // [4:8] is the sub-list for method output_type
