@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OauthAuthorizationClient interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
-	GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeState, error)
+	GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeResponse, error)
 }
 
 type oauthAuthorizationClient struct {
@@ -49,9 +49,9 @@ func (c *oauthAuthorizationClient) Authorize(ctx context.Context, in *AuthorizeR
 	return out, nil
 }
 
-func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeState, error) {
+func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AuthorizeState)
+	out := new(AuthorizeResponse)
 	err := c.cc.Invoke(ctx, OauthAuthorization_GetAuthorizeState_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -64,7 +64,7 @@ func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *Au
 // for forward compatibility.
 type OauthAuthorizationServer interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
-	GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeState, error)
+	GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeResponse, error)
 	mustEmbedUnimplementedOauthAuthorizationServer()
 }
 
@@ -78,7 +78,7 @@ type UnimplementedOauthAuthorizationServer struct{}
 func (UnimplementedOauthAuthorizationServer) Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
 }
-func (UnimplementedOauthAuthorizationServer) GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeState, error) {
+func (UnimplementedOauthAuthorizationServer) GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeState not implemented")
 }
 func (UnimplementedOauthAuthorizationServer) mustEmbedUnimplementedOauthAuthorizationServer() {}

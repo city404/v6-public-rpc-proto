@@ -13,7 +13,7 @@ service OauthAuthorization {
         };
     }
 
-    rpc GetAuthorizeState (AuthorizeState) returns (AuthorizeState) {
+    rpc GetAuthorizeState (AuthorizeState) returns (AuthorizeResponse) {
         option (google.api.http) = {
             post: "/v6/oauth/get_authorize_state"
             body: "*"
@@ -39,11 +39,18 @@ message AuthorizeResponse {
     string code = 1; // Authorization code
     string redirect_uri = 2; // Redirect URI to send the user back to
     string state = 3; // State parameter to match the request
-    string identity = 4;
+    // string identity = 4;
 }
 
 message AuthorizeState {
-    string identity = 1; 
+    string code = 1; 
     string state = 2; // State parameter for CSRF protection
-    int32 state_code = 3; // state for authorization, 0: not authorized, 1: authorized, 2: expired
+    string status = 3; // Status of the authorization request
+    string redirect_uri = 4; // Redirect URI
+    string scope = 5;
+    string response_type = 6;
+    string version = 7;
+    string code_challenge = 8; // Code challenge for PKCE
+    string code_challenge_method = 9; // Method for code challenge, e.g., "S256"
+    string client_id = 10;
 }
