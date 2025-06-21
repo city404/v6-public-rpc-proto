@@ -15,7 +15,7 @@ service OauthAuthorization {
 
     rpc GetAuthorizeState (AuthorizeRequest) returns (AuthorizeState) {
         option (google.api.http) = {
-            post: "/v6/oauth/authorize"
+            post: "/v6/oauth/get_authorize_state"
             body: "*"
         };
     }
