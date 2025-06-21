@@ -19,6 +19,20 @@ service OauthAuthorization {
             body: "*"
         };
     }
+
+    rpc GetToken (TokenRequest) returns (TokenResponse) {
+        option (google.api.http) = {
+            post: "/v6/oauth/get_token"
+            body: "*"
+        };
+    }
+
+    rpc RefreshToken (RefreshTokenRequest) returns (TokenResponse) {
+        option (google.api.http) = {
+            post: "/v6/oauth/refresh_token"
+            body: "*"
+        };
+    }
 }
 
 message AuthorizeRequest {
@@ -54,4 +68,23 @@ message AuthorizeState {
     string code_challenge_method = 9; // Method for code challenge, e.g., "S256"
     string client_id = 10;
     string device = 11; // Device information, used for device authorization
+}
+
+message TokenRequest {
+    string code = 3; // Authorization code received from the authorization endpoint
+    string redirect_uri = 4; // Redirect URI used in the authorization request
+    string grant_type = 5; // Grant type, e.g., "authorization_code"
+    string code_verifier = 6; // Code verifier for PKCE
+}
+message TokenResponse {
+    string access_token = 1; // Access token
+    string refresh_token = 2; // Refresh token
+    int32 expires_in = 3; // Token expiration time in seconds
+    string token_type = 4; // Type of the token, e.g., "Bearer"
+    string scope = 5; // Scopes granted
+    // string identity = 6; // User identity associated with the token
+}
+message RefreshTokenRequest {
+    string refresh_token = 3; // Refresh token
+    string grant_type = 4; // Grant type, e.g., "refresh_token"
 }

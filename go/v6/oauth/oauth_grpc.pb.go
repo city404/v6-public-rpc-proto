@@ -21,6 +21,8 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	OauthAuthorization_Authorize_FullMethodName         = "/v6.services.oauth.OauthAuthorization/Authorize"
 	OauthAuthorization_GetAuthorizeState_FullMethodName = "/v6.services.oauth.OauthAuthorization/GetAuthorizeState"
+	OauthAuthorization_GetToken_FullMethodName          = "/v6.services.oauth.OauthAuthorization/GetToken"
+	OauthAuthorization_RefreshToken_FullMethodName      = "/v6.services.oauth.OauthAuthorization/RefreshToken"
 )
 
 // OauthAuthorizationClient is the client API for OauthAuthorization service.
@@ -29,6 +31,8 @@ const (
 type OauthAuthorizationClient interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
 	GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeResponse, error)
+	GetToken(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
+	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
 }
 
 type oauthAuthorizationClient struct {
@@ -59,12 +63,34 @@ func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *Au
 	return out, nil
 }
 
+func (c *oauthAuthorizationClient) GetToken(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TokenResponse)
+	err := c.cc.Invoke(ctx, OauthAuthorization_GetToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oauthAuthorizationClient) RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*TokenResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(TokenResponse)
+	err := c.cc.Invoke(ctx, OauthAuthorization_RefreshToken_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OauthAuthorizationServer is the server API for OauthAuthorization service.
 // All implementations must embed UnimplementedOauthAuthorizationServer
 // for forward compatibility.
 type OauthAuthorizationServer interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
 	GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeResponse, error)
+	GetToken(context.Context, *TokenRequest) (*TokenResponse, error)
+	RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error)
 	mustEmbedUnimplementedOauthAuthorizationServer()
 }
 
@@ -80,6 +106,12 @@ func (UnimplementedOauthAuthorizationServer) Authorize(context.Context, *Authori
 }
 func (UnimplementedOauthAuthorizationServer) GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeState not implemented")
+}
+func (UnimplementedOauthAuthorizationServer) GetToken(context.Context, *TokenRequest) (*TokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetToken not implemented")
+}
+func (UnimplementedOauthAuthorizationServer) RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RefreshToken not implemented")
 }
 func (UnimplementedOauthAuthorizationServer) mustEmbedUnimplementedOauthAuthorizationServer() {}
 func (UnimplementedOauthAuthorizationServer) testEmbeddedByValue()                            {}
@@ -138,6 +170,42 @@ func _OauthAuthorization_GetAuthorizeState_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OauthAuthorization_GetToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthAuthorizationServer).GetToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthAuthorization_GetToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthAuthorizationServer).GetToken(ctx, req.(*TokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OauthAuthorization_RefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RefreshTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthAuthorizationServer).RefreshToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthAuthorization_RefreshToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthAuthorizationServer).RefreshToken(ctx, req.(*RefreshTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OauthAuthorization_ServiceDesc is the grpc.ServiceDesc for OauthAuthorization service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +220,14 @@ var OauthAuthorization_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAuthorizeState",
 			Handler:    _OauthAuthorization_GetAuthorizeState_Handler,
+		},
+		{
+			MethodName: "GetToken",
+			Handler:    _OauthAuthorization_GetToken_Handler,
+		},
+		{
+			MethodName: "RefreshToken",
+			Handler:    _OauthAuthorization_RefreshToken_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

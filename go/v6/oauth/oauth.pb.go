@@ -338,6 +338,202 @@ func (x *AuthorizeState) GetDevice() string {
 	return ""
 }
 
+type TokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`                                     // Authorization code received from the authorization endpoint
+	RedirectUri   string                 `protobuf:"bytes,4,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"`    // Redirect URI used in the authorization request
+	GrantType     string                 `protobuf:"bytes,5,opt,name=grant_type,json=grantType,proto3" json:"grant_type,omitempty"`          // Grant type, e.g., "authorization_code"
+	CodeVerifier  string                 `protobuf:"bytes,6,opt,name=code_verifier,json=codeVerifier,proto3" json:"code_verifier,omitempty"` // Code verifier for PKCE
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TokenRequest) Reset() {
+	*x = TokenRequest{}
+	mi := &file_oauth_oauth_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TokenRequest) ProtoMessage() {}
+
+func (x *TokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_oauth_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TokenRequest.ProtoReflect.Descriptor instead.
+func (*TokenRequest) Descriptor() ([]byte, []int) {
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *TokenRequest) GetCode() string {
+	if x != nil {
+		return x.Code
+	}
+	return ""
+}
+
+func (x *TokenRequest) GetRedirectUri() string {
+	if x != nil {
+		return x.RedirectUri
+	}
+	return ""
+}
+
+func (x *TokenRequest) GetGrantType() string {
+	if x != nil {
+		return x.GrantType
+	}
+	return ""
+}
+
+func (x *TokenRequest) GetCodeVerifier() string {
+	if x != nil {
+		return x.CodeVerifier
+	}
+	return ""
+}
+
+type TokenResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`    // Access token
+	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // Refresh token
+	ExpiresIn     int32                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`         // Token expiration time in seconds
+	TokenType     string                 `protobuf:"bytes,4,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`          // Type of the token, e.g., "Bearer"
+	Scope         string                 `protobuf:"bytes,5,opt,name=scope,proto3" json:"scope,omitempty"`                                   // Scopes granted
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TokenResponse) Reset() {
+	*x = TokenResponse{}
+	mi := &file_oauth_oauth_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TokenResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TokenResponse) ProtoMessage() {}
+
+func (x *TokenResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_oauth_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TokenResponse.ProtoReflect.Descriptor instead.
+func (*TokenResponse) Descriptor() ([]byte, []int) {
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *TokenResponse) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *TokenResponse) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *TokenResponse) GetExpiresIn() int32 {
+	if x != nil {
+		return x.ExpiresIn
+	}
+	return 0
+}
+
+func (x *TokenResponse) GetTokenType() string {
+	if x != nil {
+		return x.TokenType
+	}
+	return ""
+}
+
+func (x *TokenResponse) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+type RefreshTokenRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	RefreshToken  string                 `protobuf:"bytes,3,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // Refresh token
+	GrantType     string                 `protobuf:"bytes,4,opt,name=grant_type,json=grantType,proto3" json:"grant_type,omitempty"`          // Grant type, e.g., "refresh_token"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RefreshTokenRequest) Reset() {
+	*x = RefreshTokenRequest{}
+	mi := &file_oauth_oauth_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RefreshTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshTokenRequest) ProtoMessage() {}
+
+func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_oauth_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
+func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RefreshTokenRequest) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *RefreshTokenRequest) GetGrantType() string {
+	if x != nil {
+		return x.GrantType
+	}
+	return ""
+}
+
 var File_oauth_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_oauth_proto_rawDesc = "" +
@@ -374,10 +570,30 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x15code_challenge_method\x18\t \x01(\tR\x13codeChallengeMethod\x12\x1b\n" +
 	"\tclient_id\x18\n" +
 	" \x01(\tR\bclientId\x12\x16\n" +
-	"\x06device\x18\v \x01(\tR\x06device2\x95\x02\n" +
+	"\x06device\x18\v \x01(\tR\x06device\"\x89\x01\n" +
+	"\fTokenRequest\x12\x12\n" +
+	"\x04code\x18\x03 \x01(\tR\x04code\x12!\n" +
+	"\fredirect_uri\x18\x04 \x01(\tR\vredirectUri\x12\x1d\n" +
+	"\n" +
+	"grant_type\x18\x05 \x01(\tR\tgrantType\x12#\n" +
+	"\rcode_verifier\x18\x06 \x01(\tR\fcodeVerifier\"\xab\x01\n" +
+	"\rTokenResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
+	"\n" +
+	"expires_in\x18\x03 \x01(\x05R\texpiresIn\x12\x1d\n" +
+	"\n" +
+	"token_type\x18\x04 \x01(\tR\ttokenType\x12\x14\n" +
+	"\x05scope\x18\x05 \x01(\tR\x05scope\"Y\n" +
+	"\x13RefreshTokenRequest\x12#\n" +
+	"\rrefresh_token\x18\x03 \x01(\tR\frefreshToken\x12\x1d\n" +
+	"\n" +
+	"grant_type\x18\x04 \x01(\tR\tgrantType2\x82\x04\n" +
 	"\x12OauthAuthorization\x12v\n" +
 	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorize\x12\x86\x01\n" +
-	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a$.v6.services.oauth.AuthorizeResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_stateB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
+	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a$.v6.services.oauth.AuthorizeResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_state\x12m\n" +
+	"\bGetToken\x12\x1f.v6.services.oauth.TokenRequest\x1a .v6.services.oauth.TokenResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/get_token\x12|\n" +
+	"\fRefreshToken\x12&.v6.services.oauth.RefreshTokenRequest\x1a .v6.services.oauth.TokenResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v6/oauth/refresh_tokenB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
 
 var (
 	file_oauth_oauth_proto_rawDescOnce sync.Once
@@ -391,19 +607,26 @@ func file_oauth_oauth_proto_rawDescGZIP() []byte {
 	return file_oauth_oauth_proto_rawDescData
 }
 
-var file_oauth_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_oauth_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_oauth_oauth_proto_goTypes = []any{
-	(*AuthorizeRequest)(nil),  // 0: v6.services.oauth.AuthorizeRequest
-	(*AuthorizeResponse)(nil), // 1: v6.services.oauth.AuthorizeResponse
-	(*AuthorizeState)(nil),    // 2: v6.services.oauth.AuthorizeState
+	(*AuthorizeRequest)(nil),    // 0: v6.services.oauth.AuthorizeRequest
+	(*AuthorizeResponse)(nil),   // 1: v6.services.oauth.AuthorizeResponse
+	(*AuthorizeState)(nil),      // 2: v6.services.oauth.AuthorizeState
+	(*TokenRequest)(nil),        // 3: v6.services.oauth.TokenRequest
+	(*TokenResponse)(nil),       // 4: v6.services.oauth.TokenResponse
+	(*RefreshTokenRequest)(nil), // 5: v6.services.oauth.RefreshTokenRequest
 }
 var file_oauth_oauth_proto_depIdxs = []int32{
 	0, // 0: v6.services.oauth.OauthAuthorization.Authorize:input_type -> v6.services.oauth.AuthorizeRequest
 	2, // 1: v6.services.oauth.OauthAuthorization.GetAuthorizeState:input_type -> v6.services.oauth.AuthorizeState
-	1, // 2: v6.services.oauth.OauthAuthorization.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
-	1, // 3: v6.services.oauth.OauthAuthorization.GetAuthorizeState:output_type -> v6.services.oauth.AuthorizeResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	3, // 2: v6.services.oauth.OauthAuthorization.GetToken:input_type -> v6.services.oauth.TokenRequest
+	5, // 3: v6.services.oauth.OauthAuthorization.RefreshToken:input_type -> v6.services.oauth.RefreshTokenRequest
+	1, // 4: v6.services.oauth.OauthAuthorization.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
+	1, // 5: v6.services.oauth.OauthAuthorization.GetAuthorizeState:output_type -> v6.services.oauth.AuthorizeResponse
+	4, // 6: v6.services.oauth.OauthAuthorization.GetToken:output_type -> v6.services.oauth.TokenResponse
+	4, // 7: v6.services.oauth.OauthAuthorization.RefreshToken:output_type -> v6.services.oauth.TokenResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -420,7 +643,7 @@ func file_oauth_oauth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_oauth_oauth_proto_rawDesc), len(file_oauth_oauth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
