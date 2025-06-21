@@ -418,9 +418,10 @@ type TokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`    // Access token
 	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // Refresh token
-	ExpiresIn     int32                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`         // Token expiration time in seconds
+	ExpiresIn     int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`         // Token expiration time in seconds
 	TokenType     string                 `protobuf:"bytes,4,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`          // Type of the token, e.g., "Bearer"
 	Scope         string                 `protobuf:"bytes,5,opt,name=scope,proto3" json:"scope,omitempty"`                                   // Scopes granted
+	ExpiresInTs   int64                  `protobuf:"varint,6,opt,name=expires_in_ts,json=expiresInTs,proto3" json:"expires_in_ts,omitempty"` // string identity = 6; // User identity associated with the token
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -469,7 +470,7 @@ func (x *TokenResponse) GetRefreshToken() string {
 	return ""
 }
 
-func (x *TokenResponse) GetExpiresIn() int32 {
+func (x *TokenResponse) GetExpiresIn() int64 {
 	if x != nil {
 		return x.ExpiresIn
 	}
@@ -488,6 +489,13 @@ func (x *TokenResponse) GetScope() string {
 		return x.Scope
 	}
 	return ""
+}
+
+func (x *TokenResponse) GetExpiresInTs() int64 {
+	if x != nil {
+		return x.ExpiresInTs
+	}
+	return 0
 }
 
 type RefreshTokenRequest struct {
@@ -585,15 +593,16 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\fredirect_uri\x18\x04 \x01(\tR\vredirectUri\x12\x1d\n" +
 	"\n" +
 	"grant_type\x18\x05 \x01(\tR\tgrantType\x12#\n" +
-	"\rcode_verifier\x18\x06 \x01(\tR\fcodeVerifier\"\xab\x01\n" +
+	"\rcode_verifier\x18\x06 \x01(\tR\fcodeVerifier\"\xcf\x01\n" +
 	"\rTokenResponse\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
 	"\n" +
-	"expires_in\x18\x03 \x01(\x05R\texpiresIn\x12\x1d\n" +
+	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12\x1d\n" +
 	"\n" +
 	"token_type\x18\x04 \x01(\tR\ttokenType\x12\x14\n" +
-	"\x05scope\x18\x05 \x01(\tR\x05scope\"Y\n" +
+	"\x05scope\x18\x05 \x01(\tR\x05scope\x12\"\n" +
+	"\rexpires_in_ts\x18\x06 \x01(\x03R\vexpiresInTs\"Y\n" +
 	"\x13RefreshTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x03 \x01(\tR\frefreshToken\x12\x1d\n" +
 	"\n" +

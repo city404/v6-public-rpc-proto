@@ -80,9 +80,10 @@ message TokenRequest {
 message TokenResponse {
     string access_token = 1; // Access token
     string refresh_token = 2; // Refresh token
-    int32 expires_in = 3; // Token expiration time in seconds
+    int64 expires_in = 3; // Token expiration time in seconds
     string token_type = 4; // Type of the token, e.g., "Bearer"
     string scope = 5; // Scopes granted
+    int64 expires_in_ts = 6;
     // string identity = 6; // User identity associated with the token
 }
 message RefreshTokenRequest {
