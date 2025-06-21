@@ -159,6 +159,7 @@ type AuthorizeResponse struct {
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                                  // Authorization code
 	RedirectUri   string                 `protobuf:"bytes,2,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"` // Redirect URI to send the user back to
 	State         string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`                                // State parameter to match the request
+	Identity      string                 `protobuf:"bytes,4,opt,name=identity,proto3" json:"identity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -214,11 +215,18 @@ func (x *AuthorizeResponse) GetState() string {
 	return ""
 }
 
+func (x *AuthorizeResponse) GetIdentity() string {
+	if x != nil {
+		return x.Identity
+	}
+	return ""
+}
+
 type AuthorizeState struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClientId      string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
 	State         string                 `protobuf:"bytes,2,opt,name=state,proto3" json:"state,omitempty"`                           // State parameter for CSRF protection
-	StateCode     int32                  `protobuf:"varint,3,opt,name=state_code,json=stateCode,proto3" json:"state_code,omitempty"` // state for PKCE
+	StateCode     int32                  `protobuf:"varint,3,opt,name=state_code,json=stateCode,proto3" json:"state_code,omitempty"` // state for authorization, 0: not authorized, 1: authorized, 2: expired
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -253,9 +261,9 @@ func (*AuthorizeState) Descriptor() ([]byte, []int) {
 	return file_oauth_oauth_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *AuthorizeState) GetClientId() string {
+func (x *AuthorizeState) GetIdentity() string {
 	if x != nil {
-		return x.ClientId
+		return x.Identity
 	}
 	return ""
 }
@@ -293,19 +301,20 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	" \x01(\tR\x06device\x12\x12\n" +
 	"\x04mode\x18\v \x01(\tR\x04mode\x12\x1d\n" +
 	"\n" +
-	"debug_host\x18\f \x01(\tR\tdebugHost\"`\n" +
+	"debug_host\x18\f \x01(\tR\tdebugHost\"|\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state\"b\n" +
-	"\x0eAuthorizeState\x12\x1b\n" +
-	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12\x14\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\x12\x1a\n" +
+	"\bidentity\x18\x04 \x01(\tR\bidentity\"a\n" +
+	"\x0eAuthorizeState\x12\x1a\n" +
+	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12\x1d\n" +
 	"\n" +
-	"state_code\x18\x03 \x01(\x05R\tstateCode2\x94\x02\n" +
+	"state_code\x18\x03 \x01(\x05R\tstateCode2\x92\x02\n" +
 	"\x12OauthAuthorization\x12v\n" +
-	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorize\x12\x85\x01\n" +
-	"\x11GetAuthorizeState\x12#.v6.services.oauth.AuthorizeRequest\x1a!.v6.services.oauth.AuthorizeState\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_stateB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
+	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorize\x12\x83\x01\n" +
+	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a!.v6.services.oauth.AuthorizeState\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_stateB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
 
 var (
 	file_oauth_oauth_proto_rawDescOnce sync.Once
@@ -327,7 +336,7 @@ var file_oauth_oauth_proto_goTypes = []any{
 }
 var file_oauth_oauth_proto_depIdxs = []int32{
 	0, // 0: v6.services.oauth.OauthAuthorization.Authorize:input_type -> v6.services.oauth.AuthorizeRequest
-	0, // 1: v6.services.oauth.OauthAuthorization.GetAuthorizeState:input_type -> v6.services.oauth.AuthorizeRequest
+	2, // 1: v6.services.oauth.OauthAuthorization.GetAuthorizeState:input_type -> v6.services.oauth.AuthorizeState
 	1, // 2: v6.services.oauth.OauthAuthorization.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
 	2, // 3: v6.services.oauth.OauthAuthorization.GetAuthorizeState:output_type -> v6.services.oauth.AuthorizeState
 	2, // [2:4] is the sub-list for method output_type

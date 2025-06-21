@@ -28,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OauthAuthorizationClient interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
-	GetAuthorizeState(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeState, error)
+	GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeState, error)
 }
 
 type oauthAuthorizationClient struct {
@@ -49,7 +49,7 @@ func (c *oauthAuthorizationClient) Authorize(ctx context.Context, in *AuthorizeR
 	return out, nil
 }
 
-func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeState, error) {
+func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeState, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthorizeState)
 	err := c.cc.Invoke(ctx, OauthAuthorization_GetAuthorizeState_FullMethodName, in, out, cOpts...)
@@ -64,7 +64,7 @@ func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *Au
 // for forward compatibility.
 type OauthAuthorizationServer interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
-	GetAuthorizeState(context.Context, *AuthorizeRequest) (*AuthorizeState, error)
+	GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeState, error)
 	mustEmbedUnimplementedOauthAuthorizationServer()
 }
 
@@ -78,7 +78,7 @@ type UnimplementedOauthAuthorizationServer struct{}
 func (UnimplementedOauthAuthorizationServer) Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
 }
-func (UnimplementedOauthAuthorizationServer) GetAuthorizeState(context.Context, *AuthorizeRequest) (*AuthorizeState, error) {
+func (UnimplementedOauthAuthorizationServer) GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeState, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeState not implemented")
 }
 func (UnimplementedOauthAuthorizationServer) mustEmbedUnimplementedOauthAuthorizationServer() {}
@@ -121,7 +121,7 @@ func _OauthAuthorization_Authorize_Handler(srv interface{}, ctx context.Context,
 }
 
 func _OauthAuthorization_GetAuthorizeState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AuthorizeRequest)
+	in := new(AuthorizeState)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func _OauthAuthorization_GetAuthorizeState_Handler(srv interface{}, ctx context.
 		FullMethod: OauthAuthorization_GetAuthorizeState_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OauthAuthorizationServer).GetAuthorizeState(ctx, req.(*AuthorizeRequest))
+		return srv.(OauthAuthorizationServer).GetAuthorizeState(ctx, req.(*AuthorizeState))
 	}
 	return interceptor(ctx, in, info, handler)
 }
