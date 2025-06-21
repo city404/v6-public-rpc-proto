@@ -35,6 +35,7 @@ type AuthorizeRequest struct {
 	Nonce               string                 `protobuf:"bytes,9,opt,name=nonce,proto3" json:"nonce,omitempty"`                                                          // Nonce for additional security, used in OpenID Connect
 	Device              string                 `protobuf:"bytes,10,opt,name=device,proto3" json:"device,omitempty"`                                                       // Device information, used for device authorization
 	Mode                string                 `protobuf:"bytes,11,opt,name=mode,proto3" json:"mode,omitempty"`                                                           // Country code for the user
+	DebugHost           string                 `protobuf:"bytes,12,opt,name=debug_host,json=debugHost,proto3" json:"debug_host,omitempty"`                                // Debug host for testing purposes
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -146,6 +147,13 @@ func (x *AuthorizeRequest) GetMode() string {
 	return ""
 }
 
+func (x *AuthorizeRequest) GetDebugHost() string {
+	if x != nil {
+		return x.DebugHost
+	}
+	return ""
+}
+
 type AuthorizeResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                                  // Authorization code
@@ -210,7 +218,7 @@ var File_oauth_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
-	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\xda\x02\n" +
+	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\xf9\x02\n" +
 	"\x10AuthorizeRequest\x12\x1b\n" +
 	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12#\n" +
 	"\rresponse_type\x18\x02 \x01(\tR\fresponseType\x12!\n" +
@@ -223,7 +231,9 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x05nonce\x18\t \x01(\tR\x05nonce\x12\x16\n" +
 	"\x06device\x18\n" +
 	" \x01(\tR\x06device\x12\x12\n" +
-	"\x04mode\x18\v \x01(\tR\x04mode\"`\n" +
+	"\x04mode\x18\v \x01(\tR\x04mode\x12\x1d\n" +
+	"\n" +
+	"debug_host\x18\f \x01(\tR\tdebugHost\"`\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
