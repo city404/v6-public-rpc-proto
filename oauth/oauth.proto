@@ -53,4 +53,5 @@ message AuthorizeState {
     string code_challenge = 8; // Code challenge for PKCE
     string code_challenge_method = 9; // Method for code challenge, e.g., "S256"
     string client_id = 10;
+    string device = 11; // Device information, used for device authorization
 }

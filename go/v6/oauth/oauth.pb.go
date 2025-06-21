@@ -226,6 +226,7 @@ type AuthorizeState struct {
 	CodeChallenge       string                 `protobuf:"bytes,8,opt,name=code_challenge,json=codeChallenge,proto3" json:"code_challenge,omitempty"`                     // Code challenge for PKCE
 	CodeChallengeMethod string                 `protobuf:"bytes,9,opt,name=code_challenge_method,json=codeChallengeMethod,proto3" json:"code_challenge_method,omitempty"` // Method for code challenge, e.g., "S256"
 	ClientId            string                 `protobuf:"bytes,10,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	Device              string                 `protobuf:"bytes,11,opt,name=device,proto3" json:"device,omitempty"` // Device information, used for device authorization
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -330,6 +331,13 @@ func (x *AuthorizeState) GetClientId() string {
 	return ""
 }
 
+func (x *AuthorizeState) GetDevice() string {
+	if x != nil {
+		return x.Device
+	}
+	return ""
+}
+
 var File_oauth_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_oauth_proto_rawDesc = "" +
@@ -353,7 +361,7 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
-	"\x05state\x18\x03 \x01(\tR\x05state\"\xc2\x02\n" +
+	"\x05state\x18\x03 \x01(\tR\x05state\"\xda\x02\n" +
 	"\x0eAuthorizeState\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12\x16\n" +
@@ -365,7 +373,8 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x0ecode_challenge\x18\b \x01(\tR\rcodeChallenge\x122\n" +
 	"\x15code_challenge_method\x18\t \x01(\tR\x13codeChallengeMethod\x12\x1b\n" +
 	"\tclient_id\x18\n" +
-	" \x01(\tR\bclientId2\x95\x02\n" +
+	" \x01(\tR\bclientId\x12\x16\n" +
+	"\x06device\x18\v \x01(\tR\x06device2\x95\x02\n" +
 	"\x12OauthAuthorization\x12v\n" +
 	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorize\x12\x86\x01\n" +
 	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a$.v6.services.oauth.AuthorizeResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_stateB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
