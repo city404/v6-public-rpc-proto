@@ -12,6 +12,13 @@ service OauthAuthorization {
             body: "*"
         };
     }
+
+    rpc GetAuthorizeState (AuthorizeRequest) returns (AuthorizeState) {
+        option (google.api.http) = {
+            post: "/v6/oauth/authorize"
+            body: "*"
+        };
+    }
 }
 
 message AuthorizeRequest {
@@ -32,4 +39,10 @@ message AuthorizeResponse {
     string code = 1; // Authorization code
     string redirect_uri = 2; // Redirect URI to send the user back to
     string state = 3; // State parameter to match the request
+}
+
+message AuthorizeState {
+    string client_id = 1; 
+    string state = 2; // State parameter for CSRF protection
+    int32 state_code = 3; // state for PKCE
 }
