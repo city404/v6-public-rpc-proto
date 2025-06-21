@@ -20,6 +20,12 @@ message AuthorizeRequest {
     string redirect_uri = 3; // Redirect URI
     string scope = 4; // Scopes requested
     string state = 5; // State parameter for CSRF protection
+    string code_challenge = 6; // Code challenge for PKCE
+    string code_challenge_method = 7; // Method for code challenge, e.g., "S256"
+    string version = 8; // Version of the OAuth protocol, e.g., "2.0"
+    string nonce = 9; // Nonce for additional security, used in OpenID Connect
+    string device = 10; // Device information, used for device authorization
+    string mode = 11; // Country code for the user
 }
 message AuthorizeResponse {
     string code = 1; // Authorization code

@@ -23,14 +23,20 @@ const (
 )
 
 type AuthorizeRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ClientId      string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`             // Client ID
-	ResponseType  string                 `protobuf:"bytes,2,opt,name=response_type,json=responseType,proto3" json:"response_type,omitempty"` // Response type, e.g., "code"
-	RedirectUri   string                 `protobuf:"bytes,3,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"`    // Redirect URI
-	Scope         string                 `protobuf:"bytes,4,opt,name=scope,proto3" json:"scope,omitempty"`                                   // Scopes requested
-	State         string                 `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`                                   // State parameter for CSRF protection
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	ClientId            string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`                                    // Client ID
+	ResponseType        string                 `protobuf:"bytes,2,opt,name=response_type,json=responseType,proto3" json:"response_type,omitempty"`                        // Response type, e.g., "code"
+	RedirectUri         string                 `protobuf:"bytes,3,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"`                           // Redirect URI
+	Scope               string                 `protobuf:"bytes,4,opt,name=scope,proto3" json:"scope,omitempty"`                                                          // Scopes requested
+	State               string                 `protobuf:"bytes,5,opt,name=state,proto3" json:"state,omitempty"`                                                          // State parameter for CSRF protection
+	CodeChallenge       string                 `protobuf:"bytes,6,opt,name=code_challenge,json=codeChallenge,proto3" json:"code_challenge,omitempty"`                     // Code challenge for PKCE
+	CodeChallengeMethod string                 `protobuf:"bytes,7,opt,name=code_challenge_method,json=codeChallengeMethod,proto3" json:"code_challenge_method,omitempty"` // Method for code challenge, e.g., "S256"
+	Version             string                 `protobuf:"bytes,8,opt,name=version,proto3" json:"version,omitempty"`                                                      // Version of the OAuth protocol, e.g., "2.0"
+	Nonce               string                 `protobuf:"bytes,9,opt,name=nonce,proto3" json:"nonce,omitempty"`                                                          // Nonce for additional security, used in OpenID Connect
+	Device              string                 `protobuf:"bytes,10,opt,name=device,proto3" json:"device,omitempty"`                                                       // Device information, used for device authorization
+	Mode                string                 `protobuf:"bytes,11,opt,name=mode,proto3" json:"mode,omitempty"`                                                           // Country code for the user
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *AuthorizeRequest) Reset() {
@@ -94,6 +100,48 @@ func (x *AuthorizeRequest) GetScope() string {
 func (x *AuthorizeRequest) GetState() string {
 	if x != nil {
 		return x.State
+	}
+	return ""
+}
+
+func (x *AuthorizeRequest) GetCodeChallenge() string {
+	if x != nil {
+		return x.CodeChallenge
+	}
+	return ""
+}
+
+func (x *AuthorizeRequest) GetCodeChallengeMethod() string {
+	if x != nil {
+		return x.CodeChallengeMethod
+	}
+	return ""
+}
+
+func (x *AuthorizeRequest) GetVersion() string {
+	if x != nil {
+		return x.Version
+	}
+	return ""
+}
+
+func (x *AuthorizeRequest) GetNonce() string {
+	if x != nil {
+		return x.Nonce
+	}
+	return ""
+}
+
+func (x *AuthorizeRequest) GetDevice() string {
+	if x != nil {
+		return x.Device
+	}
+	return ""
+}
+
+func (x *AuthorizeRequest) GetMode() string {
+	if x != nil {
+		return x.Mode
 	}
 	return ""
 }
@@ -162,13 +210,20 @@ var File_oauth_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
-	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\xa3\x01\n" +
+	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\xda\x02\n" +
 	"\x10AuthorizeRequest\x12\x1b\n" +
 	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12#\n" +
 	"\rresponse_type\x18\x02 \x01(\tR\fresponseType\x12!\n" +
 	"\fredirect_uri\x18\x03 \x01(\tR\vredirectUri\x12\x14\n" +
 	"\x05scope\x18\x04 \x01(\tR\x05scope\x12\x14\n" +
-	"\x05state\x18\x05 \x01(\tR\x05state\"`\n" +
+	"\x05state\x18\x05 \x01(\tR\x05state\x12%\n" +
+	"\x0ecode_challenge\x18\x06 \x01(\tR\rcodeChallenge\x122\n" +
+	"\x15code_challenge_method\x18\a \x01(\tR\x13codeChallengeMethod\x12\x18\n" +
+	"\aversion\x18\b \x01(\tR\aversion\x12\x14\n" +
+	"\x05nonce\x18\t \x01(\tR\x05nonce\x12\x16\n" +
+	"\x06device\x18\n" +
+	" \x01(\tR\x06device\x12\x12\n" +
+	"\x04mode\x18\v \x01(\tR\x04mode\"`\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
