@@ -508,6 +508,7 @@ func (x *TokenResponse) GetExpiresInTs() int64 {
 
 type RefreshTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`             // Client ID
 	RefreshToken  string                 `protobuf:"bytes,3,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // Refresh token
 	GrantType     string                 `protobuf:"bytes,4,opt,name=grant_type,json=grantType,proto3" json:"grant_type,omitempty"`          // Grant type, e.g., "refresh_token"
 	unknownFields protoimpl.UnknownFields
@@ -542,6 +543,13 @@ func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
 func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
 	return file_oauth_oauth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *RefreshTokenRequest) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
 }
 
 func (x *RefreshTokenRequest) GetRefreshToken() string {
@@ -612,8 +620,9 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
 	"token_type\x18\x04 \x01(\tR\ttokenType\x12\x14\n" +
 	"\x05scope\x18\x05 \x01(\tR\x05scope\x12\"\n" +
-	"\rexpires_in_ts\x18\x06 \x01(\x03R\vexpiresInTs\"Y\n" +
-	"\x13RefreshTokenRequest\x12#\n" +
+	"\rexpires_in_ts\x18\x06 \x01(\x03R\vexpiresInTs\"v\n" +
+	"\x13RefreshTokenRequest\x12\x1b\n" +
+	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12#\n" +
 	"\rrefresh_token\x18\x03 \x01(\tR\frefreshToken\x12\x1d\n" +
 	"\n" +
 	"grant_type\x18\x04 \x01(\tR\tgrantType2\xff\x03\n" +

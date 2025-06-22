@@ -88,6 +88,7 @@ message TokenResponse {
     // string identity = 6; // User identity associated with the token
 }
 message RefreshTokenRequest {
+    string client_id = 1; // Client ID
     string refresh_token = 3; // Refresh token
     string grant_type = 4; // Grant type, e.g., "refresh_token"
 }
