@@ -48,6 +48,7 @@ message AuthorizeRequest {
     string device = 10; // Device information, used for device authorization
     string mode = 11; // Country code for the user
     string debug_host = 12; // Debug host for testing purposes
+    string grant_type = 13; // Grant type, e.g., "authorization_code"
 }
 message AuthorizeResponse {
     string code = 1; // Authorization code

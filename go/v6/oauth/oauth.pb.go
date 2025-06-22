@@ -36,6 +36,7 @@ type AuthorizeRequest struct {
 	Device              string                 `protobuf:"bytes,10,opt,name=device,proto3" json:"device,omitempty"`                                                       // Device information, used for device authorization
 	Mode                string                 `protobuf:"bytes,11,opt,name=mode,proto3" json:"mode,omitempty"`                                                           // Country code for the user
 	DebugHost           string                 `protobuf:"bytes,12,opt,name=debug_host,json=debugHost,proto3" json:"debug_host,omitempty"`                                // Debug host for testing purposes
+	GrantType           string                 `protobuf:"bytes,13,opt,name=grant_type,json=grantType,proto3" json:"grant_type,omitempty"`                                // Grant type, e.g., "authorization_code"
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -150,6 +151,13 @@ func (x *AuthorizeRequest) GetMode() string {
 func (x *AuthorizeRequest) GetDebugHost() string {
 	if x != nil {
 		return x.DebugHost
+	}
+	return ""
+}
+
+func (x *AuthorizeRequest) GetGrantType() string {
+	if x != nil {
+		return x.GrantType
 	}
 	return ""
 }
@@ -554,7 +562,7 @@ var File_oauth_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
-	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\xf9\x02\n" +
+	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\x98\x03\n" +
 	"\x10AuthorizeRequest\x12\x1b\n" +
 	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12#\n" +
 	"\rresponse_type\x18\x02 \x01(\tR\fresponseType\x12!\n" +
@@ -569,7 +577,9 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	" \x01(\tR\x06device\x12\x12\n" +
 	"\x04mode\x18\v \x01(\tR\x04mode\x12\x1d\n" +
 	"\n" +
-	"debug_host\x18\f \x01(\tR\tdebugHost\"x\n" +
+	"debug_host\x18\f \x01(\tR\tdebugHost\x12\x1d\n" +
+	"\n" +
+	"grant_type\x18\r \x01(\tR\tgrantType\"x\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
