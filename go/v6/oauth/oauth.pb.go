@@ -493,9 +493,11 @@ type DeviceCodeAuthorizeState struct {
 	ExpiresIn               int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                                            // Expiration time of the authorization code in seconds
 	VerificationUri         string                 `protobuf:"bytes,4,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"`                           // Verification URI for device authorization
 	VerificationUriComplete string                 `protobuf:"bytes,5,opt,name=verification_uri_complete,json=verificationUriComplete,proto3" json:"verification_uri_complete,omitempty"` // Complete verification URI for device authorization
-	Interval                string                 `protobuf:"bytes,6,opt,name=interval,proto3" json:"interval,omitempty"`                                                                // Polling interval for device authorization
+	Interval                int32                  `protobuf:"varint,6,opt,name=interval,proto3" json:"interval,omitempty"`                                                               // Polling interval for device authorization
 	Status                  string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`                                                                    // Status of the device authorization request
 	State                   string                 `protobuf:"bytes,8,opt,name=state,proto3" json:"state,omitempty"`                                                                      // State parameter to match the request
+	IntervalTs              int64                  `protobuf:"varint,9,opt,name=interval_ts,json=intervalTs,proto3" json:"interval_ts,omitempty"`
+	ExpiresInTs             int64                  `protobuf:"varint,10,opt,name=expires_in_ts,json=expiresInTs,proto3" json:"expires_in_ts,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -565,11 +567,11 @@ func (x *DeviceCodeAuthorizeState) GetVerificationUriComplete() string {
 	return ""
 }
 
-func (x *DeviceCodeAuthorizeState) GetInterval() string {
+func (x *DeviceCodeAuthorizeState) GetInterval() int32 {
 	if x != nil {
 		return x.Interval
 	}
-	return ""
+	return 0
 }
 
 func (x *DeviceCodeAuthorizeState) GetStatus() string {
@@ -584,6 +586,20 @@ func (x *DeviceCodeAuthorizeState) GetState() string {
 		return x.State
 	}
 	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetIntervalTs() int64 {
+	if x != nil {
+		return x.IntervalTs
+	}
+	return 0
+}
+
+func (x *DeviceCodeAuthorizeState) GetExpiresInTs() int64 {
+	if x != nil {
+		return x.ExpiresInTs
+	}
+	return 0
 }
 
 type TokenRequest struct {
@@ -855,7 +871,7 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x15code_challenge_method\x18\t \x01(\tR\x13codeChallengeMethod\x12\x1b\n" +
 	"\tclient_id\x18\n" +
 	" \x01(\tR\bclientId\x12\x16\n" +
-	"\x06device\x18\v \x01(\tR\x06device\"\xa8\x02\n" +
+	"\x06device\x18\v \x01(\tR\x06device\"\xed\x02\n" +
 	"\x18DeviceCodeAuthorizeState\x12\x1b\n" +
 	"\tuser_code\x18\x01 \x01(\tR\buserCode\x12\x1f\n" +
 	"\vdevice_code\x18\x02 \x01(\tR\n" +
@@ -864,9 +880,13 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12)\n" +
 	"\x10verification_uri\x18\x04 \x01(\tR\x0fverificationUri\x12:\n" +
 	"\x19verification_uri_complete\x18\x05 \x01(\tR\x17verificationUriComplete\x12\x1a\n" +
-	"\binterval\x18\x06 \x01(\tR\binterval\x12\x16\n" +
+	"\binterval\x18\x06 \x01(\x05R\binterval\x12\x16\n" +
 	"\x06status\x18\a \x01(\tR\x06status\x12\x14\n" +
-	"\x05state\x18\b \x01(\tR\x05state\"\x89\x01\n" +
+	"\x05state\x18\b \x01(\tR\x05state\x12\x1f\n" +
+	"\vinterval_ts\x18\t \x01(\x03R\n" +
+	"intervalTs\x12\"\n" +
+	"\rexpires_in_ts\x18\n" +
+	" \x01(\x03R\vexpiresInTs\"\x89\x01\n" +
 	"\fTokenRequest\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x04 \x01(\tR\vredirectUri\x12\x1d\n" +

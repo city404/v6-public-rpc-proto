@@ -108,9 +108,11 @@ message DeviceCodeAuthorizeState {
     int64 expires_in = 3; // Expiration time of the authorization code in seconds
     string verification_uri = 4; // Verification URI for device authorization
     string verification_uri_complete = 5; // Complete verification URI for device authorization
-    string interval = 6; // Polling interval for device authorization
+    int32 interval = 6; // Polling interval for device authorization
     string status = 7; // Status of the device authorization request
     string state = 8; // State parameter to match the request
+    int64 interval_ts = 9; 
+    int64 expires_in_ts = 10; 
 }
 
 message TokenRequest {
