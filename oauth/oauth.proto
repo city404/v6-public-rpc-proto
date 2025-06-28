@@ -63,6 +63,7 @@ message AuthorizeRequest {
     string mode = 11; // Country code for the user
     string debug_host = 12; // Debug host for testing purposes
     string grant_type = 13; // Grant type, e.g., "authorization_code"
+    bool legacy = 14; // Legacy flag for compatibility with older clients
 }
 message AuthorizeResponse {
     string code = 1; // Authorization code

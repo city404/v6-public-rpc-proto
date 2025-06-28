@@ -37,6 +37,7 @@ type AuthorizeRequest struct {
 	Mode                string                 `protobuf:"bytes,11,opt,name=mode,proto3" json:"mode,omitempty"`                                                           // Country code for the user
 	DebugHost           string                 `protobuf:"bytes,12,opt,name=debug_host,json=debugHost,proto3" json:"debug_host,omitempty"`                                // Debug host for testing purposes
 	GrantType           string                 `protobuf:"bytes,13,opt,name=grant_type,json=grantType,proto3" json:"grant_type,omitempty"`                                // Grant type, e.g., "authorization_code"
+	Legacy              bool                   `protobuf:"varint,14,opt,name=legacy,proto3" json:"legacy,omitempty"`                                                      // Legacy flag for compatibility with older clients
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -160,6 +161,13 @@ func (x *AuthorizeRequest) GetGrantType() string {
 		return x.GrantType
 	}
 	return ""
+}
+
+func (x *AuthorizeRequest) GetLegacy() bool {
+	if x != nil {
+		return x.Legacy
+	}
+	return false
 }
 
 type AuthorizeResponse struct {
@@ -818,7 +826,7 @@ var File_oauth_oauth_proto protoreflect.FileDescriptor
 
 const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
-	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\x98\x03\n" +
+	"\x11oauth/oauth.proto\x12\x11v6.services.oauth\x1a\x1cgoogle/api/annotations.proto\"\xb0\x03\n" +
 	"\x10AuthorizeRequest\x12\x1b\n" +
 	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12#\n" +
 	"\rresponse_type\x18\x02 \x01(\tR\fresponseType\x12!\n" +
@@ -835,7 +843,8 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
 	"debug_host\x18\f \x01(\tR\tdebugHost\x12\x1d\n" +
 	"\n" +
-	"grant_type\x18\r \x01(\tR\tgrantType\"\xd8\x02\n" +
+	"grant_type\x18\r \x01(\tR\tgrantType\x12\x16\n" +
+	"\x06legacy\x18\x0e \x01(\bR\x06legacy\"\xd8\x02\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
