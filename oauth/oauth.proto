@@ -13,30 +13,10 @@ service OauthAuthorization {
         };
     }
 
-    rpc DeviceCode (AuthorizeRequest) returns (DeviceCodeAuthorizeResponse) {
-        option (google.api.http) = {
-            post: "/v6/oauth/device_code"
-            body: "*"
-        };
-    }
 
     rpc GetAuthorizeState (AuthorizeState) returns (AuthorizeState) {
         option (google.api.http) = {
             post: "/v6/oauth/get_authorize_state"
-            body: "*"
-        };
-    }
-
-    rpc GetDeviceCodeState (DeviceCodeAuthorizeState) returns (DeviceCodeAuthorizeState) {
-        option (google.api.http) = {
-            post: "/v6/oauth/get_device_code_state"
-            body: "*"
-        };
-    }
-
-    rpc CompleteDeviceCodeAuthorize (DeviceCodeAuthorizeState) returns (DeviceCodeAuthorizeState) {
-        option (google.api.http) = {
-            post: "/v6/oauth/get_device_code_state"
             body: "*"
         };
     }
@@ -85,15 +65,6 @@ message AuthorizeResponse {
     // string identity = 4;
 }
 
-message DeviceCodeAuthorizeResponse {
-    string user_code = 1; // User code for device authorization
-    string device_code = 2; // Device code for device authorization
-    int64 expires_in = 3; // Expiration time of the authorization code in seconds
-    string verification_uri = 4; // Verification URI for device authorization
-    string interval = 6; // Polling interval for device authorization
-    // string identity = 4;
-}
-
 message AuthorizeState {
     string code = 1; 
     string state = 2; // State parameter for CSRF protection
@@ -106,19 +77,6 @@ message AuthorizeState {
     string code_challenge_method = 9; // Method for code challenge, e.g., "S256"
     string client_id = 10;
     string device = 11; // Device information, used for device authorization
-}
-
-message DeviceCodeAuthorizeState {
-    string user_code = 1; // User code for device authorization
-    string device_code = 2; // Device code for device authorization
-    int64 expires_in = 3; // Expiration time of the authorization code in seconds
-    string verification_uri = 4; // Verification URI for device authorization
-    string verification_uri_complete = 5; // Complete verification URI for device authorization
-    int32 interval = 6; // Polling interval for device authorization
-    string status = 7; // Status of the device authorization request
-    string state = 8; // State parameter to match the request
-    int64 interval_ts = 9; 
-    int64 expires_in_ts = 10; 
 }
 
 message TokenRequest {
