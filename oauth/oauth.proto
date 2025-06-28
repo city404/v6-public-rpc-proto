@@ -34,6 +34,13 @@ service OauthAuthorization {
         };
     }
 
+    rpc CompleteDeviceCodeAuthorize (DeviceCodeAuthorizeState) returns (DeviceCodeAuthorizeState) {
+        option (google.api.http) = {
+            post: "/v6/oauth/get_device_code_state"
+            body: "*"
+        };
+    }
+
     rpc GetToken (TokenRequest) returns (TokenResponse) {
         option (google.api.http) = {
             post: "/v6/oauth/get_token"
@@ -74,7 +81,6 @@ message AuthorizeResponse {
     string device_code = 6; // Device code for device authorization
     int64 expires_in = 7; // Expiration time of the authorization code in seconds
     string verification_uri = 8; // Verification URI for device authorization
-    string verification_uri_complete = 9; // Complete verification URI for device authorization
     string interval = 10; // Polling interval for device authorization
     // string identity = 4;
 }
@@ -84,7 +90,6 @@ message DeviceCodeAuthorizeResponse {
     string device_code = 2; // Device code for device authorization
     int64 expires_in = 3; // Expiration time of the authorization code in seconds
     string verification_uri = 4; // Verification URI for device authorization
-    string verification_uri_complete = 5; // Complete verification URI for device authorization
     string interval = 6; // Polling interval for device authorization
     // string identity = 4;
 }
