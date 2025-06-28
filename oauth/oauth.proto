@@ -34,13 +34,6 @@ service OauthAuthorization {
         };
     }
 
-    rpc DeviceCodeStateAuthorize (DeviceCodeAuthorizeState) returns (DeviceCodeAuthorizeState) {
-        option (google.api.http) = {
-            post: "/v6/oauth/get_device_code_state"
-            body: "*"
-        };
-    }
-
     rpc GetToken (TokenRequest) returns (TokenResponse) {
         option (google.api.http) = {
             post: "/v6/oauth/get_token"
