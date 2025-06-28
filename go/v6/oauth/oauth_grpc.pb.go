@@ -19,10 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	OauthAuthorization_Authorize_FullMethodName         = "/v6.services.oauth.OauthAuthorization/Authorize"
-	OauthAuthorization_GetAuthorizeState_FullMethodName = "/v6.services.oauth.OauthAuthorization/GetAuthorizeState"
-	OauthAuthorization_GetToken_FullMethodName          = "/v6.services.oauth.OauthAuthorization/GetToken"
-	OauthAuthorization_RefreshToken_FullMethodName      = "/v6.services.oauth.OauthAuthorization/RefreshToken"
+	OauthAuthorization_Authorize_FullMethodName          = "/v6.services.oauth.OauthAuthorization/Authorize"
+	OauthAuthorization_DeviceCode_FullMethodName         = "/v6.services.oauth.OauthAuthorization/DeviceCode"
+	OauthAuthorization_GetAuthorizeState_FullMethodName  = "/v6.services.oauth.OauthAuthorization/GetAuthorizeState"
+	OauthAuthorization_GetDeviceCodeState_FullMethodName = "/v6.services.oauth.OauthAuthorization/GetDeviceCodeState"
+	OauthAuthorization_GetToken_FullMethodName           = "/v6.services.oauth.OauthAuthorization/GetToken"
+	OauthAuthorization_RefreshToken_FullMethodName       = "/v6.services.oauth.OauthAuthorization/RefreshToken"
 )
 
 // OauthAuthorizationClient is the client API for OauthAuthorization service.
@@ -30,7 +32,9 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OauthAuthorizationClient interface {
 	Authorize(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*AuthorizeResponse, error)
+	DeviceCode(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*DeviceCodeAuthorizeResponse, error)
 	GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeState, error)
+	GetDeviceCodeState(ctx context.Context, in *DeviceCodeAuthorizeState, opts ...grpc.CallOption) (*DeviceCodeAuthorizeState, error)
 	GetToken(ctx context.Context, in *TokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
 	RefreshToken(ctx context.Context, in *RefreshTokenRequest, opts ...grpc.CallOption) (*TokenResponse, error)
 }
@@ -53,10 +57,30 @@ func (c *oauthAuthorizationClient) Authorize(ctx context.Context, in *AuthorizeR
 	return out, nil
 }
 
+func (c *oauthAuthorizationClient) DeviceCode(ctx context.Context, in *AuthorizeRequest, opts ...grpc.CallOption) (*DeviceCodeAuthorizeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeviceCodeAuthorizeResponse)
+	err := c.cc.Invoke(ctx, OauthAuthorization_DeviceCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *oauthAuthorizationClient) GetAuthorizeState(ctx context.Context, in *AuthorizeState, opts ...grpc.CallOption) (*AuthorizeState, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AuthorizeState)
 	err := c.cc.Invoke(ctx, OauthAuthorization_GetAuthorizeState_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *oauthAuthorizationClient) GetDeviceCodeState(ctx context.Context, in *DeviceCodeAuthorizeState, opts ...grpc.CallOption) (*DeviceCodeAuthorizeState, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeviceCodeAuthorizeState)
+	err := c.cc.Invoke(ctx, OauthAuthorization_GetDeviceCodeState_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -88,7 +112,9 @@ func (c *oauthAuthorizationClient) RefreshToken(ctx context.Context, in *Refresh
 // for forward compatibility.
 type OauthAuthorizationServer interface {
 	Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error)
+	DeviceCode(context.Context, *AuthorizeRequest) (*DeviceCodeAuthorizeResponse, error)
 	GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeState, error)
+	GetDeviceCodeState(context.Context, *DeviceCodeAuthorizeState) (*DeviceCodeAuthorizeState, error)
 	GetToken(context.Context, *TokenRequest) (*TokenResponse, error)
 	RefreshToken(context.Context, *RefreshTokenRequest) (*TokenResponse, error)
 	mustEmbedUnimplementedOauthAuthorizationServer()
@@ -104,8 +130,14 @@ type UnimplementedOauthAuthorizationServer struct{}
 func (UnimplementedOauthAuthorizationServer) Authorize(context.Context, *AuthorizeRequest) (*AuthorizeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Authorize not implemented")
 }
+func (UnimplementedOauthAuthorizationServer) DeviceCode(context.Context, *AuthorizeRequest) (*DeviceCodeAuthorizeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeviceCode not implemented")
+}
 func (UnimplementedOauthAuthorizationServer) GetAuthorizeState(context.Context, *AuthorizeState) (*AuthorizeState, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthorizeState not implemented")
+}
+func (UnimplementedOauthAuthorizationServer) GetDeviceCodeState(context.Context, *DeviceCodeAuthorizeState) (*DeviceCodeAuthorizeState, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDeviceCodeState not implemented")
 }
 func (UnimplementedOauthAuthorizationServer) GetToken(context.Context, *TokenRequest) (*TokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetToken not implemented")
@@ -152,6 +184,24 @@ func _OauthAuthorization_Authorize_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OauthAuthorization_DeviceCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthorizeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthAuthorizationServer).DeviceCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthAuthorization_DeviceCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthAuthorizationServer).DeviceCode(ctx, req.(*AuthorizeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OauthAuthorization_GetAuthorizeState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AuthorizeState)
 	if err := dec(in); err != nil {
@@ -166,6 +216,24 @@ func _OauthAuthorization_GetAuthorizeState_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(OauthAuthorizationServer).GetAuthorizeState(ctx, req.(*AuthorizeState))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OauthAuthorization_GetDeviceCodeState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeviceCodeAuthorizeState)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OauthAuthorizationServer).GetDeviceCodeState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: OauthAuthorization_GetDeviceCodeState_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OauthAuthorizationServer).GetDeviceCodeState(ctx, req.(*DeviceCodeAuthorizeState))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -218,8 +286,16 @@ var OauthAuthorization_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _OauthAuthorization_Authorize_Handler,
 		},
 		{
+			MethodName: "DeviceCode",
+			Handler:    _OauthAuthorization_DeviceCode_Handler,
+		},
+		{
 			MethodName: "GetAuthorizeState",
 			Handler:    _OauthAuthorization_GetAuthorizeState_Handler,
+		},
+		{
+			MethodName: "GetDeviceCodeState",
+			Handler:    _OauthAuthorization_GetDeviceCodeState_Handler,
 		},
 		{
 			MethodName: "GetToken",

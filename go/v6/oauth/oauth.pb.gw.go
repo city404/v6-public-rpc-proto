@@ -62,6 +62,33 @@ func local_request_OauthAuthorization_Authorize_0(ctx context.Context, marshaler
 	return msg, metadata, err
 }
 
+func request_OauthAuthorization_DeviceCode_0(ctx context.Context, marshaler runtime.Marshaler, client OauthAuthorizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq AuthorizeRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	msg, err := client.DeviceCode(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_OauthAuthorization_DeviceCode_0(ctx context.Context, marshaler runtime.Marshaler, server OauthAuthorizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq AuthorizeRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	msg, err := server.DeviceCode(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 func request_OauthAuthorization_GetAuthorizeState_0(ctx context.Context, marshaler runtime.Marshaler, client OauthAuthorizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq AuthorizeState
@@ -86,6 +113,33 @@ func local_request_OauthAuthorization_GetAuthorizeState_0(ctx context.Context, m
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetAuthorizeState(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_OauthAuthorization_GetDeviceCodeState_0(ctx context.Context, marshaler runtime.Marshaler, client OauthAuthorizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeviceCodeAuthorizeState
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	msg, err := client.GetDeviceCodeState(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_OauthAuthorization_GetDeviceCodeState_0(ctx context.Context, marshaler runtime.Marshaler, server OauthAuthorizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeviceCodeAuthorizeState
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	msg, err := server.GetDeviceCodeState(ctx, &protoReq)
 	return msg, metadata, err
 }
 
@@ -169,6 +223,26 @@ func RegisterOauthAuthorizationHandlerServer(ctx context.Context, mux *runtime.S
 		}
 		forward_OauthAuthorization_Authorize_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPost, pattern_OauthAuthorization_DeviceCode_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.oauth.OauthAuthorization/DeviceCode", runtime.WithHTTPPathPattern("/v6/oauth/device_code"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_OauthAuthorization_DeviceCode_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_OauthAuthorization_DeviceCode_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPost, pattern_OauthAuthorization_GetAuthorizeState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -188,6 +262,26 @@ func RegisterOauthAuthorizationHandlerServer(ctx context.Context, mux *runtime.S
 			return
 		}
 		forward_OauthAuthorization_GetAuthorizeState_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPost, pattern_OauthAuthorization_GetDeviceCodeState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/v6.services.oauth.OauthAuthorization/GetDeviceCodeState", runtime.WithHTTPPathPattern("/v6/oauth/get_device_code_state"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_OauthAuthorization_GetDeviceCodeState_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_OauthAuthorization_GetDeviceCodeState_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_OauthAuthorization_GetToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -286,6 +380,23 @@ func RegisterOauthAuthorizationHandlerClient(ctx context.Context, mux *runtime.S
 		}
 		forward_OauthAuthorization_Authorize_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPost, pattern_OauthAuthorization_DeviceCode_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.oauth.OauthAuthorization/DeviceCode", runtime.WithHTTPPathPattern("/v6/oauth/device_code"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_OauthAuthorization_DeviceCode_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_OauthAuthorization_DeviceCode_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPost, pattern_OauthAuthorization_GetAuthorizeState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -302,6 +413,23 @@ func RegisterOauthAuthorizationHandlerClient(ctx context.Context, mux *runtime.S
 			return
 		}
 		forward_OauthAuthorization_GetAuthorizeState_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPost, pattern_OauthAuthorization_GetDeviceCodeState_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/v6.services.oauth.OauthAuthorization/GetDeviceCodeState", runtime.WithHTTPPathPattern("/v6/oauth/get_device_code_state"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_OauthAuthorization_GetDeviceCodeState_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_OauthAuthorization_GetDeviceCodeState_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_OauthAuthorization_GetToken_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -341,15 +469,19 @@ func RegisterOauthAuthorizationHandlerClient(ctx context.Context, mux *runtime.S
 }
 
 var (
-	pattern_OauthAuthorization_Authorize_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "authorize"}, ""))
-	pattern_OauthAuthorization_GetAuthorizeState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "get_authorize_state"}, ""))
-	pattern_OauthAuthorization_GetToken_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "get_token"}, ""))
-	pattern_OauthAuthorization_RefreshToken_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "refresh_token"}, ""))
+	pattern_OauthAuthorization_Authorize_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "authorize"}, ""))
+	pattern_OauthAuthorization_DeviceCode_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "device_code"}, ""))
+	pattern_OauthAuthorization_GetAuthorizeState_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "get_authorize_state"}, ""))
+	pattern_OauthAuthorization_GetDeviceCodeState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "get_device_code_state"}, ""))
+	pattern_OauthAuthorization_GetToken_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "get_token"}, ""))
+	pattern_OauthAuthorization_RefreshToken_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v6", "oauth", "refresh_token"}, ""))
 )
 
 var (
-	forward_OauthAuthorization_Authorize_0         = runtime.ForwardResponseMessage
-	forward_OauthAuthorization_GetAuthorizeState_0 = runtime.ForwardResponseMessage
-	forward_OauthAuthorization_GetToken_0          = runtime.ForwardResponseMessage
-	forward_OauthAuthorization_RefreshToken_0      = runtime.ForwardResponseMessage
+	forward_OauthAuthorization_Authorize_0          = runtime.ForwardResponseMessage
+	forward_OauthAuthorization_DeviceCode_0         = runtime.ForwardResponseMessage
+	forward_OauthAuthorization_GetAuthorizeState_0  = runtime.ForwardResponseMessage
+	forward_OauthAuthorization_GetDeviceCodeState_0 = runtime.ForwardResponseMessage
+	forward_OauthAuthorization_GetToken_0           = runtime.ForwardResponseMessage
+	forward_OauthAuthorization_RefreshToken_0       = runtime.ForwardResponseMessage
 )

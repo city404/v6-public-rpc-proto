@@ -163,13 +163,19 @@ func (x *AuthorizeRequest) GetGrantType() string {
 }
 
 type AuthorizeResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Code          string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                                  // Authorization code
-	RedirectUri   string                 `protobuf:"bytes,2,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"` // Redirect URI to send the user back to
-	State         string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`                                // State parameter to match the request
-	Status        string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                              // Status of the authorization request
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	Code                    string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`                                                                        // Authorization code
+	RedirectUri             string                 `protobuf:"bytes,2,opt,name=redirect_uri,json=redirectUri,proto3" json:"redirect_uri,omitempty"`                                       // Redirect URI to send the user back to
+	State                   string                 `protobuf:"bytes,3,opt,name=state,proto3" json:"state,omitempty"`                                                                      // State parameter to match the request
+	Status                  string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                                                                    // Status of the authorization request
+	UserCode                string                 `protobuf:"bytes,5,opt,name=user_code,json=userCode,proto3" json:"user_code,omitempty"`                                                // User code for device authorization
+	DeviceCode              string                 `protobuf:"bytes,6,opt,name=device_code,json=deviceCode,proto3" json:"device_code,omitempty"`                                          // Device code for device authorization
+	ExpiresIn               int64                  `protobuf:"varint,7,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                                            // Expiration time of the authorization code in seconds
+	VerificationUri         string                 `protobuf:"bytes,8,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"`                           // Verification URI for device authorization
+	VerificationUriComplete string                 `protobuf:"bytes,9,opt,name=verification_uri_complete,json=verificationUriComplete,proto3" json:"verification_uri_complete,omitempty"` // Complete verification URI for device authorization
+	Interval                string                 `protobuf:"bytes,10,opt,name=interval,proto3" json:"interval,omitempty"`                                                               // Polling interval for device authorization
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
 }
 
 func (x *AuthorizeResponse) Reset() {
@@ -230,6 +236,132 @@ func (x *AuthorizeResponse) GetStatus() string {
 	return ""
 }
 
+func (x *AuthorizeResponse) GetUserCode() string {
+	if x != nil {
+		return x.UserCode
+	}
+	return ""
+}
+
+func (x *AuthorizeResponse) GetDeviceCode() string {
+	if x != nil {
+		return x.DeviceCode
+	}
+	return ""
+}
+
+func (x *AuthorizeResponse) GetExpiresIn() int64 {
+	if x != nil {
+		return x.ExpiresIn
+	}
+	return 0
+}
+
+func (x *AuthorizeResponse) GetVerificationUri() string {
+	if x != nil {
+		return x.VerificationUri
+	}
+	return ""
+}
+
+func (x *AuthorizeResponse) GetVerificationUriComplete() string {
+	if x != nil {
+		return x.VerificationUriComplete
+	}
+	return ""
+}
+
+func (x *AuthorizeResponse) GetInterval() string {
+	if x != nil {
+		return x.Interval
+	}
+	return ""
+}
+
+type DeviceCodeAuthorizeResponse struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	UserCode                string                 `protobuf:"bytes,1,opt,name=user_code,json=userCode,proto3" json:"user_code,omitempty"`                                                // User code for device authorization
+	DeviceCode              string                 `protobuf:"bytes,2,opt,name=device_code,json=deviceCode,proto3" json:"device_code,omitempty"`                                          // Device code for device authorization
+	ExpiresIn               int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                                            // Expiration time of the authorization code in seconds
+	VerificationUri         string                 `protobuf:"bytes,4,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"`                           // Verification URI for device authorization
+	VerificationUriComplete string                 `protobuf:"bytes,5,opt,name=verification_uri_complete,json=verificationUriComplete,proto3" json:"verification_uri_complete,omitempty"` // Complete verification URI for device authorization
+	Interval                string                 `protobuf:"bytes,6,opt,name=interval,proto3" json:"interval,omitempty"`                                                                // Polling interval for device authorization
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *DeviceCodeAuthorizeResponse) Reset() {
+	*x = DeviceCodeAuthorizeResponse{}
+	mi := &file_oauth_oauth_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeviceCodeAuthorizeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeviceCodeAuthorizeResponse) ProtoMessage() {}
+
+func (x *DeviceCodeAuthorizeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_oauth_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeviceCodeAuthorizeResponse.ProtoReflect.Descriptor instead.
+func (*DeviceCodeAuthorizeResponse) Descriptor() ([]byte, []int) {
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *DeviceCodeAuthorizeResponse) GetUserCode() string {
+	if x != nil {
+		return x.UserCode
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeResponse) GetDeviceCode() string {
+	if x != nil {
+		return x.DeviceCode
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeResponse) GetExpiresIn() int64 {
+	if x != nil {
+		return x.ExpiresIn
+	}
+	return 0
+}
+
+func (x *DeviceCodeAuthorizeResponse) GetVerificationUri() string {
+	if x != nil {
+		return x.VerificationUri
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeResponse) GetVerificationUriComplete() string {
+	if x != nil {
+		return x.VerificationUriComplete
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeResponse) GetInterval() string {
+	if x != nil {
+		return x.Interval
+	}
+	return ""
+}
+
 type AuthorizeState struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Code                string                 `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
@@ -249,7 +381,7 @@ type AuthorizeState struct {
 
 func (x *AuthorizeState) Reset() {
 	*x = AuthorizeState{}
-	mi := &file_oauth_oauth_proto_msgTypes[2]
+	mi := &file_oauth_oauth_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -261,7 +393,7 @@ func (x *AuthorizeState) String() string {
 func (*AuthorizeState) ProtoMessage() {}
 
 func (x *AuthorizeState) ProtoReflect() protoreflect.Message {
-	mi := &file_oauth_oauth_proto_msgTypes[2]
+	mi := &file_oauth_oauth_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -274,7 +406,7 @@ func (x *AuthorizeState) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthorizeState.ProtoReflect.Descriptor instead.
 func (*AuthorizeState) Descriptor() ([]byte, []int) {
-	return file_oauth_oauth_proto_rawDescGZIP(), []int{2}
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AuthorizeState) GetCode() string {
@@ -354,6 +486,106 @@ func (x *AuthorizeState) GetDevice() string {
 	return ""
 }
 
+type DeviceCodeAuthorizeState struct {
+	state                   protoimpl.MessageState `protogen:"open.v1"`
+	UserCode                string                 `protobuf:"bytes,1,opt,name=user_code,json=userCode,proto3" json:"user_code,omitempty"`                                                // User code for device authorization
+	DeviceCode              string                 `protobuf:"bytes,2,opt,name=device_code,json=deviceCode,proto3" json:"device_code,omitempty"`                                          // Device code for device authorization
+	ExpiresIn               int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                                            // Expiration time of the authorization code in seconds
+	VerificationUri         string                 `protobuf:"bytes,4,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"`                           // Verification URI for device authorization
+	VerificationUriComplete string                 `protobuf:"bytes,5,opt,name=verification_uri_complete,json=verificationUriComplete,proto3" json:"verification_uri_complete,omitempty"` // Complete verification URI for device authorization
+	Interval                string                 `protobuf:"bytes,6,opt,name=interval,proto3" json:"interval,omitempty"`                                                                // Polling interval for device authorization
+	Status                  string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`                                                                    // Status of the device authorization request
+	State                   string                 `protobuf:"bytes,8,opt,name=state,proto3" json:"state,omitempty"`                                                                      // State parameter to match the request
+	unknownFields           protoimpl.UnknownFields
+	sizeCache               protoimpl.SizeCache
+}
+
+func (x *DeviceCodeAuthorizeState) Reset() {
+	*x = DeviceCodeAuthorizeState{}
+	mi := &file_oauth_oauth_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeviceCodeAuthorizeState) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeviceCodeAuthorizeState) ProtoMessage() {}
+
+func (x *DeviceCodeAuthorizeState) ProtoReflect() protoreflect.Message {
+	mi := &file_oauth_oauth_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeviceCodeAuthorizeState.ProtoReflect.Descriptor instead.
+func (*DeviceCodeAuthorizeState) Descriptor() ([]byte, []int) {
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *DeviceCodeAuthorizeState) GetUserCode() string {
+	if x != nil {
+		return x.UserCode
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetDeviceCode() string {
+	if x != nil {
+		return x.DeviceCode
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetExpiresIn() int64 {
+	if x != nil {
+		return x.ExpiresIn
+	}
+	return 0
+}
+
+func (x *DeviceCodeAuthorizeState) GetVerificationUri() string {
+	if x != nil {
+		return x.VerificationUri
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetVerificationUriComplete() string {
+	if x != nil {
+		return x.VerificationUriComplete
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetInterval() string {
+	if x != nil {
+		return x.Interval
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetState() string {
+	if x != nil {
+		return x.State
+	}
+	return ""
+}
+
 type TokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Code          string                 `protobuf:"bytes,3,opt,name=code,proto3" json:"code,omitempty"`                                     // Authorization code received from the authorization endpoint
@@ -366,7 +598,7 @@ type TokenRequest struct {
 
 func (x *TokenRequest) Reset() {
 	*x = TokenRequest{}
-	mi := &file_oauth_oauth_proto_msgTypes[3]
+	mi := &file_oauth_oauth_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -378,7 +610,7 @@ func (x *TokenRequest) String() string {
 func (*TokenRequest) ProtoMessage() {}
 
 func (x *TokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_oauth_oauth_proto_msgTypes[3]
+	mi := &file_oauth_oauth_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -391,7 +623,7 @@ func (x *TokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenRequest.ProtoReflect.Descriptor instead.
 func (*TokenRequest) Descriptor() ([]byte, []int) {
-	return file_oauth_oauth_proto_rawDescGZIP(), []int{3}
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *TokenRequest) GetCode() string {
@@ -436,7 +668,7 @@ type TokenResponse struct {
 
 func (x *TokenResponse) Reset() {
 	*x = TokenResponse{}
-	mi := &file_oauth_oauth_proto_msgTypes[4]
+	mi := &file_oauth_oauth_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -448,7 +680,7 @@ func (x *TokenResponse) String() string {
 func (*TokenResponse) ProtoMessage() {}
 
 func (x *TokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_oauth_oauth_proto_msgTypes[4]
+	mi := &file_oauth_oauth_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -461,7 +693,7 @@ func (x *TokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TokenResponse.ProtoReflect.Descriptor instead.
 func (*TokenResponse) Descriptor() ([]byte, []int) {
-	return file_oauth_oauth_proto_rawDescGZIP(), []int{4}
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *TokenResponse) GetAccessToken() string {
@@ -517,7 +749,7 @@ type RefreshTokenRequest struct {
 
 func (x *RefreshTokenRequest) Reset() {
 	*x = RefreshTokenRequest{}
-	mi := &file_oauth_oauth_proto_msgTypes[5]
+	mi := &file_oauth_oauth_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -529,7 +761,7 @@ func (x *RefreshTokenRequest) String() string {
 func (*RefreshTokenRequest) ProtoMessage() {}
 
 func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_oauth_oauth_proto_msgTypes[5]
+	mi := &file_oauth_oauth_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -542,7 +774,7 @@ func (x *RefreshTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RefreshTokenRequest.ProtoReflect.Descriptor instead.
 func (*RefreshTokenRequest) Descriptor() ([]byte, []int) {
-	return file_oauth_oauth_proto_rawDescGZIP(), []int{5}
+	return file_oauth_oauth_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *RefreshTokenRequest) GetClientId() string {
@@ -587,12 +819,30 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
 	"debug_host\x18\f \x01(\tR\tdebugHost\x12\x1d\n" +
 	"\n" +
-	"grant_type\x18\r \x01(\tR\tgrantType\"x\n" +
+	"grant_type\x18\r \x01(\tR\tgrantType\"\xd8\x02\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
 	"\x05state\x18\x03 \x01(\tR\x05state\x12\x16\n" +
-	"\x06status\x18\x04 \x01(\tR\x06status\"\xda\x02\n" +
+	"\x06status\x18\x04 \x01(\tR\x06status\x12\x1b\n" +
+	"\tuser_code\x18\x05 \x01(\tR\buserCode\x12\x1f\n" +
+	"\vdevice_code\x18\x06 \x01(\tR\n" +
+	"deviceCode\x12\x1d\n" +
+	"\n" +
+	"expires_in\x18\a \x01(\x03R\texpiresIn\x12)\n" +
+	"\x10verification_uri\x18\b \x01(\tR\x0fverificationUri\x12:\n" +
+	"\x19verification_uri_complete\x18\t \x01(\tR\x17verificationUriComplete\x12\x1a\n" +
+	"\binterval\x18\n" +
+	" \x01(\tR\binterval\"\xfd\x01\n" +
+	"\x1bDeviceCodeAuthorizeResponse\x12\x1b\n" +
+	"\tuser_code\x18\x01 \x01(\tR\buserCode\x12\x1f\n" +
+	"\vdevice_code\x18\x02 \x01(\tR\n" +
+	"deviceCode\x12\x1d\n" +
+	"\n" +
+	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12)\n" +
+	"\x10verification_uri\x18\x04 \x01(\tR\x0fverificationUri\x12:\n" +
+	"\x19verification_uri_complete\x18\x05 \x01(\tR\x17verificationUriComplete\x12\x1a\n" +
+	"\binterval\x18\x06 \x01(\tR\binterval\"\xda\x02\n" +
 	"\x0eAuthorizeState\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12\x16\n" +
@@ -605,7 +855,18 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x15code_challenge_method\x18\t \x01(\tR\x13codeChallengeMethod\x12\x1b\n" +
 	"\tclient_id\x18\n" +
 	" \x01(\tR\bclientId\x12\x16\n" +
-	"\x06device\x18\v \x01(\tR\x06device\"\x89\x01\n" +
+	"\x06device\x18\v \x01(\tR\x06device\"\xa8\x02\n" +
+	"\x18DeviceCodeAuthorizeState\x12\x1b\n" +
+	"\tuser_code\x18\x01 \x01(\tR\buserCode\x12\x1f\n" +
+	"\vdevice_code\x18\x02 \x01(\tR\n" +
+	"deviceCode\x12\x1d\n" +
+	"\n" +
+	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12)\n" +
+	"\x10verification_uri\x18\x04 \x01(\tR\x0fverificationUri\x12:\n" +
+	"\x19verification_uri_complete\x18\x05 \x01(\tR\x17verificationUriComplete\x12\x1a\n" +
+	"\binterval\x18\x06 \x01(\tR\binterval\x12\x16\n" +
+	"\x06status\x18\a \x01(\tR\x06status\x12\x14\n" +
+	"\x05state\x18\b \x01(\tR\x05state\"\x89\x01\n" +
 	"\fTokenRequest\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x04 \x01(\tR\vredirectUri\x12\x1d\n" +
@@ -625,10 +886,13 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12#\n" +
 	"\rrefresh_token\x18\x03 \x01(\tR\frefreshToken\x12\x1d\n" +
 	"\n" +
-	"grant_type\x18\x04 \x01(\tR\tgrantType2\xff\x03\n" +
+	"grant_type\x18\x04 \x01(\tR\tgrantType2\xa2\x06\n" +
 	"\x12OauthAuthorization\x12v\n" +
 	"\tAuthorize\x12#.v6.services.oauth.AuthorizeRequest\x1a$.v6.services.oauth.AuthorizeResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/authorize\x12\x83\x01\n" +
-	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a!.v6.services.oauth.AuthorizeState\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_state\x12m\n" +
+	"\n" +
+	"DeviceCode\x12#.v6.services.oauth.AuthorizeRequest\x1a..v6.services.oauth.DeviceCodeAuthorizeResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v6/oauth/device_code\x12\x83\x01\n" +
+	"\x11GetAuthorizeState\x12!.v6.services.oauth.AuthorizeState\x1a!.v6.services.oauth.AuthorizeState\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/oauth/get_authorize_state\x12\x9a\x01\n" +
+	"\x12GetDeviceCodeState\x12+.v6.services.oauth.DeviceCodeAuthorizeState\x1a+.v6.services.oauth.DeviceCodeAuthorizeState\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v6/oauth/get_device_code_state\x12m\n" +
 	"\bGetToken\x12\x1f.v6.services.oauth.TokenRequest\x1a .v6.services.oauth.TokenResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/oauth/get_token\x12|\n" +
 	"\fRefreshToken\x12&.v6.services.oauth.RefreshTokenRequest\x1a .v6.services.oauth.TokenResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v6/oauth/refresh_tokenB4Z2github.com/city404/v6-public-rpc-proto/go/v6/oauthb\x06proto3"
 
@@ -644,26 +908,32 @@ func file_oauth_oauth_proto_rawDescGZIP() []byte {
 	return file_oauth_oauth_proto_rawDescData
 }
 
-var file_oauth_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_oauth_oauth_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_oauth_oauth_proto_goTypes = []any{
-	(*AuthorizeRequest)(nil),    // 0: v6.services.oauth.AuthorizeRequest
-	(*AuthorizeResponse)(nil),   // 1: v6.services.oauth.AuthorizeResponse
-	(*AuthorizeState)(nil),      // 2: v6.services.oauth.AuthorizeState
-	(*TokenRequest)(nil),        // 3: v6.services.oauth.TokenRequest
-	(*TokenResponse)(nil),       // 4: v6.services.oauth.TokenResponse
-	(*RefreshTokenRequest)(nil), // 5: v6.services.oauth.RefreshTokenRequest
+	(*AuthorizeRequest)(nil),            // 0: v6.services.oauth.AuthorizeRequest
+	(*AuthorizeResponse)(nil),           // 1: v6.services.oauth.AuthorizeResponse
+	(*DeviceCodeAuthorizeResponse)(nil), // 2: v6.services.oauth.DeviceCodeAuthorizeResponse
+	(*AuthorizeState)(nil),              // 3: v6.services.oauth.AuthorizeState
+	(*DeviceCodeAuthorizeState)(nil),    // 4: v6.services.oauth.DeviceCodeAuthorizeState
+	(*TokenRequest)(nil),                // 5: v6.services.oauth.TokenRequest
+	(*TokenResponse)(nil),               // 6: v6.services.oauth.TokenResponse
+	(*RefreshTokenRequest)(nil),         // 7: v6.services.oauth.RefreshTokenRequest
 }
 var file_oauth_oauth_proto_depIdxs = []int32{
 	0, // 0: v6.services.oauth.OauthAuthorization.Authorize:input_type -> v6.services.oauth.AuthorizeRequest
-	2, // 1: v6.services.oauth.OauthAuthorization.GetAuthorizeState:input_type -> v6.services.oauth.AuthorizeState
-	3, // 2: v6.services.oauth.OauthAuthorization.GetToken:input_type -> v6.services.oauth.TokenRequest
-	5, // 3: v6.services.oauth.OauthAuthorization.RefreshToken:input_type -> v6.services.oauth.RefreshTokenRequest
-	1, // 4: v6.services.oauth.OauthAuthorization.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
-	2, // 5: v6.services.oauth.OauthAuthorization.GetAuthorizeState:output_type -> v6.services.oauth.AuthorizeState
-	4, // 6: v6.services.oauth.OauthAuthorization.GetToken:output_type -> v6.services.oauth.TokenResponse
-	4, // 7: v6.services.oauth.OauthAuthorization.RefreshToken:output_type -> v6.services.oauth.TokenResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	0, // 1: v6.services.oauth.OauthAuthorization.DeviceCode:input_type -> v6.services.oauth.AuthorizeRequest
+	3, // 2: v6.services.oauth.OauthAuthorization.GetAuthorizeState:input_type -> v6.services.oauth.AuthorizeState
+	4, // 3: v6.services.oauth.OauthAuthorization.GetDeviceCodeState:input_type -> v6.services.oauth.DeviceCodeAuthorizeState
+	5, // 4: v6.services.oauth.OauthAuthorization.GetToken:input_type -> v6.services.oauth.TokenRequest
+	7, // 5: v6.services.oauth.OauthAuthorization.RefreshToken:input_type -> v6.services.oauth.RefreshTokenRequest
+	1, // 6: v6.services.oauth.OauthAuthorization.Authorize:output_type -> v6.services.oauth.AuthorizeResponse
+	2, // 7: v6.services.oauth.OauthAuthorization.DeviceCode:output_type -> v6.services.oauth.DeviceCodeAuthorizeResponse
+	3, // 8: v6.services.oauth.OauthAuthorization.GetAuthorizeState:output_type -> v6.services.oauth.AuthorizeState
+	4, // 9: v6.services.oauth.OauthAuthorization.GetDeviceCodeState:output_type -> v6.services.oauth.DeviceCodeAuthorizeState
+	6, // 10: v6.services.oauth.OauthAuthorization.GetToken:output_type -> v6.services.oauth.TokenResponse
+	6, // 11: v6.services.oauth.OauthAuthorization.RefreshToken:output_type -> v6.services.oauth.TokenResponse
+	6, // [6:12] is the sub-list for method output_type
+	0, // [0:6] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -680,7 +950,7 @@ func file_oauth_oauth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_oauth_oauth_proto_rawDesc), len(file_oauth_oauth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
