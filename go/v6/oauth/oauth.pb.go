@@ -178,9 +178,10 @@ type AuthorizeResponse struct {
 	Status          string                 `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`                                          // Status of the authorization request
 	UserCode        string                 `protobuf:"bytes,5,opt,name=user_code,json=userCode,proto3" json:"user_code,omitempty"`                      // User code for device authorization
 	DeviceCode      string                 `protobuf:"bytes,6,opt,name=device_code,json=deviceCode,proto3" json:"device_code,omitempty"`                // Device code for device authorization
-	ExpiresIn       int64                  `protobuf:"varint,7,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                  // Expiration time of the authorization code in seconds
+	ExpiresIn       int32                  `protobuf:"varint,7,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                  // Expiration time of the authorization code in seconds
 	VerificationUri string                 `protobuf:"bytes,8,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"` // Verification URI for device authorization
 	Interval        string                 `protobuf:"bytes,10,opt,name=interval,proto3" json:"interval,omitempty"`                                     // Polling interval for device authorization
+	ExpiresInTs     int64                  `protobuf:"varint,11,opt,name=expires_in_ts,json=expiresInTs,proto3" json:"expires_in_ts,omitempty"`         // string identity = 4;
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -257,7 +258,7 @@ func (x *AuthorizeResponse) GetDeviceCode() string {
 	return ""
 }
 
-func (x *AuthorizeResponse) GetExpiresIn() int64 {
+func (x *AuthorizeResponse) GetExpiresIn() int32 {
 	if x != nil {
 		return x.ExpiresIn
 	}
@@ -278,13 +279,21 @@ func (x *AuthorizeResponse) GetInterval() string {
 	return ""
 }
 
+func (x *AuthorizeResponse) GetExpiresInTs() int64 {
+	if x != nil {
+		return x.ExpiresInTs
+	}
+	return 0
+}
+
 type DeviceCodeAuthorizeResponse struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	UserCode        string                 `protobuf:"bytes,1,opt,name=user_code,json=userCode,proto3" json:"user_code,omitempty"`                      // User code for device authorization
 	DeviceCode      string                 `protobuf:"bytes,2,opt,name=device_code,json=deviceCode,proto3" json:"device_code,omitempty"`                // Device code for device authorization
-	ExpiresIn       int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                  // Expiration time of the authorization code in seconds
+	ExpiresIn       int32                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                  // Expiration time of the authorization code in seconds
 	VerificationUri string                 `protobuf:"bytes,4,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"` // Verification URI for device authorization
 	Interval        string                 `protobuf:"bytes,6,opt,name=interval,proto3" json:"interval,omitempty"`                                      // Polling interval for device authorization
+	ExpiresInTs     int64                  `protobuf:"varint,7,opt,name=expires_in_ts,json=expiresInTs,proto3" json:"expires_in_ts,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -333,7 +342,7 @@ func (x *DeviceCodeAuthorizeResponse) GetDeviceCode() string {
 	return ""
 }
 
-func (x *DeviceCodeAuthorizeResponse) GetExpiresIn() int64 {
+func (x *DeviceCodeAuthorizeResponse) GetExpiresIn() int32 {
 	if x != nil {
 		return x.ExpiresIn
 	}
@@ -352,6 +361,13 @@ func (x *DeviceCodeAuthorizeResponse) GetInterval() string {
 		return x.Interval
 	}
 	return ""
+}
+
+func (x *DeviceCodeAuthorizeResponse) GetExpiresInTs() int64 {
+	if x != nil {
+		return x.ExpiresInTs
+	}
+	return 0
 }
 
 type AuthorizeState struct {
@@ -482,7 +498,7 @@ type DeviceCodeAuthorizeState struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserCode      string                 `protobuf:"bytes,1,opt,name=user_code,json=userCode,proto3" json:"user_code,omitempty"`       // User code for device authorization
 	DeviceCode    string                 `protobuf:"bytes,2,opt,name=device_code,json=deviceCode,proto3" json:"device_code,omitempty"` // Device code for device authorization
-	ExpiresIn     int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`   // Expiration time of the authorization code in seconds
+	ExpiresIn     int32                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`   // Expiration time of the authorization code in seconds
 	Scope         string                 `protobuf:"bytes,4,opt,name=scope,proto3" json:"scope,omitempty"`
 	Login         bool                   `protobuf:"varint,5,opt,name=login,proto3" json:"login,omitempty"`       // Indicates if the user is logged in
 	Interval      int32                  `protobuf:"varint,6,opt,name=interval,proto3" json:"interval,omitempty"` // Polling interval for device authorization
@@ -540,7 +556,7 @@ func (x *DeviceCodeAuthorizeState) GetDeviceCode() string {
 	return ""
 }
 
-func (x *DeviceCodeAuthorizeState) GetExpiresIn() int64 {
+func (x *DeviceCodeAuthorizeState) GetExpiresIn() int32 {
 	if x != nil {
 		return x.ExpiresIn
 	}
@@ -682,7 +698,7 @@ type TokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`    // Access token
 	RefreshToken  string                 `protobuf:"bytes,2,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // Refresh token
-	ExpiresIn     int64                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`         // Token expiration time in seconds
+	ExpiresIn     int32                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`         // Token expiration time in seconds
 	TokenType     string                 `protobuf:"bytes,4,opt,name=token_type,json=tokenType,proto3" json:"token_type,omitempty"`          // Type of the token, e.g., "Bearer"
 	Scope         string                 `protobuf:"bytes,5,opt,name=scope,proto3" json:"scope,omitempty"`                                   // Scopes granted
 	ExpiresInTs   int64                  `protobuf:"varint,6,opt,name=expires_in_ts,json=expiresInTs,proto3" json:"expires_in_ts,omitempty"` // string identity = 6; // User identity associated with the token
@@ -734,7 +750,7 @@ func (x *TokenResponse) GetRefreshToken() string {
 	return ""
 }
 
-func (x *TokenResponse) GetExpiresIn() int64 {
+func (x *TokenResponse) GetExpiresIn() int32 {
 	if x != nil {
 		return x.ExpiresIn
 	}
@@ -844,7 +860,7 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"debug_host\x18\f \x01(\tR\tdebugHost\x12\x1d\n" +
 	"\n" +
 	"grant_type\x18\r \x01(\tR\tgrantType\x12\x16\n" +
-	"\x06legacy\x18\x0e \x01(\bR\x06legacy\"\x9c\x02\n" +
+	"\x06legacy\x18\x0e \x01(\bR\x06legacy\"\xc0\x02\n" +
 	"\x11AuthorizeResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x02 \x01(\tR\vredirectUri\x12\x14\n" +
@@ -854,18 +870,20 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\vdevice_code\x18\x06 \x01(\tR\n" +
 	"deviceCode\x12\x1d\n" +
 	"\n" +
-	"expires_in\x18\a \x01(\x03R\texpiresIn\x12)\n" +
+	"expires_in\x18\a \x01(\x05R\texpiresIn\x12)\n" +
 	"\x10verification_uri\x18\b \x01(\tR\x0fverificationUri\x12\x1a\n" +
 	"\binterval\x18\n" +
-	" \x01(\tR\binterval\"\xc1\x01\n" +
+	" \x01(\tR\binterval\x12\"\n" +
+	"\rexpires_in_ts\x18\v \x01(\x03R\vexpiresInTs\"\xe5\x01\n" +
 	"\x1bDeviceCodeAuthorizeResponse\x12\x1b\n" +
 	"\tuser_code\x18\x01 \x01(\tR\buserCode\x12\x1f\n" +
 	"\vdevice_code\x18\x02 \x01(\tR\n" +
 	"deviceCode\x12\x1d\n" +
 	"\n" +
-	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12)\n" +
+	"expires_in\x18\x03 \x01(\x05R\texpiresIn\x12)\n" +
 	"\x10verification_uri\x18\x04 \x01(\tR\x0fverificationUri\x12\x1a\n" +
-	"\binterval\x18\x06 \x01(\tR\binterval\"\xda\x02\n" +
+	"\binterval\x18\x06 \x01(\tR\binterval\x12\"\n" +
+	"\rexpires_in_ts\x18\a \x01(\x03R\vexpiresInTs\"\xda\x02\n" +
 	"\x0eAuthorizeState\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
 	"\x05state\x18\x02 \x01(\tR\x05state\x12\x16\n" +
@@ -884,7 +902,7 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\vdevice_code\x18\x02 \x01(\tR\n" +
 	"deviceCode\x12\x1d\n" +
 	"\n" +
-	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12\x14\n" +
+	"expires_in\x18\x03 \x01(\x05R\texpiresIn\x12\x14\n" +
 	"\x05scope\x18\x04 \x01(\tR\x05scope\x12\x14\n" +
 	"\x05login\x18\x05 \x01(\bR\x05login\x12\x1a\n" +
 	"\binterval\x18\x06 \x01(\x05R\binterval\x12\x16\n" +
@@ -906,7 +924,7 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\x12#\n" +
 	"\rrefresh_token\x18\x02 \x01(\tR\frefreshToken\x12\x1d\n" +
 	"\n" +
-	"expires_in\x18\x03 \x01(\x03R\texpiresIn\x12\x1d\n" +
+	"expires_in\x18\x03 \x01(\x05R\texpiresIn\x12\x1d\n" +
 	"\n" +
 	"token_type\x18\x04 \x01(\tR\ttokenType\x12\x14\n" +
 	"\x05scope\x18\x05 \x01(\tR\x05scope\x12\"\n" +

@@ -72,19 +72,20 @@ message AuthorizeResponse {
     string status = 4; // Status of the authorization request
     string user_code = 5; // User code for device authorization
     string device_code = 6; // Device code for device authorization
-    int64 expires_in = 7; // Expiration time of the authorization code in seconds
+    int32 expires_in = 7; // Expiration time of the authorization code in seconds
     string verification_uri = 8; // Verification URI for device authorization
     string interval = 10; // Polling interval for device authorization
+    int64 expires_in_ts = 11;
     // string identity = 4;
 }
 
 message DeviceCodeAuthorizeResponse {
     string user_code = 1; // User code for device authorization
     string device_code = 2; // Device code for device authorization
-    int64 expires_in = 3; // Expiration time of the authorization code in seconds
+    int32 expires_in = 3; // Expiration time of the authorization code in seconds
     string verification_uri = 4; // Verification URI for device authorization
     string interval = 6; // Polling interval for device authorization
-    // string identity = 4;
+   int64 expires_in_ts = 7;
 }
 
 message AuthorizeState {
@@ -104,7 +105,7 @@ message AuthorizeState {
 message DeviceCodeAuthorizeState {
     string user_code = 1; // User code for device authorization
     string device_code = 2; // Device code for device authorization
-    int64 expires_in = 3; // Expiration time of the authorization code in seconds
+    int32 expires_in = 3; // Expiration time of the authorization code in seconds
     string scope = 4;
     bool login = 5;      // Indicates if the user is logged in
     int32 interval = 6; // Polling interval for device authorization
@@ -125,7 +126,7 @@ message TokenRequest {
 message TokenResponse {
     string access_token = 1; // Access token
     string refresh_token = 2; // Refresh token
-    int64 expires_in = 3; // Token expiration time in seconds
+    int32 expires_in = 3; // Token expiration time in seconds
     string token_type = 4; // Type of the token, e.g., "Bearer"
     string scope = 5; // Scopes granted
     int64 expires_in_ts = 6;
