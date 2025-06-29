@@ -112,6 +112,10 @@ message DeviceCodeAuthorizeState {
     string state = 8; // State parameter to match the request
     int64 interval_ts = 9; 
     int64 expires_in_ts = 10; 
+    string access_token = 11; // Access token
+    string refresh_token = 12; // Refresh token
+    string scope = 13;
+    bool login = 14; // Indicates if the user is logged in
 }
 
 message TokenRequest {

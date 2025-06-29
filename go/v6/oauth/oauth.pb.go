@@ -490,6 +490,10 @@ type DeviceCodeAuthorizeState struct {
 	State                   string                 `protobuf:"bytes,8,opt,name=state,proto3" json:"state,omitempty"`                                                                      // State parameter to match the request
 	IntervalTs              int64                  `protobuf:"varint,9,opt,name=interval_ts,json=intervalTs,proto3" json:"interval_ts,omitempty"`
 	ExpiresInTs             int64                  `protobuf:"varint,10,opt,name=expires_in_ts,json=expiresInTs,proto3" json:"expires_in_ts,omitempty"`
+	AccessToken             string                 `protobuf:"bytes,11,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"`    // Access token
+	RefreshToken            string                 `protobuf:"bytes,12,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // Refresh token
+	Scope                   string                 `protobuf:"bytes,13,opt,name=scope,proto3" json:"scope,omitempty"`
+	Login                   bool                   `protobuf:"varint,14,opt,name=login,proto3" json:"login,omitempty"` // Indicates if the user is logged in
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -592,6 +596,34 @@ func (x *DeviceCodeAuthorizeState) GetExpiresInTs() int64 {
 		return x.ExpiresInTs
 	}
 	return 0
+}
+
+func (x *DeviceCodeAuthorizeState) GetAccessToken() string {
+	if x != nil {
+		return x.AccessToken
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetRefreshToken() string {
+	if x != nil {
+		return x.RefreshToken
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetScope() string {
+	if x != nil {
+		return x.Scope
+	}
+	return ""
+}
+
+func (x *DeviceCodeAuthorizeState) GetLogin() bool {
+	if x != nil {
+		return x.Login
+	}
+	return false
 }
 
 type TokenRequest struct {
@@ -862,7 +894,7 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\x15code_challenge_method\x18\t \x01(\tR\x13codeChallengeMethod\x12\x1b\n" +
 	"\tclient_id\x18\n" +
 	" \x01(\tR\bclientId\x12\x16\n" +
-	"\x06device\x18\v \x01(\tR\x06device\"\xed\x02\n" +
+	"\x06device\x18\v \x01(\tR\x06device\"\xe1\x03\n" +
 	"\x18DeviceCodeAuthorizeState\x12\x1b\n" +
 	"\tuser_code\x18\x01 \x01(\tR\buserCode\x12\x1f\n" +
 	"\vdevice_code\x18\x02 \x01(\tR\n" +
@@ -877,7 +909,11 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\vinterval_ts\x18\t \x01(\x03R\n" +
 	"intervalTs\x12\"\n" +
 	"\rexpires_in_ts\x18\n" +
-	" \x01(\x03R\vexpiresInTs\"\x89\x01\n" +
+	" \x01(\x03R\vexpiresInTs\x12!\n" +
+	"\faccess_token\x18\v \x01(\tR\vaccessToken\x12#\n" +
+	"\rrefresh_token\x18\f \x01(\tR\frefreshToken\x12\x14\n" +
+	"\x05scope\x18\r \x01(\tR\x05scope\x12\x14\n" +
+	"\x05login\x18\x0e \x01(\bR\x05login\"\x89\x01\n" +
 	"\fTokenRequest\x12\x12\n" +
 	"\x04code\x18\x03 \x01(\tR\x04code\x12!\n" +
 	"\fredirect_uri\x18\x04 \x01(\tR\vredirectUri\x12\x1d\n" +
