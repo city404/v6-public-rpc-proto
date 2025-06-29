@@ -105,8 +105,8 @@ message DeviceCodeAuthorizeState {
     string user_code = 1; // User code for device authorization
     string device_code = 2; // Device code for device authorization
     int64 expires_in = 3; // Expiration time of the authorization code in seconds
-    string verification_uri = 4; // Verification URI for device authorization
-    string verification_uri_complete = 5; // Complete verification URI for device authorization
+    string scope = 4;
+    bool login = 5;      // Indicates if the user is logged in
     int32 interval = 6; // Polling interval for device authorization
     string status = 7; // Status of the device authorization request
     string state = 8; // State parameter to match the request
@@ -114,8 +114,6 @@ message DeviceCodeAuthorizeState {
     int64 expires_in_ts = 10; 
     string access_token = 11; // Access token
     string refresh_token = 12; // Refresh token
-    string scope = 13;
-    bool login = 14; // Indicates if the user is logged in
 }
 
 message TokenRequest {
