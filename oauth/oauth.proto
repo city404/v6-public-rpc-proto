@@ -85,7 +85,7 @@ message DeviceCodeAuthorizeResponse {
     int32 expires_in = 3; // Expiration time of the authorization code in seconds
     string verification_uri = 4; // Verification URI for device authorization
     string interval = 6; // Polling interval for device authorization
-   int64 expires_in_ts = 7;
+    int64 expires_in_ts = 7;
 }
 
 message AuthorizeState {
