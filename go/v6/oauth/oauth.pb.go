@@ -292,7 +292,7 @@ type DeviceCodeAuthorizeResponse struct {
 	DeviceCode      string                 `protobuf:"bytes,2,opt,name=device_code,json=deviceCode,proto3" json:"device_code,omitempty"`                // Device code for device authorization
 	ExpiresIn       int32                  `protobuf:"varint,3,opt,name=expires_in,json=expiresIn,proto3" json:"expires_in,omitempty"`                  // Expiration time of the authorization code in seconds
 	VerificationUri string                 `protobuf:"bytes,4,opt,name=verification_uri,json=verificationUri,proto3" json:"verification_uri,omitempty"` // Verification URI for device authorization
-	Interval        string                 `protobuf:"bytes,6,opt,name=interval,proto3" json:"interval,omitempty"`                                      // Polling interval for device authorization
+	Interval        int32                  `protobuf:"varint,6,opt,name=interval,proto3" json:"interval,omitempty"`                                     // Polling interval for device authorization
 	ExpiresInTs     int64                  `protobuf:"varint,7,opt,name=expires_in_ts,json=expiresInTs,proto3" json:"expires_in_ts,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -356,11 +356,11 @@ func (x *DeviceCodeAuthorizeResponse) GetVerificationUri() string {
 	return ""
 }
 
-func (x *DeviceCodeAuthorizeResponse) GetInterval() string {
+func (x *DeviceCodeAuthorizeResponse) GetInterval() int32 {
 	if x != nil {
 		return x.Interval
 	}
-	return ""
+	return 0
 }
 
 func (x *DeviceCodeAuthorizeResponse) GetExpiresInTs() int64 {
@@ -882,7 +882,7 @@ const file_oauth_oauth_proto_rawDesc = "" +
 	"\n" +
 	"expires_in\x18\x03 \x01(\x05R\texpiresIn\x12)\n" +
 	"\x10verification_uri\x18\x04 \x01(\tR\x0fverificationUri\x12\x1a\n" +
-	"\binterval\x18\x06 \x01(\tR\binterval\x12\"\n" +
+	"\binterval\x18\x06 \x01(\x05R\binterval\x12\"\n" +
 	"\rexpires_in_ts\x18\a \x01(\x03R\vexpiresInTs\"\xda\x02\n" +
 	"\x0eAuthorizeState\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\tR\x04code\x12\x14\n" +
