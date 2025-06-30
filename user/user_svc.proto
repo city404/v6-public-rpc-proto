@@ -134,10 +134,7 @@ service PubUser {
     }
 }
 message UserCenterUriRequest {
-    string identity = 1; // user identity
-    string addon = 2; // addon information
-    string input = 3; // input information, used for user center uri
-    string type = 4; // type of user center uri, e.g., "default", "custom"
+    bool disable_ssl = 1; // disable ssl, default is false
 }
 message UserCenterUriResponse {
     string uri = 1; // user center uri

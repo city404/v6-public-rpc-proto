@@ -25,10 +25,7 @@ const (
 
 type UserCenterUriRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"` // user identity
-	Addon         string                 `protobuf:"bytes,2,opt,name=addon,proto3" json:"addon,omitempty"`       // addon information
-	Input         string                 `protobuf:"bytes,3,opt,name=input,proto3" json:"input,omitempty"`       // input information, used for user center uri
-	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`         // type of user center uri, e.g., "default", "custom"
+	DisableSsl    bool                   `protobuf:"varint,1,opt,name=disable_ssl,json=disableSsl,proto3" json:"disable_ssl,omitempty"` // disable ssl, default is false
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -63,32 +60,11 @@ func (*UserCenterUriRequest) Descriptor() ([]byte, []int) {
 	return file_user_user_svc_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *UserCenterUriRequest) GetIdentity() string {
+func (x *UserCenterUriRequest) GetDisableSsl() bool {
 	if x != nil {
-		return x.Identity
+		return x.DisableSsl
 	}
-	return ""
-}
-
-func (x *UserCenterUriRequest) GetAddon() string {
-	if x != nil {
-		return x.Addon
-	}
-	return ""
-}
-
-func (x *UserCenterUriRequest) GetInput() string {
-	if x != nil {
-		return x.Input
-	}
-	return ""
-}
-
-func (x *UserCenterUriRequest) GetType() string {
-	if x != nil {
-		return x.Type
-	}
-	return ""
+	return false
 }
 
 type UserCenterUriResponse struct {
@@ -1813,12 +1789,10 @@ var File_user_user_svc_proto protoreflect.FileDescriptor
 
 const file_user_user_svc_proto_rawDesc = "" +
 	"\n" +
-	"\x13user/user_svc.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"r\n" +
-	"\x14UserCenterUriRequest\x12\x1a\n" +
-	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x14\n" +
-	"\x05addon\x18\x02 \x01(\tR\x05addon\x12\x14\n" +
-	"\x05input\x18\x03 \x01(\tR\x05input\x12\x12\n" +
-	"\x04type\x18\x04 \x01(\tR\x04type\")\n" +
+	"\x13user/user_svc.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"7\n" +
+	"\x14UserCenterUriRequest\x12\x1f\n" +
+	"\vdisable_ssl\x18\x01 \x01(\bR\n" +
+	"disableSsl\")\n" +
 	"\x15UserCenterUriResponse\x12\x10\n" +
 	"\x03uri\x18\x01 \x01(\tR\x03uri\"\xf6\x01\n" +
 	"\x04User\x12\x1a\n" +
