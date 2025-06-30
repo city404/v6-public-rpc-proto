@@ -135,6 +135,7 @@ service PubUser {
 }
 message UserCenterUriRequest {
     bool disable_ssl = 1; // disable ssl, default is false
+    string route = 2; // route for user center, default is "/"
 }
 message UserCenterUriResponse {
     string uri = 1; // user center uri

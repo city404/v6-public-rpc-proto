@@ -26,6 +26,7 @@ const (
 type UserCenterUriRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DisableSsl    bool                   `protobuf:"varint,1,opt,name=disable_ssl,json=disableSsl,proto3" json:"disable_ssl,omitempty"` // disable ssl, default is false
+	Route         string                 `protobuf:"bytes,2,opt,name=route,proto3" json:"route,omitempty"`                              // route for user center, default is "/"
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -65,6 +66,13 @@ func (x *UserCenterUriRequest) GetDisableSsl() bool {
 		return x.DisableSsl
 	}
 	return false
+}
+
+func (x *UserCenterUriRequest) GetRoute() string {
+	if x != nil {
+		return x.Route
+	}
+	return ""
 }
 
 type UserCenterUriResponse struct {
@@ -1789,10 +1797,11 @@ var File_user_user_svc_proto protoreflect.FileDescriptor
 
 const file_user_user_svc_proto_rawDesc = "" +
 	"\n" +
-	"\x13user/user_svc.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"7\n" +
+	"\x13user/user_svc.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"M\n" +
 	"\x14UserCenterUriRequest\x12\x1f\n" +
 	"\vdisable_ssl\x18\x01 \x01(\bR\n" +
-	"disableSsl\")\n" +
+	"disableSsl\x12\x14\n" +
+	"\x05route\x18\x02 \x01(\tR\x05route\")\n" +
 	"\x15UserCenterUriResponse\x12\x10\n" +
 	"\x03uri\x18\x01 \x01(\tR\x03uri\"\xf6\x01\n" +
 	"\x04User\x12\x1a\n" +
