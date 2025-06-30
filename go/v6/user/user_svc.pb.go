@@ -23,6 +23,118 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type UserCenterUriRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"` // user identity
+	Addon         string                 `protobuf:"bytes,2,opt,name=addon,proto3" json:"addon,omitempty"`       // addon information
+	Input         string                 `protobuf:"bytes,3,opt,name=input,proto3" json:"input,omitempty"`       // input information, used for user center uri
+	Type          string                 `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`         // type of user center uri, e.g., "default", "custom"
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserCenterUriRequest) Reset() {
+	*x = UserCenterUriRequest{}
+	mi := &file_user_user_svc_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserCenterUriRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserCenterUriRequest) ProtoMessage() {}
+
+func (x *UserCenterUriRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_svc_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserCenterUriRequest.ProtoReflect.Descriptor instead.
+func (*UserCenterUriRequest) Descriptor() ([]byte, []int) {
+	return file_user_user_svc_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *UserCenterUriRequest) GetIdentity() string {
+	if x != nil {
+		return x.Identity
+	}
+	return ""
+}
+
+func (x *UserCenterUriRequest) GetAddon() string {
+	if x != nil {
+		return x.Addon
+	}
+	return ""
+}
+
+func (x *UserCenterUriRequest) GetInput() string {
+	if x != nil {
+		return x.Input
+	}
+	return ""
+}
+
+func (x *UserCenterUriRequest) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+type UserCenterUriResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Uri           string                 `protobuf:"bytes,1,opt,name=uri,proto3" json:"uri,omitempty"` // user center uri
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UserCenterUriResponse) Reset() {
+	*x = UserCenterUriResponse{}
+	mi := &file_user_user_svc_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UserCenterUriResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserCenterUriResponse) ProtoMessage() {}
+
+func (x *UserCenterUriResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_user_user_svc_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserCenterUriResponse.ProtoReflect.Descriptor instead.
+func (*UserCenterUriResponse) Descriptor() ([]byte, []int) {
+	return file_user_user_svc_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UserCenterUriResponse) GetUri() string {
+	if x != nil {
+		return x.Uri
+	}
+	return ""
+}
+
 type User struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"` // identity for user, unique in system
@@ -41,7 +153,7 @@ type User struct {
 
 func (x *User) Reset() {
 	*x = User{}
-	mi := &file_user_user_svc_proto_msgTypes[0]
+	mi := &file_user_user_svc_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -53,7 +165,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[0]
+	mi := &file_user_user_svc_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -66,7 +178,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{0}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *User) GetIdentity() string {
@@ -164,7 +276,7 @@ type LoginRequest struct {
 
 func (x *LoginRequest) Reset() {
 	*x = LoginRequest{}
-	mi := &file_user_user_svc_proto_msgTypes[1]
+	mi := &file_user_user_svc_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -176,7 +288,7 @@ func (x *LoginRequest) String() string {
 func (*LoginRequest) ProtoMessage() {}
 
 func (x *LoginRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[1]
+	mi := &file_user_user_svc_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -189,7 +301,7 @@ func (x *LoginRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginRequest.ProtoReflect.Descriptor instead.
 func (*LoginRequest) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{1}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *LoginRequest) GetIdentity() string {
@@ -322,7 +434,7 @@ type DeviceAuthorizationRequest struct {
 
 func (x *DeviceAuthorizationRequest) Reset() {
 	*x = DeviceAuthorizationRequest{}
-	mi := &file_user_user_svc_proto_msgTypes[2]
+	mi := &file_user_user_svc_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -334,7 +446,7 @@ func (x *DeviceAuthorizationRequest) String() string {
 func (*DeviceAuthorizationRequest) ProtoMessage() {}
 
 func (x *DeviceAuthorizationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[2]
+	mi := &file_user_user_svc_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -347,7 +459,7 @@ func (x *DeviceAuthorizationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeviceAuthorizationRequest.ProtoReflect.Descriptor instead.
 func (*DeviceAuthorizationRequest) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{2}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeviceAuthorizationRequest) GetIdentity() string {
@@ -384,7 +496,7 @@ type LoginResponse struct {
 
 func (x *LoginResponse) Reset() {
 	*x = LoginResponse{}
-	mi := &file_user_user_svc_proto_msgTypes[3]
+	mi := &file_user_user_svc_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -396,7 +508,7 @@ func (x *LoginResponse) String() string {
 func (*LoginResponse) ProtoMessage() {}
 
 func (x *LoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[3]
+	mi := &file_user_user_svc_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -409,7 +521,7 @@ func (x *LoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LoginResponse.ProtoReflect.Descriptor instead.
 func (*LoginResponse) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{3}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *LoginResponse) GetToken() *Token {
@@ -459,7 +571,7 @@ type LastLoginResponse struct {
 
 func (x *LastLoginResponse) Reset() {
 	*x = LastLoginResponse{}
-	mi := &file_user_user_svc_proto_msgTypes[4]
+	mi := &file_user_user_svc_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -471,7 +583,7 @@ func (x *LastLoginResponse) String() string {
 func (*LastLoginResponse) ProtoMessage() {}
 
 func (x *LastLoginResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[4]
+	mi := &file_user_user_svc_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -484,7 +596,7 @@ func (x *LastLoginResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LastLoginResponse.ProtoReflect.Descriptor instead.
 func (*LastLoginResponse) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{4}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *LastLoginResponse) GetIdentity() string {
@@ -532,7 +644,7 @@ type Token struct {
 
 func (x *Token) Reset() {
 	*x = Token{}
-	mi := &file_user_user_svc_proto_msgTypes[5]
+	mi := &file_user_user_svc_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -544,7 +656,7 @@ func (x *Token) String() string {
 func (*Token) ProtoMessage() {}
 
 func (x *Token) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[5]
+	mi := &file_user_user_svc_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -557,7 +669,7 @@ func (x *Token) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Token.ProtoReflect.Descriptor instead.
 func (*Token) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{5}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Token) GetIdentity() string {
@@ -637,7 +749,7 @@ type AuthorizationCode struct {
 
 func (x *AuthorizationCode) Reset() {
 	*x = AuthorizationCode{}
-	mi := &file_user_user_svc_proto_msgTypes[6]
+	mi := &file_user_user_svc_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -649,7 +761,7 @@ func (x *AuthorizationCode) String() string {
 func (*AuthorizationCode) ProtoMessage() {}
 
 func (x *AuthorizationCode) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[6]
+	mi := &file_user_user_svc_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -662,7 +774,7 @@ func (x *AuthorizationCode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AuthorizationCode.ProtoReflect.Descriptor instead.
 func (*AuthorizationCode) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{6}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AuthorizationCode) GetIdentity() string {
@@ -722,7 +834,7 @@ type RegisterRequest struct {
 
 func (x *RegisterRequest) Reset() {
 	*x = RegisterRequest{}
-	mi := &file_user_user_svc_proto_msgTypes[7]
+	mi := &file_user_user_svc_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -734,7 +846,7 @@ func (x *RegisterRequest) String() string {
 func (*RegisterRequest) ProtoMessage() {}
 
 func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[7]
+	mi := &file_user_user_svc_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -747,7 +859,7 @@ func (x *RegisterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegisterRequest.ProtoReflect.Descriptor instead.
 func (*RegisterRequest) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{7}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RegisterRequest) GetName() string {
@@ -796,7 +908,7 @@ type SmsVeifyCodeSendRequest struct {
 
 func (x *SmsVeifyCodeSendRequest) Reset() {
 	*x = SmsVeifyCodeSendRequest{}
-	mi := &file_user_user_svc_proto_msgTypes[8]
+	mi := &file_user_user_svc_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -808,7 +920,7 @@ func (x *SmsVeifyCodeSendRequest) String() string {
 func (*SmsVeifyCodeSendRequest) ProtoMessage() {}
 
 func (x *SmsVeifyCodeSendRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[8]
+	mi := &file_user_user_svc_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -821,7 +933,7 @@ func (x *SmsVeifyCodeSendRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmsVeifyCodeSendRequest.ProtoReflect.Descriptor instead.
 func (*SmsVeifyCodeSendRequest) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{8}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SmsVeifyCodeSendRequest) GetCaptcha() string {
@@ -858,7 +970,7 @@ type SmsVeifyCodeSendRequestNotUser struct {
 
 func (x *SmsVeifyCodeSendRequestNotUser) Reset() {
 	*x = SmsVeifyCodeSendRequestNotUser{}
-	mi := &file_user_user_svc_proto_msgTypes[9]
+	mi := &file_user_user_svc_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -870,7 +982,7 @@ func (x *SmsVeifyCodeSendRequestNotUser) String() string {
 func (*SmsVeifyCodeSendRequestNotUser) ProtoMessage() {}
 
 func (x *SmsVeifyCodeSendRequestNotUser) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[9]
+	mi := &file_user_user_svc_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -883,7 +995,7 @@ func (x *SmsVeifyCodeSendRequestNotUser) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmsVeifyCodeSendRequestNotUser.ProtoReflect.Descriptor instead.
 func (*SmsVeifyCodeSendRequestNotUser) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{9}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SmsVeifyCodeSendRequestNotUser) GetCaptcha() string {
@@ -933,7 +1045,7 @@ type SmsVeifyCodeSendResponse struct {
 
 func (x *SmsVeifyCodeSendResponse) Reset() {
 	*x = SmsVeifyCodeSendResponse{}
-	mi := &file_user_user_svc_proto_msgTypes[10]
+	mi := &file_user_user_svc_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -945,7 +1057,7 @@ func (x *SmsVeifyCodeSendResponse) String() string {
 func (*SmsVeifyCodeSendResponse) ProtoMessage() {}
 
 func (x *SmsVeifyCodeSendResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[10]
+	mi := &file_user_user_svc_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -958,7 +1070,7 @@ func (x *SmsVeifyCodeSendResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SmsVeifyCodeSendResponse.ProtoReflect.Descriptor instead.
 func (*SmsVeifyCodeSendResponse) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{10}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *SmsVeifyCodeSendResponse) GetCaptcha() string {
@@ -1006,7 +1118,7 @@ type OauthTokenResponse struct {
 
 func (x *OauthTokenResponse) Reset() {
 	*x = OauthTokenResponse{}
-	mi := &file_user_user_svc_proto_msgTypes[11]
+	mi := &file_user_user_svc_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1018,7 +1130,7 @@ func (x *OauthTokenResponse) String() string {
 func (*OauthTokenResponse) ProtoMessage() {}
 
 func (x *OauthTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[11]
+	mi := &file_user_user_svc_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1031,7 +1143,7 @@ func (x *OauthTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OauthTokenResponse.ProtoReflect.Descriptor instead.
 func (*OauthTokenResponse) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{11}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *OauthTokenResponse) GetUrl() string {
@@ -1111,7 +1223,7 @@ type OauthTokenCheckResponse struct {
 
 func (x *OauthTokenCheckResponse) Reset() {
 	*x = OauthTokenCheckResponse{}
-	mi := &file_user_user_svc_proto_msgTypes[12]
+	mi := &file_user_user_svc_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1123,7 +1235,7 @@ func (x *OauthTokenCheckResponse) String() string {
 func (*OauthTokenCheckResponse) ProtoMessage() {}
 
 func (x *OauthTokenCheckResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[12]
+	mi := &file_user_user_svc_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1136,7 +1248,7 @@ func (x *OauthTokenCheckResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OauthTokenCheckResponse.ProtoReflect.Descriptor instead.
 func (*OauthTokenCheckResponse) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{12}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *OauthTokenCheckResponse) GetLogin() *LoginResponse {
@@ -1193,7 +1305,7 @@ type ChangePasswordRequest struct {
 
 func (x *ChangePasswordRequest) Reset() {
 	*x = ChangePasswordRequest{}
-	mi := &file_user_user_svc_proto_msgTypes[13]
+	mi := &file_user_user_svc_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1205,7 +1317,7 @@ func (x *ChangePasswordRequest) String() string {
 func (*ChangePasswordRequest) ProtoMessage() {}
 
 func (x *ChangePasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[13]
+	mi := &file_user_user_svc_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1218,7 +1330,7 @@ func (x *ChangePasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ChangePasswordRequest.ProtoReflect.Descriptor instead.
 func (*ChangePasswordRequest) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{13}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ChangePasswordRequest) GetIdentity() string {
@@ -1263,7 +1375,7 @@ type UserValidateInfo struct {
 
 func (x *UserValidateInfo) Reset() {
 	*x = UserValidateInfo{}
-	mi := &file_user_user_svc_proto_msgTypes[14]
+	mi := &file_user_user_svc_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1275,7 +1387,7 @@ func (x *UserValidateInfo) String() string {
 func (*UserValidateInfo) ProtoMessage() {}
 
 func (x *UserValidateInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[14]
+	mi := &file_user_user_svc_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1288,7 +1400,7 @@ func (x *UserValidateInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserValidateInfo.ProtoReflect.Descriptor instead.
 func (*UserValidateInfo) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{14}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *UserValidateInfo) GetIdentity() string {
@@ -1344,7 +1456,7 @@ type UserStatisticsAndQuota struct {
 
 func (x *UserStatisticsAndQuota) Reset() {
 	*x = UserStatisticsAndQuota{}
-	mi := &file_user_user_svc_proto_msgTypes[15]
+	mi := &file_user_user_svc_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1356,7 +1468,7 @@ func (x *UserStatisticsAndQuota) String() string {
 func (*UserStatisticsAndQuota) ProtoMessage() {}
 
 func (x *UserStatisticsAndQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[15]
+	mi := &file_user_user_svc_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1369,7 +1481,7 @@ func (x *UserStatisticsAndQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserStatisticsAndQuota.ProtoReflect.Descriptor instead.
 func (*UserStatisticsAndQuota) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{15}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UserStatisticsAndQuota) GetDiskStatisticsQuota() *DiskStatisticsAndQuota {
@@ -1407,7 +1519,7 @@ type DiskStatisticsAndQuota struct {
 
 func (x *DiskStatisticsAndQuota) Reset() {
 	*x = DiskStatisticsAndQuota{}
-	mi := &file_user_user_svc_proto_msgTypes[16]
+	mi := &file_user_user_svc_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1419,7 +1531,7 @@ func (x *DiskStatisticsAndQuota) String() string {
 func (*DiskStatisticsAndQuota) ProtoMessage() {}
 
 func (x *DiskStatisticsAndQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[16]
+	mi := &file_user_user_svc_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1432,7 +1544,7 @@ func (x *DiskStatisticsAndQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DiskStatisticsAndQuota.ProtoReflect.Descriptor instead.
 func (*DiskStatisticsAndQuota) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{16}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DiskStatisticsAndQuota) GetBytesQuota() int64 {
@@ -1489,7 +1601,7 @@ type TrafficStatisticsAndQuota struct {
 
 func (x *TrafficStatisticsAndQuota) Reset() {
 	*x = TrafficStatisticsAndQuota{}
-	mi := &file_user_user_svc_proto_msgTypes[17]
+	mi := &file_user_user_svc_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1501,7 +1613,7 @@ func (x *TrafficStatisticsAndQuota) String() string {
 func (*TrafficStatisticsAndQuota) ProtoMessage() {}
 
 func (x *TrafficStatisticsAndQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[17]
+	mi := &file_user_user_svc_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1514,7 +1626,7 @@ func (x *TrafficStatisticsAndQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TrafficStatisticsAndQuota.ProtoReflect.Descriptor instead.
 func (*TrafficStatisticsAndQuota) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{17}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *TrafficStatisticsAndQuota) GetDailyBytesDownloadQuota() int64 {
@@ -1557,7 +1669,7 @@ type OfflineTaskStatisticsAndQuota struct {
 
 func (x *OfflineTaskStatisticsAndQuota) Reset() {
 	*x = OfflineTaskStatisticsAndQuota{}
-	mi := &file_user_user_svc_proto_msgTypes[18]
+	mi := &file_user_user_svc_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1569,7 +1681,7 @@ func (x *OfflineTaskStatisticsAndQuota) String() string {
 func (*OfflineTaskStatisticsAndQuota) ProtoMessage() {}
 
 func (x *OfflineTaskStatisticsAndQuota) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[18]
+	mi := &file_user_user_svc_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1582,7 +1694,7 @@ func (x *OfflineTaskStatisticsAndQuota) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OfflineTaskStatisticsAndQuota.ProtoReflect.Descriptor instead.
 func (*OfflineTaskStatisticsAndQuota) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{18}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *OfflineTaskStatisticsAndQuota) GetDailyTasksQuota() int64 {
@@ -1627,7 +1739,7 @@ type UserQuotaExtendInfo struct {
 
 func (x *UserQuotaExtendInfo) Reset() {
 	*x = UserQuotaExtendInfo{}
-	mi := &file_user_user_svc_proto_msgTypes[19]
+	mi := &file_user_user_svc_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1639,7 +1751,7 @@ func (x *UserQuotaExtendInfo) String() string {
 func (*UserQuotaExtendInfo) ProtoMessage() {}
 
 func (x *UserQuotaExtendInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_user_user_svc_proto_msgTypes[19]
+	mi := &file_user_user_svc_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1652,7 +1764,7 @@ func (x *UserQuotaExtendInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserQuotaExtendInfo.ProtoReflect.Descriptor instead.
 func (*UserQuotaExtendInfo) Descriptor() ([]byte, []int) {
-	return file_user_user_svc_proto_rawDescGZIP(), []int{19}
+	return file_user_user_svc_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *UserQuotaExtendInfo) GetDailyBytesDownload() int64 {
@@ -1701,7 +1813,14 @@ var File_user_user_svc_proto protoreflect.FileDescriptor
 
 const file_user_user_svc_proto_rawDesc = "" +
 	"\n" +
-	"\x13user/user_svc.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"\xf6\x01\n" +
+	"\x13user/user_svc.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"r\n" +
+	"\x14UserCenterUriRequest\x12\x1a\n" +
+	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x14\n" +
+	"\x05addon\x18\x02 \x01(\tR\x05addon\x12\x14\n" +
+	"\x05input\x18\x03 \x01(\tR\x05input\x12\x12\n" +
+	"\x04type\x18\x04 \x01(\tR\x04type\")\n" +
+	"\x15UserCenterUriResponse\x12\x10\n" +
+	"\x03uri\x18\x01 \x01(\tR\x03uri\"\xf6\x01\n" +
 	"\x04User\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x12\n" +
 	"\x04type\x18\x02 \x01(\x05R\x04type\x12\x16\n" +
@@ -1855,7 +1974,7 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\n" +
 	"disk_bytes\x18\x05 \x01(\x03R\tdiskBytes\x12\x1d\n" +
 	"\n" +
-	"disk_files\x18\x06 \x01(\x03R\tdiskFiles2\xc9\x12\n" +
+	"disk_files\x18\x06 \x01(\x03R\tdiskFiles2\xcf\x13\n" +
 	"\aPubUser\x12L\n" +
 	"\x03Get\x12\x15.v6.services.pub.User\x1a\x15.v6.services.pub.User\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v6/user/get\x12a\n" +
 	"\x05Login\x12\x1d.v6.services.pub.LoginRequest\x1a\x1e.v6.services.pub.LoginResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v6/user/login\x12V\n" +
@@ -1876,7 +1995,8 @@ const file_user_user_svc_proto_rawDesc = "" +
 	"\x10ValidateUserInfo\x12!.v6.services.pub.UserValidateInfo\x1a0.v6.services.pub.common.UserNameValidateResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v6/user/validate_user_info\x12\x85\x01\n" +
 	"\x15GetStatisticsAndQuota\x12\x15.v6.services.pub.User\x1a'.v6.services.pub.UserStatisticsAndQuota\",\x82\xd3\xe4\x93\x02&:\x01*\"!/v6/user/get_statistics_and_quota\x12~\n" +
 	"\vExtendQuota\x12$.v6.services.pub.UserQuotaExtendInfo\x1a'.v6.services.pub.UserStatisticsAndQuota\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v6/user/extend_quota\x12\x86\x01\n" +
-	"\x17GetAvailableExtendQuota\x12\x15.v6.services.pub.User\x1a$.v6.services.pub.UserQuotaExtendInfo\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v6/user/get_available_extend_quotaB3Z1github.com/city404/v6-public-rpc-proto/go/v6/userb\x06proto3"
+	"\x17GetAvailableExtendQuota\x12\x15.v6.services.pub.User\x1a$.v6.services.pub.UserQuotaExtendInfo\".\x82\xd3\xe4\x93\x02(:\x01*\"#/v6/user/get_available_extend_quota\x12\x83\x01\n" +
+	"\rUserCenterUri\x12%.v6.services.pub.UserCenterUriRequest\x1a&.v6.services.pub.UserCenterUriResponse\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v6/user/user_center_uriB3Z1github.com/city404/v6-public-rpc-proto/go/v6/userb\x06proto3"
 
 var (
 	file_user_user_svc_proto_rawDescOnce sync.Once
@@ -1890,81 +2010,85 @@ func file_user_user_svc_proto_rawDescGZIP() []byte {
 	return file_user_user_svc_proto_rawDescData
 }
 
-var file_user_user_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_user_user_svc_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_user_user_svc_proto_goTypes = []any{
-	(*User)(nil),                            // 0: v6.services.pub.User
-	(*LoginRequest)(nil),                    // 1: v6.services.pub.LoginRequest
-	(*DeviceAuthorizationRequest)(nil),      // 2: v6.services.pub.DeviceAuthorizationRequest
-	(*LoginResponse)(nil),                   // 3: v6.services.pub.LoginResponse
-	(*LastLoginResponse)(nil),               // 4: v6.services.pub.LastLoginResponse
-	(*Token)(nil),                           // 5: v6.services.pub.Token
-	(*AuthorizationCode)(nil),               // 6: v6.services.pub.AuthorizationCode
-	(*RegisterRequest)(nil),                 // 7: v6.services.pub.RegisterRequest
-	(*SmsVeifyCodeSendRequest)(nil),         // 8: v6.services.pub.SmsVeifyCodeSendRequest
-	(*SmsVeifyCodeSendRequestNotUser)(nil),  // 9: v6.services.pub.SmsVeifyCodeSendRequestNotUser
-	(*SmsVeifyCodeSendResponse)(nil),        // 10: v6.services.pub.SmsVeifyCodeSendResponse
-	(*OauthTokenResponse)(nil),              // 11: v6.services.pub.OauthTokenResponse
-	(*OauthTokenCheckResponse)(nil),         // 12: v6.services.pub.OauthTokenCheckResponse
-	(*ChangePasswordRequest)(nil),           // 13: v6.services.pub.ChangePasswordRequest
-	(*UserValidateInfo)(nil),                // 14: v6.services.pub.UserValidateInfo
-	(*UserStatisticsAndQuota)(nil),          // 15: v6.services.pub.UserStatisticsAndQuota
-	(*DiskStatisticsAndQuota)(nil),          // 16: v6.services.pub.DiskStatisticsAndQuota
-	(*TrafficStatisticsAndQuota)(nil),       // 17: v6.services.pub.TrafficStatisticsAndQuota
-	(*OfflineTaskStatisticsAndQuota)(nil),   // 18: v6.services.pub.OfflineTaskStatisticsAndQuota
-	(*UserQuotaExtendInfo)(nil),             // 19: v6.services.pub.UserQuotaExtendInfo
-	(*common.UserNameValidateResponse)(nil), // 20: v6.services.pub.common.UserNameValidateResponse
+	(*UserCenterUriRequest)(nil),            // 0: v6.services.pub.UserCenterUriRequest
+	(*UserCenterUriResponse)(nil),           // 1: v6.services.pub.UserCenterUriResponse
+	(*User)(nil),                            // 2: v6.services.pub.User
+	(*LoginRequest)(nil),                    // 3: v6.services.pub.LoginRequest
+	(*DeviceAuthorizationRequest)(nil),      // 4: v6.services.pub.DeviceAuthorizationRequest
+	(*LoginResponse)(nil),                   // 5: v6.services.pub.LoginResponse
+	(*LastLoginResponse)(nil),               // 6: v6.services.pub.LastLoginResponse
+	(*Token)(nil),                           // 7: v6.services.pub.Token
+	(*AuthorizationCode)(nil),               // 8: v6.services.pub.AuthorizationCode
+	(*RegisterRequest)(nil),                 // 9: v6.services.pub.RegisterRequest
+	(*SmsVeifyCodeSendRequest)(nil),         // 10: v6.services.pub.SmsVeifyCodeSendRequest
+	(*SmsVeifyCodeSendRequestNotUser)(nil),  // 11: v6.services.pub.SmsVeifyCodeSendRequestNotUser
+	(*SmsVeifyCodeSendResponse)(nil),        // 12: v6.services.pub.SmsVeifyCodeSendResponse
+	(*OauthTokenResponse)(nil),              // 13: v6.services.pub.OauthTokenResponse
+	(*OauthTokenCheckResponse)(nil),         // 14: v6.services.pub.OauthTokenCheckResponse
+	(*ChangePasswordRequest)(nil),           // 15: v6.services.pub.ChangePasswordRequest
+	(*UserValidateInfo)(nil),                // 16: v6.services.pub.UserValidateInfo
+	(*UserStatisticsAndQuota)(nil),          // 17: v6.services.pub.UserStatisticsAndQuota
+	(*DiskStatisticsAndQuota)(nil),          // 18: v6.services.pub.DiskStatisticsAndQuota
+	(*TrafficStatisticsAndQuota)(nil),       // 19: v6.services.pub.TrafficStatisticsAndQuota
+	(*OfflineTaskStatisticsAndQuota)(nil),   // 20: v6.services.pub.OfflineTaskStatisticsAndQuota
+	(*UserQuotaExtendInfo)(nil),             // 21: v6.services.pub.UserQuotaExtendInfo
+	(*common.UserNameValidateResponse)(nil), // 22: v6.services.pub.common.UserNameValidateResponse
 }
 var file_user_user_svc_proto_depIdxs = []int32{
-	5,  // 0: v6.services.pub.LoginResponse.token:type_name -> v6.services.pub.Token
-	0,  // 1: v6.services.pub.LoginResponse.user:type_name -> v6.services.pub.User
-	4,  // 2: v6.services.pub.LoginResponse.last_login:type_name -> v6.services.pub.LastLoginResponse
-	3,  // 3: v6.services.pub.OauthTokenCheckResponse.login:type_name -> v6.services.pub.LoginResponse
-	11, // 4: v6.services.pub.OauthTokenCheckResponse.oauth:type_name -> v6.services.pub.OauthTokenResponse
-	16, // 5: v6.services.pub.UserStatisticsAndQuota.disk_statistics_quota:type_name -> v6.services.pub.DiskStatisticsAndQuota
-	17, // 6: v6.services.pub.UserStatisticsAndQuota.traffic_statistics_quota:type_name -> v6.services.pub.TrafficStatisticsAndQuota
-	18, // 7: v6.services.pub.UserStatisticsAndQuota.offline_task_statistics_quota:type_name -> v6.services.pub.OfflineTaskStatisticsAndQuota
-	0,  // 8: v6.services.pub.PubUser.Get:input_type -> v6.services.pub.User
-	1,  // 9: v6.services.pub.PubUser.Login:input_type -> v6.services.pub.LoginRequest
-	5,  // 10: v6.services.pub.PubUser.Refresh:input_type -> v6.services.pub.Token
-	5,  // 11: v6.services.pub.PubUser.Logoff:input_type -> v6.services.pub.Token
-	2,  // 12: v6.services.pub.PubUser.DeviceAuthorization:input_type -> v6.services.pub.DeviceAuthorizationRequest
-	1,  // 13: v6.services.pub.PubUser.ResetPassword:input_type -> v6.services.pub.LoginRequest
-	13, // 14: v6.services.pub.PubUser.ChangePassword:input_type -> v6.services.pub.ChangePasswordRequest
-	7,  // 15: v6.services.pub.PubUser.Register:input_type -> v6.services.pub.RegisterRequest
-	0,  // 16: v6.services.pub.PubUser.Delete:input_type -> v6.services.pub.User
-	0,  // 17: v6.services.pub.PubUser.Update:input_type -> v6.services.pub.User
-	8,  // 18: v6.services.pub.PubUser.SendSmsVerifyCode:input_type -> v6.services.pub.SmsVeifyCodeSendRequest
-	9,  // 19: v6.services.pub.PubUser.SendSmsVerifyCodeNotUser:input_type -> v6.services.pub.SmsVeifyCodeSendRequestNotUser
-	1,  // 20: v6.services.pub.PubUser.VerifyAuthToken:input_type -> v6.services.pub.LoginRequest
-	6,  // 21: v6.services.pub.PubUser.VerifyAuthorizationCode:input_type -> v6.services.pub.AuthorizationCode
-	1,  // 22: v6.services.pub.PubUser.CheckAuthStatus:input_type -> v6.services.pub.LoginRequest
-	1,  // 23: v6.services.pub.PubUser.CreateAuthToken:input_type -> v6.services.pub.LoginRequest
-	14, // 24: v6.services.pub.PubUser.ValidateUserInfo:input_type -> v6.services.pub.UserValidateInfo
-	0,  // 25: v6.services.pub.PubUser.GetStatisticsAndQuota:input_type -> v6.services.pub.User
-	19, // 26: v6.services.pub.PubUser.ExtendQuota:input_type -> v6.services.pub.UserQuotaExtendInfo
-	0,  // 27: v6.services.pub.PubUser.GetAvailableExtendQuota:input_type -> v6.services.pub.User
-	0,  // 28: v6.services.pub.PubUser.Get:output_type -> v6.services.pub.User
-	3,  // 29: v6.services.pub.PubUser.Login:output_type -> v6.services.pub.LoginResponse
-	5,  // 30: v6.services.pub.PubUser.Refresh:output_type -> v6.services.pub.Token
-	0,  // 31: v6.services.pub.PubUser.Logoff:output_type -> v6.services.pub.User
-	3,  // 32: v6.services.pub.PubUser.DeviceAuthorization:output_type -> v6.services.pub.LoginResponse
-	0,  // 33: v6.services.pub.PubUser.ResetPassword:output_type -> v6.services.pub.User
-	0,  // 34: v6.services.pub.PubUser.ChangePassword:output_type -> v6.services.pub.User
-	0,  // 35: v6.services.pub.PubUser.Register:output_type -> v6.services.pub.User
-	0,  // 36: v6.services.pub.PubUser.Delete:output_type -> v6.services.pub.User
-	0,  // 37: v6.services.pub.PubUser.Update:output_type -> v6.services.pub.User
-	10, // 38: v6.services.pub.PubUser.SendSmsVerifyCode:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
-	10, // 39: v6.services.pub.PubUser.SendSmsVerifyCodeNotUser:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
-	12, // 40: v6.services.pub.PubUser.VerifyAuthToken:output_type -> v6.services.pub.OauthTokenCheckResponse
-	5,  // 41: v6.services.pub.PubUser.VerifyAuthorizationCode:output_type -> v6.services.pub.Token
-	12, // 42: v6.services.pub.PubUser.CheckAuthStatus:output_type -> v6.services.pub.OauthTokenCheckResponse
-	11, // 43: v6.services.pub.PubUser.CreateAuthToken:output_type -> v6.services.pub.OauthTokenResponse
-	20, // 44: v6.services.pub.PubUser.ValidateUserInfo:output_type -> v6.services.pub.common.UserNameValidateResponse
-	15, // 45: v6.services.pub.PubUser.GetStatisticsAndQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
-	15, // 46: v6.services.pub.PubUser.ExtendQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
-	19, // 47: v6.services.pub.PubUser.GetAvailableExtendQuota:output_type -> v6.services.pub.UserQuotaExtendInfo
-	28, // [28:48] is the sub-list for method output_type
-	8,  // [8:28] is the sub-list for method input_type
+	7,  // 0: v6.services.pub.LoginResponse.token:type_name -> v6.services.pub.Token
+	2,  // 1: v6.services.pub.LoginResponse.user:type_name -> v6.services.pub.User
+	6,  // 2: v6.services.pub.LoginResponse.last_login:type_name -> v6.services.pub.LastLoginResponse
+	5,  // 3: v6.services.pub.OauthTokenCheckResponse.login:type_name -> v6.services.pub.LoginResponse
+	13, // 4: v6.services.pub.OauthTokenCheckResponse.oauth:type_name -> v6.services.pub.OauthTokenResponse
+	18, // 5: v6.services.pub.UserStatisticsAndQuota.disk_statistics_quota:type_name -> v6.services.pub.DiskStatisticsAndQuota
+	19, // 6: v6.services.pub.UserStatisticsAndQuota.traffic_statistics_quota:type_name -> v6.services.pub.TrafficStatisticsAndQuota
+	20, // 7: v6.services.pub.UserStatisticsAndQuota.offline_task_statistics_quota:type_name -> v6.services.pub.OfflineTaskStatisticsAndQuota
+	2,  // 8: v6.services.pub.PubUser.Get:input_type -> v6.services.pub.User
+	3,  // 9: v6.services.pub.PubUser.Login:input_type -> v6.services.pub.LoginRequest
+	7,  // 10: v6.services.pub.PubUser.Refresh:input_type -> v6.services.pub.Token
+	7,  // 11: v6.services.pub.PubUser.Logoff:input_type -> v6.services.pub.Token
+	4,  // 12: v6.services.pub.PubUser.DeviceAuthorization:input_type -> v6.services.pub.DeviceAuthorizationRequest
+	3,  // 13: v6.services.pub.PubUser.ResetPassword:input_type -> v6.services.pub.LoginRequest
+	15, // 14: v6.services.pub.PubUser.ChangePassword:input_type -> v6.services.pub.ChangePasswordRequest
+	9,  // 15: v6.services.pub.PubUser.Register:input_type -> v6.services.pub.RegisterRequest
+	2,  // 16: v6.services.pub.PubUser.Delete:input_type -> v6.services.pub.User
+	2,  // 17: v6.services.pub.PubUser.Update:input_type -> v6.services.pub.User
+	10, // 18: v6.services.pub.PubUser.SendSmsVerifyCode:input_type -> v6.services.pub.SmsVeifyCodeSendRequest
+	11, // 19: v6.services.pub.PubUser.SendSmsVerifyCodeNotUser:input_type -> v6.services.pub.SmsVeifyCodeSendRequestNotUser
+	3,  // 20: v6.services.pub.PubUser.VerifyAuthToken:input_type -> v6.services.pub.LoginRequest
+	8,  // 21: v6.services.pub.PubUser.VerifyAuthorizationCode:input_type -> v6.services.pub.AuthorizationCode
+	3,  // 22: v6.services.pub.PubUser.CheckAuthStatus:input_type -> v6.services.pub.LoginRequest
+	3,  // 23: v6.services.pub.PubUser.CreateAuthToken:input_type -> v6.services.pub.LoginRequest
+	16, // 24: v6.services.pub.PubUser.ValidateUserInfo:input_type -> v6.services.pub.UserValidateInfo
+	2,  // 25: v6.services.pub.PubUser.GetStatisticsAndQuota:input_type -> v6.services.pub.User
+	21, // 26: v6.services.pub.PubUser.ExtendQuota:input_type -> v6.services.pub.UserQuotaExtendInfo
+	2,  // 27: v6.services.pub.PubUser.GetAvailableExtendQuota:input_type -> v6.services.pub.User
+	0,  // 28: v6.services.pub.PubUser.UserCenterUri:input_type -> v6.services.pub.UserCenterUriRequest
+	2,  // 29: v6.services.pub.PubUser.Get:output_type -> v6.services.pub.User
+	5,  // 30: v6.services.pub.PubUser.Login:output_type -> v6.services.pub.LoginResponse
+	7,  // 31: v6.services.pub.PubUser.Refresh:output_type -> v6.services.pub.Token
+	2,  // 32: v6.services.pub.PubUser.Logoff:output_type -> v6.services.pub.User
+	5,  // 33: v6.services.pub.PubUser.DeviceAuthorization:output_type -> v6.services.pub.LoginResponse
+	2,  // 34: v6.services.pub.PubUser.ResetPassword:output_type -> v6.services.pub.User
+	2,  // 35: v6.services.pub.PubUser.ChangePassword:output_type -> v6.services.pub.User
+	2,  // 36: v6.services.pub.PubUser.Register:output_type -> v6.services.pub.User
+	2,  // 37: v6.services.pub.PubUser.Delete:output_type -> v6.services.pub.User
+	2,  // 38: v6.services.pub.PubUser.Update:output_type -> v6.services.pub.User
+	12, // 39: v6.services.pub.PubUser.SendSmsVerifyCode:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
+	12, // 40: v6.services.pub.PubUser.SendSmsVerifyCodeNotUser:output_type -> v6.services.pub.SmsVeifyCodeSendResponse
+	14, // 41: v6.services.pub.PubUser.VerifyAuthToken:output_type -> v6.services.pub.OauthTokenCheckResponse
+	7,  // 42: v6.services.pub.PubUser.VerifyAuthorizationCode:output_type -> v6.services.pub.Token
+	14, // 43: v6.services.pub.PubUser.CheckAuthStatus:output_type -> v6.services.pub.OauthTokenCheckResponse
+	13, // 44: v6.services.pub.PubUser.CreateAuthToken:output_type -> v6.services.pub.OauthTokenResponse
+	22, // 45: v6.services.pub.PubUser.ValidateUserInfo:output_type -> v6.services.pub.common.UserNameValidateResponse
+	17, // 46: v6.services.pub.PubUser.GetStatisticsAndQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
+	17, // 47: v6.services.pub.PubUser.ExtendQuota:output_type -> v6.services.pub.UserStatisticsAndQuota
+	21, // 48: v6.services.pub.PubUser.GetAvailableExtendQuota:output_type -> v6.services.pub.UserQuotaExtendInfo
+	1,  // 49: v6.services.pub.PubUser.UserCenterUri:output_type -> v6.services.pub.UserCenterUriResponse
+	29, // [29:50] is the sub-list for method output_type
+	8,  // [8:29] is the sub-list for method input_type
 	8,  // [8:8] is the sub-list for extension type_name
 	8,  // [8:8] is the sub-list for extension extendee
 	0,  // [0:8] is the sub-list for field type_name
@@ -1981,7 +2105,7 @@ func file_user_user_svc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_user_user_svc_proto_rawDesc), len(file_user_user_svc_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

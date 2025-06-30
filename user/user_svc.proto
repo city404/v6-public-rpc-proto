@@ -126,8 +126,22 @@ service PubUser {
             body: "*"
         };
     }
+    rpc UserCenterUri (UserCenterUriRequest) returns (UserCenterUriResponse) {
+        option (google.api.http) = {
+            post: "/v6/user/user_center_uri"
+            body: "*"
+        };
+    }
 }
-
+message UserCenterUriRequest {
+    string identity = 1; // user identity
+    string addon = 2; // addon information
+    string input = 3; // input information, used for user center uri
+    string type = 4; // type of user center uri, e.g., "default", "custom"
+}
+message UserCenterUriResponse {
+    string uri = 1; // user center uri
+}
 message User {
     string identity = 1; // identity for user, unique in system
     int32 type = 2; // 1: user, 2: admin, 3: super admin
