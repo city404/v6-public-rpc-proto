@@ -2,34 +2,161 @@ syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/userfile";
 import "common/pub_common.proto";
+import "google/api/annotations.proto";
+
 
 service PubUserFile {
-    rpc Create (File) returns (File) {}
-    rpc Get (File) returns (File) {}
+    rpc Create (File) returns (File) {
+        option (google.api.http) = {
+            post: "/v6/userfile/create"
+            body: "*"
+        };
+    }
+    rpc Get (File) returns (File) {
+        option (google.api.http) = {
+            post: "/v6/userfile/get"
+            body: "*"
+        };
+    }
     //rpc Update (File) returns (File) {}
-    rpc Rename (File) returns (BatchOperationResponse) {}
-    rpc Trash (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc Move (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc Copy (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc Delete (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc DeleteTrash (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc Recover (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc BatchRename (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc BatchOperation (BatchOperationRequest) returns (BatchOperationResponse) {}
-    rpc List (FileListRequest) returns (FileListResponse) {}
-    rpc ListTrash (FileListRequest) returns (FileListResponse) {}
-    rpc Search (SearchRequest) returns (FileListResponse) {}
-    rpc CreateManageRTCOffer (ManageRTCRequest) returns (ManageRTCResponse) {}
-    rpc SendClientIceCandidate (SendIceCandidateRequest) returns (SendIceCandidateResponse) {}
-    rpc GetServerIceCandidate (GetIceCandidateRequest) returns (GetIceCandidateResponse) {}
-    rpc ParseFileSlice (File) returns (ParseFileSliceResponse) {}
-    rpc GetSliceDownloadAddress (SliceDownloadAddressRequest) returns (SliceDownloadAddressResponse) {}
-    rpc GetDownloadAndPreviewInfo (File) returns (DownloadAndPreviewInfo) {}
-    rpc PreviewDoc (File) returns (DocFilePreview) {}
-    rpc CreateDoc (File) returns (DocFilePreview) {}
-    rpc CreateUploadToken (File) returns (UploadToken) {}
-    rpc CreateUploadTask (File) returns (UploadTask) {}
-    rpc CreateTemporaryUpload (File) returns (UploadTask) {}
+    rpc Rename (File) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/rename"
+            body: "*"
+        };
+    }
+    rpc Trash (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/trash"
+            body: "*"
+        };
+    }
+    rpc Move (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/move"
+            body: "*"
+        };
+    }
+    rpc Copy (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/copy"
+            body: "*"
+        };
+    }
+    rpc Delete (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/delete"
+            body: "*"
+        };
+    }
+    rpc DeleteTrash (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/delete_trash"
+            body: "*"
+        };
+    }
+    rpc Recover (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/recover"
+            body: "*"
+        };
+    }
+    rpc BatchRename (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/batch_rename"
+            body: "*"
+        };
+    }
+    rpc BatchOperation (BatchOperationRequest) returns (BatchOperationResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/batch_operation"
+            body: "*"
+        };
+    }
+    rpc List (FileListRequest) returns (FileListResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/list"
+            body: "*"
+        };
+    }
+    rpc ListTrash (FileListRequest) returns (FileListResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/list_trash"
+            body: "*"
+        };
+    }
+    rpc Search (SearchRequest) returns (FileListResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/search"
+            body: "*"
+        };
+    }
+    rpc CreateManageRTCOffer (ManageRTCRequest) returns (ManageRTCResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/create_manage_rtc_offer"
+            body: "*"
+        };
+    }
+    rpc SendClientIceCandidate (SendIceCandidateRequest) returns (SendIceCandidateResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/send_client_ice_candidate"
+            body: "*"
+        };
+    }
+    rpc GetServerIceCandidate (GetIceCandidateRequest) returns (GetIceCandidateResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/get_server_ice_candidate"
+            body: "*"
+        };
+    }
+    rpc ParseFileSlice (File) returns (ParseFileSliceResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/parse_file_slice"
+            body: "*"
+        };
+    }
+    rpc GetSliceDownloadAddress (SliceDownloadAddressRequest) returns (SliceDownloadAddressResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/get_slice_download_address"
+            body: "*"
+        };
+    }
+    rpc GetDownloadAndPreviewInfo (File) returns (DownloadAndPreviewInfo) {
+        option (google.api.http) = {
+            post: "/v6/userfile/get_download_and_preview_info"
+            body: "*"
+        };
+    }
+    rpc PreviewDoc (File) returns (DocFilePreview) {
+        option (google.api.http) = {
+            post: "/v6/userfile/preview_doc"
+            body: "*"
+        };
+    }
+    rpc CreateDoc (File) returns (DocFilePreview) {
+        option (google.api.http) = {
+            post: "/v6/userfile/create_doc"
+            body: "*"
+        };
+    }
+    rpc CreateUploadToken (File) returns (UploadToken) {
+        option (google.api.http) = {
+            post: "/v6/userfile/create_upload_token"
+            body: "*"
+        };
+    }
+    rpc CreateUploadTask (File) returns (UploadTask) {
+        option (google.api.http) = {
+            post: "/v6/userfile/create_upload_task"
+            body: "*"
+        };
+    }
+    rpc CreateTemporaryUpload (File) returns (UploadTask) {
+        option (google.api.http) = {
+            post: "/v6/userfile/create_temporary_upload"
+            body: "*"
+        };
+    }
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
