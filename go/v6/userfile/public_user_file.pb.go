@@ -958,19 +958,20 @@ func (x *GetIceCandidateResponse) GetCandidate() []string {
 }
 
 type ParseFileSliceResponse struct {
-	state           protoimpl.MessageState `protogen:"open.v1"`
-	ContentIdentity string                 `protobuf:"bytes,1,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
-	MetaNodes       []string               `protobuf:"bytes,2,rep,name=meta_nodes,json=metaNodes,proto3" json:"meta_nodes,omitempty"`
-	RawNodes        []string               `protobuf:"bytes,3,rep,name=raw_nodes,json=rawNodes,proto3" json:"raw_nodes,omitempty"`
-	FileSize        int64                  `protobuf:"varint,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
-	Sizes           []*SliceSize           `protobuf:"bytes,5,rep,name=sizes,proto3" json:"sizes,omitempty"`
-	Sha1            string                 `protobuf:"bytes,6,opt,name=sha1,proto3" json:"sha1,omitempty"`
-	WcsEtag         string                 `protobuf:"bytes,7,opt,name=wcs_etag,json=wcsEtag,proto3" json:"wcs_etag,omitempty"`
-	Name            string                 `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
-	Path            string                 `protobuf:"bytes,9,opt,name=path,proto3" json:"path,omitempty"`
-	StoreType       int64                  `protobuf:"varint,10,opt,name=store_type,json=storeType,proto3" json:"store_type,omitempty"`
-	unknownFields   protoimpl.UnknownFields
-	sizeCache       protoimpl.SizeCache
+	state                protoimpl.MessageState          `protogen:"open.v1"`
+	ContentIdentity      string                          `protobuf:"bytes,1,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
+	MetaNodes            []string                        `protobuf:"bytes,2,rep,name=meta_nodes,json=metaNodes,proto3" json:"meta_nodes,omitempty"`
+	RawNodes             []string                        `protobuf:"bytes,3,rep,name=raw_nodes,json=rawNodes,proto3" json:"raw_nodes,omitempty"`
+	FileSize             int64                           `protobuf:"varint,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	Sizes                []*SliceSize                    `protobuf:"bytes,5,rep,name=sizes,proto3" json:"sizes,omitempty"`
+	Sha1                 string                          `protobuf:"bytes,6,opt,name=sha1,proto3" json:"sha1,omitempty"`
+	WcsEtag              string                          `protobuf:"bytes,7,opt,name=wcs_etag,json=wcsEtag,proto3" json:"wcs_etag,omitempty"`
+	Name                 string                          `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	Path                 string                          `protobuf:"bytes,9,opt,name=path,proto3" json:"path,omitempty"`
+	StoreType            int64                           `protobuf:"varint,10,opt,name=store_type,json=storeType,proto3" json:"store_type,omitempty"`
+	RawDownloadAddresses []*SliceDownloadAddressResponse `protobuf:"bytes,11,rep,name=raw_download_addresses,json=rawDownloadAddresses,proto3" json:"raw_download_addresses,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ParseFileSliceResponse) Reset() {
@@ -1073,6 +1074,13 @@ func (x *ParseFileSliceResponse) GetStoreType() int64 {
 	return 0
 }
 
+func (x *ParseFileSliceResponse) GetRawDownloadAddresses() []*SliceDownloadAddressResponse {
+	if x != nil {
+		return x.RawDownloadAddresses
+	}
+	return nil
+}
+
 type SliceSize struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	StartIndex    int64                  `protobuf:"varint,1,opt,name=start_index,json=startIndex,proto3" json:"start_index,omitempty"`
@@ -1139,6 +1147,7 @@ type SliceDownloadAddressRequest struct {
 	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
 	Filename      string                 `protobuf:"bytes,3,opt,name=filename,proto3" json:"filename,omitempty"`
 	Flag          int64                  `protobuf:"varint,4,opt,name=flag,proto3" json:"flag,omitempty"`
+	Parse         bool                   `protobuf:"varint,5,opt,name=parse,proto3" json:"parse,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1199,6 +1208,13 @@ func (x *SliceDownloadAddressRequest) GetFlag() int64 {
 		return x.Flag
 	}
 	return 0
+}
+
+func (x *SliceDownloadAddressRequest) GetParse() bool {
+	if x != nil {
+		return x.Parse
+	}
+	return false
 }
 
 type SliceDownloadAddressResponse struct {
@@ -1972,7 +1988,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\tcandidate\x18\x02 \x01(\tR\tcandidate\"`\n" +
 	"\x17GetIceCandidateResponse\x12'\n" +
 	"\x0fclient_identity\x18\x01 \x01(\tR\x0eclientIdentity\x12\x1c\n" +
-	"\tcandidate\x18\x02 \x03(\tR\tcandidate\"\xc4\x02\n" +
+	"\tcandidate\x18\x02 \x03(\tR\tcandidate\"\xa9\x03\n" +
 	"\x16ParseFileSliceResponse\x12)\n" +
 	"\x10content_identity\x18\x01 \x01(\tR\x0fcontentIdentity\x12\x1d\n" +
 	"\n" +
@@ -1986,17 +2002,19 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x04path\x18\t \x01(\tR\x04path\x12\x1d\n" +
 	"\n" +
 	"store_type\x18\n" +
-	" \x01(\x03R\tstoreType\"]\n" +
+	" \x01(\x03R\tstoreType\x12c\n" +
+	"\x16raw_download_addresses\x18\v \x03(\v2-.v6.services.pub.SliceDownloadAddressResponseR\x14rawDownloadAddresses\"]\n" +
 	"\tSliceSize\x12\x1f\n" +
 	"\vstart_index\x18\x01 \x01(\x03R\n" +
 	"startIndex\x12\x1b\n" +
 	"\tend_index\x18\x02 \x01(\x03R\bendIndex\x12\x12\n" +
-	"\x04size\x18\x03 \x01(\x03R\x04size\"\x83\x01\n" +
+	"\x04size\x18\x03 \x01(\x03R\x04size\"\x99\x01\n" +
 	"\x1bSliceDownloadAddressRequest\x12\x1a\n" +
 	"\bidentity\x18\x01 \x03(\tR\bidentity\x12\x18\n" +
 	"\aversion\x18\x02 \x01(\x05R\aversion\x12\x1a\n" +
 	"\bfilename\x18\x03 \x01(\tR\bfilename\x12\x12\n" +
-	"\x04flag\x18\x04 \x01(\x03R\x04flag\"\xc0\x01\n" +
+	"\x04flag\x18\x04 \x01(\x03R\x04flag\x12\x14\n" +
+	"\x05parse\x18\x05 \x01(\bR\x05parse\"\xc0\x01\n" +
 	"\x1cSliceDownloadAddressResponse\x12@\n" +
 	"\taddresses\x18\x01 \x03(\v2\".v6.services.pub.SliceDownloadInfoR\taddresses\x12\x1b\n" +
 	"\texpire_at\x18\x02 \x01(\x03R\bexpireAt\x12'\n" +
@@ -2153,62 +2171,63 @@ var file_userfile_public_user_file_proto_depIdxs = []int32{
 	0,  // 6: v6.services.pub.BatchOperationRequest.source:type_name -> v6.services.pub.File
 	0,  // 7: v6.services.pub.BatchOperationRequest.dest:type_name -> v6.services.pub.File
 	13, // 8: v6.services.pub.ParseFileSliceResponse.sizes:type_name -> v6.services.pub.SliceSize
-	16, // 9: v6.services.pub.SliceDownloadAddressResponse.addresses:type_name -> v6.services.pub.SliceDownloadInfo
-	0,  // 10: v6.services.pub.PubUserFile.Create:input_type -> v6.services.pub.File
-	0,  // 11: v6.services.pub.PubUserFile.Get:input_type -> v6.services.pub.File
-	0,  // 12: v6.services.pub.PubUserFile.Rename:input_type -> v6.services.pub.File
-	4,  // 13: v6.services.pub.PubUserFile.Trash:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 14: v6.services.pub.PubUserFile.Move:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 15: v6.services.pub.PubUserFile.Copy:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 16: v6.services.pub.PubUserFile.Delete:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 17: v6.services.pub.PubUserFile.DeleteTrash:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 18: v6.services.pub.PubUserFile.Recover:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 19: v6.services.pub.PubUserFile.BatchRename:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 20: v6.services.pub.PubUserFile.BatchOperation:input_type -> v6.services.pub.BatchOperationRequest
-	1,  // 21: v6.services.pub.PubUserFile.List:input_type -> v6.services.pub.FileListRequest
-	1,  // 22: v6.services.pub.PubUserFile.ListTrash:input_type -> v6.services.pub.FileListRequest
-	2,  // 23: v6.services.pub.PubUserFile.Search:input_type -> v6.services.pub.SearchRequest
-	6,  // 24: v6.services.pub.PubUserFile.CreateManageRTCOffer:input_type -> v6.services.pub.ManageRTCRequest
-	8,  // 25: v6.services.pub.PubUserFile.SendClientIceCandidate:input_type -> v6.services.pub.SendIceCandidateRequest
-	10, // 26: v6.services.pub.PubUserFile.GetServerIceCandidate:input_type -> v6.services.pub.GetIceCandidateRequest
-	0,  // 27: v6.services.pub.PubUserFile.ParseFileSlice:input_type -> v6.services.pub.File
-	14, // 28: v6.services.pub.PubUserFile.GetSliceDownloadAddress:input_type -> v6.services.pub.SliceDownloadAddressRequest
-	0,  // 29: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:input_type -> v6.services.pub.File
-	0,  // 30: v6.services.pub.PubUserFile.PreviewDoc:input_type -> v6.services.pub.File
-	0,  // 31: v6.services.pub.PubUserFile.CreateDoc:input_type -> v6.services.pub.File
-	0,  // 32: v6.services.pub.PubUserFile.CreateUploadToken:input_type -> v6.services.pub.File
-	0,  // 33: v6.services.pub.PubUserFile.CreateUploadTask:input_type -> v6.services.pub.File
-	0,  // 34: v6.services.pub.PubUserFile.CreateTemporaryUpload:input_type -> v6.services.pub.File
-	0,  // 35: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
-	0,  // 36: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
-	5,  // 37: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 38: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 39: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 40: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 41: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 42: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 43: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 44: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 45: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
-	3,  // 46: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
-	3,  // 47: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
-	3,  // 48: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
-	7,  // 49: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
-	9,  // 50: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
-	11, // 51: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
-	12, // 52: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
-	15, // 53: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
-	18, // 54: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
-	17, // 55: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
-	17, // 56: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
-	19, // 57: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
-	20, // 58: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
-	20, // 59: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
-	35, // [35:60] is the sub-list for method output_type
-	10, // [10:35] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	15, // 9: v6.services.pub.ParseFileSliceResponse.raw_download_addresses:type_name -> v6.services.pub.SliceDownloadAddressResponse
+	16, // 10: v6.services.pub.SliceDownloadAddressResponse.addresses:type_name -> v6.services.pub.SliceDownloadInfo
+	0,  // 11: v6.services.pub.PubUserFile.Create:input_type -> v6.services.pub.File
+	0,  // 12: v6.services.pub.PubUserFile.Get:input_type -> v6.services.pub.File
+	0,  // 13: v6.services.pub.PubUserFile.Rename:input_type -> v6.services.pub.File
+	4,  // 14: v6.services.pub.PubUserFile.Trash:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 15: v6.services.pub.PubUserFile.Move:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 16: v6.services.pub.PubUserFile.Copy:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 17: v6.services.pub.PubUserFile.Delete:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 18: v6.services.pub.PubUserFile.DeleteTrash:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 19: v6.services.pub.PubUserFile.Recover:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 20: v6.services.pub.PubUserFile.BatchRename:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 21: v6.services.pub.PubUserFile.BatchOperation:input_type -> v6.services.pub.BatchOperationRequest
+	1,  // 22: v6.services.pub.PubUserFile.List:input_type -> v6.services.pub.FileListRequest
+	1,  // 23: v6.services.pub.PubUserFile.ListTrash:input_type -> v6.services.pub.FileListRequest
+	2,  // 24: v6.services.pub.PubUserFile.Search:input_type -> v6.services.pub.SearchRequest
+	6,  // 25: v6.services.pub.PubUserFile.CreateManageRTCOffer:input_type -> v6.services.pub.ManageRTCRequest
+	8,  // 26: v6.services.pub.PubUserFile.SendClientIceCandidate:input_type -> v6.services.pub.SendIceCandidateRequest
+	10, // 27: v6.services.pub.PubUserFile.GetServerIceCandidate:input_type -> v6.services.pub.GetIceCandidateRequest
+	0,  // 28: v6.services.pub.PubUserFile.ParseFileSlice:input_type -> v6.services.pub.File
+	14, // 29: v6.services.pub.PubUserFile.GetSliceDownloadAddress:input_type -> v6.services.pub.SliceDownloadAddressRequest
+	0,  // 30: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:input_type -> v6.services.pub.File
+	0,  // 31: v6.services.pub.PubUserFile.PreviewDoc:input_type -> v6.services.pub.File
+	0,  // 32: v6.services.pub.PubUserFile.CreateDoc:input_type -> v6.services.pub.File
+	0,  // 33: v6.services.pub.PubUserFile.CreateUploadToken:input_type -> v6.services.pub.File
+	0,  // 34: v6.services.pub.PubUserFile.CreateUploadTask:input_type -> v6.services.pub.File
+	0,  // 35: v6.services.pub.PubUserFile.CreateTemporaryUpload:input_type -> v6.services.pub.File
+	0,  // 36: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
+	0,  // 37: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
+	5,  // 38: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 39: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 40: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 41: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 42: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 43: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 44: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 45: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 46: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
+	3,  // 47: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
+	3,  // 48: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
+	3,  // 49: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
+	7,  // 50: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
+	9,  // 51: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
+	11, // 52: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
+	12, // 53: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
+	15, // 54: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
+	18, // 55: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
+	17, // 56: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
+	17, // 57: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
+	19, // 58: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
+	20, // 59: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
+	20, // 60: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
+	36, // [36:61] is the sub-list for method output_type
+	11, // [11:36] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_userfile_public_user_file_proto_init() }

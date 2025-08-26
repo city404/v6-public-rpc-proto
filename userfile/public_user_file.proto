@@ -281,6 +281,7 @@ message ParseFileSliceResponse {
     string name = 8;
     string path = 9;
     int64 store_type = 10;
+    repeated SliceDownloadAddressResponse raw_download_addresses = 11;
 }
 
 message SliceSize {
@@ -295,6 +296,7 @@ message SliceDownloadAddressRequest {
     int32 version = 2;
     string filename = 3;
     int64 flag = 4;
+    bool parse = 5;
 }
 
 message SliceDownloadAddressResponse {
