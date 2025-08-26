@@ -958,18 +958,18 @@ func (x *GetIceCandidateResponse) GetCandidate() []string {
 }
 
 type ParseFileSliceResponse struct {
-	state                protoimpl.MessageState          `protogen:"open.v1"`
-	ContentIdentity      string                          `protobuf:"bytes,1,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
-	MetaNodes            []string                        `protobuf:"bytes,2,rep,name=meta_nodes,json=metaNodes,proto3" json:"meta_nodes,omitempty"`
-	RawNodes             []string                        `protobuf:"bytes,3,rep,name=raw_nodes,json=rawNodes,proto3" json:"raw_nodes,omitempty"`
-	FileSize             int64                           `protobuf:"varint,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
-	Sizes                []*SliceSize                    `protobuf:"bytes,5,rep,name=sizes,proto3" json:"sizes,omitempty"`
-	Sha1                 string                          `protobuf:"bytes,6,opt,name=sha1,proto3" json:"sha1,omitempty"`
-	WcsEtag              string                          `protobuf:"bytes,7,opt,name=wcs_etag,json=wcsEtag,proto3" json:"wcs_etag,omitempty"`
-	Name                 string                          `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
-	Path                 string                          `protobuf:"bytes,9,opt,name=path,proto3" json:"path,omitempty"`
-	StoreType            int64                           `protobuf:"varint,10,opt,name=store_type,json=storeType,proto3" json:"store_type,omitempty"`
-	RawDownloadAddresses []*SliceDownloadAddressResponse `protobuf:"bytes,11,rep,name=raw_download_addresses,json=rawDownloadAddresses,proto3" json:"raw_download_addresses,omitempty"`
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	ContentIdentity      string                 `protobuf:"bytes,1,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
+	MetaNodes            []string               `protobuf:"bytes,2,rep,name=meta_nodes,json=metaNodes,proto3" json:"meta_nodes,omitempty"`
+	RawNodes             []string               `protobuf:"bytes,3,rep,name=raw_nodes,json=rawNodes,proto3" json:"raw_nodes,omitempty"`
+	FileSize             int64                  `protobuf:"varint,4,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	Sizes                []*SliceSize           `protobuf:"bytes,5,rep,name=sizes,proto3" json:"sizes,omitempty"`
+	Sha1                 string                 `protobuf:"bytes,6,opt,name=sha1,proto3" json:"sha1,omitempty"`
+	WcsEtag              string                 `protobuf:"bytes,7,opt,name=wcs_etag,json=wcsEtag,proto3" json:"wcs_etag,omitempty"`
+	Name                 string                 `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
+	Path                 string                 `protobuf:"bytes,9,opt,name=path,proto3" json:"path,omitempty"`
+	StoreType            int64                  `protobuf:"varint,10,opt,name=store_type,json=storeType,proto3" json:"store_type,omitempty"`
+	RawDownloadAddresses []*SliceDownloadInfo   `protobuf:"bytes,11,rep,name=raw_download_addresses,json=rawDownloadAddresses,proto3" json:"raw_download_addresses,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1074,7 +1074,7 @@ func (x *ParseFileSliceResponse) GetStoreType() int64 {
 	return 0
 }
 
-func (x *ParseFileSliceResponse) GetRawDownloadAddresses() []*SliceDownloadAddressResponse {
+func (x *ParseFileSliceResponse) GetRawDownloadAddresses() []*SliceDownloadInfo {
 	if x != nil {
 		return x.RawDownloadAddresses
 	}
@@ -1988,7 +1988,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\tcandidate\x18\x02 \x01(\tR\tcandidate\"`\n" +
 	"\x17GetIceCandidateResponse\x12'\n" +
 	"\x0fclient_identity\x18\x01 \x01(\tR\x0eclientIdentity\x12\x1c\n" +
-	"\tcandidate\x18\x02 \x03(\tR\tcandidate\"\xa9\x03\n" +
+	"\tcandidate\x18\x02 \x03(\tR\tcandidate\"\x9e\x03\n" +
 	"\x16ParseFileSliceResponse\x12)\n" +
 	"\x10content_identity\x18\x01 \x01(\tR\x0fcontentIdentity\x12\x1d\n" +
 	"\n" +
@@ -2002,8 +2002,8 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x04path\x18\t \x01(\tR\x04path\x12\x1d\n" +
 	"\n" +
 	"store_type\x18\n" +
-	" \x01(\x03R\tstoreType\x12c\n" +
-	"\x16raw_download_addresses\x18\v \x03(\v2-.v6.services.pub.SliceDownloadAddressResponseR\x14rawDownloadAddresses\"]\n" +
+	" \x01(\x03R\tstoreType\x12X\n" +
+	"\x16raw_download_addresses\x18\v \x03(\v2\".v6.services.pub.SliceDownloadInfoR\x14rawDownloadAddresses\"]\n" +
 	"\tSliceSize\x12\x1f\n" +
 	"\vstart_index\x18\x01 \x01(\x03R\n" +
 	"startIndex\x12\x1b\n" +
@@ -2171,7 +2171,7 @@ var file_userfile_public_user_file_proto_depIdxs = []int32{
 	0,  // 6: v6.services.pub.BatchOperationRequest.source:type_name -> v6.services.pub.File
 	0,  // 7: v6.services.pub.BatchOperationRequest.dest:type_name -> v6.services.pub.File
 	13, // 8: v6.services.pub.ParseFileSliceResponse.sizes:type_name -> v6.services.pub.SliceSize
-	15, // 9: v6.services.pub.ParseFileSliceResponse.raw_download_addresses:type_name -> v6.services.pub.SliceDownloadAddressResponse
+	16, // 9: v6.services.pub.ParseFileSliceResponse.raw_download_addresses:type_name -> v6.services.pub.SliceDownloadInfo
 	16, // 10: v6.services.pub.SliceDownloadAddressResponse.addresses:type_name -> v6.services.pub.SliceDownloadInfo
 	0,  // 11: v6.services.pub.PubUserFile.Create:input_type -> v6.services.pub.File
 	0,  // 12: v6.services.pub.PubUserFile.Get:input_type -> v6.services.pub.File
