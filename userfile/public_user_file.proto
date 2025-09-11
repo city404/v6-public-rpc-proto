@@ -121,6 +121,14 @@ service PubUserFile {
             body: "*"
         };
     }
+
+    rpc GetDirectDownloadAddress (File) returns (FileDownloadAddressResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/get_direct_download_address"
+            body: "*"
+        };
+    }
+
     rpc GetDownloadAndPreviewInfo (File) returns (DownloadAndPreviewInfo) {
         option (google.api.http) = {
             post: "/v6/userfile/get_download_and_preview_info"
@@ -304,6 +312,15 @@ message SliceDownloadAddressResponse {
     int64 expire_at = 2;
     string request_address = 3;
     int32 version = 4;
+}
+
+message FileDownloadAddressResponse {
+    repeated SliceDownloadInfo addresses = 1;
+    int64 expire_at = 2;
+    string request_address = 3;
+    int32 version = 4;
+    int32 encrypt = 5;
+    int64 store_type = 6;
 }
 
 message SliceDownloadInfo {
