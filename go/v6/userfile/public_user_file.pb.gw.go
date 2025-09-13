@@ -550,7 +550,7 @@ func local_request_PubUserFile_GetSliceDownloadAddress_0(ctx context.Context, ma
 
 func request_PubUserFile_GetDirectDownloadAddress_0(ctx context.Context, marshaler runtime.Marshaler, client PubUserFileClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq File
+		protoReq DirectDownloadRequest
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
@@ -565,7 +565,7 @@ func request_PubUserFile_GetDirectDownloadAddress_0(ctx context.Context, marshal
 
 func local_request_PubUserFile_GetDirectDownloadAddress_0(ctx context.Context, marshaler runtime.Marshaler, server PubUserFileServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq File
+		protoReq DirectDownloadRequest
 		metadata runtime.ServerMetadata
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {

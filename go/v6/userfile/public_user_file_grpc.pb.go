@@ -71,7 +71,7 @@ type PubUserFileClient interface {
 	GetServerIceCandidate(ctx context.Context, in *GetIceCandidateRequest, opts ...grpc.CallOption) (*GetIceCandidateResponse, error)
 	ParseFileSlice(ctx context.Context, in *File, opts ...grpc.CallOption) (*ParseFileSliceResponse, error)
 	GetSliceDownloadAddress(ctx context.Context, in *SliceDownloadAddressRequest, opts ...grpc.CallOption) (*SliceDownloadAddressResponse, error)
-	GetDirectDownloadAddress(ctx context.Context, in *File, opts ...grpc.CallOption) (*FileDownloadAddressResponse, error)
+	GetDirectDownloadAddress(ctx context.Context, in *DirectDownloadRequest, opts ...grpc.CallOption) (*FileDownloadAddressResponse, error)
 	GetDownloadAndPreviewInfo(ctx context.Context, in *File, opts ...grpc.CallOption) (*DownloadAndPreviewInfo, error)
 	PreviewDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error)
 	CreateDoc(ctx context.Context, in *File, opts ...grpc.CallOption) (*DocFilePreview, error)
@@ -278,7 +278,7 @@ func (c *pubUserFileClient) GetSliceDownloadAddress(ctx context.Context, in *Sli
 	return out, nil
 }
 
-func (c *pubUserFileClient) GetDirectDownloadAddress(ctx context.Context, in *File, opts ...grpc.CallOption) (*FileDownloadAddressResponse, error) {
+func (c *pubUserFileClient) GetDirectDownloadAddress(ctx context.Context, in *DirectDownloadRequest, opts ...grpc.CallOption) (*FileDownloadAddressResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(FileDownloadAddressResponse)
 	err := c.cc.Invoke(ctx, PubUserFile_GetDirectDownloadAddress_FullMethodName, in, out, cOpts...)
@@ -372,7 +372,7 @@ type PubUserFileServer interface {
 	GetServerIceCandidate(context.Context, *GetIceCandidateRequest) (*GetIceCandidateResponse, error)
 	ParseFileSlice(context.Context, *File) (*ParseFileSliceResponse, error)
 	GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error)
-	GetDirectDownloadAddress(context.Context, *File) (*FileDownloadAddressResponse, error)
+	GetDirectDownloadAddress(context.Context, *DirectDownloadRequest) (*FileDownloadAddressResponse, error)
 	GetDownloadAndPreviewInfo(context.Context, *File) (*DownloadAndPreviewInfo, error)
 	PreviewDoc(context.Context, *File) (*DocFilePreview, error)
 	CreateDoc(context.Context, *File) (*DocFilePreview, error)
@@ -446,7 +446,7 @@ func (UnimplementedPubUserFileServer) ParseFileSlice(context.Context, *File) (*P
 func (UnimplementedPubUserFileServer) GetSliceDownloadAddress(context.Context, *SliceDownloadAddressRequest) (*SliceDownloadAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSliceDownloadAddress not implemented")
 }
-func (UnimplementedPubUserFileServer) GetDirectDownloadAddress(context.Context, *File) (*FileDownloadAddressResponse, error) {
+func (UnimplementedPubUserFileServer) GetDirectDownloadAddress(context.Context, *DirectDownloadRequest) (*FileDownloadAddressResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDirectDownloadAddress not implemented")
 }
 func (UnimplementedPubUserFileServer) GetDownloadAndPreviewInfo(context.Context, *File) (*DownloadAndPreviewInfo, error) {
@@ -831,7 +831,7 @@ func _PubUserFile_GetSliceDownloadAddress_Handler(srv interface{}, ctx context.C
 }
 
 func _PubUserFile_GetDirectDownloadAddress_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(File)
+	in := new(DirectDownloadRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -843,7 +843,7 @@ func _PubUserFile_GetDirectDownloadAddress_Handler(srv interface{}, ctx context.
 		FullMethod: PubUserFile_GetDirectDownloadAddress_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PubUserFileServer).GetDirectDownloadAddress(ctx, req.(*File))
+		return srv.(PubUserFileServer).GetDirectDownloadAddress(ctx, req.(*DirectDownloadRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

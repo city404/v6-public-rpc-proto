@@ -122,7 +122,7 @@ service PubUserFile {
         };
     }
 
-    rpc GetDirectDownloadAddress (File) returns (FileDownloadAddressResponse) {
+    rpc GetDirectDownloadAddress (DirectDownloadRequest) returns (FileDownloadAddressResponse) {
         option (google.api.http) = {
             post: "/v6/userfile/get_direct_download_address"
             body: "*"
@@ -391,4 +391,18 @@ message UploadTask {
     int64 block_hash_type = 17;
     int32 block_version = 18;
     int64 block_codec = 19;
+}
+
+message DirectDownloadRequest {
+    string identity = 1;
+    int32 version = 2;
+    string path = 3;
+    int64 flag = 4;
+    string client_ip = 5;
+    string client_ua = 6;
+    repeated string video_codecs = 7;
+    repeated string audio_codecs = 8;
+    int64 expire = 9;
+    int32 encrypt = 10;
+    string addon = 11;
 }

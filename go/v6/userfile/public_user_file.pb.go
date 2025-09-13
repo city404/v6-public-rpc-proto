@@ -1989,6 +1989,130 @@ func (x *UploadTask) GetBlockCodec() int64 {
 	return 0
 }
 
+type DirectDownloadRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
+	Version       int32                  `protobuf:"varint,2,opt,name=version,proto3" json:"version,omitempty"`
+	Path          string                 `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
+	Flag          int64                  `protobuf:"varint,4,opt,name=flag,proto3" json:"flag,omitempty"`
+	ClientIp      string                 `protobuf:"bytes,5,opt,name=client_ip,json=clientIp,proto3" json:"client_ip,omitempty"`
+	ClientUa      string                 `protobuf:"bytes,6,opt,name=client_ua,json=clientUa,proto3" json:"client_ua,omitempty"`
+	VideoCodecs   []string               `protobuf:"bytes,7,rep,name=video_codecs,json=videoCodecs,proto3" json:"video_codecs,omitempty"`
+	AudioCodecs   []string               `protobuf:"bytes,8,rep,name=audio_codecs,json=audioCodecs,proto3" json:"audio_codecs,omitempty"`
+	Expire        int64                  `protobuf:"varint,9,opt,name=expire,proto3" json:"expire,omitempty"`
+	Encrypt       int32                  `protobuf:"varint,10,opt,name=encrypt,proto3" json:"encrypt,omitempty"`
+	Addon         string                 `protobuf:"bytes,11,opt,name=addon,proto3" json:"addon,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DirectDownloadRequest) Reset() {
+	*x = DirectDownloadRequest{}
+	mi := &file_userfile_public_user_file_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DirectDownloadRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DirectDownloadRequest) ProtoMessage() {}
+
+func (x *DirectDownloadRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userfile_public_user_file_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DirectDownloadRequest.ProtoReflect.Descriptor instead.
+func (*DirectDownloadRequest) Descriptor() ([]byte, []int) {
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *DirectDownloadRequest) GetIdentity() string {
+	if x != nil {
+		return x.Identity
+	}
+	return ""
+}
+
+func (x *DirectDownloadRequest) GetVersion() int32 {
+	if x != nil {
+		return x.Version
+	}
+	return 0
+}
+
+func (x *DirectDownloadRequest) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *DirectDownloadRequest) GetFlag() int64 {
+	if x != nil {
+		return x.Flag
+	}
+	return 0
+}
+
+func (x *DirectDownloadRequest) GetClientIp() string {
+	if x != nil {
+		return x.ClientIp
+	}
+	return ""
+}
+
+func (x *DirectDownloadRequest) GetClientUa() string {
+	if x != nil {
+		return x.ClientUa
+	}
+	return ""
+}
+
+func (x *DirectDownloadRequest) GetVideoCodecs() []string {
+	if x != nil {
+		return x.VideoCodecs
+	}
+	return nil
+}
+
+func (x *DirectDownloadRequest) GetAudioCodecs() []string {
+	if x != nil {
+		return x.AudioCodecs
+	}
+	return nil
+}
+
+func (x *DirectDownloadRequest) GetExpire() int64 {
+	if x != nil {
+		return x.Expire
+	}
+	return 0
+}
+
+func (x *DirectDownloadRequest) GetEncrypt() int32 {
+	if x != nil {
+		return x.Encrypt
+	}
+	return 0
+}
+
+func (x *DirectDownloadRequest) GetAddon() string {
+	if x != nil {
+		return x.Addon
+	}
+	return ""
+}
+
 var File_userfile_public_user_file_proto protoreflect.FileDescriptor
 
 const file_userfile_public_user_file_proto_rawDesc = "" +
@@ -2187,7 +2311,20 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x0fblock_hash_type\x18\x11 \x01(\x03R\rblockHashType\x12#\n" +
 	"\rblock_version\x18\x12 \x01(\x05R\fblockVersion\x12\x1f\n" +
 	"\vblock_codec\x18\x13 \x01(\x03R\n" +
-	"blockCodec2\xce\x19\n" +
+	"blockCodec\"\xbd\x02\n" +
+	"\x15DirectDownloadRequest\x12\x1a\n" +
+	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x18\n" +
+	"\aversion\x18\x02 \x01(\x05R\aversion\x12\x12\n" +
+	"\x04path\x18\x03 \x01(\tR\x04path\x12\x12\n" +
+	"\x04flag\x18\x04 \x01(\x03R\x04flag\x12\x1b\n" +
+	"\tclient_ip\x18\x05 \x01(\tR\bclientIp\x12\x1b\n" +
+	"\tclient_ua\x18\x06 \x01(\tR\bclientUa\x12!\n" +
+	"\fvideo_codecs\x18\a \x03(\tR\vvideoCodecs\x12!\n" +
+	"\faudio_codecs\x18\b \x03(\tR\vaudioCodecs\x12\x16\n" +
+	"\x06expire\x18\t \x01(\x03R\x06expire\x12\x18\n" +
+	"\aencrypt\x18\n" +
+	" \x01(\x05R\aencrypt\x12\x14\n" +
+	"\x05addon\x18\v \x01(\tR\x05addon2\xdf\x19\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +
@@ -2207,8 +2344,8 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x16SendClientIceCandidate\x12(.v6.services.pub.SendIceCandidateRequest\x1a).v6.services.pub.SendIceCandidateResponse\"1\x82\xd3\xe4\x93\x02+:\x01*\"&/v6/userfile/send_client_ice_candidate\x12\x9c\x01\n" +
 	"\x15GetServerIceCandidate\x12'.v6.services.pub.GetIceCandidateRequest\x1a(.v6.services.pub.GetIceCandidateResponse\"0\x82\xd3\xe4\x93\x02*:\x01*\"%/v6/userfile/get_server_ice_candidate\x12z\n" +
 	"\x0eParseFileSlice\x12\x15.v6.services.pub.File\x1a'.v6.services.pub.ParseFileSliceResponse\"(\x82\xd3\xe4\x93\x02\":\x01*\"\x1d/v6/userfile/parse_file_slice\x12\xaa\x01\n" +
-	"\x17GetSliceDownloadAddress\x12,.v6.services.pub.SliceDownloadAddressRequest\x1a-.v6.services.pub.SliceDownloadAddressResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v6/userfile/get_slice_download_address\x12\x94\x01\n" +
-	"\x18GetDirectDownloadAddress\x12\x15.v6.services.pub.File\x1a,.v6.services.pub.FileDownloadAddressResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v6/userfile/get_direct_download_address\x12\x92\x01\n" +
+	"\x17GetSliceDownloadAddress\x12,.v6.services.pub.SliceDownloadAddressRequest\x1a-.v6.services.pub.SliceDownloadAddressResponse\"2\x82\xd3\xe4\x93\x02,:\x01*\"'/v6/userfile/get_slice_download_address\x12\xa5\x01\n" +
+	"\x18GetDirectDownloadAddress\x12&.v6.services.pub.DirectDownloadRequest\x1a,.v6.services.pub.FileDownloadAddressResponse\"3\x82\xd3\xe4\x93\x02-:\x01*\"(/v6/userfile/get_direct_download_address\x12\x92\x01\n" +
 	"\x19GetDownloadAndPreviewInfo\x12\x15.v6.services.pub.File\x1a'.v6.services.pub.DownloadAndPreviewInfo\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v6/userfile/get_download_and_preview_info\x12i\n" +
 	"\n" +
 	"PreviewDoc\x12\x15.v6.services.pub.File\x1a\x1f.v6.services.pub.DocFilePreview\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v6/userfile/preview_doc\x12g\n" +
@@ -2229,7 +2366,7 @@ func file_userfile_public_user_file_proto_rawDescGZIP() []byte {
 	return file_userfile_public_user_file_proto_rawDescData
 }
 
-var file_userfile_public_user_file_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_userfile_public_user_file_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_userfile_public_user_file_proto_goTypes = []any{
 	(*File)(nil),                         // 0: v6.services.pub.File
 	(*FileListRequest)(nil),              // 1: v6.services.pub.FileListRequest
@@ -2253,15 +2390,16 @@ var file_userfile_public_user_file_proto_goTypes = []any{
 	(*DownloadAndPreviewInfo)(nil),       // 19: v6.services.pub.DownloadAndPreviewInfo
 	(*UploadToken)(nil),                  // 20: v6.services.pub.UploadToken
 	(*UploadTask)(nil),                   // 21: v6.services.pub.UploadTask
-	(*common.ScanListRequest)(nil),       // 22: v6.services.pub.common.ScanListRequest
+	(*DirectDownloadRequest)(nil),        // 22: v6.services.pub.DirectDownloadRequest
+	(*common.ScanListRequest)(nil),       // 23: v6.services.pub.common.ScanListRequest
 }
 var file_userfile_public_user_file_proto_depIdxs = []int32{
 	0,  // 0: v6.services.pub.FileListRequest.parent:type_name -> v6.services.pub.File
 	0,  // 1: v6.services.pub.FileListRequest.filter:type_name -> v6.services.pub.File
-	22, // 2: v6.services.pub.FileListRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
-	22, // 3: v6.services.pub.SearchRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	23, // 2: v6.services.pub.FileListRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	23, // 3: v6.services.pub.SearchRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
 	0,  // 4: v6.services.pub.FileListResponse.files:type_name -> v6.services.pub.File
-	22, // 5: v6.services.pub.FileListResponse.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	23, // 5: v6.services.pub.FileListResponse.list_info:type_name -> v6.services.pub.common.ScanListRequest
 	0,  // 6: v6.services.pub.BatchOperationRequest.source:type_name -> v6.services.pub.File
 	0,  // 7: v6.services.pub.BatchOperationRequest.dest:type_name -> v6.services.pub.File
 	13, // 8: v6.services.pub.ParseFileSliceResponse.sizes:type_name -> v6.services.pub.SliceSize
@@ -2287,7 +2425,7 @@ var file_userfile_public_user_file_proto_depIdxs = []int32{
 	10, // 28: v6.services.pub.PubUserFile.GetServerIceCandidate:input_type -> v6.services.pub.GetIceCandidateRequest
 	0,  // 29: v6.services.pub.PubUserFile.ParseFileSlice:input_type -> v6.services.pub.File
 	14, // 30: v6.services.pub.PubUserFile.GetSliceDownloadAddress:input_type -> v6.services.pub.SliceDownloadAddressRequest
-	0,  // 31: v6.services.pub.PubUserFile.GetDirectDownloadAddress:input_type -> v6.services.pub.File
+	22, // 31: v6.services.pub.PubUserFile.GetDirectDownloadAddress:input_type -> v6.services.pub.DirectDownloadRequest
 	0,  // 32: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:input_type -> v6.services.pub.File
 	0,  // 33: v6.services.pub.PubUserFile.PreviewDoc:input_type -> v6.services.pub.File
 	0,  // 34: v6.services.pub.PubUserFile.CreateDoc:input_type -> v6.services.pub.File
@@ -2338,7 +2476,7 @@ func file_userfile_public_user_file_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userfile_public_user_file_proto_rawDesc), len(file_userfile_public_user_file_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
