@@ -321,6 +321,10 @@ message FileDownloadAddressResponse {
     int32 version = 4;
     int32 encrypt = 5;
     int64 store_type = 6;
+    int64 file_size = 7;
+    string path = 8;
+    string name = 9;
+    string content_identity = 10;
 }
 
 message SliceDownloadInfo {

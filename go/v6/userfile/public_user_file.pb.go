@@ -1293,6 +1293,10 @@ type FileDownloadAddressResponse struct {
 	Version         int32                  `protobuf:"varint,4,opt,name=version,proto3" json:"version,omitempty"`
 	Encrypt         int32                  `protobuf:"varint,5,opt,name=encrypt,proto3" json:"encrypt,omitempty"`
 	StoreType       int64                  `protobuf:"varint,6,opt,name=store_type,json=storeType,proto3" json:"store_type,omitempty"`
+	FileSize        int64                  `protobuf:"varint,7,opt,name=file_size,json=fileSize,proto3" json:"file_size,omitempty"`
+	Path            string                 `protobuf:"bytes,8,opt,name=path,proto3" json:"path,omitempty"`
+	Name            string                 `protobuf:"bytes,9,opt,name=name,proto3" json:"name,omitempty"`
+	ContentIdentity string                 `protobuf:"bytes,10,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -1367,6 +1371,34 @@ func (x *FileDownloadAddressResponse) GetStoreType() int64 {
 		return x.StoreType
 	}
 	return 0
+}
+
+func (x *FileDownloadAddressResponse) GetFileSize() int64 {
+	if x != nil {
+		return x.FileSize
+	}
+	return 0
+}
+
+func (x *FileDownloadAddressResponse) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *FileDownloadAddressResponse) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *FileDownloadAddressResponse) GetContentIdentity() string {
+	if x != nil {
+		return x.ContentIdentity
+	}
+	return ""
 }
 
 type SliceDownloadInfo struct {
@@ -2227,7 +2259,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\taddresses\x18\x01 \x03(\v2\".v6.services.pub.SliceDownloadInfoR\taddresses\x12\x1b\n" +
 	"\texpire_at\x18\x02 \x01(\x03R\bexpireAt\x12'\n" +
 	"\x0frequest_address\x18\x03 \x01(\tR\x0erequestAddress\x12\x18\n" +
-	"\aversion\x18\x04 \x01(\x05R\aversion\"\xe1\x01\n" +
+	"\aversion\x18\x04 \x01(\x05R\aversion\"\xd1\x02\n" +
 	"\x1bFileDownloadAddressResponse\x12)\n" +
 	"\x10download_address\x18\x01 \x01(\tR\x0fdownloadAddress\x12\x1b\n" +
 	"\texpire_at\x18\x02 \x01(\x03R\bexpireAt\x12'\n" +
@@ -2235,7 +2267,12 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\aversion\x18\x04 \x01(\x05R\aversion\x12\x18\n" +
 	"\aencrypt\x18\x05 \x01(\x05R\aencrypt\x12\x1d\n" +
 	"\n" +
-	"store_type\x18\x06 \x01(\x03R\tstoreType\"\xba\x01\n" +
+	"store_type\x18\x06 \x01(\x03R\tstoreType\x12\x1b\n" +
+	"\tfile_size\x18\a \x01(\x03R\bfileSize\x12\x12\n" +
+	"\x04path\x18\b \x01(\tR\x04path\x12\x12\n" +
+	"\x04name\x18\t \x01(\tR\x04name\x12)\n" +
+	"\x10content_identity\x18\n" +
+	" \x01(\tR\x0fcontentIdentity\"\xba\x01\n" +
 	"\x11SliceDownloadInfo\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12)\n" +
 	"\x10download_address\x18\x02 \x01(\tR\x0fdownloadAddress\x12%\n" +
