@@ -315,7 +315,7 @@ message SliceDownloadAddressResponse {
 }
 
 message FileDownloadAddressResponse {
-    repeated SliceDownloadInfo addresses = 1;
+    string download_address = 1;
     int64 expire_at = 2;
     string request_address = 3;
     int32 version = 4;

@@ -1286,15 +1286,15 @@ func (x *SliceDownloadAddressResponse) GetVersion() int32 {
 }
 
 type FileDownloadAddressResponse struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Addresses      []*SliceDownloadInfo   `protobuf:"bytes,1,rep,name=addresses,proto3" json:"addresses,omitempty"`
-	ExpireAt       int64                  `protobuf:"varint,2,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
-	RequestAddress string                 `protobuf:"bytes,3,opt,name=request_address,json=requestAddress,proto3" json:"request_address,omitempty"`
-	Version        int32                  `protobuf:"varint,4,opt,name=version,proto3" json:"version,omitempty"`
-	Encrypt        int32                  `protobuf:"varint,5,opt,name=encrypt,proto3" json:"encrypt,omitempty"`
-	StoreType      int64                  `protobuf:"varint,6,opt,name=store_type,json=storeType,proto3" json:"store_type,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	DownloadAddress string                 `protobuf:"bytes,1,opt,name=download_address,json=downloadAddress,proto3" json:"download_address,omitempty"`
+	ExpireAt        int64                  `protobuf:"varint,2,opt,name=expire_at,json=expireAt,proto3" json:"expire_at,omitempty"`
+	RequestAddress  string                 `protobuf:"bytes,3,opt,name=request_address,json=requestAddress,proto3" json:"request_address,omitempty"`
+	Version         int32                  `protobuf:"varint,4,opt,name=version,proto3" json:"version,omitempty"`
+	Encrypt         int32                  `protobuf:"varint,5,opt,name=encrypt,proto3" json:"encrypt,omitempty"`
+	StoreType       int64                  `protobuf:"varint,6,opt,name=store_type,json=storeType,proto3" json:"store_type,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *FileDownloadAddressResponse) Reset() {
@@ -1327,11 +1327,11 @@ func (*FileDownloadAddressResponse) Descriptor() ([]byte, []int) {
 	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{16}
 }
 
-func (x *FileDownloadAddressResponse) GetAddresses() []*SliceDownloadInfo {
+func (x *FileDownloadAddressResponse) GetDownloadAddress() string {
 	if x != nil {
-		return x.Addresses
+		return x.DownloadAddress
 	}
-	return nil
+	return ""
 }
 
 func (x *FileDownloadAddressResponse) GetExpireAt() int64 {
@@ -2227,9 +2227,9 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\taddresses\x18\x01 \x03(\v2\".v6.services.pub.SliceDownloadInfoR\taddresses\x12\x1b\n" +
 	"\texpire_at\x18\x02 \x01(\x03R\bexpireAt\x12'\n" +
 	"\x0frequest_address\x18\x03 \x01(\tR\x0erequestAddress\x12\x18\n" +
-	"\aversion\x18\x04 \x01(\x05R\aversion\"\xf8\x01\n" +
-	"\x1bFileDownloadAddressResponse\x12@\n" +
-	"\taddresses\x18\x01 \x03(\v2\".v6.services.pub.SliceDownloadInfoR\taddresses\x12\x1b\n" +
+	"\aversion\x18\x04 \x01(\x05R\aversion\"\xe1\x01\n" +
+	"\x1bFileDownloadAddressResponse\x12)\n" +
+	"\x10download_address\x18\x01 \x01(\tR\x0fdownloadAddress\x12\x1b\n" +
 	"\texpire_at\x18\x02 \x01(\x03R\bexpireAt\x12'\n" +
 	"\x0frequest_address\x18\x03 \x01(\tR\x0erequestAddress\x12\x18\n" +
 	"\aversion\x18\x04 \x01(\x05R\aversion\x12\x18\n" +
@@ -2405,64 +2405,63 @@ var file_userfile_public_user_file_proto_depIdxs = []int32{
 	13, // 8: v6.services.pub.ParseFileSliceResponse.sizes:type_name -> v6.services.pub.SliceSize
 	17, // 9: v6.services.pub.ParseFileSliceResponse.raw_download_addresses:type_name -> v6.services.pub.SliceDownloadInfo
 	17, // 10: v6.services.pub.SliceDownloadAddressResponse.addresses:type_name -> v6.services.pub.SliceDownloadInfo
-	17, // 11: v6.services.pub.FileDownloadAddressResponse.addresses:type_name -> v6.services.pub.SliceDownloadInfo
-	0,  // 12: v6.services.pub.PubUserFile.Create:input_type -> v6.services.pub.File
-	0,  // 13: v6.services.pub.PubUserFile.Get:input_type -> v6.services.pub.File
-	0,  // 14: v6.services.pub.PubUserFile.Rename:input_type -> v6.services.pub.File
-	4,  // 15: v6.services.pub.PubUserFile.Trash:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 16: v6.services.pub.PubUserFile.Move:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 17: v6.services.pub.PubUserFile.Copy:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 18: v6.services.pub.PubUserFile.Delete:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 19: v6.services.pub.PubUserFile.DeleteTrash:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 20: v6.services.pub.PubUserFile.Recover:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 21: v6.services.pub.PubUserFile.BatchRename:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 22: v6.services.pub.PubUserFile.BatchOperation:input_type -> v6.services.pub.BatchOperationRequest
-	1,  // 23: v6.services.pub.PubUserFile.List:input_type -> v6.services.pub.FileListRequest
-	1,  // 24: v6.services.pub.PubUserFile.ListTrash:input_type -> v6.services.pub.FileListRequest
-	2,  // 25: v6.services.pub.PubUserFile.Search:input_type -> v6.services.pub.SearchRequest
-	6,  // 26: v6.services.pub.PubUserFile.CreateManageRTCOffer:input_type -> v6.services.pub.ManageRTCRequest
-	8,  // 27: v6.services.pub.PubUserFile.SendClientIceCandidate:input_type -> v6.services.pub.SendIceCandidateRequest
-	10, // 28: v6.services.pub.PubUserFile.GetServerIceCandidate:input_type -> v6.services.pub.GetIceCandidateRequest
-	0,  // 29: v6.services.pub.PubUserFile.ParseFileSlice:input_type -> v6.services.pub.File
-	14, // 30: v6.services.pub.PubUserFile.GetSliceDownloadAddress:input_type -> v6.services.pub.SliceDownloadAddressRequest
-	22, // 31: v6.services.pub.PubUserFile.GetDirectDownloadAddress:input_type -> v6.services.pub.DirectDownloadRequest
-	0,  // 32: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:input_type -> v6.services.pub.File
-	0,  // 33: v6.services.pub.PubUserFile.PreviewDoc:input_type -> v6.services.pub.File
-	0,  // 34: v6.services.pub.PubUserFile.CreateDoc:input_type -> v6.services.pub.File
-	0,  // 35: v6.services.pub.PubUserFile.CreateUploadToken:input_type -> v6.services.pub.File
-	0,  // 36: v6.services.pub.PubUserFile.CreateUploadTask:input_type -> v6.services.pub.File
-	0,  // 37: v6.services.pub.PubUserFile.CreateTemporaryUpload:input_type -> v6.services.pub.File
-	0,  // 38: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
-	0,  // 39: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
-	5,  // 40: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 41: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 42: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 43: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 44: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 45: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 46: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 47: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 48: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
-	3,  // 49: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
-	3,  // 50: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
-	3,  // 51: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
-	7,  // 52: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
-	9,  // 53: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
-	11, // 54: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
-	12, // 55: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
-	15, // 56: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
-	16, // 57: v6.services.pub.PubUserFile.GetDirectDownloadAddress:output_type -> v6.services.pub.FileDownloadAddressResponse
-	19, // 58: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
-	18, // 59: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
-	18, // 60: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
-	20, // 61: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
-	21, // 62: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
-	21, // 63: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
-	38, // [38:64] is the sub-list for method output_type
-	12, // [12:38] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	0,  // 11: v6.services.pub.PubUserFile.Create:input_type -> v6.services.pub.File
+	0,  // 12: v6.services.pub.PubUserFile.Get:input_type -> v6.services.pub.File
+	0,  // 13: v6.services.pub.PubUserFile.Rename:input_type -> v6.services.pub.File
+	4,  // 14: v6.services.pub.PubUserFile.Trash:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 15: v6.services.pub.PubUserFile.Move:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 16: v6.services.pub.PubUserFile.Copy:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 17: v6.services.pub.PubUserFile.Delete:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 18: v6.services.pub.PubUserFile.DeleteTrash:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 19: v6.services.pub.PubUserFile.Recover:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 20: v6.services.pub.PubUserFile.BatchRename:input_type -> v6.services.pub.BatchOperationRequest
+	4,  // 21: v6.services.pub.PubUserFile.BatchOperation:input_type -> v6.services.pub.BatchOperationRequest
+	1,  // 22: v6.services.pub.PubUserFile.List:input_type -> v6.services.pub.FileListRequest
+	1,  // 23: v6.services.pub.PubUserFile.ListTrash:input_type -> v6.services.pub.FileListRequest
+	2,  // 24: v6.services.pub.PubUserFile.Search:input_type -> v6.services.pub.SearchRequest
+	6,  // 25: v6.services.pub.PubUserFile.CreateManageRTCOffer:input_type -> v6.services.pub.ManageRTCRequest
+	8,  // 26: v6.services.pub.PubUserFile.SendClientIceCandidate:input_type -> v6.services.pub.SendIceCandidateRequest
+	10, // 27: v6.services.pub.PubUserFile.GetServerIceCandidate:input_type -> v6.services.pub.GetIceCandidateRequest
+	0,  // 28: v6.services.pub.PubUserFile.ParseFileSlice:input_type -> v6.services.pub.File
+	14, // 29: v6.services.pub.PubUserFile.GetSliceDownloadAddress:input_type -> v6.services.pub.SliceDownloadAddressRequest
+	22, // 30: v6.services.pub.PubUserFile.GetDirectDownloadAddress:input_type -> v6.services.pub.DirectDownloadRequest
+	0,  // 31: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:input_type -> v6.services.pub.File
+	0,  // 32: v6.services.pub.PubUserFile.PreviewDoc:input_type -> v6.services.pub.File
+	0,  // 33: v6.services.pub.PubUserFile.CreateDoc:input_type -> v6.services.pub.File
+	0,  // 34: v6.services.pub.PubUserFile.CreateUploadToken:input_type -> v6.services.pub.File
+	0,  // 35: v6.services.pub.PubUserFile.CreateUploadTask:input_type -> v6.services.pub.File
+	0,  // 36: v6.services.pub.PubUserFile.CreateTemporaryUpload:input_type -> v6.services.pub.File
+	0,  // 37: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
+	0,  // 38: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
+	5,  // 39: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 40: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 41: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 42: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 43: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 44: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 45: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 46: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 47: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
+	3,  // 48: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
+	3,  // 49: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
+	3,  // 50: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
+	7,  // 51: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
+	9,  // 52: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
+	11, // 53: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
+	12, // 54: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
+	15, // 55: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
+	16, // 56: v6.services.pub.PubUserFile.GetDirectDownloadAddress:output_type -> v6.services.pub.FileDownloadAddressResponse
+	19, // 57: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
+	18, // 58: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
+	18, // 59: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
+	20, // 60: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
+	21, // 61: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
+	21, // 62: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
+	37, // [37:63] is the sub-list for method output_type
+	11, // [11:37] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_userfile_public_user_file_proto_init() }
