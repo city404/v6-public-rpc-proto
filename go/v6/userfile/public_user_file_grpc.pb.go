@@ -45,6 +45,7 @@ const (
 	PubUserFile_CreateUploadToken_FullMethodName         = "/v6.services.pub.PubUserFile/CreateUploadToken"
 	PubUserFile_CreateUploadTask_FullMethodName          = "/v6.services.pub.PubUserFile/CreateUploadTask"
 	PubUserFile_CreateTemporaryUpload_FullMethodName     = "/v6.services.pub.PubUserFile/CreateTemporaryUpload"
+	PubUserFile_ReportPreviewStatus_FullMethodName       = "/v6.services.pub.PubUserFile/ReportPreviewStatus"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -78,6 +79,7 @@ type PubUserFileClient interface {
 	CreateUploadToken(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadToken, error)
 	CreateUploadTask(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadTask, error)
 	CreateTemporaryUpload(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadTask, error)
+	ReportPreviewStatus(ctx context.Context, in *PreviewStatus, opts ...grpc.CallOption) (*PreviewStatus, error)
 }
 
 type pubUserFileClient struct {
@@ -348,6 +350,16 @@ func (c *pubUserFileClient) CreateTemporaryUpload(ctx context.Context, in *File,
 	return out, nil
 }
 
+func (c *pubUserFileClient) ReportPreviewStatus(ctx context.Context, in *PreviewStatus, opts ...grpc.CallOption) (*PreviewStatus, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PreviewStatus)
+	err := c.cc.Invoke(ctx, PubUserFile_ReportPreviewStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility.
@@ -379,6 +391,7 @@ type PubUserFileServer interface {
 	CreateUploadToken(context.Context, *File) (*UploadToken, error)
 	CreateUploadTask(context.Context, *File) (*UploadTask, error)
 	CreateTemporaryUpload(context.Context, *File) (*UploadTask, error)
+	ReportPreviewStatus(context.Context, *PreviewStatus) (*PreviewStatus, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -466,6 +479,9 @@ func (UnimplementedPubUserFileServer) CreateUploadTask(context.Context, *File) (
 }
 func (UnimplementedPubUserFileServer) CreateTemporaryUpload(context.Context, *File) (*UploadTask, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateTemporaryUpload not implemented")
+}
+func (UnimplementedPubUserFileServer) ReportPreviewStatus(context.Context, *PreviewStatus) (*PreviewStatus, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReportPreviewStatus not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 func (UnimplementedPubUserFileServer) testEmbeddedByValue()                     {}
@@ -956,6 +972,24 @@ func _PubUserFile_CreateTemporaryUpload_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_ReportPreviewStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreviewStatus)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).ReportPreviewStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_ReportPreviewStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).ReportPreviewStatus(ctx, req.(*PreviewStatus))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1066,6 +1100,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateTemporaryUpload",
 			Handler:    _PubUserFile_CreateTemporaryUpload_Handler,
+		},
+		{
+			MethodName: "ReportPreviewStatus",
+			Handler:    _PubUserFile_ReportPreviewStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

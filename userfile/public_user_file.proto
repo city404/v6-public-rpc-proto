@@ -165,6 +165,12 @@ service PubUserFile {
             body: "*"
         };
     }
+    rpc ReportPreviewStatus (PreviewStatus) returns (PreviewStatus) {
+        option (google.api.http) = {
+            post: "/v6/userfile/report_preview_status"
+            body: "*"
+        };
+    }
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -409,4 +415,22 @@ message DirectDownloadRequest {
     int64 expire = 9;
     int32 encrypt = 10;
     string addon = 11;
+}
+
+message PreviewStatus {
+    string identity = 1;
+    int32 code = 2;
+    string message = 3;
+    string path = 4;
+    string status = 5;
+    int32 type = 6;
+    int32 num = 7;
+    int64 report_ts = 8;
+    string video_codec = 9;
+    string audio_codec = 10;
+    int32 width = 11;
+    int32 height = 12;
+    int64 duration = 13;
+    int64 size = 14;
+    string extra = 15;
 }

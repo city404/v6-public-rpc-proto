@@ -2145,6 +2145,162 @@ func (x *DirectDownloadRequest) GetAddon() string {
 	return ""
 }
 
+type PreviewStatus struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
+	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
+	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Type          int32                  `protobuf:"varint,6,opt,name=type,proto3" json:"type,omitempty"`
+	Num           int32                  `protobuf:"varint,7,opt,name=num,proto3" json:"num,omitempty"`
+	ReportTs      int64                  `protobuf:"varint,8,opt,name=report_ts,json=reportTs,proto3" json:"report_ts,omitempty"`
+	VideoCodec    string                 `protobuf:"bytes,9,opt,name=video_codec,json=videoCodec,proto3" json:"video_codec,omitempty"`
+	AudioCodec    string                 `protobuf:"bytes,10,opt,name=audio_codec,json=audioCodec,proto3" json:"audio_codec,omitempty"`
+	Width         int32                  `protobuf:"varint,11,opt,name=width,proto3" json:"width,omitempty"`
+	Height        int32                  `protobuf:"varint,12,opt,name=height,proto3" json:"height,omitempty"`
+	Duration      int64                  `protobuf:"varint,13,opt,name=duration,proto3" json:"duration,omitempty"`
+	Size          int64                  `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
+	Extra         string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *PreviewStatus) Reset() {
+	*x = PreviewStatus{}
+	mi := &file_userfile_public_user_file_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *PreviewStatus) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PreviewStatus) ProtoMessage() {}
+
+func (x *PreviewStatus) ProtoReflect() protoreflect.Message {
+	mi := &file_userfile_public_user_file_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PreviewStatus.ProtoReflect.Descriptor instead.
+func (*PreviewStatus) Descriptor() ([]byte, []int) {
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *PreviewStatus) GetIdentity() string {
+	if x != nil {
+		return x.Identity
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetPath() string {
+	if x != nil {
+		return x.Path
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetType() int32 {
+	if x != nil {
+		return x.Type
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetNum() int32 {
+	if x != nil {
+		return x.Num
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetReportTs() int64 {
+	if x != nil {
+		return x.ReportTs
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetVideoCodec() string {
+	if x != nil {
+		return x.VideoCodec
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetAudioCodec() string {
+	if x != nil {
+		return x.AudioCodec
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetWidth() int32 {
+	if x != nil {
+		return x.Width
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetHeight() int32 {
+	if x != nil {
+		return x.Height
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetDuration() int64 {
+	if x != nil {
+		return x.Duration
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetSize() int64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetExtra() string {
+	if x != nil {
+		return x.Extra
+	}
+	return ""
+}
+
 var File_userfile_public_user_file_proto protoreflect.FileDescriptor
 
 const file_userfile_public_user_file_proto_rawDesc = "" +
@@ -2361,7 +2517,26 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x06expire\x18\t \x01(\x03R\x06expire\x12\x18\n" +
 	"\aencrypt\x18\n" +
 	" \x01(\x05R\aencrypt\x12\x14\n" +
-	"\x05addon\x18\v \x01(\tR\x05addon2\xdf\x19\n" +
+	"\x05addon\x18\v \x01(\tR\x05addon\"\xfe\x02\n" +
+	"\rPreviewStatus\x12\x1a\n" +
+	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x12\n" +
+	"\x04code\x18\x02 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x12\x12\n" +
+	"\x04path\x18\x04 \x01(\tR\x04path\x12\x16\n" +
+	"\x06status\x18\x05 \x01(\tR\x06status\x12\x12\n" +
+	"\x04type\x18\x06 \x01(\x05R\x04type\x12\x10\n" +
+	"\x03num\x18\a \x01(\x05R\x03num\x12\x1b\n" +
+	"\treport_ts\x18\b \x01(\x03R\breportTs\x12\x1f\n" +
+	"\vvideo_codec\x18\t \x01(\tR\n" +
+	"videoCodec\x12\x1f\n" +
+	"\vaudio_codec\x18\n" +
+	" \x01(\tR\n" +
+	"audioCodec\x12\x14\n" +
+	"\x05width\x18\v \x01(\x05R\x05width\x12\x16\n" +
+	"\x06height\x18\f \x01(\x05R\x06height\x12\x1a\n" +
+	"\bduration\x18\r \x01(\x03R\bduration\x12\x12\n" +
+	"\x04size\x18\x0e \x01(\x03R\x04size\x12\x14\n" +
+	"\x05extra\x18\x0f \x01(\tR\x05extra2\xe6\x1a\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +
@@ -2389,7 +2564,8 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\tCreateDoc\x12\x15.v6.services.pub.File\x1a\x1f.v6.services.pub.DocFilePreview\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v6/userfile/create_doc\x12u\n" +
 	"\x11CreateUploadToken\x12\x15.v6.services.pub.File\x1a\x1c.v6.services.pub.UploadToken\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v6/userfile/create_upload_token\x12r\n" +
 	"\x10CreateUploadTask\x12\x15.v6.services.pub.File\x1a\x1b.v6.services.pub.UploadTask\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v6/userfile/create_upload_task\x12|\n" +
-	"\x15CreateTemporaryUpload\x12\x15.v6.services.pub.File\x1a\x1b.v6.services.pub.UploadTask\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v6/userfile/create_temporary_uploadB7Z5github.com/city404/v6-public-rpc-proto/go/v6/userfileb\x06proto3"
+	"\x15CreateTemporaryUpload\x12\x15.v6.services.pub.File\x1a\x1b.v6.services.pub.UploadTask\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v6/userfile/create_temporary_upload\x12\x84\x01\n" +
+	"\x13ReportPreviewStatus\x12\x1e.v6.services.pub.PreviewStatus\x1a\x1e.v6.services.pub.PreviewStatus\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v6/userfile/report_preview_statusB7Z5github.com/city404/v6-public-rpc-proto/go/v6/userfileb\x06proto3"
 
 var (
 	file_userfile_public_user_file_proto_rawDescOnce sync.Once
@@ -2403,7 +2579,7 @@ func file_userfile_public_user_file_proto_rawDescGZIP() []byte {
 	return file_userfile_public_user_file_proto_rawDescData
 }
 
-var file_userfile_public_user_file_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
+var file_userfile_public_user_file_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_userfile_public_user_file_proto_goTypes = []any{
 	(*File)(nil),                         // 0: v6.services.pub.File
 	(*FileListRequest)(nil),              // 1: v6.services.pub.FileListRequest
@@ -2428,15 +2604,16 @@ var file_userfile_public_user_file_proto_goTypes = []any{
 	(*UploadToken)(nil),                  // 20: v6.services.pub.UploadToken
 	(*UploadTask)(nil),                   // 21: v6.services.pub.UploadTask
 	(*DirectDownloadRequest)(nil),        // 22: v6.services.pub.DirectDownloadRequest
-	(*common.ScanListRequest)(nil),       // 23: v6.services.pub.common.ScanListRequest
+	(*PreviewStatus)(nil),                // 23: v6.services.pub.PreviewStatus
+	(*common.ScanListRequest)(nil),       // 24: v6.services.pub.common.ScanListRequest
 }
 var file_userfile_public_user_file_proto_depIdxs = []int32{
 	0,  // 0: v6.services.pub.FileListRequest.parent:type_name -> v6.services.pub.File
 	0,  // 1: v6.services.pub.FileListRequest.filter:type_name -> v6.services.pub.File
-	23, // 2: v6.services.pub.FileListRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
-	23, // 3: v6.services.pub.SearchRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	24, // 2: v6.services.pub.FileListRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	24, // 3: v6.services.pub.SearchRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
 	0,  // 4: v6.services.pub.FileListResponse.files:type_name -> v6.services.pub.File
-	23, // 5: v6.services.pub.FileListResponse.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	24, // 5: v6.services.pub.FileListResponse.list_info:type_name -> v6.services.pub.common.ScanListRequest
 	0,  // 6: v6.services.pub.BatchOperationRequest.source:type_name -> v6.services.pub.File
 	0,  // 7: v6.services.pub.BatchOperationRequest.dest:type_name -> v6.services.pub.File
 	13, // 8: v6.services.pub.ParseFileSliceResponse.sizes:type_name -> v6.services.pub.SliceSize
@@ -2468,34 +2645,36 @@ var file_userfile_public_user_file_proto_depIdxs = []int32{
 	0,  // 34: v6.services.pub.PubUserFile.CreateUploadToken:input_type -> v6.services.pub.File
 	0,  // 35: v6.services.pub.PubUserFile.CreateUploadTask:input_type -> v6.services.pub.File
 	0,  // 36: v6.services.pub.PubUserFile.CreateTemporaryUpload:input_type -> v6.services.pub.File
-	0,  // 37: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
-	0,  // 38: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
-	5,  // 39: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 40: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 41: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 42: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 43: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 44: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 45: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 46: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 47: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
-	3,  // 48: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
-	3,  // 49: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
-	3,  // 50: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
-	7,  // 51: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
-	9,  // 52: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
-	11, // 53: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
-	12, // 54: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
-	15, // 55: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
-	16, // 56: v6.services.pub.PubUserFile.GetDirectDownloadAddress:output_type -> v6.services.pub.FileDownloadAddressResponse
-	19, // 57: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
-	18, // 58: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
-	18, // 59: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
-	20, // 60: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
-	21, // 61: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
-	21, // 62: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
-	37, // [37:63] is the sub-list for method output_type
-	11, // [11:37] is the sub-list for method input_type
+	23, // 37: v6.services.pub.PubUserFile.ReportPreviewStatus:input_type -> v6.services.pub.PreviewStatus
+	0,  // 38: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
+	0,  // 39: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
+	5,  // 40: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 41: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 42: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 43: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 44: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 45: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 46: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 47: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 48: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
+	3,  // 49: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
+	3,  // 50: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
+	3,  // 51: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
+	7,  // 52: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
+	9,  // 53: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
+	11, // 54: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
+	12, // 55: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
+	15, // 56: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
+	16, // 57: v6.services.pub.PubUserFile.GetDirectDownloadAddress:output_type -> v6.services.pub.FileDownloadAddressResponse
+	19, // 58: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
+	18, // 59: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
+	18, // 60: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
+	20, // 61: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
+	21, // 62: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
+	21, // 63: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
+	23, // 64: v6.services.pub.PubUserFile.ReportPreviewStatus:output_type -> v6.services.pub.PreviewStatus
+	38, // [38:65] is the sub-list for method output_type
+	11, // [11:38] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
 	11, // [11:11] is the sub-list for extension extendee
 	0,  // [0:11] is the sub-list for field type_name
@@ -2512,7 +2691,7 @@ func file_userfile_public_user_file_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userfile_public_user_file_proto_rawDesc), len(file_userfile_public_user_file_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   23,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
