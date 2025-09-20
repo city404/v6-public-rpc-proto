@@ -2146,26 +2146,27 @@ func (x *DirectDownloadRequest) GetAddon() string {
 }
 
 type PreviewStatus struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Identity      string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
-	Code          int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
-	Message       string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	Path          string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
-	Status        string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	Type          int32                  `protobuf:"varint,6,opt,name=type,proto3" json:"type,omitempty"`
-	Num           int32                  `protobuf:"varint,7,opt,name=num,proto3" json:"num,omitempty"`
-	ReportTs      int64                  `protobuf:"varint,8,opt,name=report_ts,json=reportTs,proto3" json:"report_ts,omitempty"`
-	VideoCodec    string                 `protobuf:"bytes,9,opt,name=video_codec,json=videoCodec,proto3" json:"video_codec,omitempty"`
-	AudioCodec    string                 `protobuf:"bytes,10,opt,name=audio_codec,json=audioCodec,proto3" json:"audio_codec,omitempty"`
-	Width         int32                  `protobuf:"varint,11,opt,name=width,proto3" json:"width,omitempty"`
-	Height        int32                  `protobuf:"varint,12,opt,name=height,proto3" json:"height,omitempty"`
-	Duration      int64                  `protobuf:"varint,13,opt,name=duration,proto3" json:"duration,omitempty"`
-	Size          int64                  `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
-	Extra         string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`
-	UserAgent     string                 `protobuf:"bytes,16,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
-	ClientId      string                 `protobuf:"bytes,17,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	Identity        string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
+	Code            int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Message         string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	Path            string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
+	Status          string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Type            int32                  `protobuf:"varint,6,opt,name=type,proto3" json:"type,omitempty"`
+	Num             int32                  `protobuf:"varint,7,opt,name=num,proto3" json:"num,omitempty"`
+	ReportTs        int64                  `protobuf:"varint,8,opt,name=report_ts,json=reportTs,proto3" json:"report_ts,omitempty"`
+	VideoCodec      string                 `protobuf:"bytes,9,opt,name=video_codec,json=videoCodec,proto3" json:"video_codec,omitempty"`
+	AudioCodec      string                 `protobuf:"bytes,10,opt,name=audio_codec,json=audioCodec,proto3" json:"audio_codec,omitempty"`
+	Width           int32                  `protobuf:"varint,11,opt,name=width,proto3" json:"width,omitempty"`
+	Height          int32                  `protobuf:"varint,12,opt,name=height,proto3" json:"height,omitempty"`
+	Duration        int64                  `protobuf:"varint,13,opt,name=duration,proto3" json:"duration,omitempty"`
+	Size            int64                  `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
+	Extra           string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`
+	UserAgent       string                 `protobuf:"bytes,16,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
+	ClientId        string                 `protobuf:"bytes,17,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	ContentIdentity string                 `protobuf:"bytes,18,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *PreviewStatus) Reset() {
@@ -2313,6 +2314,13 @@ func (x *PreviewStatus) GetUserAgent() string {
 func (x *PreviewStatus) GetClientId() string {
 	if x != nil {
 		return x.ClientId
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetContentIdentity() string {
+	if x != nil {
+		return x.ContentIdentity
 	}
 	return ""
 }
@@ -2533,7 +2541,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x06expire\x18\t \x01(\x03R\x06expire\x12\x18\n" +
 	"\aencrypt\x18\n" +
 	" \x01(\x05R\aencrypt\x12\x14\n" +
-	"\x05addon\x18\v \x01(\tR\x05addon\"\xba\x03\n" +
+	"\x05addon\x18\v \x01(\tR\x05addon\"\xe5\x03\n" +
 	"\rPreviewStatus\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12\x18\n" +
@@ -2555,7 +2563,8 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x05extra\x18\x0f \x01(\tR\x05extra\x12\x1d\n" +
 	"\n" +
 	"user_agent\x18\x10 \x01(\tR\tuserAgent\x12\x1b\n" +
-	"\tclient_id\x18\x11 \x01(\tR\bclientId2\xe6\x1a\n" +
+	"\tclient_id\x18\x11 \x01(\tR\bclientId\x12)\n" +
+	"\x10content_identity\x18\x12 \x01(\tR\x0fcontentIdentity2\xe6\x1a\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +
