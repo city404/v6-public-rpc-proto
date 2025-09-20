@@ -419,7 +419,7 @@ message DirectDownloadRequest {
 
 message PreviewStatus {
     string identity = 1;
-    int32 code = 2;
+    string code = 2;
     string message = 3;
     string path = 4;
     string status = 5;
@@ -436,4 +436,6 @@ message PreviewStatus {
     string user_agent = 16;
     string client_id = 17;
     string content_identity = 18;
+    string extra_code = 19;
+    string extra_message = 20;
 }

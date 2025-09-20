@@ -2148,7 +2148,7 @@ func (x *DirectDownloadRequest) GetAddon() string {
 type PreviewStatus struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Identity        string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
-	Code            int32                  `protobuf:"varint,2,opt,name=code,proto3" json:"code,omitempty"`
+	Code            string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
 	Message         string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
 	Path            string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
 	Status          string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
@@ -2165,6 +2165,8 @@ type PreviewStatus struct {
 	UserAgent       string                 `protobuf:"bytes,16,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
 	ClientId        string                 `protobuf:"bytes,17,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 	ContentIdentity string                 `protobuf:"bytes,18,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
+	ExtraCode       string                 `protobuf:"bytes,19,opt,name=extra_code,json=extraCode,proto3" json:"extra_code,omitempty"`
+	ExtraMessage    string                 `protobuf:"bytes,20,opt,name=extra_message,json=extraMessage,proto3" json:"extra_message,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2206,11 +2208,11 @@ func (x *PreviewStatus) GetIdentity() string {
 	return ""
 }
 
-func (x *PreviewStatus) GetCode() int32 {
+func (x *PreviewStatus) GetCode() string {
 	if x != nil {
 		return x.Code
 	}
-	return 0
+	return ""
 }
 
 func (x *PreviewStatus) GetMessage() string {
@@ -2321,6 +2323,20 @@ func (x *PreviewStatus) GetClientId() string {
 func (x *PreviewStatus) GetContentIdentity() string {
 	if x != nil {
 		return x.ContentIdentity
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetExtraCode() string {
+	if x != nil {
+		return x.ExtraCode
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetExtraMessage() string {
+	if x != nil {
+		return x.ExtraMessage
 	}
 	return ""
 }
@@ -2541,10 +2557,10 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x06expire\x18\t \x01(\x03R\x06expire\x12\x18\n" +
 	"\aencrypt\x18\n" +
 	" \x01(\x05R\aencrypt\x12\x14\n" +
-	"\x05addon\x18\v \x01(\tR\x05addon\"\xe5\x03\n" +
+	"\x05addon\x18\v \x01(\tR\x05addon\"\xa9\x04\n" +
 	"\rPreviewStatus\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x12\n" +
-	"\x04code\x18\x02 \x01(\x05R\x04code\x12\x18\n" +
+	"\x04code\x18\x02 \x01(\tR\x04code\x12\x18\n" +
 	"\amessage\x18\x03 \x01(\tR\amessage\x12\x12\n" +
 	"\x04path\x18\x04 \x01(\tR\x04path\x12\x16\n" +
 	"\x06status\x18\x05 \x01(\tR\x06status\x12\x12\n" +
@@ -2564,7 +2580,10 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\n" +
 	"user_agent\x18\x10 \x01(\tR\tuserAgent\x12\x1b\n" +
 	"\tclient_id\x18\x11 \x01(\tR\bclientId\x12)\n" +
-	"\x10content_identity\x18\x12 \x01(\tR\x0fcontentIdentity2\xe6\x1a\n" +
+	"\x10content_identity\x18\x12 \x01(\tR\x0fcontentIdentity\x12\x1d\n" +
+	"\n" +
+	"extra_code\x18\x13 \x01(\tR\textraCode\x12#\n" +
+	"\rextra_message\x18\x14 \x01(\tR\fextraMessage2\xe6\x1a\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +
