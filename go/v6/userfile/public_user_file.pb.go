@@ -2162,6 +2162,8 @@ type PreviewStatus struct {
 	Duration      int64                  `protobuf:"varint,13,opt,name=duration,proto3" json:"duration,omitempty"`
 	Size          int64                  `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
 	Extra         string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`
+	UserAgent     string                 `protobuf:"bytes,16,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
+	ClientId      string                 `protobuf:"bytes,17,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2297,6 +2299,20 @@ func (x *PreviewStatus) GetSize() int64 {
 func (x *PreviewStatus) GetExtra() string {
 	if x != nil {
 		return x.Extra
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetUserAgent() string {
+	if x != nil {
+		return x.UserAgent
+	}
+	return ""
+}
+
+func (x *PreviewStatus) GetClientId() string {
+	if x != nil {
+		return x.ClientId
 	}
 	return ""
 }
@@ -2517,7 +2533,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x06expire\x18\t \x01(\x03R\x06expire\x12\x18\n" +
 	"\aencrypt\x18\n" +
 	" \x01(\x05R\aencrypt\x12\x14\n" +
-	"\x05addon\x18\v \x01(\tR\x05addon\"\xfe\x02\n" +
+	"\x05addon\x18\v \x01(\tR\x05addon\"\xba\x03\n" +
 	"\rPreviewStatus\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\x05R\x04code\x12\x18\n" +
@@ -2536,7 +2552,10 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x06height\x18\f \x01(\x05R\x06height\x12\x1a\n" +
 	"\bduration\x18\r \x01(\x03R\bduration\x12\x12\n" +
 	"\x04size\x18\x0e \x01(\x03R\x04size\x12\x14\n" +
-	"\x05extra\x18\x0f \x01(\tR\x05extra2\xe6\x1a\n" +
+	"\x05extra\x18\x0f \x01(\tR\x05extra\x12\x1d\n" +
+	"\n" +
+	"user_agent\x18\x10 \x01(\tR\tuserAgent\x12\x1b\n" +
+	"\tclient_id\x18\x11 \x01(\tR\bclientId2\xe6\x1a\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +

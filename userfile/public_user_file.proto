@@ -433,4 +433,6 @@ message PreviewStatus {
     int64 duration = 13;
     int64 size = 14;
     string extra = 15;
+    string user_agent = 16;
+    string client_id = 17;
 }
