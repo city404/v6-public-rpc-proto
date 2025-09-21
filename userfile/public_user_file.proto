@@ -438,4 +438,5 @@ message PreviewStatus {
     string content_identity = 18;
     string extra_code = 19;
     string extra_message = 20;
+    string name = 21;
 }
