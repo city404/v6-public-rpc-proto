@@ -418,28 +418,28 @@ message DirectDownloadRequest {
 }
 
 message PreviewStatus {
-    string identity = 1; 
-    string code = 2;
-    string message = 3;
-    string path = 4;
-    string status = 5;
-    int32 type = 6;
-    int32 num = 7;
-    int64 report_ts = 8;
-    string video_codec = 9;
-    string audio_codec = 10;
-    int32 width = 11;
-    int32 height = 12;
-    float duration = 13;
-    int64 size = 14;
-    string extra = 15;
-    string user_agent = 16;
-    string client_id = 17;
-    string content_identity = 18;
-    string extra_code = 19;
-    string extra_message = 20;
-    string name = 21;
-    int32 playback_type = 22;
-    int32 play_mode = 23;
-    float current_pos = 24;
+    string identity = 1; // file identity
+    string code = 2; // status code, 0: success, other: fail
+    string message = 3; // status message
+    string path = 4; // file path
+    string status = 5; // processing error, playing, paused, loading, ended
+    int32 type = 6; // file type, 1: video, 2: audio, 3: doc, 4: image
+    int32 num = 7; 
+    int64 report_ts = 8; // report timestamp, unix timestamp in milliseconds
+    string video_codec = 9; // video codec
+    string audio_codec = 10; // audio codec
+    int32 width = 11; // video width
+    int32 height = 12; // video height
+    float duration = 13; // video duration
+    int64 size = 14; // file size
+    string extra = 15; // extra info
+    string user_agent = 16; // user agent
+    string client_id = 17; // client id
+    string content_identity = 18; // content identity
+    string extra_code = 19; // extra code
+    string extra_message = 20; // extra message
+    string name = 21; // file name
+    int32 playback_type = 22; // playback type, 0: unknown, 1: xg_player, 2: ve_player, 3: dash
+    int32 play_mode = 23; // play mode: 0: unknown, 1: converted hls, 2: slice file
+    float current_pos = 24; // current position
 }

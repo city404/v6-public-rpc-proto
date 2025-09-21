@@ -2147,30 +2147,30 @@ func (x *DirectDownloadRequest) GetAddon() string {
 
 type PreviewStatus struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
-	Identity        string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
-	Code            string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	Message         string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	Path            string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`
-	Status          string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	Type            int32                  `protobuf:"varint,6,opt,name=type,proto3" json:"type,omitempty"`
+	Identity        string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"` // file identity
+	Code            string                 `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`         // status code, 0: success, other: fail
+	Message         string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`   // status message
+	Path            string                 `protobuf:"bytes,4,opt,name=path,proto3" json:"path,omitempty"`         // file path
+	Status          string                 `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`     // processing error, playing, paused, loading, ended
+	Type            int32                  `protobuf:"varint,6,opt,name=type,proto3" json:"type,omitempty"`        // file type, 1: video, 2: audio, 3: doc, 4: image
 	Num             int32                  `protobuf:"varint,7,opt,name=num,proto3" json:"num,omitempty"`
-	ReportTs        int64                  `protobuf:"varint,8,opt,name=report_ts,json=reportTs,proto3" json:"report_ts,omitempty"`
-	VideoCodec      string                 `protobuf:"bytes,9,opt,name=video_codec,json=videoCodec,proto3" json:"video_codec,omitempty"`
-	AudioCodec      string                 `protobuf:"bytes,10,opt,name=audio_codec,json=audioCodec,proto3" json:"audio_codec,omitempty"`
-	Width           int32                  `protobuf:"varint,11,opt,name=width,proto3" json:"width,omitempty"`
-	Height          int32                  `protobuf:"varint,12,opt,name=height,proto3" json:"height,omitempty"`
-	Duration        float32                `protobuf:"fixed32,13,opt,name=duration,proto3" json:"duration,omitempty"`
-	Size            int64                  `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
-	Extra           string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`
-	UserAgent       string                 `protobuf:"bytes,16,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
-	ClientId        string                 `protobuf:"bytes,17,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
-	ContentIdentity string                 `protobuf:"bytes,18,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"`
-	ExtraCode       string                 `protobuf:"bytes,19,opt,name=extra_code,json=extraCode,proto3" json:"extra_code,omitempty"`
-	ExtraMessage    string                 `protobuf:"bytes,20,opt,name=extra_message,json=extraMessage,proto3" json:"extra_message,omitempty"`
-	Name            string                 `protobuf:"bytes,21,opt,name=name,proto3" json:"name,omitempty"`
-	PlaybackType    int32                  `protobuf:"varint,22,opt,name=playback_type,json=playbackType,proto3" json:"playback_type,omitempty"`
-	PlayMode        int32                  `protobuf:"varint,23,opt,name=play_mode,json=playMode,proto3" json:"play_mode,omitempty"`
-	CurrentPos      float32                `protobuf:"fixed32,24,opt,name=current_pos,json=currentPos,proto3" json:"current_pos,omitempty"`
+	ReportTs        int64                  `protobuf:"varint,8,opt,name=report_ts,json=reportTs,proto3" json:"report_ts,omitempty"`                      // report timestamp, unix timestamp in milliseconds
+	VideoCodec      string                 `protobuf:"bytes,9,opt,name=video_codec,json=videoCodec,proto3" json:"video_codec,omitempty"`                 // video codec
+	AudioCodec      string                 `protobuf:"bytes,10,opt,name=audio_codec,json=audioCodec,proto3" json:"audio_codec,omitempty"`                // audio codec
+	Width           int32                  `protobuf:"varint,11,opt,name=width,proto3" json:"width,omitempty"`                                           // video width
+	Height          int32                  `protobuf:"varint,12,opt,name=height,proto3" json:"height,omitempty"`                                         // video height
+	Duration        float32                `protobuf:"fixed32,13,opt,name=duration,proto3" json:"duration,omitempty"`                                    // video duration
+	Size            int64                  `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`                                             // file size
+	Extra           string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`                                            // extra info
+	UserAgent       string                 `protobuf:"bytes,16,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`                   // user agent
+	ClientId        string                 `protobuf:"bytes,17,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`                      // client id
+	ContentIdentity string                 `protobuf:"bytes,18,opt,name=content_identity,json=contentIdentity,proto3" json:"content_identity,omitempty"` // content identity
+	ExtraCode       string                 `protobuf:"bytes,19,opt,name=extra_code,json=extraCode,proto3" json:"extra_code,omitempty"`                   // extra code
+	ExtraMessage    string                 `protobuf:"bytes,20,opt,name=extra_message,json=extraMessage,proto3" json:"extra_message,omitempty"`          // extra message
+	Name            string                 `protobuf:"bytes,21,opt,name=name,proto3" json:"name,omitempty"`                                              // file name
+	PlaybackType    int32                  `protobuf:"varint,22,opt,name=playback_type,json=playbackType,proto3" json:"playback_type,omitempty"`         // playback type, 0: unknown, 1: xg_player, 2: ve_player, 3: dash
+	PlayMode        int32                  `protobuf:"varint,23,opt,name=play_mode,json=playMode,proto3" json:"play_mode,omitempty"`                     // play mode: 0: unknown, 1: converted hls, 2: slice file
+	CurrentPos      float32                `protobuf:"fixed32,24,opt,name=current_pos,json=currentPos,proto3" json:"current_pos,omitempty"`              // current position
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
