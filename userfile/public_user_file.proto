@@ -418,7 +418,7 @@ message DirectDownloadRequest {
 }
 
 message PreviewStatus {
-    string identity = 1;
+    string identity = 1; 
     string code = 2;
     string message = 3;
     string path = 4;
