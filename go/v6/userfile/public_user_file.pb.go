@@ -2168,6 +2168,8 @@ type PreviewStatus struct {
 	ExtraCode       string                 `protobuf:"bytes,19,opt,name=extra_code,json=extraCode,proto3" json:"extra_code,omitempty"`
 	ExtraMessage    string                 `protobuf:"bytes,20,opt,name=extra_message,json=extraMessage,proto3" json:"extra_message,omitempty"`
 	Name            string                 `protobuf:"bytes,21,opt,name=name,proto3" json:"name,omitempty"`
+	PlaybackType    int32                  `protobuf:"varint,22,opt,name=playback_type,json=playbackType,proto3" json:"playback_type,omitempty"`
+	PlayMode        int32                  `protobuf:"varint,23,opt,name=play_mode,json=playMode,proto3" json:"play_mode,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2347,6 +2349,20 @@ func (x *PreviewStatus) GetName() string {
 		return x.Name
 	}
 	return ""
+}
+
+func (x *PreviewStatus) GetPlaybackType() int32 {
+	if x != nil {
+		return x.PlaybackType
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetPlayMode() int32 {
+	if x != nil {
+		return x.PlayMode
+	}
+	return 0
 }
 
 var File_userfile_public_user_file_proto protoreflect.FileDescriptor
@@ -2565,7 +2581,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x06expire\x18\t \x01(\x03R\x06expire\x12\x18\n" +
 	"\aencrypt\x18\n" +
 	" \x01(\x05R\aencrypt\x12\x14\n" +
-	"\x05addon\x18\v \x01(\tR\x05addon\"\xbd\x04\n" +
+	"\x05addon\x18\v \x01(\tR\x05addon\"\xff\x04\n" +
 	"\rPreviewStatus\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x18\n" +
@@ -2592,7 +2608,9 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\n" +
 	"extra_code\x18\x13 \x01(\tR\textraCode\x12#\n" +
 	"\rextra_message\x18\x14 \x01(\tR\fextraMessage\x12\x12\n" +
-	"\x04name\x18\x15 \x01(\tR\x04name2\xe6\x1a\n" +
+	"\x04name\x18\x15 \x01(\tR\x04name\x12#\n" +
+	"\rplayback_type\x18\x16 \x01(\x05R\fplaybackType\x12\x1b\n" +
+	"\tplay_mode\x18\x17 \x01(\x05R\bplayMode2\xe6\x1a\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +

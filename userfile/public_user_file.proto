@@ -439,4 +439,6 @@ message PreviewStatus {
     string extra_code = 19;
     string extra_message = 20;
     string name = 21;
+    int32 playback_type = 22;
+    int32 play_mode = 23;
 }
