@@ -2159,7 +2159,7 @@ type PreviewStatus struct {
 	AudioCodec      string                 `protobuf:"bytes,10,opt,name=audio_codec,json=audioCodec,proto3" json:"audio_codec,omitempty"`
 	Width           int32                  `protobuf:"varint,11,opt,name=width,proto3" json:"width,omitempty"`
 	Height          int32                  `protobuf:"varint,12,opt,name=height,proto3" json:"height,omitempty"`
-	Duration        int64                  `protobuf:"varint,13,opt,name=duration,proto3" json:"duration,omitempty"`
+	Duration        float32                `protobuf:"fixed32,13,opt,name=duration,proto3" json:"duration,omitempty"`
 	Size            int64                  `protobuf:"varint,14,opt,name=size,proto3" json:"size,omitempty"`
 	Extra           string                 `protobuf:"bytes,15,opt,name=extra,proto3" json:"extra,omitempty"`
 	UserAgent       string                 `protobuf:"bytes,16,opt,name=user_agent,json=userAgent,proto3" json:"user_agent,omitempty"`
@@ -2170,7 +2170,7 @@ type PreviewStatus struct {
 	Name            string                 `protobuf:"bytes,21,opt,name=name,proto3" json:"name,omitempty"`
 	PlaybackType    int32                  `protobuf:"varint,22,opt,name=playback_type,json=playbackType,proto3" json:"playback_type,omitempty"`
 	PlayMode        int32                  `protobuf:"varint,23,opt,name=play_mode,json=playMode,proto3" json:"play_mode,omitempty"`
-	CurrentPos      int64                  `protobuf:"varint,24,opt,name=current_pos,json=currentPos,proto3" json:"current_pos,omitempty"`
+	CurrentPos      float32                `protobuf:"fixed32,24,opt,name=current_pos,json=currentPos,proto3" json:"current_pos,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2289,7 +2289,7 @@ func (x *PreviewStatus) GetHeight() int32 {
 	return 0
 }
 
-func (x *PreviewStatus) GetDuration() int64 {
+func (x *PreviewStatus) GetDuration() float32 {
 	if x != nil {
 		return x.Duration
 	}
@@ -2366,7 +2366,7 @@ func (x *PreviewStatus) GetPlayMode() int32 {
 	return 0
 }
 
-func (x *PreviewStatus) GetCurrentPos() int64 {
+func (x *PreviewStatus) GetCurrentPos() float32 {
 	if x != nil {
 		return x.CurrentPos
 	}
@@ -2606,7 +2606,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"audioCodec\x12\x14\n" +
 	"\x05width\x18\v \x01(\x05R\x05width\x12\x16\n" +
 	"\x06height\x18\f \x01(\x05R\x06height\x12\x1a\n" +
-	"\bduration\x18\r \x01(\x03R\bduration\x12\x12\n" +
+	"\bduration\x18\r \x01(\x02R\bduration\x12\x12\n" +
 	"\x04size\x18\x0e \x01(\x03R\x04size\x12\x14\n" +
 	"\x05extra\x18\x0f \x01(\tR\x05extra\x12\x1d\n" +
 	"\n" +
@@ -2619,7 +2619,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x04name\x18\x15 \x01(\tR\x04name\x12#\n" +
 	"\rplayback_type\x18\x16 \x01(\x05R\fplaybackType\x12\x1b\n" +
 	"\tplay_mode\x18\x17 \x01(\x05R\bplayMode\x12\x1f\n" +
-	"\vcurrent_pos\x18\x18 \x01(\x03R\n" +
+	"\vcurrent_pos\x18\x18 \x01(\x02R\n" +
 	"currentPos2\xe6\x1a\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +

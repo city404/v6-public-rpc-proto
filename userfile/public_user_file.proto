@@ -430,7 +430,7 @@ message PreviewStatus {
     string audio_codec = 10;
     int32 width = 11;
     int32 height = 12;
-    int64 duration = 13;
+    float duration = 13;
     int64 size = 14;
     string extra = 15;
     string user_agent = 16;
@@ -441,5 +441,5 @@ message PreviewStatus {
     string name = 21;
     int32 playback_type = 22;
     int32 play_mode = 23;
-    int64 current_pos = 24;
+    float current_pos = 24;
 }
