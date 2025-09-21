@@ -441,4 +441,5 @@ message PreviewStatus {
     string name = 21;
     int32 playback_type = 22;
     int32 play_mode = 23;
+    int64 current_pos = 24;
 }

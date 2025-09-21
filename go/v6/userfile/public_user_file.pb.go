@@ -2170,6 +2170,7 @@ type PreviewStatus struct {
 	Name            string                 `protobuf:"bytes,21,opt,name=name,proto3" json:"name,omitempty"`
 	PlaybackType    int32                  `protobuf:"varint,22,opt,name=playback_type,json=playbackType,proto3" json:"playback_type,omitempty"`
 	PlayMode        int32                  `protobuf:"varint,23,opt,name=play_mode,json=playMode,proto3" json:"play_mode,omitempty"`
+	CurrentPos      int64                  `protobuf:"varint,24,opt,name=current_pos,json=currentPos,proto3" json:"current_pos,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -2361,6 +2362,13 @@ func (x *PreviewStatus) GetPlaybackType() int32 {
 func (x *PreviewStatus) GetPlayMode() int32 {
 	if x != nil {
 		return x.PlayMode
+	}
+	return 0
+}
+
+func (x *PreviewStatus) GetCurrentPos() int64 {
+	if x != nil {
+		return x.CurrentPos
 	}
 	return 0
 }
@@ -2581,7 +2589,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x06expire\x18\t \x01(\x03R\x06expire\x12\x18\n" +
 	"\aencrypt\x18\n" +
 	" \x01(\x05R\aencrypt\x12\x14\n" +
-	"\x05addon\x18\v \x01(\tR\x05addon\"\xff\x04\n" +
+	"\x05addon\x18\v \x01(\tR\x05addon\"\xa0\x05\n" +
 	"\rPreviewStatus\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x12\n" +
 	"\x04code\x18\x02 \x01(\tR\x04code\x12\x18\n" +
@@ -2610,7 +2618,9 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\rextra_message\x18\x14 \x01(\tR\fextraMessage\x12\x12\n" +
 	"\x04name\x18\x15 \x01(\tR\x04name\x12#\n" +
 	"\rplayback_type\x18\x16 \x01(\x05R\fplaybackType\x12\x1b\n" +
-	"\tplay_mode\x18\x17 \x01(\x05R\bplayMode2\xe6\x1a\n" +
+	"\tplay_mode\x18\x17 \x01(\x05R\bplayMode\x12\x1f\n" +
+	"\vcurrent_pos\x18\x18 \x01(\x03R\n" +
+	"currentPos2\xe6\x1a\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +
