@@ -297,12 +297,11 @@ type TaskFile struct {
 	UpdateTs int64  `protobuf:"varint,6,opt,name=update_ts,json=updateTs,proto3" json:"update_ts,omitempty"`
 	CreateTs int64  `protobuf:"varint,7,opt,name=create_ts,json=createTs,proto3" json:"create_ts,omitempty"`
 	Name     string `protobuf:"bytes,8,opt,name=name,proto3" json:"name,omitempty"`
-	Size     uint64 `protobuf:"varint,9,opt,name=size,proto3" json:"size,omitempty"`
+	Size     int64  `protobuf:"varint,9,opt,name=size,proto3" json:"size,omitempty"`
 	// string content_identity = 10;
 	// int32 code = 11;
 	// string message = 12;
-	BytesTotal uint64 `protobuf:"varint,13,opt,name=bytes_total,json=bytesTotal,proto3" json:"bytes_total,omitempty"`
-	// uint64 bytes_processed = 14;
+	BytesTotal    int64 `protobuf:"varint,13,opt,name=bytes_total,json=bytesTotal,proto3" json:"bytes_total,omitempty"`
 	Index         int32 `protobuf:"varint,15,opt,name=index,proto3" json:"index,omitempty"`
 	Directory     bool  `protobuf:"varint,16,opt,name=directory,proto3" json:"directory,omitempty"`
 	unknownFields protoimpl.UnknownFields
@@ -381,14 +380,14 @@ func (x *TaskFile) GetName() string {
 	return ""
 }
 
-func (x *TaskFile) GetSize() uint64 {
+func (x *TaskFile) GetSize() int64 {
 	if x != nil {
 		return x.Size
 	}
 	return 0
 }
 
-func (x *TaskFile) GetBytesTotal() uint64 {
+func (x *TaskFile) GetBytesTotal() int64 {
 	if x != nil {
 		return x.BytesTotal
 	}
@@ -663,15 +662,15 @@ type UserTask struct {
 	File           string   `protobuf:"bytes,6,opt,name=file,proto3" json:"file,omitempty"`
 	CreateTs       int64    `protobuf:"varint,7,opt,name=create_ts,json=createTs,proto3" json:"create_ts,omitempty"`
 	Url            string   `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
-	Size           uint64   `protobuf:"varint,9,opt,name=size,proto3" json:"size,omitempty"`
+	Size           int64    `protobuf:"varint,9,opt,name=size,proto3" json:"size,omitempty"`
 	Name           string   `protobuf:"bytes,10,opt,name=name,proto3" json:"name,omitempty"`
 	TaskIdentity   string   `protobuf:"bytes,11,opt,name=task_identity,json=taskIdentity,proto3" json:"task_identity,omitempty"`
 	Code           int32    `protobuf:"varint,12,opt,name=code,proto3" json:"code,omitempty"`
 	Message        string   `protobuf:"bytes,13,opt,name=message,proto3" json:"message,omitempty"`
 	Addon          string   `protobuf:"bytes,14,opt,name=addon,proto3" json:"addon,omitempty"`
-	Progress       uint64   `protobuf:"varint,16,opt,name=progress,proto3" json:"progress,omitempty"`
-	BytesTotal     uint64   `protobuf:"varint,17,opt,name=bytes_total,json=bytesTotal,proto3" json:"bytes_total,omitempty"`
-	BytesProcessed uint64   `protobuf:"varint,18,opt,name=bytes_processed,json=bytesProcessed,proto3" json:"bytes_processed,omitempty"`
+	Progress       int64    `protobuf:"varint,16,opt,name=progress,proto3" json:"progress,omitempty"`
+	BytesTotal     int64    `protobuf:"varint,17,opt,name=bytes_total,json=bytesTotal,proto3" json:"bytes_total,omitempty"`
+	BytesProcessed int64    `protobuf:"varint,18,opt,name=bytes_processed,json=bytesProcessed,proto3" json:"bytes_processed,omitempty"`
 	Flag           int32    `protobuf:"varint,19,opt,name=flag,proto3" json:"flag,omitempty"`
 	SavePath       string   `protobuf:"bytes,20,opt,name=save_path,json=savePath,proto3" json:"save_path,omitempty"`
 	Callbacks      []string `protobuf:"bytes,21,rep,name=callbacks,proto3" json:"callbacks,omitempty"`
@@ -759,7 +758,7 @@ func (x *UserTask) GetUrl() string {
 	return ""
 }
 
-func (x *UserTask) GetSize() uint64 {
+func (x *UserTask) GetSize() int64 {
 	if x != nil {
 		return x.Size
 	}
@@ -801,21 +800,21 @@ func (x *UserTask) GetAddon() string {
 	return ""
 }
 
-func (x *UserTask) GetProgress() uint64 {
+func (x *UserTask) GetProgress() int64 {
 	if x != nil {
 		return x.Progress
 	}
 	return 0
 }
 
-func (x *UserTask) GetBytesTotal() uint64 {
+func (x *UserTask) GetBytesTotal() int64 {
 	if x != nil {
 		return x.BytesTotal
 	}
 	return 0
 }
 
-func (x *UserTask) GetBytesProcessed() uint64 {
+func (x *UserTask) GetBytesProcessed() int64 {
 	if x != nil {
 		return x.BytesProcessed
 	}
@@ -890,8 +889,8 @@ const file_offline_public_user_offline_proto_rawDesc = "" +
 	"\tupdate_ts\x18\x06 \x01(\x03R\bupdateTs\x12\x1b\n" +
 	"\tcreate_ts\x18\a \x01(\x03R\bcreateTs\x12\x12\n" +
 	"\x04name\x18\b \x01(\tR\x04name\x12\x12\n" +
-	"\x04size\x18\t \x01(\x04R\x04size\x12\x1f\n" +
-	"\vbytes_total\x18\r \x01(\x04R\n" +
+	"\x04size\x18\t \x01(\x03R\x04size\x12\x1f\n" +
+	"\vbytes_total\x18\r \x01(\x03R\n" +
 	"bytesTotal\x12\x14\n" +
 	"\x05index\x18\x0f \x01(\x05R\x05index\x12\x1c\n" +
 	"\tdirectory\x18\x10 \x01(\bR\tdirectory\"|\n" +
@@ -917,17 +916,17 @@ const file_offline_public_user_offline_proto_rawDesc = "" +
 	"\x04file\x18\x06 \x01(\tR\x04file\x12\x1b\n" +
 	"\tcreate_ts\x18\a \x01(\x03R\bcreateTs\x12\x10\n" +
 	"\x03url\x18\b \x01(\tR\x03url\x12\x12\n" +
-	"\x04size\x18\t \x01(\x04R\x04size\x12\x12\n" +
+	"\x04size\x18\t \x01(\x03R\x04size\x12\x12\n" +
 	"\x04name\x18\n" +
 	" \x01(\tR\x04name\x12#\n" +
 	"\rtask_identity\x18\v \x01(\tR\ftaskIdentity\x12\x12\n" +
 	"\x04code\x18\f \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\r \x01(\tR\amessage\x12\x14\n" +
 	"\x05addon\x18\x0e \x01(\tR\x05addon\x12\x1a\n" +
-	"\bprogress\x18\x10 \x01(\x04R\bprogress\x12\x1f\n" +
-	"\vbytes_total\x18\x11 \x01(\x04R\n" +
+	"\bprogress\x18\x10 \x01(\x03R\bprogress\x12\x1f\n" +
+	"\vbytes_total\x18\x11 \x01(\x03R\n" +
 	"bytesTotal\x12'\n" +
-	"\x0fbytes_processed\x18\x12 \x01(\x04R\x0ebytesProcessed\x12\x12\n" +
+	"\x0fbytes_processed\x18\x12 \x01(\x03R\x0ebytesProcessed\x12\x12\n" +
 	"\x04flag\x18\x13 \x01(\x05R\x04flag\x12\x1b\n" +
 	"\tsave_path\x18\x14 \x01(\tR\bsavePath\x12\x1c\n" +
 	"\tcallbacks\x18\x15 \x03(\tR\tcallbacks\x12!\n" +

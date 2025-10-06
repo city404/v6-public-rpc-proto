@@ -51,12 +51,11 @@ message TaskFile {
     int64 update_ts = 6;
     int64 create_ts = 7;
     string name = 8;
-    uint64 size = 9;
+    int64 size = 9;
     // string content_identity = 10;
     // int32 code = 11;
     // string message = 12;
-    uint64 bytes_total = 13;
-    // uint64 bytes_processed = 14;
+    int64 bytes_total = 13;
     int32 index = 15;
     bool directory = 16;
 }
@@ -96,15 +95,15 @@ message UserTask {
     string file = 6;
     int64 create_ts = 7;
     string url = 8;
-    uint64 size = 9;
+    int64 size = 9;
     string name = 10;
     string task_identity = 11;
     int32 code = 12;
     string message = 13;
     string addon = 14;
-    uint64 progress = 16;
-    uint64 bytes_total = 17;
-    uint64 bytes_processed = 18;
+    int64 progress = 16;
+    int64 bytes_total = 17;
+    int64 bytes_processed = 18;
     int32 flag = 19;
     string save_path = 20;
     repeated string callbacks = 21;
