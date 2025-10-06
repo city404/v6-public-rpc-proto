@@ -2,12 +2,34 @@ syntax = "proto3";
 package v6.services.pub;
 option go_package = "github.com/city404/v6-public-rpc-proto/go/v6/offline";
 import "common/pub_common.proto";
+import "google/api/annotations.proto";
+
 
 service PubOfflineTask {
-    rpc Parse (TaskParseRequest) returns (TaskParseResponse) {}
-    rpc Add (UserTask) returns (UserTask) {}
-    rpc List (OfflineTaskListRequest) returns (OfflineTaskListResponse) {}
-    rpc Delete (OfflineTaskDeleteRequest) returns (OfflineTaskDeleteResponse) {}
+    rpc Parse (TaskParseRequest) returns (TaskParseResponse) {
+        option (google.api.http) = {
+            post: "/v6/offline_task/parse"
+            body: "*"
+        };
+    }
+    rpc Add (UserTask) returns (UserTask) {
+        option (google.api.http) = {
+            post: "/v6/offline_task/add"
+            body: "*"
+        };
+    }
+    rpc List (OfflineTaskListRequest) returns (OfflineTaskListResponse) {
+        option (google.api.http) = {
+            post: "/v6/offline_task/list"
+            body: "*"
+        };
+    }
+    rpc Delete (OfflineTaskDeleteRequest) returns (OfflineTaskDeleteResponse) {
+        option (google.api.http) = {
+            post: "/v6/offline_task/delete"
+            body: "*"
+        };
+    }
 }
 
 message TaskParseRequest {

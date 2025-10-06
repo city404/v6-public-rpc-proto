@@ -8,6 +8,7 @@ package offline
 
 import (
 	common "github.com/city404/v6-public-rpc-proto/go/v6/common"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -853,7 +854,7 @@ var File_offline_public_user_offline_proto protoreflect.FileDescriptor
 
 const file_offline_public_user_offline_proto_rawDesc = "" +
 	"\n" +
-	"!offline/public_user_offline.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\"\x92\x01\n" +
+	"!offline/public_user_offline.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"\x92\x01\n" +
 	"\x10TaskParseRequest\x12\x10\n" +
 	"\x03url\x18\x01 \x01(\tR\x03url\x12\x12\n" +
 	"\x04file\x18\x02 \x01(\tR\x04file\x12\x1a\n" +
@@ -930,12 +931,12 @@ const file_offline_public_user_offline_proto_rawDesc = "" +
 	"\x04flag\x18\x13 \x01(\x05R\x04flag\x12\x1b\n" +
 	"\tsave_path\x18\x14 \x01(\tR\bsavePath\x12\x1c\n" +
 	"\tcallbacks\x18\x15 \x03(\tR\tcallbacks\x12!\n" +
-	"\fignore_files\x18\x16 \x03(\tR\vignoreFiles2\xe1\x02\n" +
-	"\x0ePubOfflineTask\x12P\n" +
-	"\x05Parse\x12!.v6.services.pub.TaskParseRequest\x1a\".v6.services.pub.TaskParseResponse\"\x00\x12=\n" +
-	"\x03Add\x12\x19.v6.services.pub.UserTask\x1a\x19.v6.services.pub.UserTask\"\x00\x12[\n" +
-	"\x04List\x12'.v6.services.pub.OfflineTaskListRequest\x1a(.v6.services.pub.OfflineTaskListResponse\"\x00\x12a\n" +
-	"\x06Delete\x12).v6.services.pub.OfflineTaskDeleteRequest\x1a*.v6.services.pub.OfflineTaskDeleteResponse\"\x00B6Z4github.com/city404/v6-public-rpc-proto/go/v6/offlineb\x06proto3"
+	"\fignore_files\x18\x16 \x03(\tR\vignoreFiles2\xe4\x03\n" +
+	"\x0ePubOfflineTask\x12q\n" +
+	"\x05Parse\x12!.v6.services.pub.TaskParseRequest\x1a\".v6.services.pub.TaskParseResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v6/offline_task/parse\x12\\\n" +
+	"\x03Add\x12\x19.v6.services.pub.UserTask\x1a\x19.v6.services.pub.UserTask\"\x1f\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v6/offline_task/add\x12{\n" +
+	"\x04List\x12'.v6.services.pub.OfflineTaskListRequest\x1a(.v6.services.pub.OfflineTaskListResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v6/offline_task/list\x12\x83\x01\n" +
+	"\x06Delete\x12).v6.services.pub.OfflineTaskDeleteRequest\x1a*.v6.services.pub.OfflineTaskDeleteResponse\"\"\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v6/offline_task/deleteB6Z4github.com/city404/v6-public-rpc-proto/go/v6/offlineb\x06proto3"
 
 var (
 	file_offline_public_user_offline_proto_rawDescOnce sync.Once
