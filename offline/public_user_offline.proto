@@ -28,16 +28,16 @@ message TaskMeta {
     string file = 6;
     int64 create_ts = 7;
     string url = 8;
-    uint64 size = 9;
+    int64 size = 9;
     string name = 10;
     // string lock_by = 11;
     int32 code = 12;
     string message = 13;
     string addon = 14;
-    uint64 retries = 15;
-    uint64 progress = 16;
-    uint64 bytes_total = 17;
-    uint64 bytes_processed = 18;
+    int64 retries = 15;
+    int64 progress = 16;
+    int64 bytes_total = 17;
+    int64 bytes_processed = 18;
     int32 flag = 19;
     // int32 retry_status = 20;
 }
