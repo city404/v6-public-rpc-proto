@@ -179,13 +179,6 @@ service PubUserFile {
         };
     }
 
-    rpc GetLastModify (SlicesDownloadInfoRequest) returns (SlicesDownloadInfoResponse) {
-        option (google.api.http) = {
-            post: "/v6/userfile/get_file_slices_download_info"
-            body: "*"
-        };
-    }
-
     rpc ListRecentUpdatedFiles (ListRecentUpdatedFilesRequest) returns (FileListResponse) {
         option (google.api.http) = {
             post: "/v6/userfile/list_recent_updated_files"
