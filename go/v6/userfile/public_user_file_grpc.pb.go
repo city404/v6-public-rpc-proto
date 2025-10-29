@@ -46,6 +46,7 @@ const (
 	PubUserFile_CreateUploadTask_FullMethodName          = "/v6.services.pub.PubUserFile/CreateUploadTask"
 	PubUserFile_CreateTemporaryUpload_FullMethodName     = "/v6.services.pub.PubUserFile/CreateTemporaryUpload"
 	PubUserFile_ReportPreviewStatus_FullMethodName       = "/v6.services.pub.PubUserFile/ReportPreviewStatus"
+	PubUserFile_GetFileSlicesDownloadInfo_FullMethodName = "/v6.services.pub.PubUserFile/GetFileSlicesDownloadInfo"
 )
 
 // PubUserFileClient is the client API for PubUserFile service.
@@ -80,6 +81,7 @@ type PubUserFileClient interface {
 	CreateUploadTask(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadTask, error)
 	CreateTemporaryUpload(ctx context.Context, in *File, opts ...grpc.CallOption) (*UploadTask, error)
 	ReportPreviewStatus(ctx context.Context, in *PreviewStatus, opts ...grpc.CallOption) (*PreviewStatus, error)
+	GetFileSlicesDownloadInfo(ctx context.Context, in *SlicesDownloadInfoRequest, opts ...grpc.CallOption) (*SlicesDownloadInfoResponse, error)
 }
 
 type pubUserFileClient struct {
@@ -360,6 +362,16 @@ func (c *pubUserFileClient) ReportPreviewStatus(ctx context.Context, in *Preview
 	return out, nil
 }
 
+func (c *pubUserFileClient) GetFileSlicesDownloadInfo(ctx context.Context, in *SlicesDownloadInfoRequest, opts ...grpc.CallOption) (*SlicesDownloadInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SlicesDownloadInfoResponse)
+	err := c.cc.Invoke(ctx, PubUserFile_GetFileSlicesDownloadInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PubUserFileServer is the server API for PubUserFile service.
 // All implementations must embed UnimplementedPubUserFileServer
 // for forward compatibility.
@@ -392,6 +404,7 @@ type PubUserFileServer interface {
 	CreateUploadTask(context.Context, *File) (*UploadTask, error)
 	CreateTemporaryUpload(context.Context, *File) (*UploadTask, error)
 	ReportPreviewStatus(context.Context, *PreviewStatus) (*PreviewStatus, error)
+	GetFileSlicesDownloadInfo(context.Context, *SlicesDownloadInfoRequest) (*SlicesDownloadInfoResponse, error)
 	mustEmbedUnimplementedPubUserFileServer()
 }
 
@@ -482,6 +495,9 @@ func (UnimplementedPubUserFileServer) CreateTemporaryUpload(context.Context, *Fi
 }
 func (UnimplementedPubUserFileServer) ReportPreviewStatus(context.Context, *PreviewStatus) (*PreviewStatus, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReportPreviewStatus not implemented")
+}
+func (UnimplementedPubUserFileServer) GetFileSlicesDownloadInfo(context.Context, *SlicesDownloadInfoRequest) (*SlicesDownloadInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFileSlicesDownloadInfo not implemented")
 }
 func (UnimplementedPubUserFileServer) mustEmbedUnimplementedPubUserFileServer() {}
 func (UnimplementedPubUserFileServer) testEmbeddedByValue()                     {}
@@ -990,6 +1006,24 @@ func _PubUserFile_ReportPreviewStatus_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PubUserFile_GetFileSlicesDownloadInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SlicesDownloadInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PubUserFileServer).GetFileSlicesDownloadInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PubUserFile_GetFileSlicesDownloadInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PubUserFileServer).GetFileSlicesDownloadInfo(ctx, req.(*SlicesDownloadInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PubUserFile_ServiceDesc is the grpc.ServiceDesc for PubUserFile service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1104,6 +1138,10 @@ var PubUserFile_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReportPreviewStatus",
 			Handler:    _PubUserFile_ReportPreviewStatus_Handler,
+		},
+		{
+			MethodName: "GetFileSlicesDownloadInfo",
+			Handler:    _PubUserFile_GetFileSlicesDownloadInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

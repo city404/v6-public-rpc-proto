@@ -23,6 +23,118 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type SlicesDownloadInfoRequest struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	File          *File                   `protobuf:"bytes,1,opt,name=file,proto3" json:"file,omitempty"`
+	ListInfo      *common.ScanListRequest `protobuf:"bytes,2,opt,name=list_info,json=listInfo,proto3" json:"list_info,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SlicesDownloadInfoRequest) Reset() {
+	*x = SlicesDownloadInfoRequest{}
+	mi := &file_userfile_public_user_file_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SlicesDownloadInfoRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SlicesDownloadInfoRequest) ProtoMessage() {}
+
+func (x *SlicesDownloadInfoRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_userfile_public_user_file_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SlicesDownloadInfoRequest.ProtoReflect.Descriptor instead.
+func (*SlicesDownloadInfoRequest) Descriptor() ([]byte, []int) {
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *SlicesDownloadInfoRequest) GetFile() *File {
+	if x != nil {
+		return x.File
+	}
+	return nil
+}
+
+func (x *SlicesDownloadInfoRequest) GetListInfo() *common.ScanListRequest {
+	if x != nil {
+		return x.ListInfo
+	}
+	return nil
+}
+
+type SlicesDownloadInfoResponse struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Slices        []*SliceDownloadInfo    `protobuf:"bytes,1,rep,name=slices,proto3" json:"slices,omitempty"`
+	ListInfo      *common.ScanListRequest `protobuf:"bytes,2,opt,name=list_info,json=listInfo,proto3" json:"list_info,omitempty"`
+	File          *File                   `protobuf:"bytes,3,opt,name=file,proto3" json:"file,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SlicesDownloadInfoResponse) Reset() {
+	*x = SlicesDownloadInfoResponse{}
+	mi := &file_userfile_public_user_file_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SlicesDownloadInfoResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SlicesDownloadInfoResponse) ProtoMessage() {}
+
+func (x *SlicesDownloadInfoResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_userfile_public_user_file_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SlicesDownloadInfoResponse.ProtoReflect.Descriptor instead.
+func (*SlicesDownloadInfoResponse) Descriptor() ([]byte, []int) {
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SlicesDownloadInfoResponse) GetSlices() []*SliceDownloadInfo {
+	if x != nil {
+		return x.Slices
+	}
+	return nil
+}
+
+func (x *SlicesDownloadInfoResponse) GetListInfo() *common.ScanListRequest {
+	if x != nil {
+		return x.ListInfo
+	}
+	return nil
+}
+
+func (x *SlicesDownloadInfoResponse) GetFile() *File {
+	if x != nil {
+		return x.File
+	}
+	return nil
+}
+
 type File struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	Identity        string                 `protobuf:"bytes,1,opt,name=identity,proto3" json:"identity,omitempty"`
@@ -61,7 +173,7 @@ type File struct {
 
 func (x *File) Reset() {
 	*x = File{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[0]
+	mi := &file_userfile_public_user_file_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -73,7 +185,7 @@ func (x *File) String() string {
 func (*File) ProtoMessage() {}
 
 func (x *File) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[0]
+	mi := &file_userfile_public_user_file_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -86,7 +198,7 @@ func (x *File) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use File.ProtoReflect.Descriptor instead.
 func (*File) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{0}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *File) GetIdentity() string {
@@ -310,7 +422,7 @@ type FileListRequest struct {
 
 func (x *FileListRequest) Reset() {
 	*x = FileListRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[1]
+	mi := &file_userfile_public_user_file_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -322,7 +434,7 @@ func (x *FileListRequest) String() string {
 func (*FileListRequest) ProtoMessage() {}
 
 func (x *FileListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[1]
+	mi := &file_userfile_public_user_file_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -335,7 +447,7 @@ func (x *FileListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileListRequest.ProtoReflect.Descriptor instead.
 func (*FileListRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{1}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *FileListRequest) GetParent() *File {
@@ -369,7 +481,7 @@ type SearchRequest struct {
 
 func (x *SearchRequest) Reset() {
 	*x = SearchRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[2]
+	mi := &file_userfile_public_user_file_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -381,7 +493,7 @@ func (x *SearchRequest) String() string {
 func (*SearchRequest) ProtoMessage() {}
 
 func (x *SearchRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[2]
+	mi := &file_userfile_public_user_file_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -394,7 +506,7 @@ func (x *SearchRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchRequest.ProtoReflect.Descriptor instead.
 func (*SearchRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{2}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SearchRequest) GetName() string {
@@ -421,7 +533,7 @@ type FileListResponse struct {
 
 func (x *FileListResponse) Reset() {
 	*x = FileListResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[3]
+	mi := &file_userfile_public_user_file_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -433,7 +545,7 @@ func (x *FileListResponse) String() string {
 func (*FileListResponse) ProtoMessage() {}
 
 func (x *FileListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[3]
+	mi := &file_userfile_public_user_file_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -446,7 +558,7 @@ func (x *FileListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileListResponse.ProtoReflect.Descriptor instead.
 func (*FileListResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{3}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *FileListResponse) GetFiles() []*File {
@@ -475,7 +587,7 @@ type BatchOperationRequest struct {
 
 func (x *BatchOperationRequest) Reset() {
 	*x = BatchOperationRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[4]
+	mi := &file_userfile_public_user_file_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -487,7 +599,7 @@ func (x *BatchOperationRequest) String() string {
 func (*BatchOperationRequest) ProtoMessage() {}
 
 func (x *BatchOperationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[4]
+	mi := &file_userfile_public_user_file_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -500,7 +612,7 @@ func (x *BatchOperationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchOperationRequest.ProtoReflect.Descriptor instead.
 func (*BatchOperationRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{4}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *BatchOperationRequest) GetSource() []*File {
@@ -544,7 +656,7 @@ type BatchOperationResponse struct {
 
 func (x *BatchOperationResponse) Reset() {
 	*x = BatchOperationResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[5]
+	mi := &file_userfile_public_user_file_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -556,7 +668,7 @@ func (x *BatchOperationResponse) String() string {
 func (*BatchOperationResponse) ProtoMessage() {}
 
 func (x *BatchOperationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[5]
+	mi := &file_userfile_public_user_file_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -569,7 +681,7 @@ func (x *BatchOperationResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchOperationResponse.ProtoReflect.Descriptor instead.
 func (*BatchOperationResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{5}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BatchOperationResponse) GetTask() string {
@@ -619,7 +731,7 @@ type ManageRTCRequest struct {
 
 func (x *ManageRTCRequest) Reset() {
 	*x = ManageRTCRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[6]
+	mi := &file_userfile_public_user_file_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -631,7 +743,7 @@ func (x *ManageRTCRequest) String() string {
 func (*ManageRTCRequest) ProtoMessage() {}
 
 func (x *ManageRTCRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[6]
+	mi := &file_userfile_public_user_file_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -644,7 +756,7 @@ func (x *ManageRTCRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ManageRTCRequest.ProtoReflect.Descriptor instead.
 func (*ManageRTCRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{6}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ManageRTCRequest) GetSdp() string {
@@ -682,7 +794,7 @@ type ManageRTCResponse struct {
 
 func (x *ManageRTCResponse) Reset() {
 	*x = ManageRTCResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[7]
+	mi := &file_userfile_public_user_file_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -694,7 +806,7 @@ func (x *ManageRTCResponse) String() string {
 func (*ManageRTCResponse) ProtoMessage() {}
 
 func (x *ManageRTCResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[7]
+	mi := &file_userfile_public_user_file_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +819,7 @@ func (x *ManageRTCResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ManageRTCResponse.ProtoReflect.Descriptor instead.
 func (*ManageRTCResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{7}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ManageRTCResponse) GetFileSize() int64 {
@@ -756,7 +868,7 @@ type SendIceCandidateRequest struct {
 
 func (x *SendIceCandidateRequest) Reset() {
 	*x = SendIceCandidateRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[8]
+	mi := &file_userfile_public_user_file_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -768,7 +880,7 @@ func (x *SendIceCandidateRequest) String() string {
 func (*SendIceCandidateRequest) ProtoMessage() {}
 
 func (x *SendIceCandidateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[8]
+	mi := &file_userfile_public_user_file_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -781,7 +893,7 @@ func (x *SendIceCandidateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendIceCandidateRequest.ProtoReflect.Descriptor instead.
 func (*SendIceCandidateRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{8}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *SendIceCandidateRequest) GetClientIdentity() string {
@@ -809,7 +921,7 @@ type SendIceCandidateResponse struct {
 
 func (x *SendIceCandidateResponse) Reset() {
 	*x = SendIceCandidateResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[9]
+	mi := &file_userfile_public_user_file_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -821,7 +933,7 @@ func (x *SendIceCandidateResponse) String() string {
 func (*SendIceCandidateResponse) ProtoMessage() {}
 
 func (x *SendIceCandidateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[9]
+	mi := &file_userfile_public_user_file_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -834,7 +946,7 @@ func (x *SendIceCandidateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendIceCandidateResponse.ProtoReflect.Descriptor instead.
 func (*SendIceCandidateResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{9}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SendIceCandidateResponse) GetClientIdentity() string {
@@ -862,7 +974,7 @@ type GetIceCandidateRequest struct {
 
 func (x *GetIceCandidateRequest) Reset() {
 	*x = GetIceCandidateRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[10]
+	mi := &file_userfile_public_user_file_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -874,7 +986,7 @@ func (x *GetIceCandidateRequest) String() string {
 func (*GetIceCandidateRequest) ProtoMessage() {}
 
 func (x *GetIceCandidateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[10]
+	mi := &file_userfile_public_user_file_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -887,7 +999,7 @@ func (x *GetIceCandidateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIceCandidateRequest.ProtoReflect.Descriptor instead.
 func (*GetIceCandidateRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{10}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetIceCandidateRequest) GetClientIdentity() string {
@@ -915,7 +1027,7 @@ type GetIceCandidateResponse struct {
 
 func (x *GetIceCandidateResponse) Reset() {
 	*x = GetIceCandidateResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[11]
+	mi := &file_userfile_public_user_file_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -927,7 +1039,7 @@ func (x *GetIceCandidateResponse) String() string {
 func (*GetIceCandidateResponse) ProtoMessage() {}
 
 func (x *GetIceCandidateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[11]
+	mi := &file_userfile_public_user_file_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -940,7 +1052,7 @@ func (x *GetIceCandidateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetIceCandidateResponse.ProtoReflect.Descriptor instead.
 func (*GetIceCandidateResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{11}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetIceCandidateResponse) GetClientIdentity() string {
@@ -976,7 +1088,7 @@ type ParseFileSliceResponse struct {
 
 func (x *ParseFileSliceResponse) Reset() {
 	*x = ParseFileSliceResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[12]
+	mi := &file_userfile_public_user_file_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -988,7 +1100,7 @@ func (x *ParseFileSliceResponse) String() string {
 func (*ParseFileSliceResponse) ProtoMessage() {}
 
 func (x *ParseFileSliceResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[12]
+	mi := &file_userfile_public_user_file_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1001,7 +1113,7 @@ func (x *ParseFileSliceResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseFileSliceResponse.ProtoReflect.Descriptor instead.
 func (*ParseFileSliceResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{12}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ParseFileSliceResponse) GetContentIdentity() string {
@@ -1092,7 +1204,7 @@ type SliceSize struct {
 
 func (x *SliceSize) Reset() {
 	*x = SliceSize{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[13]
+	mi := &file_userfile_public_user_file_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1104,7 +1216,7 @@ func (x *SliceSize) String() string {
 func (*SliceSize) ProtoMessage() {}
 
 func (x *SliceSize) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[13]
+	mi := &file_userfile_public_user_file_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1117,7 +1229,7 @@ func (x *SliceSize) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SliceSize.ProtoReflect.Descriptor instead.
 func (*SliceSize) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{13}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SliceSize) GetStartIndex() int64 {
@@ -1154,7 +1266,7 @@ type SliceDownloadAddressRequest struct {
 
 func (x *SliceDownloadAddressRequest) Reset() {
 	*x = SliceDownloadAddressRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[14]
+	mi := &file_userfile_public_user_file_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1166,7 +1278,7 @@ func (x *SliceDownloadAddressRequest) String() string {
 func (*SliceDownloadAddressRequest) ProtoMessage() {}
 
 func (x *SliceDownloadAddressRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[14]
+	mi := &file_userfile_public_user_file_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1179,7 +1291,7 @@ func (x *SliceDownloadAddressRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SliceDownloadAddressRequest.ProtoReflect.Descriptor instead.
 func (*SliceDownloadAddressRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{14}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SliceDownloadAddressRequest) GetIdentity() []string {
@@ -1229,7 +1341,7 @@ type SliceDownloadAddressResponse struct {
 
 func (x *SliceDownloadAddressResponse) Reset() {
 	*x = SliceDownloadAddressResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[15]
+	mi := &file_userfile_public_user_file_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1241,7 +1353,7 @@ func (x *SliceDownloadAddressResponse) String() string {
 func (*SliceDownloadAddressResponse) ProtoMessage() {}
 
 func (x *SliceDownloadAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[15]
+	mi := &file_userfile_public_user_file_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1254,7 +1366,7 @@ func (x *SliceDownloadAddressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SliceDownloadAddressResponse.ProtoReflect.Descriptor instead.
 func (*SliceDownloadAddressResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{15}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *SliceDownloadAddressResponse) GetAddresses() []*SliceDownloadInfo {
@@ -1303,7 +1415,7 @@ type FileDownloadAddressResponse struct {
 
 func (x *FileDownloadAddressResponse) Reset() {
 	*x = FileDownloadAddressResponse{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[16]
+	mi := &file_userfile_public_user_file_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1315,7 +1427,7 @@ func (x *FileDownloadAddressResponse) String() string {
 func (*FileDownloadAddressResponse) ProtoMessage() {}
 
 func (x *FileDownloadAddressResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[16]
+	mi := &file_userfile_public_user_file_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1328,7 +1440,7 @@ func (x *FileDownloadAddressResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use FileDownloadAddressResponse.ProtoReflect.Descriptor instead.
 func (*FileDownloadAddressResponse) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{16}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *FileDownloadAddressResponse) GetDownloadAddress() string {
@@ -1414,7 +1526,7 @@ type SliceDownloadInfo struct {
 
 func (x *SliceDownloadInfo) Reset() {
 	*x = SliceDownloadInfo{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[17]
+	mi := &file_userfile_public_user_file_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1426,7 +1538,7 @@ func (x *SliceDownloadInfo) String() string {
 func (*SliceDownloadInfo) ProtoMessage() {}
 
 func (x *SliceDownloadInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[17]
+	mi := &file_userfile_public_user_file_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1439,7 +1551,7 @@ func (x *SliceDownloadInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SliceDownloadInfo.ProtoReflect.Descriptor instead.
 func (*SliceDownloadInfo) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{17}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *SliceDownloadInfo) GetIdentity() string {
@@ -1498,7 +1610,7 @@ type DocFilePreview struct {
 
 func (x *DocFilePreview) Reset() {
 	*x = DocFilePreview{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[18]
+	mi := &file_userfile_public_user_file_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1510,7 +1622,7 @@ func (x *DocFilePreview) String() string {
 func (*DocFilePreview) ProtoMessage() {}
 
 func (x *DocFilePreview) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[18]
+	mi := &file_userfile_public_user_file_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1523,7 +1635,7 @@ func (x *DocFilePreview) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DocFilePreview.ProtoReflect.Descriptor instead.
 func (*DocFilePreview) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{18}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *DocFilePreview) GetIdentity() string {
@@ -1640,7 +1752,7 @@ type DownloadAndPreviewInfo struct {
 
 func (x *DownloadAndPreviewInfo) Reset() {
 	*x = DownloadAndPreviewInfo{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[19]
+	mi := &file_userfile_public_user_file_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1652,7 +1764,7 @@ func (x *DownloadAndPreviewInfo) String() string {
 func (*DownloadAndPreviewInfo) ProtoMessage() {}
 
 func (x *DownloadAndPreviewInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[19]
+	mi := &file_userfile_public_user_file_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1665,7 +1777,7 @@ func (x *DownloadAndPreviewInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadAndPreviewInfo.ProtoReflect.Descriptor instead.
 func (*DownloadAndPreviewInfo) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{19}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *DownloadAndPreviewInfo) GetIdentity() string {
@@ -1788,7 +1900,7 @@ type UploadToken struct {
 
 func (x *UploadToken) Reset() {
 	*x = UploadToken{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[20]
+	mi := &file_userfile_public_user_file_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1800,7 +1912,7 @@ func (x *UploadToken) String() string {
 func (*UploadToken) ProtoMessage() {}
 
 func (x *UploadToken) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[20]
+	mi := &file_userfile_public_user_file_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1813,7 +1925,7 @@ func (x *UploadToken) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadToken.ProtoReflect.Descriptor instead.
 func (*UploadToken) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{20}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *UploadToken) GetToken() string {
@@ -1888,7 +2000,7 @@ type UploadTask struct {
 
 func (x *UploadTask) Reset() {
 	*x = UploadTask{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[21]
+	mi := &file_userfile_public_user_file_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1900,7 +2012,7 @@ func (x *UploadTask) String() string {
 func (*UploadTask) ProtoMessage() {}
 
 func (x *UploadTask) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[21]
+	mi := &file_userfile_public_user_file_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1913,7 +2025,7 @@ func (x *UploadTask) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UploadTask.ProtoReflect.Descriptor instead.
 func (*UploadTask) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{21}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *UploadTask) GetCreated() bool {
@@ -2040,7 +2152,7 @@ type DirectDownloadRequest struct {
 
 func (x *DirectDownloadRequest) Reset() {
 	*x = DirectDownloadRequest{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[22]
+	mi := &file_userfile_public_user_file_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2052,7 +2164,7 @@ func (x *DirectDownloadRequest) String() string {
 func (*DirectDownloadRequest) ProtoMessage() {}
 
 func (x *DirectDownloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[22]
+	mi := &file_userfile_public_user_file_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2065,7 +2177,7 @@ func (x *DirectDownloadRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DirectDownloadRequest.ProtoReflect.Descriptor instead.
 func (*DirectDownloadRequest) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{22}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *DirectDownloadRequest) GetIdentity() string {
@@ -2177,7 +2289,7 @@ type PreviewStatus struct {
 
 func (x *PreviewStatus) Reset() {
 	*x = PreviewStatus{}
-	mi := &file_userfile_public_user_file_proto_msgTypes[23]
+	mi := &file_userfile_public_user_file_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2189,7 +2301,7 @@ func (x *PreviewStatus) String() string {
 func (*PreviewStatus) ProtoMessage() {}
 
 func (x *PreviewStatus) ProtoReflect() protoreflect.Message {
-	mi := &file_userfile_public_user_file_proto_msgTypes[23]
+	mi := &file_userfile_public_user_file_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2202,7 +2314,7 @@ func (x *PreviewStatus) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PreviewStatus.ProtoReflect.Descriptor instead.
 func (*PreviewStatus) Descriptor() ([]byte, []int) {
-	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{23}
+	return file_userfile_public_user_file_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *PreviewStatus) GetIdentity() string {
@@ -2377,7 +2489,14 @@ var File_userfile_public_user_file_proto protoreflect.FileDescriptor
 
 const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\n" +
-	"\x1fuserfile/public_user_file.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"\x8e\x06\n" +
+	"\x1fuserfile/public_user_file.proto\x12\x0fv6.services.pub\x1a\x17common/pub_common.proto\x1a\x1cgoogle/api/annotations.proto\"\x8c\x01\n" +
+	"\x19SlicesDownloadInfoRequest\x12)\n" +
+	"\x04file\x18\x01 \x01(\v2\x15.v6.services.pub.FileR\x04file\x12D\n" +
+	"\tlist_info\x18\x02 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\"\xc9\x01\n" +
+	"\x1aSlicesDownloadInfoResponse\x12:\n" +
+	"\x06slices\x18\x01 \x03(\v2\".v6.services.pub.SliceDownloadInfoR\x06slices\x12D\n" +
+	"\tlist_info\x18\x02 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\x12)\n" +
+	"\x04file\x18\x03 \x01(\v2\x15.v6.services.pub.FileR\x04file\"\x8e\x06\n" +
 	"\x04File\x12\x1a\n" +
 	"\bidentity\x18\x01 \x01(\tR\bidentity\x12\x16\n" +
 	"\x06parent\x18\x03 \x01(\tR\x06parent\x12\x12\n" +
@@ -2620,7 +2739,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\rplayback_type\x18\x16 \x01(\x05R\fplaybackType\x12\x1b\n" +
 	"\tplay_mode\x18\x17 \x01(\x05R\bplayMode\x12\x1f\n" +
 	"\vcurrent_pos\x18\x18 \x01(\x02R\n" +
-	"currentPos2\xe6\x1a\n" +
+	"currentPos2\x94\x1c\n" +
 	"\vPubUserFile\x12V\n" +
 	"\x06Create\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v6/userfile/create\x12P\n" +
 	"\x03Get\x12\x15.v6.services.pub.File\x1a\x15.v6.services.pub.File\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v6/userfile/get\x12h\n" +
@@ -2649,7 +2768,8 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x11CreateUploadToken\x12\x15.v6.services.pub.File\x1a\x1c.v6.services.pub.UploadToken\"+\x82\xd3\xe4\x93\x02%:\x01*\" /v6/userfile/create_upload_token\x12r\n" +
 	"\x10CreateUploadTask\x12\x15.v6.services.pub.File\x1a\x1b.v6.services.pub.UploadTask\"*\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v6/userfile/create_upload_task\x12|\n" +
 	"\x15CreateTemporaryUpload\x12\x15.v6.services.pub.File\x1a\x1b.v6.services.pub.UploadTask\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v6/userfile/create_temporary_upload\x12\x84\x01\n" +
-	"\x13ReportPreviewStatus\x12\x1e.v6.services.pub.PreviewStatus\x1a\x1e.v6.services.pub.PreviewStatus\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v6/userfile/report_preview_statusB7Z5github.com/city404/v6-public-rpc-proto/go/v6/userfileb\x06proto3"
+	"\x13ReportPreviewStatus\x12\x1e.v6.services.pub.PreviewStatus\x1a\x1e.v6.services.pub.PreviewStatus\"-\x82\xd3\xe4\x93\x02':\x01*\"\"/v6/userfile/report_preview_status\x12\xab\x01\n" +
+	"\x19GetFileSlicesDownloadInfo\x12*.v6.services.pub.SlicesDownloadInfoRequest\x1a+.v6.services.pub.SlicesDownloadInfoResponse\"5\x82\xd3\xe4\x93\x02/:\x01*\"*/v6/userfile/get_file_slices_download_infoB7Z5github.com/city404/v6-public-rpc-proto/go/v6/userfileb\x06proto3"
 
 var (
 	file_userfile_public_user_file_proto_rawDescOnce sync.Once
@@ -2663,105 +2783,114 @@ func file_userfile_public_user_file_proto_rawDescGZIP() []byte {
 	return file_userfile_public_user_file_proto_rawDescData
 }
 
-var file_userfile_public_user_file_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_userfile_public_user_file_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_userfile_public_user_file_proto_goTypes = []any{
-	(*File)(nil),                         // 0: v6.services.pub.File
-	(*FileListRequest)(nil),              // 1: v6.services.pub.FileListRequest
-	(*SearchRequest)(nil),                // 2: v6.services.pub.SearchRequest
-	(*FileListResponse)(nil),             // 3: v6.services.pub.FileListResponse
-	(*BatchOperationRequest)(nil),        // 4: v6.services.pub.BatchOperationRequest
-	(*BatchOperationResponse)(nil),       // 5: v6.services.pub.BatchOperationResponse
-	(*ManageRTCRequest)(nil),             // 6: v6.services.pub.ManageRTCRequest
-	(*ManageRTCResponse)(nil),            // 7: v6.services.pub.ManageRTCResponse
-	(*SendIceCandidateRequest)(nil),      // 8: v6.services.pub.SendIceCandidateRequest
-	(*SendIceCandidateResponse)(nil),     // 9: v6.services.pub.SendIceCandidateResponse
-	(*GetIceCandidateRequest)(nil),       // 10: v6.services.pub.GetIceCandidateRequest
-	(*GetIceCandidateResponse)(nil),      // 11: v6.services.pub.GetIceCandidateResponse
-	(*ParseFileSliceResponse)(nil),       // 12: v6.services.pub.ParseFileSliceResponse
-	(*SliceSize)(nil),                    // 13: v6.services.pub.SliceSize
-	(*SliceDownloadAddressRequest)(nil),  // 14: v6.services.pub.SliceDownloadAddressRequest
-	(*SliceDownloadAddressResponse)(nil), // 15: v6.services.pub.SliceDownloadAddressResponse
-	(*FileDownloadAddressResponse)(nil),  // 16: v6.services.pub.FileDownloadAddressResponse
-	(*SliceDownloadInfo)(nil),            // 17: v6.services.pub.SliceDownloadInfo
-	(*DocFilePreview)(nil),               // 18: v6.services.pub.DocFilePreview
-	(*DownloadAndPreviewInfo)(nil),       // 19: v6.services.pub.DownloadAndPreviewInfo
-	(*UploadToken)(nil),                  // 20: v6.services.pub.UploadToken
-	(*UploadTask)(nil),                   // 21: v6.services.pub.UploadTask
-	(*DirectDownloadRequest)(nil),        // 22: v6.services.pub.DirectDownloadRequest
-	(*PreviewStatus)(nil),                // 23: v6.services.pub.PreviewStatus
-	(*common.ScanListRequest)(nil),       // 24: v6.services.pub.common.ScanListRequest
+	(*SlicesDownloadInfoRequest)(nil),    // 0: v6.services.pub.SlicesDownloadInfoRequest
+	(*SlicesDownloadInfoResponse)(nil),   // 1: v6.services.pub.SlicesDownloadInfoResponse
+	(*File)(nil),                         // 2: v6.services.pub.File
+	(*FileListRequest)(nil),              // 3: v6.services.pub.FileListRequest
+	(*SearchRequest)(nil),                // 4: v6.services.pub.SearchRequest
+	(*FileListResponse)(nil),             // 5: v6.services.pub.FileListResponse
+	(*BatchOperationRequest)(nil),        // 6: v6.services.pub.BatchOperationRequest
+	(*BatchOperationResponse)(nil),       // 7: v6.services.pub.BatchOperationResponse
+	(*ManageRTCRequest)(nil),             // 8: v6.services.pub.ManageRTCRequest
+	(*ManageRTCResponse)(nil),            // 9: v6.services.pub.ManageRTCResponse
+	(*SendIceCandidateRequest)(nil),      // 10: v6.services.pub.SendIceCandidateRequest
+	(*SendIceCandidateResponse)(nil),     // 11: v6.services.pub.SendIceCandidateResponse
+	(*GetIceCandidateRequest)(nil),       // 12: v6.services.pub.GetIceCandidateRequest
+	(*GetIceCandidateResponse)(nil),      // 13: v6.services.pub.GetIceCandidateResponse
+	(*ParseFileSliceResponse)(nil),       // 14: v6.services.pub.ParseFileSliceResponse
+	(*SliceSize)(nil),                    // 15: v6.services.pub.SliceSize
+	(*SliceDownloadAddressRequest)(nil),  // 16: v6.services.pub.SliceDownloadAddressRequest
+	(*SliceDownloadAddressResponse)(nil), // 17: v6.services.pub.SliceDownloadAddressResponse
+	(*FileDownloadAddressResponse)(nil),  // 18: v6.services.pub.FileDownloadAddressResponse
+	(*SliceDownloadInfo)(nil),            // 19: v6.services.pub.SliceDownloadInfo
+	(*DocFilePreview)(nil),               // 20: v6.services.pub.DocFilePreview
+	(*DownloadAndPreviewInfo)(nil),       // 21: v6.services.pub.DownloadAndPreviewInfo
+	(*UploadToken)(nil),                  // 22: v6.services.pub.UploadToken
+	(*UploadTask)(nil),                   // 23: v6.services.pub.UploadTask
+	(*DirectDownloadRequest)(nil),        // 24: v6.services.pub.DirectDownloadRequest
+	(*PreviewStatus)(nil),                // 25: v6.services.pub.PreviewStatus
+	(*common.ScanListRequest)(nil),       // 26: v6.services.pub.common.ScanListRequest
 }
 var file_userfile_public_user_file_proto_depIdxs = []int32{
-	0,  // 0: v6.services.pub.FileListRequest.parent:type_name -> v6.services.pub.File
-	0,  // 1: v6.services.pub.FileListRequest.filter:type_name -> v6.services.pub.File
-	24, // 2: v6.services.pub.FileListRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
-	24, // 3: v6.services.pub.SearchRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
-	0,  // 4: v6.services.pub.FileListResponse.files:type_name -> v6.services.pub.File
-	24, // 5: v6.services.pub.FileListResponse.list_info:type_name -> v6.services.pub.common.ScanListRequest
-	0,  // 6: v6.services.pub.BatchOperationRequest.source:type_name -> v6.services.pub.File
-	0,  // 7: v6.services.pub.BatchOperationRequest.dest:type_name -> v6.services.pub.File
-	13, // 8: v6.services.pub.ParseFileSliceResponse.sizes:type_name -> v6.services.pub.SliceSize
-	17, // 9: v6.services.pub.ParseFileSliceResponse.raw_download_addresses:type_name -> v6.services.pub.SliceDownloadInfo
-	17, // 10: v6.services.pub.SliceDownloadAddressResponse.addresses:type_name -> v6.services.pub.SliceDownloadInfo
-	0,  // 11: v6.services.pub.PubUserFile.Create:input_type -> v6.services.pub.File
-	0,  // 12: v6.services.pub.PubUserFile.Get:input_type -> v6.services.pub.File
-	0,  // 13: v6.services.pub.PubUserFile.Rename:input_type -> v6.services.pub.File
-	4,  // 14: v6.services.pub.PubUserFile.Trash:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 15: v6.services.pub.PubUserFile.Move:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 16: v6.services.pub.PubUserFile.Copy:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 17: v6.services.pub.PubUserFile.Delete:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 18: v6.services.pub.PubUserFile.DeleteTrash:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 19: v6.services.pub.PubUserFile.Recover:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 20: v6.services.pub.PubUserFile.BatchRename:input_type -> v6.services.pub.BatchOperationRequest
-	4,  // 21: v6.services.pub.PubUserFile.BatchOperation:input_type -> v6.services.pub.BatchOperationRequest
-	1,  // 22: v6.services.pub.PubUserFile.List:input_type -> v6.services.pub.FileListRequest
-	1,  // 23: v6.services.pub.PubUserFile.ListTrash:input_type -> v6.services.pub.FileListRequest
-	2,  // 24: v6.services.pub.PubUserFile.Search:input_type -> v6.services.pub.SearchRequest
-	6,  // 25: v6.services.pub.PubUserFile.CreateManageRTCOffer:input_type -> v6.services.pub.ManageRTCRequest
-	8,  // 26: v6.services.pub.PubUserFile.SendClientIceCandidate:input_type -> v6.services.pub.SendIceCandidateRequest
-	10, // 27: v6.services.pub.PubUserFile.GetServerIceCandidate:input_type -> v6.services.pub.GetIceCandidateRequest
-	0,  // 28: v6.services.pub.PubUserFile.ParseFileSlice:input_type -> v6.services.pub.File
-	14, // 29: v6.services.pub.PubUserFile.GetSliceDownloadAddress:input_type -> v6.services.pub.SliceDownloadAddressRequest
-	22, // 30: v6.services.pub.PubUserFile.GetDirectDownloadAddress:input_type -> v6.services.pub.DirectDownloadRequest
-	0,  // 31: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:input_type -> v6.services.pub.File
-	0,  // 32: v6.services.pub.PubUserFile.PreviewDoc:input_type -> v6.services.pub.File
-	0,  // 33: v6.services.pub.PubUserFile.CreateDoc:input_type -> v6.services.pub.File
-	0,  // 34: v6.services.pub.PubUserFile.CreateUploadToken:input_type -> v6.services.pub.File
-	0,  // 35: v6.services.pub.PubUserFile.CreateUploadTask:input_type -> v6.services.pub.File
-	0,  // 36: v6.services.pub.PubUserFile.CreateTemporaryUpload:input_type -> v6.services.pub.File
-	23, // 37: v6.services.pub.PubUserFile.ReportPreviewStatus:input_type -> v6.services.pub.PreviewStatus
-	0,  // 38: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
-	0,  // 39: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
-	5,  // 40: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 41: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 42: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 43: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 44: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 45: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 46: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 47: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
-	5,  // 48: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
-	3,  // 49: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
-	3,  // 50: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
-	3,  // 51: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
-	7,  // 52: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
-	9,  // 53: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
-	11, // 54: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
-	12, // 55: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
-	15, // 56: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
-	16, // 57: v6.services.pub.PubUserFile.GetDirectDownloadAddress:output_type -> v6.services.pub.FileDownloadAddressResponse
-	19, // 58: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
-	18, // 59: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
-	18, // 60: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
-	20, // 61: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
-	21, // 62: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
-	21, // 63: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
-	23, // 64: v6.services.pub.PubUserFile.ReportPreviewStatus:output_type -> v6.services.pub.PreviewStatus
-	38, // [38:65] is the sub-list for method output_type
-	11, // [11:38] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	2,  // 0: v6.services.pub.SlicesDownloadInfoRequest.file:type_name -> v6.services.pub.File
+	26, // 1: v6.services.pub.SlicesDownloadInfoRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	19, // 2: v6.services.pub.SlicesDownloadInfoResponse.slices:type_name -> v6.services.pub.SliceDownloadInfo
+	26, // 3: v6.services.pub.SlicesDownloadInfoResponse.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	2,  // 4: v6.services.pub.SlicesDownloadInfoResponse.file:type_name -> v6.services.pub.File
+	2,  // 5: v6.services.pub.FileListRequest.parent:type_name -> v6.services.pub.File
+	2,  // 6: v6.services.pub.FileListRequest.filter:type_name -> v6.services.pub.File
+	26, // 7: v6.services.pub.FileListRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	26, // 8: v6.services.pub.SearchRequest.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	2,  // 9: v6.services.pub.FileListResponse.files:type_name -> v6.services.pub.File
+	26, // 10: v6.services.pub.FileListResponse.list_info:type_name -> v6.services.pub.common.ScanListRequest
+	2,  // 11: v6.services.pub.BatchOperationRequest.source:type_name -> v6.services.pub.File
+	2,  // 12: v6.services.pub.BatchOperationRequest.dest:type_name -> v6.services.pub.File
+	15, // 13: v6.services.pub.ParseFileSliceResponse.sizes:type_name -> v6.services.pub.SliceSize
+	19, // 14: v6.services.pub.ParseFileSliceResponse.raw_download_addresses:type_name -> v6.services.pub.SliceDownloadInfo
+	19, // 15: v6.services.pub.SliceDownloadAddressResponse.addresses:type_name -> v6.services.pub.SliceDownloadInfo
+	2,  // 16: v6.services.pub.PubUserFile.Create:input_type -> v6.services.pub.File
+	2,  // 17: v6.services.pub.PubUserFile.Get:input_type -> v6.services.pub.File
+	2,  // 18: v6.services.pub.PubUserFile.Rename:input_type -> v6.services.pub.File
+	6,  // 19: v6.services.pub.PubUserFile.Trash:input_type -> v6.services.pub.BatchOperationRequest
+	6,  // 20: v6.services.pub.PubUserFile.Move:input_type -> v6.services.pub.BatchOperationRequest
+	6,  // 21: v6.services.pub.PubUserFile.Copy:input_type -> v6.services.pub.BatchOperationRequest
+	6,  // 22: v6.services.pub.PubUserFile.Delete:input_type -> v6.services.pub.BatchOperationRequest
+	6,  // 23: v6.services.pub.PubUserFile.DeleteTrash:input_type -> v6.services.pub.BatchOperationRequest
+	6,  // 24: v6.services.pub.PubUserFile.Recover:input_type -> v6.services.pub.BatchOperationRequest
+	6,  // 25: v6.services.pub.PubUserFile.BatchRename:input_type -> v6.services.pub.BatchOperationRequest
+	6,  // 26: v6.services.pub.PubUserFile.BatchOperation:input_type -> v6.services.pub.BatchOperationRequest
+	3,  // 27: v6.services.pub.PubUserFile.List:input_type -> v6.services.pub.FileListRequest
+	3,  // 28: v6.services.pub.PubUserFile.ListTrash:input_type -> v6.services.pub.FileListRequest
+	4,  // 29: v6.services.pub.PubUserFile.Search:input_type -> v6.services.pub.SearchRequest
+	8,  // 30: v6.services.pub.PubUserFile.CreateManageRTCOffer:input_type -> v6.services.pub.ManageRTCRequest
+	10, // 31: v6.services.pub.PubUserFile.SendClientIceCandidate:input_type -> v6.services.pub.SendIceCandidateRequest
+	12, // 32: v6.services.pub.PubUserFile.GetServerIceCandidate:input_type -> v6.services.pub.GetIceCandidateRequest
+	2,  // 33: v6.services.pub.PubUserFile.ParseFileSlice:input_type -> v6.services.pub.File
+	16, // 34: v6.services.pub.PubUserFile.GetSliceDownloadAddress:input_type -> v6.services.pub.SliceDownloadAddressRequest
+	24, // 35: v6.services.pub.PubUserFile.GetDirectDownloadAddress:input_type -> v6.services.pub.DirectDownloadRequest
+	2,  // 36: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:input_type -> v6.services.pub.File
+	2,  // 37: v6.services.pub.PubUserFile.PreviewDoc:input_type -> v6.services.pub.File
+	2,  // 38: v6.services.pub.PubUserFile.CreateDoc:input_type -> v6.services.pub.File
+	2,  // 39: v6.services.pub.PubUserFile.CreateUploadToken:input_type -> v6.services.pub.File
+	2,  // 40: v6.services.pub.PubUserFile.CreateUploadTask:input_type -> v6.services.pub.File
+	2,  // 41: v6.services.pub.PubUserFile.CreateTemporaryUpload:input_type -> v6.services.pub.File
+	25, // 42: v6.services.pub.PubUserFile.ReportPreviewStatus:input_type -> v6.services.pub.PreviewStatus
+	0,  // 43: v6.services.pub.PubUserFile.GetFileSlicesDownloadInfo:input_type -> v6.services.pub.SlicesDownloadInfoRequest
+	2,  // 44: v6.services.pub.PubUserFile.Create:output_type -> v6.services.pub.File
+	2,  // 45: v6.services.pub.PubUserFile.Get:output_type -> v6.services.pub.File
+	7,  // 46: v6.services.pub.PubUserFile.Rename:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 47: v6.services.pub.PubUserFile.Trash:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 48: v6.services.pub.PubUserFile.Move:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 49: v6.services.pub.PubUserFile.Copy:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 50: v6.services.pub.PubUserFile.Delete:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 51: v6.services.pub.PubUserFile.DeleteTrash:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 52: v6.services.pub.PubUserFile.Recover:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 53: v6.services.pub.PubUserFile.BatchRename:output_type -> v6.services.pub.BatchOperationResponse
+	7,  // 54: v6.services.pub.PubUserFile.BatchOperation:output_type -> v6.services.pub.BatchOperationResponse
+	5,  // 55: v6.services.pub.PubUserFile.List:output_type -> v6.services.pub.FileListResponse
+	5,  // 56: v6.services.pub.PubUserFile.ListTrash:output_type -> v6.services.pub.FileListResponse
+	5,  // 57: v6.services.pub.PubUserFile.Search:output_type -> v6.services.pub.FileListResponse
+	9,  // 58: v6.services.pub.PubUserFile.CreateManageRTCOffer:output_type -> v6.services.pub.ManageRTCResponse
+	11, // 59: v6.services.pub.PubUserFile.SendClientIceCandidate:output_type -> v6.services.pub.SendIceCandidateResponse
+	13, // 60: v6.services.pub.PubUserFile.GetServerIceCandidate:output_type -> v6.services.pub.GetIceCandidateResponse
+	14, // 61: v6.services.pub.PubUserFile.ParseFileSlice:output_type -> v6.services.pub.ParseFileSliceResponse
+	17, // 62: v6.services.pub.PubUserFile.GetSliceDownloadAddress:output_type -> v6.services.pub.SliceDownloadAddressResponse
+	18, // 63: v6.services.pub.PubUserFile.GetDirectDownloadAddress:output_type -> v6.services.pub.FileDownloadAddressResponse
+	21, // 64: v6.services.pub.PubUserFile.GetDownloadAndPreviewInfo:output_type -> v6.services.pub.DownloadAndPreviewInfo
+	20, // 65: v6.services.pub.PubUserFile.PreviewDoc:output_type -> v6.services.pub.DocFilePreview
+	20, // 66: v6.services.pub.PubUserFile.CreateDoc:output_type -> v6.services.pub.DocFilePreview
+	22, // 67: v6.services.pub.PubUserFile.CreateUploadToken:output_type -> v6.services.pub.UploadToken
+	23, // 68: v6.services.pub.PubUserFile.CreateUploadTask:output_type -> v6.services.pub.UploadTask
+	23, // 69: v6.services.pub.PubUserFile.CreateTemporaryUpload:output_type -> v6.services.pub.UploadTask
+	25, // 70: v6.services.pub.PubUserFile.ReportPreviewStatus:output_type -> v6.services.pub.PreviewStatus
+	1,  // 71: v6.services.pub.PubUserFile.GetFileSlicesDownloadInfo:output_type -> v6.services.pub.SlicesDownloadInfoResponse
+	44, // [44:72] is the sub-list for method output_type
+	16, // [16:44] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_userfile_public_user_file_proto_init() }
@@ -2775,7 +2904,7 @@ func file_userfile_public_user_file_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_userfile_public_user_file_proto_rawDesc), len(file_userfile_public_user_file_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

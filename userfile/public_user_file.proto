@@ -171,7 +171,25 @@ service PubUserFile {
             body: "*"
         };
     }
+
+    rpc GetFileSlicesDownloadInfo (SlicesDownloadInfoRequest) returns (SlicesDownloadInfoResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/get_file_slices_download_info"
+            body: "*"
+        };
+    }
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
+}
+
+message SlicesDownloadInfoRequest {
+    File file = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+}
+
+message SlicesDownloadInfoResponse {
+    repeated SliceDownloadInfo slices = 1;
+    .v6.services.pub.common.ScanListRequest list_info = 2;
+    File file = 3;
 }
 
 message File {
