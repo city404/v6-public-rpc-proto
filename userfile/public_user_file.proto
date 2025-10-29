@@ -178,6 +178,20 @@ service PubUserFile {
             body: "*"
         };
     }
+
+    rpc GetLastModify (SlicesDownloadInfoRequest) returns (SlicesDownloadInfoResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/get_file_slices_download_info"
+            body: "*"
+        };
+    }
+
+    rpc ListRecentUpdatedFiles (ListRecentUpdatedFilesRequest) returns (FileListResponse) {
+        option (google.api.http) = {
+            post: "/v6/userfile/list_recent_updated_files"
+            body: "*"
+        };
+    }
     // rpc CreateDownloadAnswer (RTCDownloadInfo) returns (RTCDownloadInfo) {}
 }
 
@@ -228,6 +242,12 @@ message File {
 message FileListRequest {
     File parent = 1;
     File filter = 2;
+    .v6.services.pub.common.ScanListRequest list_info = 3;
+}
+
+message ListRecentUpdatedFilesRequest {
+    File parent = 1;
+    int64 start_ts = 2;
     .v6.services.pub.common.ScanListRequest list_info = 3;
 }
 
