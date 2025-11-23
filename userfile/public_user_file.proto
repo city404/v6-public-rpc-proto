@@ -267,6 +267,7 @@ message BatchOperationResponse {
     int64 affected  = 3;
     int64 create_ts = 4;
     int64 progress = 5;
+    int64 total = 6;
 }
 
 message ManageRTCRequest {

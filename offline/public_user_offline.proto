@@ -130,4 +130,5 @@ message UserTask {
     string save_path = 20;
     repeated string callbacks = 21;
     repeated string ignore_files = 22;
+    string save_identity = 23;
 }
