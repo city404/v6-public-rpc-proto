@@ -45,7 +45,7 @@ rm -rf ./go
 cp -r ./go_temp/github.com/city404/v6-public-rpc-proto/go ./
 rm -rf ./go_temp
 cd ./go
-# cp ../main.go ./
+cp -r ../go.mod ./
 go mod init github.com/city404/v6-public-rpc-proto/go
 # go get google.golang.org/grpc
 go get
