@@ -1,6 +1,6 @@
 module github.com/city404/v6-public-rpc-proto/go
 
-go 1.25.5
+go 1.24.0
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.27.3
