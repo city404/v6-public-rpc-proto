@@ -21,114 +21,145 @@ service PubUser {
             body: "*"
         };
     } // login with password
+
+    // Refresh refreshes the access token using the refresh token
     rpc Refresh (Token) returns (Token) {
         option (google.api.http) = {
             post: "/v6/user/refresh"
             body: "*"
         };
     } // refresh token. 
+
+    // Logoff logs off a user by invalidating the token
     rpc Logoff (Token) returns (User) {
         option (google.api.http) = {
             post: "/v6/user/logoff"
             body: "*"
         };
     }
+
+    // DeviceAuthorization authorizes a device for a user
     rpc DeviceAuthorization (DeviceAuthorizationRequest) returns (LoginResponse) {
         option (google.api.http) = {
             post: "/v6/user/device_authorization"
             body: "*"
         };
     }
+    // ResetPassword resets the password for a user
     rpc ResetPassword (LoginRequest) returns (User) {
         option (google.api.http) = {
             post: "/v6/user/reset_password"
             body: "*"
         };
     } 
+    // ChangePassword changes the password for a user
     rpc ChangePassword (ChangePasswordRequest) returns (User) {
         option (google.api.http) = {
             post: "/v6/user/change_password"
             body: "*"
         };
     } 
+    // Register registers a new user
     rpc Register (RegisterRequest) returns (User) {
         option (google.api.http) = {
             post: "/v6/user/register"
             body: "*"
         };
     }
+    // Delete deletes a user
     rpc Delete (User) returns (User) {
         option (google.api.http) = {
             post: "/v6/user/delete"
             body: "*"
         };
     }
+    // Update updates user information
     rpc Update (User) returns (User) {
         option (google.api.http) = {
             post: "/v6/user/update"
             body: "*"
         };
     }
+    // SendSmsVerifyCode sends an SMS verification code to the user
     rpc SendSmsVerifyCode (SmsVeifyCodeSendRequest) returns (SmsVeifyCodeSendResponse) {
         option (google.api.http) = {
             post: "/v6/user/sms_verify_code"
             body: "*"
         };
     }
+    // SendSmsVerifyCodeNotUser sends an SMS verification code to a non-user
     rpc SendSmsVerifyCodeNotUser (SmsVeifyCodeSendRequestNotUser) returns (SmsVeifyCodeSendResponse) {
         option (google.api.http) = {
             post: "/v6/user/sms_verify_code_not_user"
             body: "*"
         };
     }
+
+    // VerifyAuthToken verifies the authenticity of an auth token
     rpc VerifyAuthToken (LoginRequest) returns (OauthTokenCheckResponse) {
         option (google.api.http) = {
             post: "/v6/user/verify_auth_token"
             body: "*"
         };
     }
+
+    // VerifyAuthorizationCode verifies an authorization code and returns a token
     rpc VerifyAuthorizationCode (AuthorizationCode) returns (Token) {
         option (google.api.http) = {
             post: "/v6/user/verify_authorization_code"
             body: "*"
         };
     }
+
+    // CheckAuthStatus checks the authentication status of a user
     rpc CheckAuthStatus (LoginRequest) returns (OauthTokenCheckResponse) {
         option (google.api.http) = {
             post: "/v6/user/check_auth_status"
             body: "*"
         };
     }
+
+    // CreateAuthToken creates an authentication token for a user
     rpc CreateAuthToken (LoginRequest) returns (OauthTokenResponse) {
         option (google.api.http) = {
             post: "/v6/user/create_auth_token"
             body: "*"
         };
     }
+
+    // ValidateUserInfo validates user information such as identity, name, email, and phone
     rpc ValidateUserInfo (UserValidateInfo) returns (v6.services.pub.common.UserNameValidateResponse) {
         option (google.api.http) = {
             post: "/v6/user/validate_user_info"
             body: "*"
         };
     }
+
+    // GetStatisticsAndQuota gets user statistics and quota information
     rpc GetStatisticsAndQuota (User) returns (UserStatisticsAndQuota) {
         option (google.api.http) = {
             post: "/v6/user/get_statistics_and_quota"
             body: "*"
         };
     }
+
+    // ExtendQuota extends user quota based on the provided information
     rpc ExtendQuota (UserQuotaExtendInfo) returns (UserStatisticsAndQuota) {
         option (google.api.http) = {
             post: "/v6/user/extend_quota"
             body: "*"
         };
     }
+
+    // GetAvailableExtendQuota gets available quota that can be extended for the user
     rpc GetAvailableExtendQuota (User) returns (UserQuotaExtendInfo) {
         option (google.api.http) = {
             post: "/v6/user/get_available_extend_quota"
             body: "*"
         };
     }
+
+    // UserCenterUri gets the user center URI
     rpc UserCenterUri (UserCenterUriRequest) returns (UserCenterUriResponse) {
         option (google.api.http) = {
             post: "/v6/user/user_center_uri"

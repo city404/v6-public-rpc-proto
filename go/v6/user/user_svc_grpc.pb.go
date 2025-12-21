@@ -55,24 +55,43 @@ type PubUserClient interface {
 	Get(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
 	// Login logs in a user with identity and password
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	// Refresh refreshes the access token using the refresh token
 	Refresh(ctx context.Context, in *Token, opts ...grpc.CallOption) (*Token, error)
+	// Logoff logs off a user by invalidating the token
 	Logoff(ctx context.Context, in *Token, opts ...grpc.CallOption) (*User, error)
+	// DeviceAuthorization authorizes a device for a user
 	DeviceAuthorization(ctx context.Context, in *DeviceAuthorizationRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	// ResetPassword resets the password for a user
 	ResetPassword(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*User, error)
+	// ChangePassword changes the password for a user
 	ChangePassword(ctx context.Context, in *ChangePasswordRequest, opts ...grpc.CallOption) (*User, error)
+	// Register registers a new user
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*User, error)
+	// Delete deletes a user
 	Delete(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
+	// Update updates user information
 	Update(ctx context.Context, in *User, opts ...grpc.CallOption) (*User, error)
+	// SendSmsVerifyCode sends an SMS verification code to the user
 	SendSmsVerifyCode(ctx context.Context, in *SmsVeifyCodeSendRequest, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
+	// SendSmsVerifyCodeNotUser sends an SMS verification code to a non-user
 	SendSmsVerifyCodeNotUser(ctx context.Context, in *SmsVeifyCodeSendRequestNotUser, opts ...grpc.CallOption) (*SmsVeifyCodeSendResponse, error)
+	// VerifyAuthToken verifies the authenticity of an auth token
 	VerifyAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error)
+	// VerifyAuthorizationCode verifies an authorization code and returns a token
 	VerifyAuthorizationCode(ctx context.Context, in *AuthorizationCode, opts ...grpc.CallOption) (*Token, error)
+	// CheckAuthStatus checks the authentication status of a user
 	CheckAuthStatus(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenCheckResponse, error)
+	// CreateAuthToken creates an authentication token for a user
 	CreateAuthToken(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*OauthTokenResponse, error)
+	// ValidateUserInfo validates user information such as identity, name, email, and phone
 	ValidateUserInfo(ctx context.Context, in *UserValidateInfo, opts ...grpc.CallOption) (*common.UserNameValidateResponse, error)
+	// GetStatisticsAndQuota gets user statistics and quota information
 	GetStatisticsAndQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error)
+	// ExtendQuota extends user quota based on the provided information
 	ExtendQuota(ctx context.Context, in *UserQuotaExtendInfo, opts ...grpc.CallOption) (*UserStatisticsAndQuota, error)
+	// GetAvailableExtendQuota gets available quota that can be extended for the user
 	GetAvailableExtendQuota(ctx context.Context, in *User, opts ...grpc.CallOption) (*UserQuotaExtendInfo, error)
+	// UserCenterUri gets the user center URI
 	UserCenterUri(ctx context.Context, in *UserCenterUriRequest, opts ...grpc.CallOption) (*UserCenterUriResponse, error)
 	// GetSettings gets string settings for the user
 	GetSettings(ctx context.Context, in *Settings, opts ...grpc.CallOption) (*Settings, error)
@@ -328,24 +347,43 @@ type PubUserServer interface {
 	Get(context.Context, *User) (*User, error)
 	// Login logs in a user with identity and password
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	// Refresh refreshes the access token using the refresh token
 	Refresh(context.Context, *Token) (*Token, error)
+	// Logoff logs off a user by invalidating the token
 	Logoff(context.Context, *Token) (*User, error)
+	// DeviceAuthorization authorizes a device for a user
 	DeviceAuthorization(context.Context, *DeviceAuthorizationRequest) (*LoginResponse, error)
+	// ResetPassword resets the password for a user
 	ResetPassword(context.Context, *LoginRequest) (*User, error)
+	// ChangePassword changes the password for a user
 	ChangePassword(context.Context, *ChangePasswordRequest) (*User, error)
+	// Register registers a new user
 	Register(context.Context, *RegisterRequest) (*User, error)
+	// Delete deletes a user
 	Delete(context.Context, *User) (*User, error)
+	// Update updates user information
 	Update(context.Context, *User) (*User, error)
+	// SendSmsVerifyCode sends an SMS verification code to the user
 	SendSmsVerifyCode(context.Context, *SmsVeifyCodeSendRequest) (*SmsVeifyCodeSendResponse, error)
+	// SendSmsVerifyCodeNotUser sends an SMS verification code to a non-user
 	SendSmsVerifyCodeNotUser(context.Context, *SmsVeifyCodeSendRequestNotUser) (*SmsVeifyCodeSendResponse, error)
+	// VerifyAuthToken verifies the authenticity of an auth token
 	VerifyAuthToken(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error)
+	// VerifyAuthorizationCode verifies an authorization code and returns a token
 	VerifyAuthorizationCode(context.Context, *AuthorizationCode) (*Token, error)
+	// CheckAuthStatus checks the authentication status of a user
 	CheckAuthStatus(context.Context, *LoginRequest) (*OauthTokenCheckResponse, error)
+	// CreateAuthToken creates an authentication token for a user
 	CreateAuthToken(context.Context, *LoginRequest) (*OauthTokenResponse, error)
+	// ValidateUserInfo validates user information such as identity, name, email, and phone
 	ValidateUserInfo(context.Context, *UserValidateInfo) (*common.UserNameValidateResponse, error)
+	// GetStatisticsAndQuota gets user statistics and quota information
 	GetStatisticsAndQuota(context.Context, *User) (*UserStatisticsAndQuota, error)
+	// ExtendQuota extends user quota based on the provided information
 	ExtendQuota(context.Context, *UserQuotaExtendInfo) (*UserStatisticsAndQuota, error)
+	// GetAvailableExtendQuota gets available quota that can be extended for the user
 	GetAvailableExtendQuota(context.Context, *User) (*UserQuotaExtendInfo, error)
+	// UserCenterUri gets the user center URI
 	UserCenterUri(context.Context, *UserCenterUriRequest) (*UserCenterUriResponse, error)
 	// GetSettings gets string settings for the user
 	GetSettings(context.Context, *Settings) (*Settings, error)
