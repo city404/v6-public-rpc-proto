@@ -5,13 +5,16 @@ import "common/pub_common.proto";
 import "google/api/annotations.proto";
 
 
+// User related services
 service PubUser {
+    // Get gets user information
     rpc Get (User) returns (User) {
         option (google.api.http) = {
             post: "/v6/user/get"
             body: "*"
         };
     }
+    // Login logs in a user with identity and password
     rpc Login (LoginRequest) returns (LoginResponse) {
         option (google.api.http) = {
             post: "/v6/user/login"
@@ -102,7 +105,7 @@ service PubUser {
             body: "*"
         };
     }
-    rpc ValidateUserInfo (UserValidateInfo) returns (.v6.services.pub.common.UserNameValidateResponse) {
+    rpc ValidateUserInfo (UserValidateInfo) returns (v6.services.pub.common.UserNameValidateResponse) {
         option (google.api.http) = {
             post: "/v6/user/validate_user_info"
             body: "*"
@@ -129,6 +132,20 @@ service PubUser {
     rpc UserCenterUri (UserCenterUriRequest) returns (UserCenterUriResponse) {
         option (google.api.http) = {
             post: "/v6/user/user_center_uri"
+            body: "*"
+        };
+    }
+    // GetSettings gets string settings for the user
+    rpc GetSettings(Settings) returns (Settings) {
+        option (google.api.http) = {
+            post: "/v6/user/get_settings"
+            body: "*"
+        };
+    }
+    // SetSettings sets string settings for the user
+    rpc SetSettings(Settings) returns (Settings) {
+        option (google.api.http) = {
+            post: "/v6/user/set_settings"
             body: "*"
         };
     }
@@ -321,4 +338,9 @@ message UserQuotaExtendInfo {
     int64 daily_offline_tasks_bytes = 4;
     int64 disk_bytes = 5;
     int64 disk_files = 6;
+}
+
+// Settings represents user settings as key-value pairs
+message Settings {
+    map<string, string> settings = 1;
 }
