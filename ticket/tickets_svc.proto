@@ -11,8 +11,10 @@ service PubTicket {
     rpc UpdateContactInfo (ContactInfo) returns (ContactInfo) {}
     rpc ListConversation (ConversationListRequest) returns (ConversationListResponse) {}
     rpc Comment (Ticket) returns (Ticket) {}
-    rpc Delete (.v6.services.pub.common.StringList) returns (.v6.services.pub.common.StringList) {}
-    rpc Close (.v6.services.pub.common.StringList) returns (.v6.services.pub.common.StringList) {}
+    // rpc Delete (v6.services.pub.common.StringList) returns (v6.services.pub.common.StringList) {}
+    rpc Delete (v6.services.pub.common.StringList) returns (v6.services.pub.common.StringList) {}
+    // Close ticket
+    rpc Close (v6.services.pub.common.StringList) returns (v6.services.pub.common.StringList) {}
 }
 
 message Ticket {

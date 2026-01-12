@@ -42,7 +42,9 @@ type PubTicketClient interface {
 	UpdateContactInfo(ctx context.Context, in *ContactInfo, opts ...grpc.CallOption) (*ContactInfo, error)
 	ListConversation(ctx context.Context, in *ConversationListRequest, opts ...grpc.CallOption) (*ConversationListResponse, error)
 	Comment(ctx context.Context, in *Ticket, opts ...grpc.CallOption) (*Ticket, error)
+	// rpc Delete (v6.services.pub.common.StringList) returns (v6.services.pub.common.StringList) {}
 	Delete(ctx context.Context, in *common.StringList, opts ...grpc.CallOption) (*common.StringList, error)
+	// Close ticket
 	Close(ctx context.Context, in *common.StringList, opts ...grpc.CallOption) (*common.StringList, error)
 }
 
@@ -155,7 +157,9 @@ type PubTicketServer interface {
 	UpdateContactInfo(context.Context, *ContactInfo) (*ContactInfo, error)
 	ListConversation(context.Context, *ConversationListRequest) (*ConversationListResponse, error)
 	Comment(context.Context, *Ticket) (*Ticket, error)
+	// rpc Delete (v6.services.pub.common.StringList) returns (v6.services.pub.common.StringList) {}
 	Delete(context.Context, *common.StringList) (*common.StringList, error)
+	// Close ticket
 	Close(context.Context, *common.StringList) (*common.StringList, error)
 	mustEmbedUnimplementedPubTicketServer()
 }
