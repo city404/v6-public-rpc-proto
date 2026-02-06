@@ -12,7 +12,7 @@ service PubDavConfig {
     rpc Disable (DavConfig) returns (DavConfig) {}
     rpc ListAll (DavConfig) returns (DavConfigListResponse) {}
     rpc List (DavConfigListRequest) returns (DavConfigListResponse) {}
-    rpc ValidateUserName (DavConfig) returns (.v6.services.pub.common.UserNameValidateResponse) {}
+    rpc ValidateUserName (DavConfig) returns (v6.services.pub.common.UserNameValidateResponse) {}
     rpc ServerInfo (DavConfig) returns (DavServerInfo) {}
     rpc Create (DavConfig) returns (DavConfig) {}
     rpc Delete (DavConfig) returns (DavConfig) {}

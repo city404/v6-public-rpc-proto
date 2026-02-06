@@ -11,7 +11,7 @@ service PubSftpConfig {
     rpc Enable (SftpConfig) returns (SftpConfig) {}
     rpc Disable (SftpConfig) returns (SftpConfig) {}
     rpc UpdateKeys (SftpConfig) returns (SftpConfig) {}
-    rpc ValidateUserName (SftpConfig) returns (.v6.services.pub.common.UserNameValidateResponse) {}
+    rpc ValidateUserName (SftpConfig) returns (v6.services.pub.common.UserNameValidateResponse) {}
 }
 
 
