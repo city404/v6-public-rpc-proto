@@ -243,6 +243,7 @@ message ListRecentUpdatedFilesRequest {
     int64 start_ts = 2;
     .v6.services.pub.common.ScanListRequest list_info = 3;
     bool contain_subdir = 4;
+    bool contain_root = 5;
 }
 
 message SearchRequest {

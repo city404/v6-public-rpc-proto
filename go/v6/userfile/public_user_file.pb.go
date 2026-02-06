@@ -477,6 +477,7 @@ type ListRecentUpdatedFilesRequest struct {
 	StartTs       int64                   `protobuf:"varint,2,opt,name=start_ts,json=startTs,proto3" json:"start_ts,omitempty"`
 	ListInfo      *common.ScanListRequest `protobuf:"bytes,3,opt,name=list_info,json=listInfo,proto3" json:"list_info,omitempty"`
 	ContainSubdir bool                    `protobuf:"varint,4,opt,name=contain_subdir,json=containSubdir,proto3" json:"contain_subdir,omitempty"`
+	ContainRoot   bool                    `protobuf:"varint,5,opt,name=contain_root,json=containRoot,proto3" json:"contain_root,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -535,6 +536,13 @@ func (x *ListRecentUpdatedFilesRequest) GetListInfo() *common.ScanListRequest {
 func (x *ListRecentUpdatedFilesRequest) GetContainSubdir() bool {
 	if x != nil {
 		return x.ContainSubdir
+	}
+	return false
+}
+
+func (x *ListRecentUpdatedFilesRequest) GetContainRoot() bool {
+	if x != nil {
+		return x.ContainRoot
 	}
 	return false
 }
@@ -2609,12 +2617,13 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\x0fFileListRequest\x12-\n" +
 	"\x06parent\x18\x01 \x01(\v2\x15.v6.services.pub.FileR\x06parent\x12-\n" +
 	"\x06filter\x18\x02 \x01(\v2\x15.v6.services.pub.FileR\x06filter\x12D\n" +
-	"\tlist_info\x18\x03 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\"\xd6\x01\n" +
+	"\tlist_info\x18\x03 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\"\xf9\x01\n" +
 	"\x1dListRecentUpdatedFilesRequest\x12-\n" +
 	"\x06parent\x18\x01 \x01(\v2\x15.v6.services.pub.FileR\x06parent\x12\x19\n" +
 	"\bstart_ts\x18\x02 \x01(\x03R\astartTs\x12D\n" +
 	"\tlist_info\x18\x03 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\x12%\n" +
-	"\x0econtain_subdir\x18\x04 \x01(\bR\rcontainSubdir\"i\n" +
+	"\x0econtain_subdir\x18\x04 \x01(\bR\rcontainSubdir\x12!\n" +
+	"\fcontain_root\x18\x05 \x01(\bR\vcontainRoot\"i\n" +
 	"\rSearchRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12D\n" +
 	"\tlist_info\x18\x03 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\"\x85\x01\n" +
