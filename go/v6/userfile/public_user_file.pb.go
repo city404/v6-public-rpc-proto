@@ -477,7 +477,7 @@ type ListRecentUpdatedFilesRequest struct {
 	StartTs       int64                   `protobuf:"varint,2,opt,name=start_ts,json=startTs,proto3" json:"start_ts,omitempty"`
 	ListInfo      *common.ScanListRequest `protobuf:"bytes,3,opt,name=list_info,json=listInfo,proto3" json:"list_info,omitempty"`
 	ContainSubdir bool                    `protobuf:"varint,4,opt,name=contain_subdir,json=containSubdir,proto3" json:"contain_subdir,omitempty"`
-	ContainRoot   bool                    `protobuf:"varint,5,opt,name=contain_root,json=containRoot,proto3" json:"contain_root,omitempty"`
+	ContainSelf   bool                    `protobuf:"varint,5,opt,name=contain_self,json=containSelf,proto3" json:"contain_self,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -540,9 +540,9 @@ func (x *ListRecentUpdatedFilesRequest) GetContainSubdir() bool {
 	return false
 }
 
-func (x *ListRecentUpdatedFilesRequest) GetContainRoot() bool {
+func (x *ListRecentUpdatedFilesRequest) GetContainSelf() bool {
 	if x != nil {
-		return x.ContainRoot
+		return x.ContainSelf
 	}
 	return false
 }
@@ -2623,7 +2623,7 @@ const file_userfile_public_user_file_proto_rawDesc = "" +
 	"\bstart_ts\x18\x02 \x01(\x03R\astartTs\x12D\n" +
 	"\tlist_info\x18\x03 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\x12%\n" +
 	"\x0econtain_subdir\x18\x04 \x01(\bR\rcontainSubdir\x12!\n" +
-	"\fcontain_root\x18\x05 \x01(\bR\vcontainRoot\"i\n" +
+	"\fcontain_self\x18\x05 \x01(\bR\vcontainSelf\"i\n" +
 	"\rSearchRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12D\n" +
 	"\tlist_info\x18\x03 \x01(\v2'.v6.services.pub.common.ScanListRequestR\blistInfo\"\x85\x01\n" +
